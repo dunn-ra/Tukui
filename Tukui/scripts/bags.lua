@@ -297,10 +297,10 @@ local BAGTYPE_FISHING = 32768
 
 function Stuffing:BagType(bag)
 	local bagType = select(2, GetContainerNumFreeSlots(bag))
-	
+
 	if bit.band(bagType, BAGTYPE_FISHING) > 0 then
 		return ST_FISHBAG
-	elseif bit.band(bagType, BAGTYPE_PROFESSION) > 0 then		
+	elseif bit.band(bagType, BAGTYPE_PROFESSION) > 0 then
 		return ST_SPECIAL
 	end
 
@@ -393,15 +393,24 @@ function Stuffing:CreateBagFrame(w)
 	f:SetFrameLevel(20)
 
 	if w == "Bank" then
-		f:SetPoint("BOTTOMLEFT", TukuiInfoLeft, "TOPLEFT", 0, TukuiDB.Scale(5))
+		f:SetPoint("BOTTOMLEFT", TukuiBottomPanel, "TOPLEFT", TukuiDB.Scale(5), TukuiDB.Scale(5))
 	else
-		f:SetPoint("BOTTOMRIGHT", TukuiInfoRight, "TOPRIGHT", 0, TukuiDB.Scale(5))
+		f:SetPoint("BOTTOMRIGHT", TukuiBottomPanel, "TOPRIGHT", TukuiDB.Scale(-5), TukuiDB.Scale(5))
 	end
-	
+	-- toggle moveable bags
+	if TukuiCF["bags"].enable == true and TukuiCF["bags"].moveable == true then
+		f:SetScript("OnMouseDown", function()
+			f:ClearAllPoints()
+			f:StartMoving()
+		end)
+		f:SetScript("OnMouseUp", function()
+			f:StopMovingOrSizing()
+		end)
+	end
 	-- close button
 	f.b_close = CreateFrame("Button", "Stuffing_CloseButton" .. w, f, "UIPanelCloseButton")
-	f.b_close:SetWidth(TukuiDB.Scale(32))
-	f.b_close:SetHeight(TukuiDB.Scale(32))
+	f.b_close:SetWidth(TukuiDB.Scale(28))
+	f.b_close:SetHeight(TukuiDB.Scale(28))
 	f.b_close:SetPoint("TOPRIGHT", TukuiDB.Scale(-3), TukuiDB.Scale(-3))
 	f.b_close:SetScript("OnClick", function(self, btn)
 		if self:GetParent():GetName() == "StuffingFrameBags" and btn == "RightButton" then
@@ -566,33 +575,19 @@ function Stuffing:Layout(lb)
 
 	if lb then
 		bs = bags_BANK
-		if TukuiCF["panels"].tinfowidth >= 405 then
-			cols = 11
-		elseif TukuiCF["panels"].tinfowidth >= 370 and TukuiCF["panels"].tinfowidth < 405 then
-			cols = 10
-		elseif TukuiCF["panels"].tinfowidth >= 335 and TukuiCF["panels"].tinfowidth < 370 then
-			cols = 9
-		else
-			cols = 8
-		end
+		cols = TukuiCF["bags"].slot
+
 		f = self.bankFrame
 	else
 		bs = bags_BACKPACK
-		if TukuiCF["panels"].tinfowidth >= 405 then
-			cols = 11
-		elseif TukuiCF["panels"].tinfowidth >= 370 and TukuiCF["panels"].tinfowidth < 405 then
-			cols = 10
-		elseif TukuiCF["panels"].tinfowidth >= 335 and TukuiCF["panels"].tinfowidth < 370 then
-			cols = 9
-		else
-			cols = 8
-		end
+		cols = TukuiCF["bags"].slot
+
 		f = self.frame
 
 		f.gold:SetText(GetMoneyString(GetMoney(), 12))
 		f.editbox:SetFont(BAGSFONT, 12)
 		f.detail:SetFont(BAGSFONT, 12)
-		f.gold:SetFont(BAGSFONT, 12)
+		f.gold:SetFont(BAGSFONT, 11)
 
 		f.detail:ClearAllPoints()
 		f.detail:SetPoint("TOPLEFT", f, TukuiDB.Scale(12), TukuiDB.Scale(-10))
@@ -606,8 +601,9 @@ function Stuffing:Layout(lb)
 		edgeSize = TukuiDB.mult,
 		insets = {left = -TukuiDB.mult, right = -TukuiDB.mult, top = -TukuiDB.mult, bottom = -TukuiDB.mult}
 	})
-	f:SetBackdropColor(unpack(TukuiCF["media"].backdropcolor))
+	f:SetBackdropColor(unpack(TukuiCF["media"].altbackdropcolor))
 	f:SetBackdropBorderColor(unpack(TukuiCF["media"].bordercolor))
+	f:SetAlpha(0.8)
 
 
 	-- bag frame stuff
@@ -679,8 +675,8 @@ function Stuffing:Layout(lb)
 		rows = rows + 1
 	end
 
-	f:SetWidth(TukuiDB.Scale(cols * 31 + (cols - 1) * 4 + 12 * 2)) 
-	f:SetHeight(TukuiDB.Scale(rows * 31 + (rows - 1) * 4 + off + 12 * 2))
+	f:SetWidth(TukuiDB.Scale(cols * 28 + (cols - 1) * 4 + 10 * 2)) -- frame size
+	f:SetHeight(TukuiDB.Scale(rows * 28 + (rows - 1) * 4 + off + 10 * 2))
 
 
 	local idx = 0
@@ -703,17 +699,17 @@ function Stuffing:Layout(lb)
 					table.insert(self.buttons, idx + 1, b)
 				end
 
-				xoff = 12 + (x * 31)
+				xoff = 10 + (x * 28)
 						+ (x * 4)
 
-				yoff = off + 12 + (y * 31)
+				yoff = off + 10 + (y * 28)
 						+ ((y - 1) * 4)
 				yoff = yoff * -1
 
 				b.frame:ClearAllPoints()
 				b.frame:SetPoint("TOPLEFT", f, "TOPLEFT", TukuiDB.Scale(xoff), TukuiDB.Scale(yoff))
-				b.frame:SetHeight(TukuiDB.Scale(31))
-				b.frame:SetWidth(TukuiDB.Scale(31))
+				b.frame:SetHeight(TukuiDB.Scale(28))
+				b.frame:SetWidth(TukuiDB.Scale(28))
 				b.frame:SetPushedTexture("")
 				b.frame:SetNormalTexture("")
 				b.frame:Show()
@@ -723,8 +719,9 @@ function Stuffing:Layout(lb)
 				
 				-- color fish bag border slot to red
 				if bagType == ST_FISHBAG then b.frame:SetBackdropBorderColor(1, 0, 0) b.frame.lock = true end
+				
 				-- color profession bag slot border ~yellow
-				if bagType == ST_SPECIAL then b.frame:SetBackdropBorderColor(255/255, 243/255,  82/255) b.frame.lock = true end
+				if bagType == ST_SPECIAL then b.frame:SetBackdropBorderColor(204/255, 204/255, 153/255) b.frame.lock = true end
 				
 				self:SlotUpdate(b)
 				
@@ -905,7 +902,7 @@ function Stuffing:PLAYER_ENTERING_WORLD()
 			TukuiDB.StyleButton(slot, false)
 		end
 		self:ClearAllPoints()
-		self:SetPoint("BOTTOMRIGHT", TukuiInfoRight, "TOPRIGHT", TukuiDB.Scale(4), TukuiDB.Scale(5))
+		self:SetPoint("BOTTOMRIGHT", TukuiBottomPanel, "TOPRIGHT", TukuiDB.Scale(5), TukuiDB.Scale(5))
 	end)
 end
 
@@ -1123,32 +1120,33 @@ end
 
 function Stuffing:SortBags()
 	if (UnitAffectingCombat("player")) then return end
-	
+
 	local free
 	local total = 0
 	local bagtypeforfree
 	
 	if StuffingFrameBank and StuffingFrameBank:IsShown() then
 		for i = 5, 11 do
-			free, bagtypeforfree = GetContainerNumFreeSlots(i)
-			if bagtypeforfree == 0 then			
-				total = free + total
-			end
+		free, bagtypeforfree = GetContainerNumFreeSlots(i)
+		if bagtypeforfree == 0 then
+			total = free + total
 		end
-		
-		total = select(1, GetContainerNumFreeSlots(-1)) + total
+	end
+	
+	total = select(1, GetContainerNumFreeSlots(-1)) + total
+	
 	else
 		for i = 0, 4 do
 			free, bagtypeforfree = GetContainerNumFreeSlots(i)
-			if bagtypeforfree == 0 then			
+			if bagtypeforfree == 0 then
 				total = free + total
 			end
 		end
 	end
-
+	
 	if total == 0 then
 		print("|cffff0000"..ERROR_CAPS.." - "..ERR_INV_FULL.."|r")
-		return	
+		return
 	end
 	
 	local bs = self.sortBags
@@ -1327,7 +1325,6 @@ function Stuffing.Menu(self, level)
 	local info = self.info
 
 	wipe(info)
-
 	if level ~= 1 then
 		return
 	end
@@ -1341,14 +1338,6 @@ function Stuffing.Menu(self, level)
 	UIDropDownMenu_AddButton(info, level)
 	
 	wipe(info)
-	info.text = tukuilocal.bags_sortspecial
-	info.notCheckable = 1
-	info.func = function()
-		Stuffing_Sort("c/p")
-	end
-	UIDropDownMenu_AddButton(info, level)
-
-	wipe(info)
 	info.text = tukuilocal.bags_stackmenu
 	info.notCheckable = 1
 	info.func = function()
@@ -1357,6 +1346,14 @@ function Stuffing.Menu(self, level)
 	end
 	UIDropDownMenu_AddButton(info, level)
 	
+	wipe(info)
+	info.text = tukuilocal.bags_sortspecial
+	info.notCheckable = 1
+	info.func = function()
+		Stuffing_Sort("c/p")
+	end
+	UIDropDownMenu_AddButton(info, level)
+
 	wipe(info)
 	info.text = tukuilocal.bags_stackspecial
 	info.notCheckable = 1
@@ -1385,22 +1382,22 @@ function Stuffing.Menu(self, level)
 
 	end
 	UIDropDownMenu_AddButton(info, level)
-
-	wipe(info)
+	
+		wipe(info)
 	info.text = KEYRING
 	info.checked = function()
 		return key_ring == 1
 	end
 
 	info.func = function()
-		if key_ring == 1 then
-			key_ring = 0
-		else
-			key_ring = 1
-		end
-		Stuffing_Toggle()
-		ToggleKeyRing()
-		Stuffing:Layout()
+	if key_ring == 1 then
+		key_ring = 0
+	else
+		key_ring = 1
+	end
+	Stuffing_Toggle()
+	Stuffing:Layout()
+	ToggleKeyRing()
 	end
 	UIDropDownMenu_AddButton(info, level)
 

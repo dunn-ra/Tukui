@@ -1,6 +1,5 @@
 if TukuiCF.unitframes.enable ~= true or TukuiCF.unitframes.raidunitdebuffwatch ~= true then return end
 if not oUF then return end
-
 --[[------------------------------------------------------------------------------------------------------
 oUF_AuraWatch by Astromech
 Please leave comments, suggestions, and bug reports on this addon's WoWInterface page

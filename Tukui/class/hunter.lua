@@ -1,13 +1,17 @@
 if (TukuiDB.myclass ~= "HUNTER") then return end
+
+if TukuiDB.myclass == "HUNTER" then
+	TukuiCF["unitframes"].swing = true
+end
  
 local PetHappiness = CreateFrame("Frame")
 PetHappiness.happiness = GetPetHappiness()
 
-local OnEvent = function(self, event, ...)
+local OnEvent = function(self, event, unit)
 	local happiness = GetPetHappiness()
 	local hunterPet = select(2, HasPetUI())
-	local unit, power = ...
-	if (event == "UNIT_POWER" and unit == "pet" and power == "HAPPINESS" and happiness and hunterPet and self.happiness ~= happiness) then
+	
+	if (event == "UNIT_HAPPINESS" and happiness and hunterPet and self.happiness ~= happiness) then
 		-- happiness has changed
 		self.happiness = happiness
 		if (happiness == 1) then
@@ -24,6 +28,6 @@ local OnEvent = function(self, event, ...)
 		end
 	end
 end
-PetHappiness:RegisterEvent('UNIT_POWER')
+PetHappiness:RegisterEvent('UNIT_HAPPINESS')
 PetHappiness:RegisterEvent("UNIT_PET")
 PetHappiness:SetScript("OnEvent", OnEvent)

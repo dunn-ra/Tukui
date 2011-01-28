@@ -25,7 +25,7 @@ if TukuiDB.client == "frFR" then
 	tukuilocal.chat_lfg = "RechercheDeGroupe"
 
 	tukuilocal.disband = "Dissoudre le groupe"
-
+	
 	tukuilocal.datatext_download = "Téléchargement: "
 	tukuilocal.datatext_bandwidth = "Bande passante: "
 	tukuilocal.datatext_guild = "Guilde"
@@ -169,8 +169,10 @@ if TukuiDB.client == "frFR" then
 	tukuilocal.core_autoinv_disable = "Invitation automatique désactivée"
 	tukuilocal.core_wf_unlock = "Fenêtre des quêtes déverrouillée"
 	tukuilocal.core_wf_lock = "Fenêtre des quêtes verrouillée"
-	tukuilocal.core_welcome1 = "Bienvenue sur |cffC495DDTukui|r, version "
-	tukuilocal.core_welcome2 = "Tapez |cff00FFFF/uihelp|r pour plus de détails ou visitez www.tukui.org"
+	tukuilocal.core_welcome1 = "CyUI v "
+	tukuilocal.core_welcome2 = " loaded! Based on |cffC495DDTukui|r v "
+	tukuilocal.core_welcome3 = "Type |cff00FFFF/uihelp|r for more info or |cff00FFFF/tukui|r for extra configuration"
+	tukuilocal.core_site = " - www.tukui.org"
 
 	tukuilocal.core_uihelp1 = "|cff00ff00Commandes générales|r"
 	tukuilocal.core_uihelp2 = "|cffFF0000/tracker|r - Traqueur de bijoux pour arêne - Traqueur de bijoux pour arêne - Basse mémoire. (Icone seulement)"

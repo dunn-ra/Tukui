@@ -29,7 +29,7 @@ function style(self)
  
 	Count:ClearAllPoints()
 	Count:SetPoint("BOTTOMRIGHT", 0, TukuiDB.Scale(2))
-	Count:SetFont(TukuiCF["media"].font, 12, "OUTLINE")
+	Count:SetFont(TukuiCF["media"].font, 11, "OUTLINE")
  
 	Btname:SetText("")
 	Btname:Hide()
@@ -40,14 +40,18 @@ function style(self)
 		if self:GetHeight() ~= TukuiDB.buttonsize then
 			self:SetSize(TukuiDB.buttonsize, TukuiDB.buttonsize)
 		end
-
+		
 		-- create the bg/border panel
 		local panel = CreateFrame("Frame", name.."Panel", self)
-		TukuiDB.CreatePanel(panel, TukuiDB.buttonsize, TukuiDB.buttonsize, "CENTER", self, "CENTER", 0, 0)
- 
+		if TukuiCF["actionbar"].translucid ~= true then
+			TukuiDB.CreatePanel(panel, TukuiDB.buttonsize, TukuiDB.buttonsize, "CENTER", self, "CENTER", 0, 0)
+		else
+			TukuiDB.CreateTransPanel(panel, TukuiDB.buttonsize, TukuiDB.buttonsize, "CENTER", self, "CENTER", 0, 0)
+		end
+	
 		panel:SetFrameStrata(self:GetFrameStrata())
 		panel:SetFrameLevel(self:GetFrameLevel() - 1)
- 
+		
 		Icon:SetTexCoord(.08, .92, .08, .92)
 		Icon:SetPoint("TOPLEFT", Button, TukuiDB.Scale(2), TukuiDB.Scale(-2))
 		Icon:SetPoint("BOTTOMRIGHT", Button, TukuiDB.Scale(-2), TukuiDB.Scale(2))
@@ -86,13 +90,18 @@ local function stylesmallbutton(normal, button, icon, name, pet)
 		button:SetHeight(TukuiDB.petbuttonsize)
 		
 		local panel = CreateFrame("Frame", name.."Panel", button)
-		TukuiDB.CreatePanel(panel, TukuiDB.petbuttonsize, TukuiDB.petbuttonsize, "CENTER", button, "CENTER", 0, 0)
+		if TukuiCF["actionbar"].translucid ~= true then
+			TukuiDB.CreatePanel(panel, (TukuiDB.petbuttonsize / 1.1), (TukuiDB.petbuttonsize / 1.1), "CENTER", button, "CENTER", 0, 0)
+		else
+			TukuiDB.CreateTransPanel(panel, (TukuiDB.petbuttonsize / 1.1), (TukuiDB.petbuttonsize / 1.1), "CENTER", button, "CENTER", 0, 0)
+		end
 		panel:SetBackdropColor(unpack(media.backdropcolor))
 		panel:SetFrameStrata(button:GetFrameStrata())
 		panel:SetFrameLevel(button:GetFrameLevel() - 1)
 
 		icon:SetTexCoord(.08, .92, .08, .92)
 		icon:ClearAllPoints()
+		
 		if pet then
 			local autocast = _G[name.."AutoCastable"]
 			autocast:SetWidth(TukuiDB.Scale(41))
@@ -132,8 +141,6 @@ function TukuiDB.StylePet()
 	end
 end
 
-
-
 local function updatehotkey(self, actionButtonType)
 	local hotkey = _G[self:GetName() .. 'HotKey']
 	local text = hotkey:GetText()
@@ -143,6 +150,8 @@ local function updatehotkey(self, actionButtonType)
 	text = replace(text, '(c%-)', 'C')
 	text = replace(text, '(Mouse Button )', 'M')
 	text = replace(text, '(Middle Mouse)', 'M3')
+	text = replace(text, '(Mouse Wheel Up)', 'Mu')
+	text = replace(text, '(Mouse Wheel Down)', 'Md')
 	text = replace(text, '(Num Pad )', 'N')
 	text = replace(text, '(Page Up)', 'PU')
 	text = replace(text, '(Page Down)', 'PD')
@@ -150,6 +159,7 @@ local function updatehotkey(self, actionButtonType)
 	text = replace(text, '(Insert)', 'Ins')
 	text = replace(text, '(Home)', 'Hm')
 	text = replace(text, '(Delete)', 'Del')
+	text = replace(text, '(Capslock)', 'Caps')
 	
 	if hotkey:GetText() == _G['RANGE_INDICATOR'] then
 		hotkey:SetText('')

@@ -41,7 +41,6 @@ movebutton:SetScript("OnMouseUp", function()
 	WorldMapScreenAnchor:StopMovingOrSizing()
 end)
 
-
 -- look if map is not locked
 local MoveMap = GetCVarBool("advancedWorldMap")
 if MoveMap == nil then
@@ -102,20 +101,20 @@ local SmallerMapSkin = function()
 
 	WorldMapQuestShowObjectives:SetParent(ald)
 	WorldMapQuestShowObjectives:ClearAllPoints()
-	WorldMapQuestShowObjectives:SetPoint("BOTTOMLEFT", WorldMapButton, "BOTTOMLEFT", TukuiDB.Scale(7), TukuiDB.Scale(36))
+	WorldMapQuestShowObjectives:SetPoint("BOTTOMRIGHT", WorldMapButton, "BOTTOMRIGHT", TukuiDB.Scale(-12), TukuiDB.Scale(4))
 	WorldMapQuestShowObjectives:SetFrameStrata("HIGH")
 	WorldMapQuestShowObjectivesText:SetFont(ft, fontsize, "THINOUTLINE")
 	WorldMapQuestShowObjectivesText:SetShadowOffset(TukuiDB.mult, -TukuiDB.mult)
 	WorldMapQuestShowObjectivesText:ClearAllPoints()
-	WorldMapQuestShowObjectivesText:SetPoint("LEFT", WorldMapQuestShowObjectives, "RIGHT", TukuiDB.Scale(0), TukuiDB.Scale(1))
+	WorldMapQuestShowObjectivesText:SetPoint("RIGHT", WorldMapQuestShowObjectives, "LEFT", 0, 0)
 	
 	WorldMapShowDigSites:SetParent(ald)
 	WorldMapShowDigSitesText:ClearAllPoints()
-	WorldMapShowDigSitesText:SetPoint("BOTTOMLEFT", WorldMapQuestShowObjectivesText, "TOPLEFT", 0, TukuiDB.Scale(2))
+	WorldMapShowDigSitesText:SetPoint("BOTTOMRIGHT", WorldMapQuestShowObjectivesText, "TOPRIGHT", 0, TukuiDB.Scale(2))
 	WorldMapShowDigSitesText:SetFont(ft, fontsize, "THINOUTLINE")
 	WorldMapShowDigSitesText:SetShadowOffset(TukuiDB.mult, -TukuiDB.mult)	
 	WorldMapShowDigSites:ClearAllPoints()
-	WorldMapShowDigSites:SetPoint("BOTTOM", WorldMapQuestShowObjectives, "TOP", 0, TukuiDB.Scale(2))
+	WorldMapShowDigSites:SetPoint("BOTTOMRIGHT", WorldMapQuestShowObjectives, "TOPRIGHT", 0, TukuiDB.Scale(2))
 	WorldMapShowDigSites:SetFrameStrata("HIGH")
 	
 	WorldMapFrameAreaFrame:SetFrameStrata("DIALOG")
@@ -242,10 +241,11 @@ TukuiDB.SetTemplate(tinymapbg)
 
 tinymap:SetScript("OnEvent", function(self, event, addon)
 	if addon ~= "Blizzard_BattlefieldMinimap" then return end
-
+	
 	BattlefieldMinimap:SetScript("OnShow", function(self)
 		-- show holder
 		tinymap:Show()
+	
 		TukuiDB.Kill(BattlefieldMinimapCorner)
 		TukuiDB.Kill(BattlefieldMinimapBackground)
 		TukuiDB.Kill(BattlefieldMinimapTab)
@@ -262,12 +262,12 @@ tinymap:SetScript("OnEvent", function(self, event, addon)
 		tinymap:SetScale(1)
 		tinymap:SetAlpha(1)
 	end)
-
+	
 	BattlefieldMinimap:SetScript("OnHide", function(self)
 		tinymap:SetScale(0.00001)
 		tinymap:SetAlpha(0)
 	end)
-
+	
 	tinymap:SetScript("OnMouseUp", function(self, btn)
 		if btn == "LeftButton" then
 			self:StopMovingOrSizing()
@@ -277,7 +277,7 @@ tinymap:SetScript("OnEvent", function(self, event, addon)
 			if OpacityFrame:IsShown() then OpacityFrame:Hide() end -- seem to be a bug with default ui in 4.0, we hide it on next click
 		end
 	end)
-
+	
 	tinymap:SetScript("OnMouseDown", function(self, btn)
 		if btn == "LeftButton" then
 			if BattlefieldMinimapOptions and BattlefieldMinimapOptions.locked then

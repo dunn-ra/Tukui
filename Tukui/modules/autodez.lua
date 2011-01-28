@@ -9,8 +9,10 @@ if TukuiCF["loot"].autogreed == true then
 	autogreed:RegisterEvent("START_LOOT_ROLL")
 	autogreed:SetScript("OnEvent", function(self, event, id)
 		local name = select(2, GetLootRollItemInfo(id))
-		if (name == select(1, GetItemInfo(43102))) then
+		if (name == select(1, GetItemInfo(43102))) then -- Frozen Orbs
 			RollOnLoot(id, 2)
+		elseif (name == select(1, GetItemInfo(52078))) then -- Chaos Orbs
+			RollOnLoot(id, 1)
 		end
 		if TukuiDB.level ~= MAX_PLAYER_LEVEL then return end
 		if(id and select(4, GetLootRollItemInfo(id))==2 and not (select(5, GetLootRollItemInfo(id)))) then

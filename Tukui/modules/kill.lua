@@ -9,7 +9,7 @@ Kill:SetScript("OnEvent", function(self, event, addon)
 	if event == "PLAYER_LOGIN" then
 		if IsAddOnLoaded("Tukui_Dps_Layout") or IsAddOnLoaded("Tukui_Heal_Layout") then
 			InterfaceOptionsFrameCategoriesButton10:SetScale(0.00001)
-			InterfaceOptionsFrameCategoriesButton10:SetAlpha(0)		
+			InterfaceOptionsFrameCategoriesButton10:SetAlpha(0) 
 			InterfaceOptionsFrameCategoriesButton11:SetScale(0.00001)
 			InterfaceOptionsFrameCategoriesButton11:SetAlpha(0)
 			k(CompactPartyFrame)
@@ -32,10 +32,10 @@ Kill:SetScript("OnEvent", function(self, event, addon)
 		k(TutorialFrameAlertButton)
 		
 		k(InterfaceOptionsUnitFramePanelPartyBackground)
-
+		
 		-- make sure boss or arena frame is always disabled when running tukui
 		SetCVar("showArenaEnemyFrames", 0)
-		
+
 		if TukuiCF.arena.unitframes then
 			k(InterfaceOptionsUnitFramePanelArenaEnemyFrames)
 			k(InterfaceOptionsUnitFramePanelArenaEnemyCastBar)

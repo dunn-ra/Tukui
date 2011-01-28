@@ -1,4 +1,4 @@
-﻿-- credits : Caellian - CaelNamePlates !
+-- credits : Caellian - CaelNamePlates !
 
 if not TukuiCF["nameplate"].enable == true then return end
 
@@ -54,6 +54,18 @@ local threatUpdate = function(self, elapsed)
 			end
 		end
 
+		local _, maxHealth = self.healthBar:GetMinMaxValues()
+		local minHealth = self.healthBar:GetValue()
+		if not self.healthBar.percent then
+			self.healthBar.percent = self.healthBar:CreateFontString(nil, "OVERLAY")
+			self.healthBar.percent:SetFont(font, fontSize, fontOutline)
+			self.healthBar.percent:SetPoint("LEFT", self.healthBar, "RIGHT", TukuiDB.Scale(2), 0)
+			self.healthBar.percent:SetTextColor(0.84, 0.75, 0.65)
+			self.healthBar.percent:SetShadowOffset(TukuiDB.mult, -TukuiDB.mult)
+			self.healthBar.percent:SetJustifyH("LEFT")
+		end
+		self.healthBar.percent:SetText((string.format("%d%%", math.floor((minHealth/maxHealth)*100))))
+
 		self.healthBar:SetStatusBarColor(self.r, self.g, self.b)
 
 		self.elapsed = 0
@@ -88,15 +100,15 @@ local updatePlate = function(self)
 
 	self.healthBar:ClearAllPoints()
 	self.healthBar:SetPoint("CENTER", self.healthBar:GetParent())
-	self.healthBar:SetHeight(TukuiDB.Scale(7))
-	self.healthBar:SetWidth(TukuiDB.Scale(110))
+	self.healthBar:SetHeight(TukuiDB.Scale(8))
+	self.healthBar:SetWidth(TukuiDB.Scale(120))
 
 	self.healthBar.hpBackground:SetVertexColor(self.r * 0.20, self.g * 0.20, self.b * 0.20)
 
 	self.castBar:ClearAllPoints()
 	self.castBar:SetPoint("TOP", self.healthBar, "BOTTOM", 0, TukuiDB.Scale(-4))
-	self.castBar:SetHeight(TukuiDB.Scale(5))
-	self.castBar:SetWidth(TukuiDB.Scale(110))
+	self.castBar:SetHeight(TukuiDB.Scale(6))
+	self.castBar:SetWidth(TukuiDB.Scale(120))
 
 	self.highlight:ClearAllPoints()
 	self.highlight:SetAllPoints(self.healthBar)

@@ -7,7 +7,7 @@ if TukuiCF["datatext"].wowtime and TukuiCF["datatext"].wowtime > 0 then
 	Stat:SetFrameStrata("BACKGROUND")
 	Stat:SetFrameLevel(3)
 
-	local Text  = TukuiInfoLeft:CreateFontString(nil, "OVERLAY")
+	local Text  = TukuiBottomPanel:CreateFontString(nil, "OVERLAY")
 	Text:SetFont(TukuiCF.media.font, TukuiCF["datatext"].fontsize)
 	TukuiDB.PP(TukuiCF["datatext"].wowtime, Text)
 

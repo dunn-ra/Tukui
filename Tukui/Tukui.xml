@@ -14,6 +14,8 @@
 	<Script file="config\media.lua"/>
 	
 	<Script file="modules\configui.lua"/>
+	
+	<Script file="scripts\classtimer.lua"/>
 
 	<Include file="libs\oUF\oUF.xml"/>
 	<Script file="libs\oUF_AuraWatch\oUF_AuraWatch.lua"/>
@@ -27,9 +29,10 @@
 	<Script file="libs\oUF_TotemBar\oUF_TotemBar.lua"/>
 	<Script file="libs\oUF_Trinkets\oUF_Trinkets.lua"/>
 	<Script file="libs\oUF_RaidDebuffs\oUF_RaidDebuffs.lua"/>	
+	<Script file="libs\oUF_Swing\oUF_Swing.lua"/>
 	
 	<Script file="config\watch.lua"/>
-		
+
 	<Script file="modules\colors.lua"/>	
 	<Script file="modules\functions.lua"/>
 	<Script file="modules\launch.lua"/>
@@ -53,6 +56,8 @@
 	<Script file="modules\item.lua"/>
 	<Script file="modules\kill.lua"/>
 	<Script file="modules\spam.lua"/>
+	<Script file="modules\achievement.lua"/>
+	<Script file="modules\wipe.lua"/>
 	
 	<Script file="scripts\font.lua"/>
 	<Script file="scripts\buffs.lua"/>
@@ -103,13 +108,16 @@
 	<Script file="scripts\skin.lua"/>
 	<Script file="scripts\totemskin.lua"/>
 	<Script file="scripts\bubbles.lua"/>
+	<Script file="scripts\markbar.lua"/>
+	<Script file="scripts\raidutility.lua"/>
 	
 	<Include file="unitframes\templates.xml"/>
 	<Script file="unitframes\tags.lua"/>
-	<Script file="unitframes\layout.lua"/>
 	
 	<Script file="pvp\interrupticons.lua"/>
-			
+	
 	<Script file="class\priest.lua"/>
 	<Script file="class\hunter.lua"/>
+	<Script file="class\warlock.lua"/>
+	<Script file="class\mage.lua"/>
 </Ui>

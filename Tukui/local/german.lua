@@ -24,8 +24,8 @@ if TukuiDB.client == "deDE" then
 	tukuilocal.chat_recrutment = "Gildenrekrutierung"
 	tukuilocal.chat_lfg = "SucheNachGruppe"
 	
-	tukuilocal.disband = "Gruppe wird aufgelöst."  
- 
+	tukuilocal.disband = "Gruppe wird aufgelöst."
+	
 	tukuilocal.datatext_download = "Download: "
 	tukuilocal.datatext_bandwidth = "Bandbreite: "
 	tukuilocal.datatext_guild = "Gilde"
@@ -168,8 +168,10 @@ if TukuiDB.client == "deDE" then
 	tukuilocal.core_autoinv_disable = "Autoinvite AUS"   
 	tukuilocal.core_wf_unlock = "Quest Tracker entriegelt"
 	tukuilocal.core_wf_lock = "Quest Tracker verriegelt" 
-	tukuilocal.core_welcome1 = "Willkommen bei |cffC495DDTukui|r Version " 
-	tukuilocal.core_welcome2 = "Tippe |cff00FFFF/uihelp|r für mehr Informationen"
+	tukuilocal.core_welcome1 = "CyUI v "
+	tukuilocal.core_welcome2 = " loaded! Based on |cffC495DDTukui|r v "
+	tukuilocal.core_welcome3 = "Type |cff00FFFF/uihelp|r for more info or |cff00FFFF/tukui|r for extra configuration"
+	tukuilocal.core_site = " - www.tukui.org"
  
 	tukuilocal.core_uihelp1 = "|cff00ff00Allgemeine Slash Befehle|r"
 	tukuilocal.core_uihelp2 = "|cffFF0000/tracker|r - Tukui Arena Gegner Cooldown Tracker - Low-memory Gegner PVP cooldown tracker. (Icon only)"

@@ -5,14 +5,28 @@
 local TukuiMinimap = CreateFrame("Frame", "TukuiMinimap", Minimap)
 TukuiMinimap:RegisterEvent("ADDON_LOADED")
 
-TukuiDB.CreatePanel(TukuiMinimap, 144, 144, "CENTER", Minimap, "CENTER", -0, 0)
+if TukuiCF["actionbar"].translucid ~= true then
+	TukuiDB.CreatePanel(TukuiMinimap, 144, 144, "CENTER", Minimap, "CENTER", -0, 0)
+else
+	TukuiDB.CreateTransPanel(TukuiMinimap, 144, 144, "CENTER", Minimap, "CENTER", -0, 0)
+end
 TukuiMinimap:ClearAllPoints()
 TukuiMinimap:SetPoint("TOPLEFT", TukuiDB.Scale(-2), TukuiDB.Scale(2))
 TukuiMinimap:SetPoint("BOTTOMRIGHT", TukuiDB.Scale(2), TukuiDB.Scale(-2))
 
 Minimap:ClearAllPoints()
-Minimap:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", TukuiDB.Scale(-24), TukuiDB.Scale(-24))
+Minimap:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", TukuiDB.Scale(-7), TukuiDB.Scale(-7))
 Minimap:SetSize(TukuiDB.Scale(144), TukuiDB.Scale(144))
+
+if TukuiDB.lowversion == true then
+	if TukuiCF["actionbar"].translucid ~= true then
+		TukuiDB.CreatePanel(TukuiMinimap, 120, 120, "CENTER", Minimap, "CENTER", -0, 0)
+	else
+		TukuiDB.CreateTransPanel(TukuiMinimap, 120, 120, "CENTER", Minimap, "CENTER", -0, 0)
+	end
+	Minimap:SetSize(TukuiDB.Scale(120), TukuiDB.Scale(120))
+end
+
 
 -- Hide Border
 MinimapBorder:Hide()
@@ -39,7 +53,7 @@ GameTimeFrame:Hide()
 
 -- Hide Mail Button
 MiniMapMailFrame:ClearAllPoints()
-MiniMapMailFrame:SetPoint("TOPRIGHT", Minimap, TukuiDB.Scale(3), TukuiDB.Scale(4))
+MiniMapMailFrame:SetPoint("BOTTOMLEFT", Minimap, TukuiDB.Scale(-4), TukuiDB.Scale(-8))
 MiniMapMailBorder:Hide()
 MiniMapMailIcon:SetTexture("Interface\\AddOns\\Tukui\\media\\textures\\mail")
 
@@ -54,7 +68,12 @@ MiniMapWorldMapButton:Hide()
 -- shitty 3.3 flag to move
 MiniMapInstanceDifficulty:ClearAllPoints()
 MiniMapInstanceDifficulty:SetParent(Minimap)
-MiniMapInstanceDifficulty:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, 0)
+MiniMapInstanceDifficulty:SetPoint("TOPRIGHT", Minimap, "TOPRIGHT", 0, 0)
+
+-- Guild tabard
+GuildInstanceDifficulty:ClearAllPoints()
+GuildInstanceDifficulty:SetParent(Minimap)
+GuildInstanceDifficulty:SetPoint("TOPRIGHT", Minimap, "TOPRIGHT", TukuiDB.Scale(-3), 0)
 
 -- GhostFrame under minimap
 GhostFrameContentsFrame:SetWidth(TukuiDB.Scale(148))
@@ -138,7 +157,6 @@ Minimap:SetScript("OnMouseUp", function(self, btn)
 	end
 end)
 
-
 -- Set Square Map Mask
 Minimap:SetMaskTexture('Interface\\ChatFrame\\ChatFrameBackground')
 
@@ -151,7 +169,6 @@ TukuiDB.SetTemplate(LFDSearchStatus)
 ----------------------------------------------------------------------------------------
 -- Animation Coords and Current Zone. Awesome feature by AlleyKat.
 ----------------------------------------------------------------------------------------
-
 -- Set Anim func
 local set_anim = function (self,k,x,y)
 	self.anim = self:CreateAnimationGroup("Move_In")
@@ -172,7 +189,7 @@ local set_anim = function (self,k,x,y)
 	self.anim_o.b:SetOffset(x,y)
 	if k then self.anim_o:SetScript("OnFinished",function() self:Hide() end) end
 end
- 
+
 --Style Zone and Coord panels
 local m_zone = CreateFrame("Frame",nil,UIParent)
 TukuiDB.CreatePanel(m_zone, 0, 20, "TOPLEFT", Minimap, "TOPLEFT", TukuiDB.Scale(2),TukuiDB.Scale(-2))
@@ -202,34 +219,35 @@ m_coord_text:SetFont(TukuiCF["media"].font,12)
 m_coord_text:SetPoint("Center",TukuiDB.Scale(-1),0)
 m_coord_text:SetJustifyH("CENTER")
 m_coord_text:SetJustifyV("MIDDLE")
- 
+
 -- Set Scripts and etc.
 Minimap:SetScript("OnEnter",function()
 	m_zone.anim_o:Stop()
 	m_coord.anim_o:Stop()
 	m_zone:Show()
+	m_coord:Show()
 	local x,y = GetPlayerMapPosition("player")
-	if x ~= 0 and y ~= 0 then
-		m_coord:Show()
-		m_coord.anim:Play()
-	end
+		if x ~= 0 and y ~= 0 then
+			m_coord:Show()
+			m_coord.anim:Play()
+		end
 	m_zone.anim:Play()
 end)
- 
+
 Minimap:SetScript("OnLeave",function()
 	m_coord.anim:Stop()
 	m_coord.anim_o:Play()
 	m_zone.anim:Stop()
 	m_zone.anim_o:Play()
 end)
- 
+
 m_coord_text:SetText("00,00")
- 
+
 local ela,go = 0,false
- 
+
 m_coord.anim:SetScript("OnFinished",function() go = true end)
 m_coord.anim_o:SetScript("OnPlay",function() go = false end)
- 
+
 local coord_Update = function(self,t)
 	ela = ela - t
 	if ela > 0 or not(go) then return end
@@ -254,9 +272,9 @@ local coord_Update = function(self,t)
 	end
 	ela = .2
 end
- 
+
 m_coord:SetScript("OnUpdate",coord_Update)
- 
+
 local zone_Update = function()
 	local pvp = GetZonePVPInfo()
 	m_zone_text:SetText(GetMinimapZoneText())
@@ -272,13 +290,13 @@ local zone_Update = function()
 		m_zone_text:SetTextColor(1.0, 1.0, 1.0)
 	end
 end
- 
+
 m_zone:RegisterEvent("PLAYER_ENTERING_WORLD")
 m_zone:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 m_zone:RegisterEvent("ZONE_CHANGED")
 m_zone:RegisterEvent("ZONE_CHANGED_INDOORS")
 m_zone:SetScript("OnEvent",zone_Update) 
- 
+
 local a,k = CreateFrame("Frame"),4
 a:SetScript("OnUpdate",function(self,t)
 	k = k - t

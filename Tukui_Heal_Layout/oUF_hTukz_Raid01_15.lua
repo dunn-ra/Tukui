@@ -13,7 +13,7 @@ local function Shared(self, unit)
 	self.menu = TukuiDB.SpawnMenu
 	
 	self:SetBackdrop({bgFile = TukuiCF["media"].blank, insets = {top = -TukuiDB.mult, left = -TukuiDB.mult, bottom = -TukuiDB.mult, right = -TukuiDB.mult}})
-	self:SetBackdropColor(0.1, 0.1, 0.1)
+	self:SetBackdropColor(0, 0, 0)
 	
 	local health = CreateFrame('StatusBar', nil, self)
 	health:SetPoint("TOPLEFT")
@@ -28,7 +28,7 @@ local function Shared(self, unit)
 	health.bg:SetTexture(0.3, 0.3, 0.3)
 	health.bg.multiplier = 0.3
 	self.Health.bg = health.bg
-		
+
 	health.value = health:CreateFontString(nil, "OVERLAY")
 	health.value:SetPoint("RIGHT", health, -3, 1)
 	health.value:SetFont(font2, 12*TukuiDB.raidscale, "THINOUTLINE")
@@ -43,8 +43,8 @@ local function Shared(self, unit)
 	if TukuiCF.unitframes.unicolor == true then
 		health.colorDisconnected = false
 		health.colorClass = false
-		health:SetStatusBarColor(.3, .3, .3, 1)
-		health.bg:SetVertexColor(.1, .1, .1, 1)		
+		health:SetStatusBarColor(unpack(TukuiCF["media"].healthcolor))
+		health.bg:SetVertexColor(unpack(TukuiCF["media"].healthdeficit))	
 	else
 		health.colorDisconnected = true
 		health.colorClass = true
@@ -75,12 +75,28 @@ local function Shared(self, unit)
 		power.colorPower = true
 	end
 	
+	local FrameBorder = CreateFrame("Frame", nil, self)
+	FrameBorder:SetPoint("TOPLEFT", self, "TOPLEFT", TukuiDB.Scale(-1), TukuiDB.Scale(1))
+	FrameBorder:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", TukuiDB.Scale(1), TukuiDB.Scale(-1))
+	TukuiDB.SetTemplate(FrameBorder)
+	FrameBorder:SetBackdropBorderColor(0, 0, 0)
+	FrameBorder:SetFrameLevel(2)
+	FrameBorder:SetAlpha(0)
+	self.FrameBorder = FrameBorder
+	
 	local name = health:CreateFontString(nil, "OVERLAY")
     name:SetPoint("LEFT", health, 3, 0)
 	name:SetFont(font2, 12*TukuiDB.raidscale, "THINOUTLINE")
 	name:SetShadowOffset(1, -1)
 	--name.frequentUpdates = 0.2
-	self:Tag(name, "[Tukui:namemedium]")
+	if TukuiCF["unitframes"].unicolor == true then
+		self:Tag(name, "[Tukui:namemedium]")
+	else
+		self:Tag(name, "[Tukui:namemedium]")
+		name:SetTextColor(unpack(TukuiCF["media"].tncolor))
+		name:SetShadowColor(0, 0, 0)
+		name:SetShadowOffset(1.25, -1.25)
+	end
 	self.Name = name
 	
     local leader = health:CreateTexture(nil, "OVERLAY")
@@ -112,19 +128,19 @@ local function Shared(self, unit)
 	
 	if TukuiCF["unitframes"].showsymbols == true then
 		local RaidIcon = health:CreateTexture(nil, 'OVERLAY')
-		RaidIcon:SetHeight(TukuiDB.Scale(18*TukuiDB.raidscale))
-		RaidIcon:SetWidth(TukuiDB.Scale(18*TukuiDB.raidscale))
-		RaidIcon:SetPoint('CENTER', self, 'TOP')
+		RaidIcon:SetHeight(TukuiDB.Scale(16*TukuiDB.raidscale))
+		RaidIcon:SetWidth(TukuiDB.Scale(16*TukuiDB.raidscale))
+		RaidIcon:SetPoint('RIGHT', self, 'RIGHT', (TukuiDB.Scale(-2*TukuiDB.raidscale)), (TukuiDB.Scale(3*TukuiDB.raidscale)))
 		RaidIcon:SetTexture("Interface\\AddOns\\Tukui\\media\\textures\\raidicons.blp") -- thx hankthetank for texture
 		self.RaidIcon = RaidIcon
 	end
 	
-	local ReadyCheck = self.Power:CreateTexture(nil, "OVERLAY")
+	local ReadyCheck = health:CreateTexture(nil, "OVERLAY")
 	ReadyCheck:SetHeight(TukuiDB.Scale(12*TukuiDB.raidscale))
 	ReadyCheck:SetWidth(TukuiDB.Scale(12*TukuiDB.raidscale))
-	ReadyCheck:SetPoint('CENTER')
+	ReadyCheck:SetPoint('TOP', self, 'TOP')
 	self.ReadyCheck = ReadyCheck
-	
+
     local debuffs = CreateFrame('Frame', nil, self)
     debuffs:SetPoint('LEFT', self, 'RIGHT', 4, 0)
     debuffs:SetHeight(26)
@@ -169,7 +185,7 @@ local function Shared(self, unit)
 		local ohpb = CreateFrame('StatusBar', nil, self.Health)
 		ohpb:SetPoint('TOPLEFT', mhpb:GetStatusBarTexture(), 'TOPRIGHT', 0, 0)
 		ohpb:SetPoint('BOTTOMLEFT', mhpb:GetStatusBarTexture(), 'BOTTOMRIGHT', 0, 0)
-		ohpb:SetWidth(150*TukuiDB.raidscale)
+		ohpb:SetWidth(120*TukuiDB.raidscale)
 		ohpb:SetStatusBarTexture(normTex)
 		ohpb:SetStatusBarColor(0, 1, 0, 0.25)
 
@@ -179,7 +195,7 @@ local function Shared(self, unit)
 			maxOverflow = 1,
 		}
 	end
-
+	
 	return self
 end
 
@@ -193,7 +209,7 @@ oUF:Factory(function(self)
 		self:SetWidth(header:GetAttribute('initial-width'))
 		self:SetHeight(header:GetAttribute('initial-height'))
 	]],
-	'initial-width', TukuiDB.Scale(150*TukuiDB.raidscale),
+	'initial-width', TukuiDB.Scale(120*TukuiDB.raidscale),
 	'initial-height', TukuiDB.Scale(32*TukuiDB.raidscale),	
 	"showParty", true, "showPlayer", TukuiCF["unitframes"].showplayerinparty, "showRaid", true, "groupFilter", "1,2,3,4,5,6,7,8", "groupingOrder", "1,2,3,4,5,6,7,8", "groupBy", "GROUP", "yOffset", TukuiDB.Scale(-4))
 	raid:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 15, -300*TukuiDB.raidscale)
@@ -222,7 +238,7 @@ oUF:Factory(function(self)
 			local numparty = GetNumPartyMembers()
 			if numparty > 0 and numraid == 0 or numraid > 0 and numraid <= 5 then
 				raid:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 15, -300*TukuiDB.raidscale)
-				for i,v in ipairs(pets) do v:Enable() end
+				for i,v in ipairs(pets) do v:Disable() end
 			elseif numraid > 5 and numraid <= 10 then
 				raid:SetPoint('TOPLEFT', UIParent, 15, -260*TukuiDB.raidscale)
 				for i,v in ipairs(pets) do v:Disable() end
@@ -235,11 +251,3 @@ oUF:Factory(function(self)
 		end
 	end)
 end)
-
-
-
-
-
-
-
-

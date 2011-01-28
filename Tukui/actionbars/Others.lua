@@ -52,5 +52,3 @@ TukuiDB.SetTemplate(vehicle)
 vehicle:RegisterForClicks("AnyUp")
 vehicle:SetScript("OnClick", function() VehicleExit() end)
 RegisterStateDriver(vehicle, "visibility", "[target=vehicle,exists] show;hide")
-
-

@@ -17,10 +17,10 @@ local ItemRefTooltip = ItemRefTooltip
 local linkTypes = {item = true, enchant = true, spell = true, quest = true, unit = true, talent = true, achievement = true, glyph = true}
 
 local classification = {
-	worldboss = "|cffAF5050Boss|r",
-	rareelite = "|cffAF5050+ Rare|r",
-	elite = "|cffAF5050+|r",
-	rare = "|cffAF5050Rare|r",
+	worldboss = "|cffAF5050 Boss|r",
+	rareelite = "|cffAF5050 Elite Rare|r",
+	elite = "|cffAF5050 Elite|r",
+	rare = "|cffAF5050 Rare|r",
 }
 
 local NeedBackdropBorderRefresh = false
@@ -40,10 +40,13 @@ hooksecurefunc("GameTooltip_SetDefaultAnchor", function(self, parent)
 			-- avoids flicker when mouseover unitframes with open bags
 			if TukuiCF["bags"].enable == true and StuffingFrameBags and StuffingFrameBags:IsShown() then
 				self:ClearAllPoints()
-				self:SetPoint("BOTTOMRIGHT", StuffingFrameBags, "TOPRIGHT", 0, TukuiDB.Scale(4))
+				self:SetPoint("BOTTOMRIGHT", StuffingFrameBags, "TOPRIGHT", 0, TukuiDB.Scale(5))
+			elseif IsAddOnLoaded("Recount") and Recount_MainWindow:IsShown() and TukuiCF["tooltip"].recountconfig == true then
+				self:ClearAllPoints()
+				self:SetPoint("BOTTOMRIGHT", Recount_MainWindow, "TOPRIGHT", 0, TukuiDB.Scale(-5))
 			else
 				self:ClearAllPoints()
-				self:SetPoint("BOTTOMRIGHT", TukuiInfoRight, "TOPRIGHT", 0, TukuiDB.Scale(5))
+				self:SetPoint("BOTTOMRIGHT", TukuiBottomPanel, "TOPRIGHT", TukuiDB.Scale(-5), TukuiDB.Scale(5))
 			end
 		end
 	end
@@ -56,7 +59,7 @@ GameTooltip:HookScript("OnUpdate",function(self, ...)
 		self:ClearAllPoints()
 		self:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", (x / scale + (15)), (y / scale + (7)))
 	end
-
+	
 	if self:GetAnchorType() == "ANCHOR_CURSOR" and NeedBackdropBorderRefresh == true and db.cursor ~= true then
 		-- h4x for world object tooltip border showing last border color 
 		-- or showing background sometime ~blue :x
@@ -70,10 +73,13 @@ GameTooltip:HookScript("OnUpdate",function(self, ...)
 			-- moves tooltip when opening bags
 			if TukuiCF["bags"].enable == true and StuffingFrameBags and StuffingFrameBags:IsShown() then
 				self:ClearAllPoints()
-				self:SetPoint("BOTTOMRIGHT", StuffingFrameBags, "TOPRIGHT", 0, TukuiDB.Scale(4))
+				self:SetPoint("BOTTOMRIGHT", StuffingFrameBags, "TOPRIGHT", 0, TukuiDB.Scale(5))
+			elseif IsAddOnLoaded("Recount") and Recount_MainWindow:IsShown() and TukuiCF["tooltip"].recountconfig == true then
+				self:ClearAllPoints()
+				self:SetPoint("BOTTOMRIGHT", Recount_MainWindow, "TOPRIGHT", 0, TukuiDB.Scale(-5))
 			else
 				self:ClearAllPoints()
-				self:SetPoint("BOTTOMRIGHT", TukuiInfoRight, "TOPRIGHT", 0, TukuiDB.Scale(5))
+				self:SetPoint("BOTTOMRIGHT", TukuiBottomPanel, "TOPRIGHT", TukuiDB.Scale(-5), TukuiDB.Scale(5))
 			end
 		end
 	end
@@ -171,12 +177,14 @@ healthBar:SetHeight(TukuiDB.Scale(6))
 healthBar:SetPoint("BOTTOMLEFT", healthBar:GetParent(), "TOPLEFT", TukuiDB.Scale(2), TukuiDB.Scale(5))
 healthBar:SetPoint("BOTTOMRIGHT", healthBar:GetParent(), "TOPRIGHT", -TukuiDB.Scale(2), TukuiDB.Scale(5))
 healthBar:SetStatusBarTexture(TukuiCF.media.normTex)
+healthBar:Hide()
 
 local healthBarBG = CreateFrame("Frame", "StatusBarBG", healthBar)
 healthBarBG:SetFrameLevel(healthBar:GetFrameLevel() - 1)
 healthBarBG:SetPoint("TOPLEFT", -TukuiDB.Scale(2), TukuiDB.Scale(2))
 healthBarBG:SetPoint("BOTTOMRIGHT", TukuiDB.Scale(2), -TukuiDB.Scale(2))
-TukuiDB.SetTemplate(healthBarBG)
+TukuiDB.SetCyTemplate(healthBarBG)
+healthBarBG:Hide()
 
 GameTooltip:HookScript("OnTooltipSetUnit", function(self)
 	local lines = self:NumLines()
@@ -282,12 +290,14 @@ local BorderColor = function(self)
 		self:SetBackdropBorderColor(r, g, b)
 		healthBarBG:SetBackdropBorderColor(r, g, b)
 		healthBar:SetStatusBarColor(r, g, b)
+		healthBar:SetAlpha(0)
 	elseif reaction then
 		local c = TukuiDB.oUF_colors.reaction[reaction]
 		r, g, b = c[1], c[2], c[3]
 		self:SetBackdropBorderColor(r, g, b)
 		healthBarBG:SetBackdropBorderColor(r, g, b)
 		healthBar:SetStatusBarColor(r, g, b)
+		healthBar:SetAlpha(0)
 	else
 		local _, link = self:GetItem()
 		local quality = link and select(3, GetItemInfo(link))
@@ -295,9 +305,10 @@ local BorderColor = function(self)
 			local r, g, b = GetItemQualityColor(quality)
 			self:SetBackdropBorderColor(r, g, b)
 		else
-			self:SetBackdropBorderColor(unpack(TukuiCF["media"].bordercolor))
+			--self:SetBackdropBorderColor(unpack(TukuiCF["media"].bordercolor)) -- handled by SetCyTemplate function
 			healthBarBG:SetBackdropBorderColor(unpack(TukuiCF["media"].bordercolor))
 			healthBar:SetStatusBarColor(unpack(TukuiCF["media"].bordercolor))
+			healthBar:SetAlpha(0)
 		end
 	end
 	
@@ -306,7 +317,7 @@ local BorderColor = function(self)
 end
 
 local SetStyle = function(self)
-	TukuiDB.SetTemplate(self)
+	TukuiDB.SetCyTemplate(self)
 	BorderColor(self)
 end
 
@@ -318,8 +329,8 @@ TukuiTooltip:SetScript("OnEvent", function(self)
 	
 	ItemRefTooltip:HookScript("OnTooltipSetItem", SetStyle)
 	
-	TukuiDB.SetTemplate(FriendsTooltip)
-		
+	TukuiDB.SetCyTemplate(FriendsTooltip)
+
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	self:SetScript("OnEvent", nil)
 	

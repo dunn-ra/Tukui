@@ -10,31 +10,54 @@ local mainhand, _, _, offhand = GetWeaponEnchantInfo()
 local rowbuffs = 16
 
 TemporaryEnchantFrame:ClearAllPoints()
-TemporaryEnchantFrame:SetPoint("TOPRIGHT", Minimap, "TOPRIGHT", 0, TukuiDB.Scale(-16))
+if TukuiDB.lowversion ~= true then
+	TemporaryEnchantFrame:SetPoint("TOPRIGHT", UIParent, TukuiDB.Scale(-166), TukuiDB.Scale(-6))
+else
+	TemporaryEnchantFrame:SetPoint("TOPRIGHT", UIParent, TukuiDB.Scale(-136), TukuiDB.Scale(-6))
+end
 TemporaryEnchantFrame.SetPoint = TukuiDB.dummy
 
 TempEnchant1:ClearAllPoints()
 TempEnchant2:ClearAllPoints()
-TempEnchant1:SetPoint("TOPRIGHT", UIParent, TukuiDB.Scale(-184), TukuiDB.Scale(-22))
+if TukuiDB.lowversion ~= true then
+	TempEnchant1:SetPoint("TOPRIGHT", UIParent, TukuiDB.Scale(-166), TukuiDB.Scale(-6))
+else
+	TempEnchant1:SetPoint("TOPRIGHT", UIParent, TukuiDB.Scale(-136), TukuiDB.Scale(-6))
+end
 TempEnchant2:SetPoint("RIGHT", TempEnchant1, "LEFT", TukuiDB.Scale(-4), 0)
 
 WorldStateAlwaysUpFrame:SetFrameStrata("BACKGROUND")
 WorldStateAlwaysUpFrame:SetFrameLevel(0)
 
-for i = 1, 3 do
-	local f = CreateFrame("Frame", nil, _G["TempEnchant"..i])
-	TukuiDB.CreatePanel(f, 30, 30, "CENTER", _G["TempEnchant"..i], "CENTER", 0, 0)	
-	_G["TempEnchant"..i.."Border"]:Hide()
-	_G["TempEnchant"..i.."Icon"]:SetTexCoord(.08, .92, .08, .92)
-	_G["TempEnchant"..i.."Icon"]:SetPoint("TOPLEFT", _G["TempEnchant"..i], TukuiDB.Scale(2), TukuiDB.Scale(-2))
-	_G["TempEnchant"..i.."Icon"]:SetPoint("BOTTOMRIGHT", _G["TempEnchant"..i], TukuiDB.Scale(-2), TukuiDB.Scale(2))
-	_G["TempEnchant"..i]:SetHeight(TukuiDB.Scale(30))
-	_G["TempEnchant"..i]:SetWidth(TukuiDB.Scale(30))	
-	_G["TempEnchant"..i.."Duration"]:ClearAllPoints()
-	_G["TempEnchant"..i.."Duration"]:SetPoint("BOTTOM", 0, TukuiDB.Scale(-13))
-	_G["TempEnchant"..i.."Duration"]:SetFont(TukuiCF["media"].font, 12)
+if TukuiDB.lowversion ~= true then
+	for i = 1, 3 do
+		local f = CreateFrame("Frame", nil, _G["TempEnchant"..i])
+		TukuiDB.CreateTransPanel(f, 28, 28, "CENTER", _G["TempEnchant"..i], "CENTER", 0, 0)	
+		_G["TempEnchant"..i.."Border"]:Hide()
+		_G["TempEnchant"..i.."Icon"]:SetTexCoord(.08, .92, .08, .92)
+		_G["TempEnchant"..i.."Icon"]:SetPoint("TOPLEFT", _G["TempEnchant"..i], TukuiDB.Scale(2), TukuiDB.Scale(-2))
+		_G["TempEnchant"..i.."Icon"]:SetPoint("BOTTOMRIGHT", _G["TempEnchant"..i], TukuiDB.Scale(-2), TukuiDB.Scale(2))
+		_G["TempEnchant"..i]:SetHeight(TukuiDB.Scale(28))
+		_G["TempEnchant"..i]:SetWidth(TukuiDB.Scale(28))	
+		_G["TempEnchant"..i.."Duration"]:ClearAllPoints()
+		_G["TempEnchant"..i.."Duration"]:SetPoint("BOTTOM", 0, TukuiDB.Scale(-13))
+		_G["TempEnchant"..i.."Duration"]:SetFont(TukuiCF["media"].font, 12)
+	end
+else
+	for i = 1, 3 do
+		local f = CreateFrame("Frame", nil, _G["TempEnchant"..i])
+		TukuiDB.CreateTransPanel(f, 22, 22, "CENTER", _G["TempEnchant"..i], "CENTER", 0, 0)	
+		_G["TempEnchant"..i.."Border"]:Hide()
+		_G["TempEnchant"..i.."Icon"]:SetTexCoord(.08, .92, .08, .92)
+		_G["TempEnchant"..i.."Icon"]:SetPoint("TOPLEFT", _G["TempEnchant"..i], TukuiDB.Scale(2), TukuiDB.Scale(-2))
+		_G["TempEnchant"..i.."Icon"]:SetPoint("BOTTOMRIGHT", _G["TempEnchant"..i], TukuiDB.Scale(-2), TukuiDB.Scale(2))
+		_G["TempEnchant"..i]:SetHeight(TukuiDB.Scale(22))
+		_G["TempEnchant"..i]:SetWidth(TukuiDB.Scale(22))	
+		_G["TempEnchant"..i.."Duration"]:ClearAllPoints()
+		_G["TempEnchant"..i.."Duration"]:SetPoint("BOTTOM", 0, TukuiDB.Scale(-13))
+		_G["TempEnchant"..i.."Duration"]:SetFont(TukuiCF["media"].font, 12)
+	end
 end
-
 local function StyleBuffs(buttonName, index, debuff)
 	local buff		= _G[buttonName..index]
 	local icon		= _G[buttonName..index.."Icon"]
@@ -46,9 +69,14 @@ local function StyleBuffs(buttonName, index, debuff)
 		icon:SetPoint("TOPLEFT", buff, TukuiDB.Scale(2), TukuiDB.Scale(-2))
 		icon:SetPoint("BOTTOMRIGHT", buff, TukuiDB.Scale(-2), TukuiDB.Scale(2))
 		
-		buff:SetHeight(TukuiDB.Scale(30))
-		buff:SetWidth(TukuiDB.Scale(30))
-				
+		if TukuiDB.lowversion ~= true then
+			buff:SetHeight(TukuiDB.Scale(28))
+			buff:SetWidth(TukuiDB.Scale(28))
+		else
+			buff:SetHeight(TukuiDB.Scale(22))
+			buff:SetWidth(TukuiDB.Scale(22))
+		end
+		
 		duration:ClearAllPoints()
 		duration:SetPoint("BOTTOM", 0, TukuiDB.Scale(-13))
 		duration:SetFont(TukuiCF["media"].font, 12)
@@ -58,7 +86,11 @@ local function StyleBuffs(buttonName, index, debuff)
 		count:SetFont(TukuiCF["media"].font, 12, "OUTLINE")
 		
 		local panel = CreateFrame("Frame", buttonName..index.."Panel", buff)
-		TukuiDB.CreatePanel(panel, 30, 30, "CENTER", buff, "CENTER", 0, 0)
+		if TukuiDB.lowversion ~= true then
+			TukuiDB.CreateTransPanel(panel, 28, 28, "CENTER", buff, "CENTER", 0, 0)
+		else
+			TukuiDB.CreateTransPanel(panel, 22, 22, "CENTER", buff, "CENTER", 0, 0)
+		end
 		panel:SetFrameLevel(buff:GetFrameLevel() - 1)
 		panel:SetFrameStrata(buff:GetFrameStrata())
 	end
@@ -96,9 +128,17 @@ local function UpdateBuffAnchors()
 			buff:ClearAllPoints()
 			if ( (numBuffs > 1) and (mod(numBuffs, rowbuffs) == 1) ) then
 				if ( numBuffs == rowbuffs+1 ) then
-					buff:SetPoint("TOPRIGHT", UIParent, TukuiDB.Scale(-184), TukuiDB.Scale(-92))
+					if TukuiDB.lowversion ~= true then
+						buff:SetPoint("TOPRIGHT", UIParent, TukuiDB.Scale(-166), TukuiDB.Scale(-55))
+					else
+						buff:SetPoint("TOPRIGHT", UIParent, TukuiDB.Scale(-136), TukuiDB.Scale(-50))
+					end
 				else
-					buff:SetPoint("TOPRIGHT", UIParent, TukuiDB.Scale(-184), TukuiDB.Scale(-22))
+					if TukuiDB.lowversion ~= true then
+						buff:SetPoint("TOPRIGHT", UIParent, TukuiDB.Scale(-166), TukuiDB.Scale(-6))
+					else
+						buff:SetPoint("TOPRIGHT", UIParent, TukuiDB.Scale(-136), TukuiDB.Scale(-6))
+					end
 				end
 				aboveBuff = buff;
 			elseif ( numBuffs == 1 ) then
@@ -110,7 +150,11 @@ local function UpdateBuffAnchors()
 					elseif ((mainhand and not offhand and not hand3) or (offhand and not mainhand and not hand3) or (hand3 and not mainhand and not offhand)) and not UnitHasVehicleUI("player") then
 						buff:SetPoint("RIGHT", TempEnchant1, "LEFT", TukuiDB.Scale(-4), 0)
 					else
-						buff:SetPoint("TOPRIGHT", UIParent, TukuiDB.Scale(-184), TukuiDB.Scale(-22))
+						if TukuiDB.lowversion ~= true then
+							buff:SetPoint("TOPRIGHT", UIParent, TukuiDB.Scale(-167), TukuiDB.Scale(-6))
+						else
+							buff:SetPoint("TOPRIGHT", UIParent, TukuiDB.Scale(-137), TukuiDB.Scale(-6))
+						end
 					end
 			else
 				buff:SetPoint("RIGHT", previousBuff, "LEFT", TukuiDB.Scale(-4), 0)
@@ -133,7 +177,11 @@ local function UpdateDebuffAnchors(buttonName, index)
 	_G[buttonName..index.."Panel"]:SetBackdropBorderColor(color.r * 0.6, color.g * 0.6, color.b * 0.6)
 	debuff:ClearAllPoints()
 	if index == 1 then
-		debuff:SetPoint("TOPRIGHT", UIParent, TukuiDB.Scale(-184), TukuiDB.Scale(-161))
+		if TukuiDB.lowversion ~= true then
+			debuff:SetPoint("TOPRIGHT", UIParent, TukuiDB.Scale(-166), TukuiDB.Scale(-124))
+		else
+			debuff:SetPoint("TOPRIGHT", UIParent, TukuiDB.Scale(-136), TukuiDB.Scale(-105))
+		end
 	else
 		debuff:SetPoint("RIGHT", _G[buttonName..(index-1)], "LEFT", TukuiDB.Scale(-4), 0)
 	end

@@ -6,7 +6,7 @@ hooksecurefunc(DurabilityFrame,"SetPoint",function(self,_,parent)
 		if TukuiCF["actionbar"].bottomrows == true then
 			self:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, TukuiDB.Scale(228));
 		else
-			self:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, TukuiDB.Scale(200))
+			self:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, TukuiDB.Scale(220))
 		end
     end
 end)

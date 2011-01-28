@@ -21,14 +21,14 @@ end
 
 local function setup()
 	TukuiWatchFrame:ClearAllPoints()
-	if TukuiCF.actionbar.rightbars == 3 then
+	--[[if TukuiCF.actionbar.rightbars == 3 then
 		TukuiWatchFrame:SetPoint("TOPRIGHT", Minimap, "BOTTOMRIGHT", TukuiDB.Scale(-180), TukuiDB.Scale(-68))
-	elseif TukuiCF.actionbar.rightbars == 2 then
-		TukuiWatchFrame:SetPoint("TOPRIGHT", Minimap, "BOTTOMRIGHT", TukuiDB.Scale(-140), TukuiDB.Scale(-68))
+	else--]]if TukuiCF.actionbar.rightbars == 2 then
+		TukuiWatchFrame:SetPoint("TOPRIGHT", Minimap, "BOTTOMRIGHT", TukuiDB.Scale(-140), TukuiDB.Scale(-75))
 	elseif TukuiCF.actionbar.rightbars == 1 then
-		TukuiWatchFrame:SetPoint("TOPRIGHT", Minimap, "BOTTOMRIGHT", TukuiDB.Scale(-100), TukuiDB.Scale(-68))
+		TukuiWatchFrame:SetPoint("TOPRIGHT", Minimap, "BOTTOMRIGHT", TukuiDB.Scale(-100), TukuiDB.Scale(-75))
 	else
-		TukuiWatchFrame:SetPoint("TOPRIGHT", Minimap, "BOTTOMRIGHT", TukuiDB.Scale(-30), TukuiDB.Scale(-68))
+		TukuiWatchFrame:SetPoint("TOPRIGHT", Minimap, "BOTTOMRIGHT", TukuiDB.Scale(-35), TukuiDB.Scale(-75))
 	end
 	
 	local screenheight = GetScreenHeight()

@@ -78,7 +78,7 @@ local function SetChatStyle(frame)
 	_G[chat.."EditBox"]:ClearAllPoints();
 	_G[chat.."EditBox"]:SetPoint("TOPLEFT", TukuiInfoLeft, TukuiDB.Scale(2), TukuiDB.Scale(-2))
 	_G[chat.."EditBox"]:SetPoint("BOTTOMRIGHT", TukuiInfoLeft, TukuiDB.Scale(-2), TukuiDB.Scale(2))
-	
+
 	-- Hide textures
 	for j = 1, #CHAT_FRAME_TEXTURES do
 		_G[chat..CHAT_FRAME_TEXTURES[j]]:SetTexture(nil)
@@ -117,7 +117,7 @@ local function SetChatStyle(frame)
 
 	-- Kill off editbox artwork
 	local a, b, c = select(6, _G[chat.."EditBox"]:GetRegions()); TukuiDB.Kill (a); TukuiDB.Kill (b); TukuiDB.Kill (c)
-				
+
 	-- Disable alt key usage
 	_G[chat.."EditBox"]:SetAltArrowKeyMode(false)
 	
@@ -129,12 +129,12 @@ local function SetChatStyle(frame)
 	
 	-- hide edit box every time we click on a tab
 	_G[chat.."Tab"]:HookScript("OnClick", function() _G[chat.."EditBox"]:Hide() end)
-			
+	
 	-- rename combag log to log
 	if _G[chat] == _G["ChatFrame2"] then
 		FCF_SetWindowName(_G[chat], "Log")
 	end
-			
+
 	-- create our own texture for edit box
 	local EditBoxBackground = CreateFrame("frame", "TukuiChatchatEditBoxBackground", _G[chat.."EditBox"])
 	TukuiDB.CreatePanel(EditBoxBackground, 1, 1, "LEFT", _G[chat.."EditBox"], "LEFT", 0, 0)
@@ -175,7 +175,7 @@ local function SetupChat(self)
 		SetChatStyle(frame)
 		FCFTab_UpdateAlpha(frame)
 	end
-				
+
 	-- Remember last channel
 	ChatTypeInfo.WHISPER.sticky = 1
 	ChatTypeInfo.BN_WHISPER.sticky = 1
@@ -205,9 +205,9 @@ local function SetupChatPosAndFont(self)
 		-- doing resize of chat also here for users that hit "cancel" when default installation is show.
 		if i == 1 then
 			chat:ClearAllPoints()
-			chat:SetPoint("BOTTOMLEFT", TukuiInfoLeft, "TOPLEFT", 0, TukuiDB.Scale(6))
+			chat:SetPoint("BOTTOMLEFT", TukuiInfoLeft, "TOPLEFT", TukuiDB.Scale(-1), TukuiDB.Scale(3))
 			FCF_SavePositionAndDimensions(chat)
-		elseif i == 4 and name == LOOT then
+		elseif i == 4 --[[and name == LOOT--]] then
 			if not chat.isDocked then
 				chat:ClearAllPoints()
 				chat:SetPoint("BOTTOMRIGHT", TukuiInfoRight, "TOPRIGHT", 0, TukuiDB.Scale(6))
@@ -216,7 +216,7 @@ local function SetupChatPosAndFont(self)
 			end
 		end
 	end
-			
+
 	-- reposition battle.net popup over chat #1
 	BNToastFrame:HookScript("OnShow", function(self)
 		self:ClearAllPoints()
@@ -351,9 +351,9 @@ function TukuiDB.ChatCopyButtons()
 	for i = 1, NUM_CHAT_WINDOWS do
 		local cf = _G[format("ChatFrame%d",  i)]
 		local button = CreateFrame("Button", format("ButtonCF%d", i), cf)
-		button:SetPoint("TOPRIGHT", 0, 0)
-		button:SetHeight(TukuiDB.Scale(20))
-		button:SetWidth(TukuiDB.Scale(20))
+		button:SetPoint("TOPLEFT", TukuiDB.Scale(3), 0)
+		button:SetHeight(TukuiDB.Scale(25))
+		button:SetWidth(TukuiDB.Scale(25))
 		button:SetAlpha(0)
 		TukuiDB.SetTemplate(button)
 		
@@ -363,14 +363,20 @@ function TukuiDB.ChatCopyButtons()
 		buttontext:SetPoint("CENTER", TukuiDB.Scale(1), 0)
 		buttontext:SetJustifyH("CENTER")
 		buttontext:SetJustifyV("CENTER")
-				
-		button:SetScript("OnMouseUp", function(self)
-			Copy(cf)
+		-- add chatmenu
+		button:SetScript("OnMouseUp", function(self, btn)
+			if i == 1 and btn == "RightButton" then
+				ToggleFrame(ChatMenu)
+			else
+				Copy(cf)
+			end
 		end)
 		button:SetScript("OnEnter", function() 
-			button:SetAlpha(1) 
+			button:SetAlpha(1)
 		end)
-		button:SetScript("OnLeave", function() button:SetAlpha(0) end)
+		button:SetScript("OnLeave", function()
+			button:SetAlpha(0)
+		end)
 	end
 end
 TukuiDB.ChatCopyButtons()
@@ -380,7 +386,7 @@ TukuiDB.ChatCopyButtons()
 --	Enhance/rewrite a Blizzard feature, chatframe mousewheel.
 ------------------------------------------------------------------------
 
-local ScrollLines = 3 -- set the jump when a scroll is done !
+local ScrollLines = 4 -- set the jump when a scroll is done !
 function FloatingChatFrame_OnMouseScroll(self, delta)
 	if delta < 0 then
 		if IsShiftKeyDown() then

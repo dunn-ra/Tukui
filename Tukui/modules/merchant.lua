@@ -6,12 +6,15 @@ local filter = {
 	[6308]  = true, -- Raw Bristle Whisker Catfish
 	[6309]  = true, -- 17 Pound Catfish
 	[6310]  = true, -- 19 Pound Catfish
-	[41808] = true, -- Bonescale Snapper
+	--[41808] = true, -- Bonescale Snapper
 	[42336] = true, -- Bloodstone Band
 	[42337] = true, -- Sun Rock Ring
 	[43244] = true, -- Crystal Citrine Necklace
 	[43571] = true, -- Sewer Carp
-	[43572] = true, -- Magic Eater		
+	[43572] = true, -- Magic Eater 
+	[6372] = true, -- Swim Speed Potion
+	[17058] = true, -- Fish Oil
+	[17057] = true, -- Shiny Fish Scales
 }
 
 local f = CreateFrame("Frame")

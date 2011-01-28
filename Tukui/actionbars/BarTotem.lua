@@ -11,10 +11,10 @@ if TukuiDB.myclass == "SHAMAN" then
 		MultiCastActionBarFrame:SetScript("OnHide", nil)
 		MultiCastActionBarFrame:SetParent(TukuiShiftBar)
 		MultiCastActionBarFrame:ClearAllPoints()
-		MultiCastActionBarFrame:SetPoint("BOTTOMLEFT", TukuiShiftBar, 0, TukuiDB.Scale(23))
- 
+		MultiCastActionBarFrame:SetPoint("LEFT", TukuiShiftBar, "LEFT", TukuiDB.Scale(3), TukuiDB.Scale(21))
+		
 		hooksecurefunc("MultiCastActionButton_Update",function(actionbutton) if not InCombatLockdown() then actionbutton:SetAllPoints(actionbutton.slotButton) end end)
- 
+		
 		MultiCastActionBarFrame.SetParent = TukuiDB.dummy
 		MultiCastActionBarFrame.SetPoint = TukuiDB.dummy
 		MultiCastRecallSpellButton.SetPoint = TukuiDB.dummy -- bug fix, see http://www.tukui.org/v2/forums/topic.php?id=2405

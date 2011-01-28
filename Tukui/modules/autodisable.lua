@@ -1,3 +1,4 @@
+
 ------------------------------------------------------------------------
 -- prevent action bar users config errors
 ------------------------------------------------------------------------
@@ -10,8 +11,16 @@ if TukuiCF["actionbar"].rightbars > 3 then
 	TukuiCF["actionbar"].rightbars = 3
 end
 
-if TukuiCF["actionbar"].bottomrows == 2 and TukuiCF["actionbar"].rightbars > 1 and not TukuiDB.lowversion then
+if TukuiCF["actionbar"].bottomrows == 2 and TukuiCF["actionbar"].rightbars > 2 then
 	TukuiCF["actionbar"].rightbars = 1
+end
+
+------------------------------------------------------------------------
+-- overwrite castbar
+------------------------------------------------------------------------
+
+if TukuiCF["unitframes"].separatecastbar ~= true and TukuiCF["unitframes"].cbicons == true then
+	TukuiCF["unitframes"].cbicons = false
 end
 
 --------------------------------------------------------------------------
@@ -34,10 +43,6 @@ elseif TukuiDB.client == "frFR" then
 	TukuiCF["media"].uffont = TukuiCF["media"].fr_uffont
 	TukuiCF["media"].font = TukuiCF["media"].fr_font
 	TukuiCF["media"].dmgfont = TukuiCF["media"].fr_dmgfont
-elseif TukuiDB.client == "deDE" then
-	TukuiCF["media"].uffont = TukuiCF["media"].de_uffont
-	TukuiCF["media"].font = TukuiCF["media"].de_font
-	TukuiCF["media"].dmgfont = TukuiCF["media"].de_dmgfont
 end
 
 ------------------------------------------------------------------------
@@ -86,4 +91,3 @@ end
 ------------------------------------------------------------------------
 -- Others
 ------------------------------------------------------------------------
-

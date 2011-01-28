@@ -8,7 +8,7 @@ if TukuiCF["datatext"].dur and TukuiCF["datatext"].dur > 0 then
 	Stat:SetFrameStrata("BACKGROUND")
 	Stat:SetFrameLevel(3)
 
-	local Text  = TukuiInfoLeft:CreateFontString(nil, "OVERLAY")
+	local Text  = TukuiBottomPanel:CreateFontString(nil, "OVERLAY")
 	Text:SetFont(TukuiCF.media.font, TukuiCF["datatext"].fontsize)
 	TukuiDB.PP(TukuiCF["datatext"].dur, Text)
 
@@ -28,7 +28,7 @@ if TukuiCF["datatext"].dur and TukuiCF["datatext"].dur > 0 then
 		table.sort(tukuilocal.Slots, function(a, b) return a[3] < b[3] end)
 		
 		if Total > 0 then
-			Text:SetText(floor(tukuilocal.Slots[1][3]*100).."% "..tukuilocal.datatext_armor)
+			Text:SetText(floor(tukuilocal.Slots[1][3]*100).."% "..hexa..tukuilocal.datatext_armor..hexb)
 		else
 			Text:SetText("100% "..tukuilocal.datatext_armor)
 		end

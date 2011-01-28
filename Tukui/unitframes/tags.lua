@@ -108,7 +108,6 @@ local utf8sub = function(string, i, dots)
 	end
 end
 
-
 oUF.TagEvents['Tukui:getnamecolor'] = 'UNIT_HAPPINESS'
 oUF.Tags['Tukui:getnamecolor'] = function(unit)
 	local reaction = UnitReaction(unit, 'player')
@@ -126,25 +125,31 @@ oUF.Tags['Tukui:getnamecolor'] = function(unit)
 	end
 end
 
+oUF.TagEvents['Tukui:nametiny'] = 'UNIT_NAME_UPDATE'
+oUF.Tags['Tukui:nametiny'] = function(unit)
+	local name = UnitName(unit)
+	return utf8sub(name, 8, false)
+end
+
 oUF.TagEvents['Tukui:nameshort'] = 'UNIT_NAME_UPDATE'
 oUF.Tags['Tukui:nameshort'] = function(unit)
 	local name = UnitName(unit)
-	return utf8sub(name, 10, false)
+	return utf8sub(name, 12, false)
 end
 
 oUF.TagEvents['Tukui:namemedium'] = 'UNIT_NAME_UPDATE'
 oUF.Tags['Tukui:namemedium'] = function(unit)
 	local name = UnitName(unit)
-	return utf8sub(name, 15, true)
+	return utf8sub(name, 16, false)
 end
 
 oUF.TagEvents['Tukui:namelong'] = 'UNIT_NAME_UPDATE'
 oUF.Tags['Tukui:namelong'] = function(unit)
 	local name = UnitName(unit)
-	return utf8sub(name, 20, true)
+	return utf8sub(name, 20, false)
 end
 
-oUF.TagEvents['Tukui:dead'] = 'UNIT_HEALTH'
+oUF.TagEvents['Tukui:dead'] = 'UNIT_NAME_UPDATE'
 oUF.Tags['Tukui:dead'] = function(unit)
 	if UnitIsDeadOrGhost(unit) then
 		return tukuilocal.unitframes_ouf_deaddps

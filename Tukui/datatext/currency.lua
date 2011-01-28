@@ -8,7 +8,7 @@ if TukuiCF["datatext"].currency and TukuiCF["datatext"].currency > 0 then
 	Stat:SetFrameStrata("BACKGROUND")
 	Stat:SetFrameLevel(3)
 
-	local Text  = TukuiInfoLeft:CreateFontString(nil, "OVERLAY")
+	local Text  = TukuiBottomPanel:CreateFontString(nil, "OVERLAY")
 	Text:SetFont(TukuiCF.media.font, TukuiCF["datatext"].fontsize)
 	TukuiDB.PP(TukuiCF["datatext"].currency, Text)
 	
@@ -22,10 +22,9 @@ if TukuiCF["datatext"].currency and TukuiCF["datatext"].currency > 0 then
 				for _, word in ipairs(words) do
 					_text = _text .. string.sub(word,1,1)
 				end
-				_text = _text .. ": " .. count
+				_text = hexa.._text..": "..hexb..count..hexa
 			end
 		end
-		
 		Text:SetText(_text)
 	end
 	

@@ -15,8 +15,8 @@ local function install()
 	SetCVar("nameplateShowFriendlyTotems", 0)
 	SetCVar("nameplateShowEnemies", 1)
 	SetCVar("nameplateShowEnemyPets", 1)
-	SetCVar("nameplateShowEnemyGuardians", 1)
-	SetCVar("nameplateShowEnemyTotems", 1)
+	SetCVar("nameplateShowEnemyGuardians", 0)
+	SetCVar("nameplateShowEnemyTotems", 0)
 	SetCVar("ShowClassColorInNameplate", 1)
 	SetCVar("screenshotQuality", 8)
 	SetCVar("cameraDistanceMax", 50)
@@ -35,21 +35,21 @@ local function install()
 	SetCVar("autoQuestProgress", 1)
 	SetCVar("showLootSpam", 1)
 	SetCVar("guildMemberNotify", 1)
-	SetCVar("chatBubblesParty", 0)
-	SetCVar("chatBubbles", 0)	
+	SetCVar("chatBubblesParty", 1)
+	SetCVar("chatBubbles", 1)
 	SetCVar("UnitNameOwn", 0)
-	SetCVar("UnitNameNPC", 0)
+	SetCVar("UnitNameNPC", 1)
 	SetCVar("UnitNameNonCombatCreatureName", 0)
 	SetCVar("UnitNamePlayerGuild", 1)
 	SetCVar("UnitNamePlayerPVPTitle", 1)
-	SetCVar("UnitNameFriendlyPlayerName", 0)
+	SetCVar("UnitNameFriendlyPlayerName", 1)
 	SetCVar("UnitNameFriendlyPetName", 0)
 	SetCVar("UnitNameFriendlyGuardianName", 0)
 	SetCVar("UnitNameFriendlyTotemName", 0)
 	SetCVar("UnitNameEnemyPlayerName", 1)
-	SetCVar("UnitNameEnemyPetName", 1)
-	SetCVar("UnitNameEnemyGuardianName", 1)
-	SetCVar("UnitNameEnemyTotemName", 1)
+	SetCVar("UnitNameEnemyPetName", 0)
+	SetCVar("UnitNameEnemyGuardianName", 0)
+	SetCVar("UnitNameEnemyTotemName", 0)
 	SetCVar("UberTooltips", 1)
 	SetCVar("removeChatDelay", 1)
 	SetCVar("showVKeyCastbar", 1)
@@ -74,7 +74,7 @@ local function install()
 		FCF_DockFrame(ChatFrame3)
 
 		FCF_OpenNewWindow(LOOT)
-		FCF_UnDockFrame(ChatFrame4)
+		--FCF_UnDockFrame(ChatFrame4)
 		FCF_SetLocked(ChatFrame4, 1)
 		ChatFrame4:Show()
 
@@ -83,18 +83,15 @@ local function install()
 			local chatFrameId = frame:GetID()
 			local chatName = FCF_GetChatWindowInfo(chatFrameId)
 			
-			frame:SetSize(TukuiDB.Scale(TukuiCF["panels"].tinfowidth + 1), TukuiDB.Scale(111))
+			frame:SetSize(TukuiDB.Scale(TukuiCF["chat"].panelwidth + 1), TukuiDB.Scale(111))
 			
 			-- this is the default width and height of tukui chats.
-			SetChatWindowSavedDimensions(chatFrameId, TukuiDB.Scale(TukuiCF["panels"].tinfowidth + 1), TukuiDB.Scale(111))
+			SetChatWindowSavedDimensions(chatFrameId, TukuiDB.Scale(TukuiCF["chat"].panelwidth + 1), TukuiDB.Scale(111))
 			
 			-- move general bottom left or Loot (if found) on right.
 			if i == 1 then
 				frame:ClearAllPoints()
-				frame:SetPoint("BOTTOMLEFT", TukuiInfoLeft, "TOPLEFT", 0, TukuiDB.Scale(6))
-			elseif i == 4 and chatName == LOOT then
-				frame:ClearAllPoints()
-				frame:SetPoint("BOTTOMRIGHT", TukuiInfoRight, "TOPRIGHT", 0, TukuiDB.Scale(6))
+				frame:SetPoint("BOTTOMLEFT", TukuiInfoLeft, "TOPLEFT", TukuiDB.Scale(-1), TukuiDB.Scale(6))
 			end
 					
 			-- save new default position and dimension
@@ -145,7 +142,8 @@ local function install()
 		ChatFrame_AddMessageGroup(ChatFrame1, "ACHIEVEMENT")
 		ChatFrame_AddMessageGroup(ChatFrame1, "BN_WHISPER")
 		ChatFrame_AddMessageGroup(ChatFrame1, "BN_CONVERSATION")
-					
+		ChatFrame_AddMessageGroup(ChatFrame1, "BN_INLINE_TOAST_ALERT")
+
 		-- Setup the spam chat frame
 		ChatFrame_RemoveAllMessageGroups(ChatFrame3)
 		ChatFrame_AddChannel(ChatFrame3, tukuilocal.chat_trade) -- erf, it seem we need to localize this now
@@ -153,7 +151,7 @@ local function install()
 		ChatFrame_AddChannel(ChatFrame3, tukuilocal.chat_defense) -- erf, it seem we need to localize this now
 		ChatFrame_AddChannel(ChatFrame3, tukuilocal.chat_recrutment) -- erf, it seem we need to localize this now
 		ChatFrame_AddChannel(ChatFrame3, tukuilocal.chat_lfg) -- erf, it seem we need to localize this now
-				
+		
 		-- Setup the right chat
 		ChatFrame_RemoveAllMessageGroups(ChatFrame4)
 		ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_XP_GAIN")
@@ -161,7 +159,7 @@ local function install()
 		ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_FACTION_CHANGE")
 		ChatFrame_AddMessageGroup(ChatFrame4, "LOOT")
 		ChatFrame_AddMessageGroup(ChatFrame4, "MONEY")
-				
+
 		-- enable classcolor automatically on login and on each character without doing /configure each time.
 		ToggleChatColorNamesByClassGroup(true, "SAY")
 		ToggleChatColorNamesByClassGroup(true, "EMOTE")
@@ -184,7 +182,7 @@ local function install()
 		ToggleChatColorNamesByClassGroup(true, "CHANNEL4")
 		ToggleChatColorNamesByClassGroup(true, "CHANNEL5")
 	end
-		   
+
 	TukuiInstallv1200 = true
 	
 	-- reset unitframe position
@@ -193,7 +191,7 @@ local function install()
 	else
 		TukuiData.ufpos = {}
 	end
-			
+
 	ReloadUI()
 end
 
@@ -269,8 +267,8 @@ TukuiOnLogon:SetScript("OnEvent", function(self, event)
 		StaticPopup_Show("DISABLE_RAID")
 	end
 	
-	print(tukuilocal.core_welcome1..TukuiDB.version)
-	print(tukuilocal.core_welcome2)
+	print(tukuilocal.core_welcome1..TukuiDB.version..tukuilocal.core_welcome2..tukuilocal.core_site)
+	print(tukuilocal.core_welcome3)
 end)
 
 ------------------------------------------------------------------------
@@ -293,9 +291,10 @@ local function UIHelp()
 	print(tukuilocal.core_uihelp11)
 	--print(tukuilocal.core_uihelp12)  -- temp disabled, don't know yet if i'll readd this feature
 	print(tukuilocal.core_uihelp13)
+	print(tukuilocal.core_uihelp14)
 	print(tukuilocal.core_uihelp15)
 	print(" ")
-	print(tukuilocal.core_uihelp14)
+	print(tukuilocal.core_uihelp16)
 end
 
 SLASH_UIHELP1 = "/UIHelp"
@@ -303,5 +302,3 @@ SlashCmdList["UIHELP"] = UIHelp
 
 SLASH_CONFIGURE1 = "/resetui"
 SlashCmdList.CONFIGURE = function() StaticPopup_Show("INSTALL_UI") end
-
-

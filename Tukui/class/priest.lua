@@ -26,7 +26,6 @@ local function UpdateBar(self)
 	local duration = self.Duration
 	local timeLeft = self.EndTime-GetTime()
 	local roundedt = math.floor(timeLeft*10.5)/10
-	
 	self.Bar:SetValue(timeLeft/duration)
 	
 	-- for 4.0.6 priest changes of strength of soul, color the weakened soul bar.
@@ -37,7 +36,7 @@ local function UpdateBar(self)
 	else
 		self.Bar:SetStatusBarColor(81/255, 13/255, 13/255)
 	end
-	
+
 	if roundedt % 1 == 0 then 
 		self.Time:SetText(roundedt .. ".0")
 	else 
@@ -107,8 +106,6 @@ if (TukuiCF["unitframes"].ws_show_target) then
 			elseif name then
 				self.EndTime = expirationTime
 				self.Duration = duration
-				self.Panel:Show()
-				self.Target = true
 				self:SetScript("OnUpdate", UpdateBar)
 			end
 		end
@@ -140,7 +137,7 @@ if (TukuiCF["unitframes"].ws_show_player) then
 	ConfigureBar(WeakenedPlayerFrame)
 	-- Check for Weakened Soul on me and show bar if it is
 	local function WeakenedPlayerCheck(self, event, unit, spell)
-		if (unit == "player" and UnitDebuff("player", ws)) then		
+		if (unit == "player" and UnitDebuff("player", ws)) then
 			local name, _, _, _, _, duration, expirationTime, unitCaster = UnitDebuff("player", ws)
 			if name then
 				self.EndTime = expirationTime

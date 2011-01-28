@@ -26,8 +26,8 @@ if TukuiDB.client == "esES" then
 	
 	tukuilocal.disband = "Desacer grupo."
  
-	tukuilocal.datatext_download = "Descarga: "
-	tukuilocal.datatext_bandwidth = "Ancho de banda: "
+	tukuilocal.datatext_download = "Download: "
+	tukuilocal.datatext_bandwidth = "Bandwidth: "
 	tukuilocal.datatext_guild = "Hermandad"
 	tukuilocal.datatext_noguild = "Sin Hermandad"
 	tukuilocal.datatext_bags = "Bolsas: "
@@ -169,8 +169,10 @@ if TukuiDB.client == "esES" then
 	tukuilocal.core_autoinv_disable = "Auto Invitar OFF"
 	tukuilocal.core_wf_unlock = "Registro de Misiones Desbloqueado"
 	tukuilocal.core_wf_lock = "Registro de Misiones Bloqueado"
-	tukuilocal.core_welcome1 = "Bienvenido a |cffC495DDTukui|r versión "
-	tukuilocal.core_welcome2 = "Escribe |cff00FFFF/uihelp|r para más información"
+	tukuilocal.core_welcome1 = "CyUI v "
+	tukuilocal.core_welcome2 = " loaded! Based on |cffC495DDTukui|r v "
+	tukuilocal.core_welcome3 = "Type |cff00FFFF/uihelp|r for more info or |cff00FFFF/tukui|r for extra configuration"
+	tukuilocal.core_site = " - www.tukui.org"
  
 	tukuilocal.core_uihelp1 = "|cff00ff00Comandos Generales|r"
 	tukuilocal.core_uihelp2 = "|cffFF0000/tracker|r - Tukui Arena Enemy Cooldown Tracker - Rastreador de Habilidades de enemigo para PVP, use poce memoria. (Icono solo)"

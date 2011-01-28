@@ -8,7 +8,7 @@ if TukuiCF["datatext"].hps_text and TukuiCF["datatext"].hps_text > 0 then
 	local player_id = UnitGUID("player")
 	local actual_heals_total, cmbt_time = 0
  
-	hText = TukuiInfoLeft:CreateFontString(nil, "OVERLAY")
+	hText = TukuiBottomPanel:CreateFontString(nil, "OVERLAY")
 	hText:SetFont(TukuiCF.media.font, TukuiCF["datatext"].fontsize)
 	hText:SetText("0.0 ",tukuilocal.datatext_hps)
  
@@ -75,7 +75,7 @@ if TukuiCF["datatext"].hps_text and TukuiCF["datatext"].hps_text > 0 then
  
 	function get_hps()
 		if (actual_heals_total == 0) then
-			return ("0.0 " .. tukuilocal.datatext_hps)
+			return ("0.0 "..hexa..tukuilocal.datatext_hps..hexb)
 		else
 			return string.format("%.1f " .. tukuilocal.datatext_hps, (actual_heals_total or 0) / (cmbt_time or 1))
 		end

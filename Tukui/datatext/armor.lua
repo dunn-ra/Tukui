@@ -8,13 +8,13 @@ if TukuiCF["datatext"].armor and TukuiCF["datatext"].armor > 0 then
 	Stat:SetFrameStrata("BACKGROUND")
 	Stat:SetFrameLevel(3)
 
-	local Text  = TukuiInfoLeft:CreateFontString(nil, "OVERLAY")
+	local Text  = TukuiBottomPanel:CreateFontString(nil, "OVERLAY")
 	Text:SetFont(TukuiCF.media.font, TukuiCF["datatext"].fontsize)
 	TukuiDB.PP(TukuiCF["datatext"].armor, Text)
 
 	local function Update(self)
 		baseArmor , effectiveArmor, armor, posBuff, negBuff = UnitArmor("player");
-		Text:SetText((effectiveArmor).." "..tukuilocal.datatext_armor)
+		Text:SetText((effectiveArmor).." "..hexa..tukuilocal.datatext_armor)
 		--Setup Armor Tooltip
 		self:SetAllPoints(Text)
 	end

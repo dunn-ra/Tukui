@@ -25,7 +25,7 @@ if TukuiDB.client == "ruRU" then
 	tukuilocal.chat_lfg = "ПоискСпутников"
  
 	tukuilocal.disband = "Роспуск группы."
-
+	
 	tukuilocal.datatext_download = "Загрузка: "
 	tukuilocal.datatext_bandwidth = "Скорость: "
 	tukuilocal.datatext_guild = "Гильдия"
@@ -169,8 +169,10 @@ if TukuiDB.client == "ruRU" then
 	tukuilocal.core_autoinv_disable = "Автоприглашение ВЫКЛ"
 	tukuilocal.core_wf_unlock = "Окно отслеживания заданий разблокировано"
 	tukuilocal.core_wf_lock = "Окно отслеживания заданий закреплено"
-	tukuilocal.core_welcome1 = "Добро пожаловать в |cffC495DDTukui|r версии "
-	tukuilocal.core_welcome2 = "Напечатайте |cff00FFFF/uihelp|r для получения доп. информации"
+	tukuilocal.core_welcome1 = "CyUI v "
+	tukuilocal.core_welcome2 = " loaded! Based on |cffC495DDTukui|r v "
+	tukuilocal.core_welcome3 = "Type |cff00FFFF/uihelp|r for more info or |cff00FFFF/tukui|r for extra configuration"
+	tukuilocal.core_site = " - www.tukui.org"
  
 	tukuilocal.core_uihelp1 = "|cff00ff00Общие комманды|r"
 	tukuilocal.core_uihelp2 = "|cffFF0000/tracker|r - Tukui Arena Enemy Cooldown Tracker - PVP-таймер вражеских перезарядок . (только иконка)"

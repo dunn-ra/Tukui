@@ -8,7 +8,7 @@ if TukuiCF["datatext"].bags and TukuiCF["datatext"].bags > 0 then
 	Stat:SetFrameStrata("BACKGROUND")
 	Stat:SetFrameLevel(3)
 
-	local Text  = TukuiInfoLeft:CreateFontString(nil, "OVERLAY")
+	local Text  = TukuiBottomPanel:CreateFontString(nil, "OVERLAY")
 	Text:SetFont(TukuiCF.media.font, TukuiCF["datatext"].fontsize)
 	TukuiDB.PP(TukuiCF["datatext"].bags, Text)
 
@@ -18,7 +18,7 @@ if TukuiCF["datatext"].bags and TukuiCF["datatext"].bags > 0 then
 			free, total = free + GetContainerNumFreeSlots(i), total + GetContainerNumSlots(i)
 		end
 		used = total - free
-		Text:SetText(tukuilocal.datatext_bags..used.."/"..total)
+		Text:SetText(hexa..tukuilocal.datatext_bags..hexb..used..hexa.."/"..hexb..total)
 		self:SetAllPoints(Text)
 	end
           

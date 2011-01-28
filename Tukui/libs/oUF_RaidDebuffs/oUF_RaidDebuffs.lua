@@ -26,7 +26,6 @@ local function add(spell)
 	if addon.MatchBySpellName and type(spell) == 'number' then
 		spell = GetSpellInfo(spell)
 	end
-	
 	debuff_data[spell] = addon.priority
 	addon.priority = addon.priority + 1
 end
@@ -41,6 +40,7 @@ function addon:ResetDebuffData()
 	wipe(debuff_data)
 	addon.priority = 10
 end
+
 
 local DispellColor = {
 	['Magic']	= {.2, .6, 1},
@@ -237,11 +237,11 @@ local function Update(self, event, unit)
 	
 	--Reset the DispellPriority
 	DispellPriority = {
-		['Magic']	= 4,
-		['Curse']	= 3,
-		['Disease']	= 2,
-		['Poison']	= 1,
-	}	
+		['Magic']  = 4,
+		['Curse']  = 3,
+		['Disease']  = 2,
+		['Poison']  = 1,
+	} 
 end
 
 local function Enable(self)

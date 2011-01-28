@@ -8,7 +8,7 @@ if TukuiCF["datatext"].gold and TukuiCF["datatext"].gold > 0 then
 	Stat:SetFrameStrata("BACKGROUND")
 	Stat:SetFrameLevel(3)
 
-	local Text  = TukuiInfoLeft:CreateFontString(nil, "OVERLAY")
+	local Text  = TukuiBottomPanel:CreateFontString(nil, "OVERLAY")
 	Text:SetFont(TukuiCF.media.font, TukuiCF["datatext"].fontsize)
 	TukuiDB.PP(TukuiCF["datatext"].gold, Text)
 
@@ -43,11 +43,11 @@ if TukuiCF["datatext"].gold and TukuiCF["datatext"].gold > 0 then
 		end
 		
 		local NewMoney	= GetMoney()
-		local Change = NewMoney-OldMoney -- Positive if we gain money
+		local Change = NewMoney-OldMoney	-- Positive if we gain money
 		
-		if OldMoney>NewMoney then		-- Lost Money
+		if OldMoney>NewMoney then			-- Lost Money
 			Spent = Spent - Change
-		else							-- Gained Moeny
+		else								-- Gained Moeny
 			Profit = Profit + Change
 		end
 		
@@ -100,7 +100,7 @@ if TukuiCF["datatext"].gold and TukuiCF["datatext"].gold > 0 then
 			GameTooltip:AddLine(tukuilocal.datatext_server)
 			GameTooltip:AddDoubleLine(tukuilocal.datatext_totalgold, FormatTooltipMoney(totalGold), 1, 1, 1, 1, 1, 1)
 
-			for i = 1, GetNumWatchedTokens() do
+			for i = 1, MAX_WATCHED_TOKENS do
 				local name, count, extraCurrencyType, icon, itemID = GetBackpackCurrencyInfo(i)
 				if name and i == 1 then
 					GameTooltip:AddLine(" ")

@@ -25,7 +25,7 @@ if TukuiDB.client == "zhTW" then
 	tukuilocal.chat_lfg = "尋求組隊"
 	
 	tukuilocal.disband = "正在解散隊伍."
-
+	
 	tukuilocal.datatext_download = "下載: "
 	tukuilocal.datatext_bandwidth = "寬頻: "
 	tukuilocal.datatext_guild = "公會"
@@ -168,8 +168,10 @@ if TukuiDB.client == "zhTW" then
 	tukuilocal.core_autoinv_disable = "自動邀請功能已關閉"
 	tukuilocal.core_wf_unlock = "解鎖任務追蹤"
 	tukuilocal.core_wf_lock = "鎖定任務追蹤"
-	tukuilocal.core_welcome1 = "歡迎使用 |cffC495DDTukui|r "
-	tukuilocal.core_welcome2 = "輸入 |cff00FFFF/uihelp|r 以獲得更多資訊"
+	tukuilocal.core_welcome1 = "CyUI v "
+	tukuilocal.core_welcome2 = " loaded! Based on |cffC495DDTukui|r v "
+	tukuilocal.core_welcome3 = "Type |cff00FFFF/uihelp|r for more info or |cff00FFFF/tukui|r for extra configuration"
+	tukuilocal.core_site = " - www.tukui.org"
  
 	tukuilocal.core_uihelp1 = "|cff00ff00基本指令|r"
 	tukuilocal.core_uihelp2 = "|cffFF0000/tracker|r - Tukui 競技場敵方冷卻監視器 - 一個精簡的PvP冷卻監視器 (Icon only)"

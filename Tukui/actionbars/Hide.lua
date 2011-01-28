@@ -1,9 +1,7 @@
 if not TukuiCF["actionbar"].enable == true then return end
-
 ---------------------------------------------------------------------------
 -- Hide all Blizzard stuff that we don't need
 ---------------------------------------------------------------------------
-
 do
 	MainMenuBar:SetScale(0.00001)
 	MainMenuBar:SetAlpha(0)
@@ -30,7 +28,7 @@ do
 	
 	-- fix main bar keybind not working after a talent switch. :X
 	hooksecurefunc('TalentFrame_LoadUI', function()
-		PlayerTalentFrame:UnregisterEvent('ACTIVE_TALENT_GROUP_CHANGED')
+	PlayerTalentFrame:UnregisterEvent('ACTIVE_TALENT_GROUP_CHANGED')
 	end)
 end
 
@@ -53,4 +51,3 @@ do
 	end
 	uiManagedFrames = nil
 end
-

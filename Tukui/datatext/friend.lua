@@ -11,7 +11,7 @@ if TukuiCF["datatext"].friends and TukuiCF["datatext"].friends > 0 then
 	local tthead = {r=0.4,g=0.78,b=1}
 	local ttsubh = {r=0.75,g=0.9,b=1}
 
-	local Text  = TukuiInfoLeft:CreateFontString(nil, "OVERLAY")
+	local Text  = TukuiBottomPanel:CreateFontString(nil, "OVERLAY")
 	Text:SetFont(TukuiCF.media.font, TukuiCF["datatext"].fontsize)
 	TukuiDB.PP(TukuiCF["datatext"].friends, Text)
 	
@@ -51,7 +51,7 @@ if TukuiCF["datatext"].friends and TukuiCF["datatext"].friends > 0 then
 				for i = 1, BNtotal do if select(7, BNGetFriendInfo(i)) then BNonline = BNonline + 1 end end
 			end
 			local totalonline = online + BNonline
-			Text:SetText(tukuilocal.datatext_friends..": "..totalonline)
+			Text:SetText(hexa..tukuilocal.datatext_friends..": "..hexb..totalonline)
 			self:SetAllPoints(Text)
 	end
 
@@ -143,7 +143,8 @@ if TukuiCF["datatext"].friends and TukuiCF["datatext"].friends > 0 then
 						if client == "WoW" then
 							local hasFocus, toonName, client, realmName, faction, race, class, guild, zoneName, level = BNGetToonInfo(toonID)
 							if level == "" then level = "0" end -- extremly rare bug, sometime a bugged battle.net friend list cannot level of friend, resulting a lua error.
-							classc, levelc = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[class], GetQuestDifficultyColor(level)
+							-- temp fix for bnet returning nil
+							local classc, levelc = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[class], GetQuestDifficultyColor(level)
 							if classc == nil then classc = GetQuestDifficultyColor(level) end
 							if UnitInParty(name) or UnitInRaid(name) then grouped = "|cffaaaaaa*|r" else grouped = "" end
 							GameTooltip:AddDoubleLine(format("%s (|cff%02x%02x%02x%d|r |cff%02x%02x%02x%s|r%s) |cff%02x%02x%02x%s|r",client,levelc.r*255,levelc.g*255,levelc.b*255,level,classc.r*255,classc.g*255,classc.b*255,toonName,grouped, 255, 0, 0, status),givenName.." "..surname,238,238,238,238,238,238)

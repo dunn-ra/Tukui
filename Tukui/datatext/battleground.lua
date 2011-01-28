@@ -3,7 +3,7 @@
 --------------------------------------------------------------------
 
 if TukuiCF["datatext"].battleground == true then
-	local bgframe = TukuiInfoLeftBattleGround
+	local bgframe = TukuiBottomPanel
 	bgframe:SetScript("OnEnter", function(self)
 		local numScores = GetNumBattlefieldScores()
 		for i=1, numScores do
@@ -23,13 +23,13 @@ if TukuiCF["datatext"].battleground == true then
 					GameTooltip:AddDoubleLine(tukuilocal.datatext_ttdmgdone, damageDone,1,1,1)
 					GameTooltip:AddDoubleLine(tukuilocal.datatext_tthealdone, healingDone,1,1,1)
 					--Add extra statistics to watch based on what BG you are in.
-					if GetRealZoneText() == tukuilocal.bg_arathi then 
+					if GetRealZoneText() == tukuilocal.bg_arathi then
 						GameTooltip:AddDoubleLine(tukuilocal.datatext_basesassaulted,GetBattlefieldStatData(i, 1),1,1,1)
 						GameTooltip:AddDoubleLine(tukuilocal.datatext_basesdefended,GetBattlefieldStatData(i, 2),1,1,1)
-					elseif GetRealZoneText() == tukuilocal.bg_warsong then 
+					elseif GetRealZoneText() == tukuilocal.bg_warsong then
 						GameTooltip:AddDoubleLine(tukuilocal.datatext_flagscaptured,GetBattlefieldStatData(i, 1),1,1,1)
 						GameTooltip:AddDoubleLine(tukuilocal.datatext_flagsreturned,GetBattlefieldStatData(i, 2),1,1,1)
-					elseif GetRealZoneText() == tukuilocal.bg_eye then 
+					elseif GetRealZoneText() == tukuilocal.bg_eye then
 						GameTooltip:AddDoubleLine(tukuilocal.datatext_flagscaptured,GetBattlefieldStatData(i, 1),1,1,1)
 					elseif GetRealZoneText() == tukuilocal.bg_alterac then
 						GameTooltip:AddDoubleLine(tukuilocal.datatext_graveyardsassaulted,GetBattlefieldStatData(i, 1),1,1,1)
@@ -53,19 +53,19 @@ if TukuiCF["datatext"].battleground == true then
 	local Stat = CreateFrame("Frame")
 	Stat:EnableMouse(true)
 	
-	local Text1  = TukuiInfoLeftBattleGround:CreateFontString(nil, "OVERLAY")
+	local Text1  = TukuiBottomPanel:CreateFontString(nil, "OVERLAY")
 	Text1:SetFont(TukuiCF.media.font, TukuiCF["datatext"].fontsize)
-	Text1:SetPoint("LEFT", TukuiInfoLeftBattleGround, 30, 0.5)
+	Text1:SetPoint("LEFT", TukuiBottomPanel, 30, 0.5)
 	Text1:SetHeight(TukuiInfoLeft:GetHeight())
 
-	local Text2  = TukuiInfoLeftBattleGround:CreateFontString(nil, "OVERLAY")
+	local Text2  = TukuiBottomPanel:CreateFontString(nil, "OVERLAY")
 	Text2:SetFont(TukuiCF.media.font, TukuiCF["datatext"].fontsize)
-	Text2:SetPoint("CENTER", TukuiInfoLeftBattleGround, 0, 0.5)
+	Text2:SetPoint("CENTER", TukuiBottomPanel, 0, 0.5)
 	Text2:SetHeight(TukuiInfoLeft:GetHeight())
 
-	local Text3  = TukuiInfoLeftBattleGround:CreateFontString(nil, "OVERLAY")
+	local Text3  = TukuiBottomPanel:CreateFontString(nil, "OVERLAY")
 	Text3:SetFont(TukuiCF.media.font, TukuiCF["datatext"].fontsize)
-	Text3:SetPoint("RIGHT", TukuiInfoLeftBattleGround, -30, 0.5)
+	Text3:SetPoint("RIGHT", TukuiBottomPanel, -30, 0.5)
 	Text3:SetHeight(TukuiInfoLeft:GetHeight())
 
 	local int = 2

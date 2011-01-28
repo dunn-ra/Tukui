@@ -12,7 +12,7 @@ local function Shared(self, unit)
 	self.menu = TukuiDB.SpawnMenu
 	
 	self:SetBackdrop({bgFile = TukuiCF["media"].blank, insets = {top = -TukuiDB.mult, left = -TukuiDB.mult, bottom = -TukuiDB.mult, right = -TukuiDB.mult}})
-	self:SetBackdropColor(0.1, 0.1, 0.1)
+	self:SetBackdropColor(0, 0, 0)
 	
 	local health = CreateFrame('StatusBar', nil, self)
     health:SetAllPoints(self)
@@ -33,26 +33,55 @@ local function Shared(self, unit)
 	if TukuiCF.unitframes.unicolor == true then
 		health.colorDisconnected = false
 		health.colorClass = false
-		health:SetStatusBarColor(.3, .3, .3, 1)
-		health.bg:SetVertexColor(.1, .1, .1, 1)		
+		health:SetStatusBarColor(unpack(TukuiCF["media"].althealthcolor))
+		health.bg:SetVertexColor(unpack(TukuiCF["media"].healthdeficit))
 	else
 		health.colorDisconnected = true
 		health.colorClass = true
-		health.colorReaction = true			
+		health.colorReaction = true
 	end
-		
+	
+	local FrameBorder = CreateFrame("Frame", nil, self)
+	FrameBorder:SetPoint("TOPLEFT", self, "TOPLEFT", TukuiDB.Scale(-1), TukuiDB.Scale(1))
+	FrameBorder:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", TukuiDB.Scale(1), TukuiDB.Scale(-1))
+	TukuiDB.SetTemplate(FrameBorder)
+	FrameBorder:SetBackdropBorderColor(0, 0, 0)
+	FrameBorder:SetFrameLevel(2)
+	FrameBorder:SetAlpha(0)
+	self.FrameBorder = FrameBorder
+
 	local name = health:CreateFontString(nil, 'OVERLAY')
-	name:SetFont(font2, 13*TukuiDB.raidscale, "THINOUTLINE")
-	name:SetPoint("LEFT", self, "RIGHT", TukuiDB.Scale(5), 0)
+	name:SetFont(font2, 12*TukuiDB.raidscale, "THINOUTLINE")
+	name:SetPoint("LEFT", self, "LEFT", TukuiDB.Scale(5), 0)
 	--name.frequentUpdates = 0.2
-	self:Tag(name, '[Tukui:namemedium] [Tukui:dead][Tukui:afk]')
+	if TukuiCF["unitframes"].unicolor == true then
+		self:Tag(name, '[Tukui:getnamecolor][Tukui:namemedium] [Tukui:afk]')
+	else
+		self:Tag(name, "[Tukui:namemedium]")
+		name:SetTextColor(unpack(TukuiCF["media"].tncolor))
+		name:SetShadowColor(0, 0, 0)
+		name:SetShadowOffset(0.75, -0.75)
+	end
 	self.Name = name
+	
+	local leader = health:CreateTexture(nil, "OVERLAY")
+    leader:SetHeight(TukuiDB.Scale(12*TukuiDB.raidscale))
+    leader:SetWidth(TukuiDB.Scale(12*TukuiDB.raidscale))
+    leader:SetPoint("TOPLEFT", 0, 6)
+	self.Leader = leader
+	
+    local MasterLooter = health:CreateTexture(nil, "OVERLAY")
+    MasterLooter:SetHeight(TukuiDB.Scale(12*TukuiDB.raidscale))
+    MasterLooter:SetWidth(TukuiDB.Scale(12*TukuiDB.raidscale))
+	self.MasterLooter = MasterLooter
+    self:RegisterEvent("PARTY_LEADER_CHANGED", TukuiDB.MLAnchorUpdate)
+    self:RegisterEvent("PARTY_MEMBERS_CHANGED", TukuiDB.MLAnchorUpdate)
 	
 	if TukuiCF["unitframes"].showsymbols == true then
 		RaidIcon = health:CreateTexture(nil, 'OVERLAY')
-		RaidIcon:SetHeight(TukuiDB.Scale(14*TukuiDB.raidscale))
-		RaidIcon:SetWidth(TukuiDB.Scale(14*TukuiDB.raidscale))
-		RaidIcon:SetPoint("CENTER", self, "CENTER")
+		RaidIcon:SetHeight(TukuiDB.Scale(12*TukuiDB.raidscale))
+		RaidIcon:SetWidth(TukuiDB.Scale(12*TukuiDB.raidscale))
+		RaidIcon:SetPoint("RIGHT", self, "RIGHT")
 		RaidIcon:SetTexture("Interface\\AddOns\\Tukui\\media\\textures\\raidicons.blp") -- thx hankthetank for texture
 		self.RaidIcon = RaidIcon
 	end
@@ -67,7 +96,7 @@ local function Shared(self, unit)
 	local ReadyCheck = health:CreateTexture(nil, "OVERLAY")
 	ReadyCheck:SetHeight(TukuiDB.Scale(12*TukuiDB.raidscale))
 	ReadyCheck:SetWidth(TukuiDB.Scale(12*TukuiDB.raidscale))
-	ReadyCheck:SetPoint('CENTER')
+	ReadyCheck:SetPoint('RIGHT')
 	self.ReadyCheck = ReadyCheck
 	
 	--local picon = self.Health:CreateTexture(nil, 'OVERLAY')
@@ -103,9 +132,14 @@ oUF:Factory(function(self)
 			self:SetWidth(header:GetAttribute('initial-width'))
 			self:SetHeight(header:GetAttribute('initial-height'))
 		]],
-		'initial-width', TukuiDB.Scale(100*TukuiDB.raidscale),
-		'initial-height', TukuiDB.Scale(12*TukuiDB.raidscale),
-		"showRaid", true, "groupFilter", "1,2,3,4,5,6,7,8", "groupingOrder", "1,2,3,4,5,6,7,8", "groupBy", "GROUP", "yOffset", TukuiDB.Scale(-3)
+		'initial-width', TukuiDB.Scale(80*TukuiDB.raidscale),
+		'initial-height', TukuiDB.Scale(15*TukuiDB.raidscale),
+		"showRaid", true,
+		"groupFilter", "1,2,3,4,5",
+		"groupingOrder",
+		"1,2,3,4,5,6,7,8",
+		"groupBy", "GROUP",
+		"yOffset", TukuiDB.Scale(-3)
 	)
-	raid:SetPoint('TOPLEFT', UIParent, 15, -18)
+	raid:SetPoint('TOPLEFT', UIParent, TukuiDB.Scale(10), TukuiDB.Scale(-10))
 end)
