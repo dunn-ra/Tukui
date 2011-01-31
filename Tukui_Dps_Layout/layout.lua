@@ -5,14 +5,24 @@ if not TukuiCF["unitframes"].enable == true then return end
 ------------------------------------------------------------------------
 
 local db = TukuiCF["unitframes"]
+local ui = TukuiCF["uisizes"]
+-- fonts
 local font1 = TukuiCF["media"].uffont
 local font2 = TukuiCF["media"].font
 local font3 = TukuiCF["media"].nfont
+-- textures
 local normTex = TukuiCF["media"].normTex
 local hpTex = TukuiCF["media"].hpText
 local glowTex = TukuiCF["media"].glowTex
 local bubbleTex = TukuiCF["media"].bubbleTex
-
+--[-[ unitframe size
+local ufwidth
+local hpheight
+local btnsize
+local assisttank_width
+local assisttank_height
+--]]
+-- backdrop setting
 local backdrop = {
 	bgFile = TukuiCF["media"].blank,
 	insets = {top = -TukuiDB.mult, left = -TukuiDB.mult, bottom = -TukuiDB.mult, right = -TukuiDB.mult},
@@ -41,6 +51,24 @@ local function Shared(self, unit)
 	-- this is the glow border
 	TukuiDB.CreateShadow(self)
 
+	--[-[ unitframe sizes
+	ufwidth = TukuiDB.Scale(ui.playerwidth)
+	hpheight = TukuiDB.Scale(ui.playerheight)
+	pwrheight = TukuiDB.Scale(ui.playerheight / 4)
+	ufheight = TukuiDB.Scale(pwrheight + hpheight + 1)
+	assisttank_width = TukuiDB.Scale(ui.assisttankw)
+	assisttank_height = TukuiDB.Scale(ui.assisttankh)
+	btnsize = TukuiDB.buttonsize
+	if TukuiDB.lowversion then
+		ufwidth = TukuiDB.Scale(ui.playerwidth*0.85)
+	end
+	-- small frames
+	sufwidth = TukuiDB.Scale((ufwidth / 2) - (ufwidth * 0.02))
+	shpheight = TukuiDB.Scale(hpheight * 0.8)
+	spwrheight = TukuiDB.Scale(pwrheight * 0.8)
+	sufheight = TukuiDB.Scale(ufheight * 0.8)
+	--]]
+	
 	------------------------------------------------------------------------
 	--  Features we want for all units at the same time
 	------------------------------------------------------------------------
@@ -67,11 +95,7 @@ local function Shared(self, unit)
 	------------------------------------------------------------------------
 	if (unit == "player" or unit == "target") then
 		local panel = CreateFrame("Frame", nil, self)
-		if TukuiDB.lowversion then
-			TukuiDB.CreatePanel(panel, 170, 28, "BOTTOM", self, "BOTTOM", 0, 0)
-		else
-			TukuiDB.CreatePanel(panel, 200, 28, "BOTTOM", self, "BOTTOM", 0, 0)
-		end
+		TukuiDB.CreatePanel(panel, ufwidth, ufheight, "BOTTOM", self, "BOTTOM", 0, 0)
 		panel:SetFrameLevel(2)
 		panel:SetFrameStrata("MEDIUM")
 		panel:SetBackdropBorderColor(unpack(TukuiCF["media"].altbordercolor))
@@ -80,7 +104,7 @@ local function Shared(self, unit)
 		
 		-- health bar
 		local health = CreateFrame('StatusBar', nil, self)
-		health:SetHeight(TukuiDB.Scale(19))
+		health:SetHeight(hpheight)
 		health:SetPoint("TOPLEFT")
 		health:SetPoint("TOPRIGHT")
 		health:SetStatusBarTexture(hpTex)
@@ -117,7 +141,7 @@ local function Shared(self, unit)
 
 		-- power
 		local power = CreateFrame('StatusBar', nil, self)
-		power:SetHeight(TukuiDB.Scale(5))
+		power:SetHeight(pwrheight)
 		power:SetPoint("TOPLEFT", health, "BOTTOMLEFT", 0, -TukuiDB.mult)
 		power:SetPoint("TOPRIGHT", health, "BOTTOMRIGHT", 0, -TukuiDB.mult)
 		power:SetStatusBarTexture(normTex)
@@ -193,11 +217,11 @@ local function Shared(self, unit)
 		end
 		
 		-- portraits
-		if (db.charportrait == true) then
+		if db.charportrait == true then
 			local portrait = CreateFrame("PlayerModel", nil, self)
 			portrait:SetFrameLevel(8)
-			portrait:SetHeight(35)
-			portrait:SetWidth(41)
+			portrait:SetHeight(ufheight)
+			portrait:SetWidth(ufheight)
 			portrait:SetAlpha(1)
 			portrait:SetBackdrop(backdrop)
 			portrait:SetBackdropColor(.1, .1, .1)
@@ -214,8 +238,8 @@ local function Shared(self, unit)
 		-- alt power bar
 		local AltPowerBar = CreateFrame("StatusBar", nil, self.Health)
 		AltPowerBar:SetFrameLevel(5)
-		AltPowerBar:SetHeight(16)
-		AltPowerBar:SetWidth(200)
+		AltPowerBar:SetHeight(ufwidth)
+		AltPowerBar:SetWidth(ufwidth)
 		AltPowerBar:SetStatusBarTexture(TukuiCF.media.normTex)
 		AltPowerBar:GetStatusBarTexture():SetHorizTile(false)
 		AltPowerBar:SetStatusBarColor(.69, .09, .12, 1)
@@ -297,8 +321,8 @@ local function Shared(self, unit)
 				Reputation:SetStatusBarTexture(normTex)
 				Reputation:SetBackdrop(backdrop)
 				Reputation:SetBackdropColor(unpack(TukuiCF["media"].altbackdropcolor))
-				Reputation:SetWidth(panel:GetWidth() - 1)
-				Reputation:SetHeight(power:GetHeight())
+				Reputation:SetWidth(ufwidth)
+				Reputation:SetHeight(pwrheight)
 				Reputation:SetPoint("TOPLEFT", power, 0, 0)
 				Reputation:SetFrameLevel(10)
 				Reputation:SetAlpha(0)
@@ -316,8 +340,8 @@ local function Shared(self, unit)
 				Experience:SetStatusBarColor(0, 0.4, 1, .8)
 				Experience:SetBackdrop(backdrop)
 				Experience:SetBackdropColor(unpack(TukuiCF["media"].altbackdropcolor))
-				Experience:SetWidth(panel:GetWidth() - 1)
-				Experience:SetHeight(power:GetHeight())
+				Experience:SetWidth(ufwidth)
+				Experience:SetHeight(pwrheight)
 				Experience:SetPoint("TOPLEFT", power, 0, 0)
 				Experience:SetFrameLevel(10)
 				Experience:SetAlpha(0)				
@@ -339,12 +363,8 @@ local function Shared(self, unit)
 				
 				local eclipseBar = CreateFrame('Frame', nil, self)
 				eclipseBar:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, TukuiDB.Scale(1))
-				if TukuiDB.lowversion then
-					eclipseBar:SetWidth(TukuiDB.Scale(170))
-				else
-					eclipseBar:SetWidth(TukuiDB.Scale(200))
-				end
-				eclipseBar:SetHeight(TukuiDB.Scale(5))
+				eclipseBar:SetWidth(ufwidth)
+				eclipseBar:SetHeight(pwrheight)
 				eclipseBar:SetFrameStrata("MEDIUM")
 				eclipseBar:SetFrameLevel(8)
 				
@@ -390,12 +410,8 @@ local function Shared(self, unit)
 	
 				local bars = CreateFrame("Frame", nil, self)
 				bars:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, TukuiDB.Scale(1))
-				if TukuiDB.lowversion then
-					bars:SetWidth(TukuiDB.Scale(170))
-				else
-					bars:SetWidth(TukuiDB.Scale(200))
-				end
-				bars:SetHeight(TukuiDB.Scale(5))
+				bars:SetWidth(ufwidth)
+				bars:SetHeight(pwrheight)
 				TukuiDB.SetTemplate(bars)
 				--bars:SetBackdropBorderColor(0,0,0,0)
 				bars:SetBackdrop(backdrop)
@@ -403,7 +419,7 @@ local function Shared(self, unit)
 				
 				for i = 1, 3 do					
 					bars[i]=CreateFrame("StatusBar", self:GetName().."_Shard"..i, self)
-					bars[i]:SetHeight(TukuiDB.Scale(5))					
+					bars[i]:SetHeight(pwrheight)
 					bars[i]:SetStatusBarTexture(normTex)
 					bars[i]:GetStatusBarTexture():SetHorizTile(false)
 
@@ -419,19 +435,11 @@ local function Shared(self, unit)
 					
 					if i == 1 then
 						bars[i]:SetPoint("LEFT", bars)
-						if TukuiDB.lowversion then
-							bars[i]:SetWidth(TukuiDB.Scale(56.6))
-						else
-							bars[i]:SetWidth(TukuiDB.Scale(66)) -- setting SetWidth here just to fit fit 200 perfectly
-						end
+						bars[i]:SetWidth((ufwidth - 2) / 3)
 						bars[i].bg:SetAllPoints(bars[i])
 					else
 						bars[i]:SetPoint("LEFT", bars[i-1], "RIGHT", TukuiDB.Scale(1), 0)
-						if TukuiDB.lowversion then
-							bars[i]:SetWidth(TukuiDB.Scale(56.6))
-						else
-							bars[i]:SetWidth(TukuiDB.Scale(66)) -- setting SetWidth here just to fit fit 200 perfectly
-						end
+						bars[i]:SetWidth((ufwidth - 2) / 3)
 						bars[i].bg:SetAllPoints(bars[i])
 					end
 					
@@ -457,12 +465,8 @@ local function Shared(self, unit)
 				
 				for i = 1, 5 do
 					CPoints[i] = CreateFrame('StatusBar', "ComboPoint"..i, self)
-					CPoints[i]:SetHeight(5)
-					if TukuiDB.lowversion then
-						CPoints[i]:SetWidth(TukuiDB.Scale(166) / 5)
-					else
-						CPoints[i]:SetWidth(TukuiDB.Scale(196) / 5)
-					end
+					CPoints[i]:SetHeight(pwrheight)
+					CPoints[i]:SetWidth((ufwidth - 4) / 5)
 					CPoints[i]:SetStatusBarTexture(normTex)
 					CPoints[i]:GetStatusBarTexture():SetHorizTile(false)
 					CPoints[i]:SetStatusBarColor(0.69, 0.31, 0.31)
@@ -487,23 +491,15 @@ local function Shared(self, unit)
 				
 				local Runes = CreateFrame("Frame", nil, self)
 				Runes:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, TukuiDB.Scale(1))
-				Runes:SetHeight(TukuiDB.Scale(5))
-				if TukuiDB.lowversion then
-					Runes:SetWidth(TukuiDB.Scale(170))
-				else
-					Runes:SetWidth(TukuiDB.Scale(200))
-				end
+				Runes:SetHeight(pwrheight)
+				Runes:SetWidth((ufwidth - 5) / 6)
 				Runes:SetBackdrop(backdrop)
 				Runes:SetBackdropColor(0, 0, 0)
 
 				for i = 1, 6 do
 					Runes[i] = CreateFrame("StatusBar", self:GetName().."_Runes"..i, self)
-					Runes[i]:SetHeight(TukuiDB.Scale(5))
-					if TukuiDB.lowversion then
-						Runes[i]:SetWidth(TukuiDB.Scale(165) / 6)
-					else
-						Runes[i]:SetWidth(TukuiDB.Scale(195) / 6)
-					end
+					Runes[i]:SetHeight(pwrheight)
+					Runes[i]:SetWidth((ufwidth - 5) / 6)
 					if (i == 1) then
 						Runes[i]:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, TukuiDB.Scale(1))
 					else
@@ -531,12 +527,8 @@ local function Shared(self, unit)
 					   TotemBar[i]:SetPoint("TOPLEFT", TotemBar[i-1], "TOPRIGHT", TukuiDB.Scale(1), 0)
 					end
 					TotemBar[i]:SetStatusBarTexture(normTex)
-					TotemBar[i]:SetHeight(TukuiDB.Scale(5))
-					if TukuiDB.lowversion then
-						TotemBar[i]:SetWidth(TukuiDB.Scale(167) / 4)
-					else
-						TotemBar[i]:SetWidth(TukuiDB.Scale(197) / 4)
-					end
+					TotemBar[i]:SetHeight(pwrheight)
+					TotemBar[i]:SetWidth((ufwidth - 3) / 4)
 					TotemBar[i]:SetBackdrop(backdrop)
 					TotemBar[i]:SetBackdropColor(0, 0, 0)
 					TotemBar[i]:SetMinMaxValues(0, 1)
@@ -554,8 +546,8 @@ local function Shared(self, unit)
 				local Swing = CreateFrame("StatusBar", self:GetName().."_SwingBar", health)
 				self.Swing = Swing
 
-				self.Swing:SetHeight(TukuiDB.Scale(3))
-				self.Swing:SetWidth(panel:GetWidth())
+				self.Swing:SetHeight(pwrheight)
+				self.Swing:SetWidth(ufwidth)
 				self.Swing:SetPoint("TOP", health, "TOP", 0, 0)
 
 				self.Swing.bg = CreateFrame("Frame", nil, self.Swing)
@@ -607,23 +599,23 @@ local function Shared(self, unit)
 			
 			if TukuiDB.lowversion then
 				buffs:SetHeight(22.5)
-				buffs:SetWidth(170)
+				buffs:SetWidth(ufwidth)
 				buffs.size = 22.5
 				buffs.num = 7
 				
 				debuffs:SetHeight(22.5)
-				debuffs:SetWidth(170)
+				debuffs:SetWidth(ufwidth)
 				debuffs:SetPoint("BOTTOMLEFT", buffs, "TOPLEFT", 0, 6)
 				debuffs.size = 22.5
 				debuffs.num = 21
 			else				
 				buffs:SetHeight(23.2)
-				buffs:SetWidth(200)
+				buffs:SetWidth(ufwidth)
 				buffs.size = 23.2
 				buffs.num = 8
 				
 				debuffs:SetHeight(23.2)
-				debuffs:SetWidth(200)
+				debuffs:SetWidth(ufwidth)
 				debuffs:SetPoint("BOTTOMLEFT", buffs, "TOPLEFT", 0, 6)
 				debuffs.size = 23.2
 				debuffs.num = 24
@@ -681,48 +673,28 @@ local function Shared(self, unit)
 				castbar.time:SetPoint("RIGHT", castbar, "RIGHT", TukuiDB.Scale(-6), TukuiDB.Scale(-4))
 				castbar.Text:SetPoint("LEFT", castbar, "LEFT", TukuiDB.Scale(-6), TukuiDB.Scale(-4))
 			else
-				castbar:SetHeight(TukuiDB.Scale(20))
+				castbar:SetHeight(hpheight)
 				castbar.time:SetPoint("RIGHT", castbar, "RIGHT", TukuiDB.Scale(-5), TukuiDB.Scale(-1))
 				castbar.Text:SetPoint("LEFT", castbar, "LEFT", TukuiDB.Scale(5), TukuiDB.Scale(1))
-				if TukuiDB.lowversion then
-					if unit == "player" then
-						castbar:SetWidth(160)
-						if TukuiCF["actionbar"].bottomrows == 2 then
-							castbar:SetPoint("BOTTOM", TukuiActionBar3Background, "TOP", TukuiDB.Scale(-31.5), TukuiDB.Scale(12))
-						else
-							castbar:SetPoint("BOTTOM", TukuiActionBarBackground, "TOP", TukuiDB.Scale(-31.5), TukuiDB.Scale(12))
-						end
-					elseif unit == "target" then
-						castbar:SetWidth(180)
-						castbar:SetHeight(TukuiDB.Scale(18))
-						castbar:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, TukuiDB.Scale(200))
-					end
-				else
-					if unit == "player" then
-						castbar:SetWidth(200)
-						if TukuiCF["actionbar"].bottomrows == 2 then
-							castbar:SetPoint("BOTTOM", TukuiActionBar3Background, "TOP", 0, TukuiDB.Scale(45))
-						else
-							castbar:SetPoint("BOTTOM", TukuiActionBarBackground, "TOP", 0, TukuiDB.Scale(50))
-						end
-					elseif unit == "target" then
-						castbar:SetWidth(220)
-						castbar:SetHeight(TukuiDB.Scale(18))
-						castbar:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, TukuiDB.Scale(275))
-					end
+				if unit == "player" then
+					castbar:SetWidth(ufwidth*1.05)
+					castbar:SetPoint("BOTTOM", InvTukuiActionBarBackground, "TOP", TukuiDB.Scale(0), TukuiDB.Scale(55))
+				elseif unit == "target" then
+					castbar:SetWidth(ufwidth*1.1)
+					castbar:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, TukuiDB.Scale(220))
 				end
 			end			
 			
 			if db.cbicons == true and db.separatecastbar == true then
 				castbar.button = CreateFrame("Frame", nil, castbar)
 				if unit == "player" then
-					castbar.button:SetHeight(TukuiDB.Scale(24))
-					castbar.button:SetWidth(TukuiDB.Scale(24))
-					castbar.button:SetPoint("TOP", 0, TukuiDB.Scale(30))
+					castbar.button:SetHeight(btnsize*1.2)
+					castbar.button:SetWidth(btnsize*1.2)
+					castbar.button:SetPoint("TOP", 0, (hpheight+btnsize*1.2))
 				elseif unit == "target" then
-					castbar.button:SetHeight(TukuiDB.Scale(20))
-					castbar.button:SetWidth(TukuiDB.Scale(20))
-					castbar.button:SetPoint("TOP", 0, TukuiDB.Scale(25))
+					castbar.button:SetHeight(btnsize*1.5)
+					castbar.button:SetWidth(btnsize*1.5)
+					castbar.button:SetPoint("TOP", 0, (hpheight+btnsize))
 				end
 				TukuiDB.SetCyTemplate(castbar.button)
 				TukuiDB.CreateShadow(castbar.button)
@@ -778,11 +750,7 @@ local function Shared(self, unit)
 			local mhpb = CreateFrame('StatusBar', nil, self.Health)
 			mhpb:SetPoint('TOPLEFT', self.Health:GetStatusBarTexture(), 'TOPRIGHT', 0, 0)
 			mhpb:SetPoint('BOTTOMLEFT', self.Health:GetStatusBarTexture(), 'BOTTOMRIGHT', 0, 0)
-			if TukuiDB.lowversion then
-				mhpb:SetWidth(170)
-			else
-				mhpb:SetWidth(200)
-			end
+			mhpb:SetWidth(ufwidth)
 			mhpb:SetStatusBarTexture(normTex)
 			mhpb:SetStatusBarColor(0, 1, 0.5, 0.25)
 			mhpb:SetMinMaxValues(0,1)
@@ -790,7 +758,7 @@ local function Shared(self, unit)
 			local ohpb = CreateFrame('StatusBar', nil, self.Health)
 			ohpb:SetPoint('TOPLEFT', mhpb:GetStatusBarTexture(), 'TOPRIGHT', 0, 0)
 			ohpb:SetPoint('BOTTOMLEFT', mhpb:GetStatusBarTexture(), 'BOTTOMRIGHT', 0, 0)
-			ohpb:SetWidth(200)
+			ohpb:SetWidth(ufwidth)
 			ohpb:SetStatusBarTexture(normTex)
 			ohpb:SetStatusBarColor(0, 1, 0, 0.25)
 
@@ -808,11 +776,7 @@ local function Shared(self, unit)
 	
 	if (unit == "targettarget") then
 		local panel = CreateFrame("Frame", nil, self)
-		if TukuiDB.lowversion then
-			TukuiDB.CreatePanel(panel, 76, 16, "BOTTOM", self, "BOTTOM", 0, TukuiDB.Scale(0))
-		else
-			TukuiDB.CreatePanel(panel, 96, 16, "BOTTOM", self, "BOTTOM", 0, TukuiDB.Scale(0))
-		end
+		TukuiDB.CreatePanel(panel, ufwidth, ufheight, "BOTTOM", self, "BOTTOM", 0, 0)
 		panel:SetFrameLevel(2)
 		panel:SetFrameStrata("MEDIUM")
 		panel:SetBackdropBorderColor(unpack(TukuiCF["media"].altbordercolor))
@@ -821,7 +785,7 @@ local function Shared(self, unit)
 		
 		-- health bar
 		local health = CreateFrame('StatusBar', nil, self)
-		health:SetHeight(TukuiDB.Scale(14))
+		health:SetHeight(shpheight)
 		health:SetPoint("TOPLEFT")
 		health:SetPoint("TOPRIGHT")
 		health:SetStatusBarTexture(normTex)
@@ -840,7 +804,7 @@ local function Shared(self, unit)
 		
 		-- power
 		local power = CreateFrame('StatusBar', nil, self)
-		power:SetHeight(TukuiDB.Scale(2))
+		power:SetHeight(spwrheight)
 		power:SetPoint("TOPLEFT", health, "BOTTOMLEFT", 0, -TukuiDB.mult)
 		power:SetPoint("TOPRIGHT", health, "BOTTOMRIGHT", 0, -TukuiDB.mult)
 		power:SetStatusBarTexture(normTex)
@@ -888,7 +852,7 @@ local function Shared(self, unit)
 		if db.totdebuffs == true then
 			local debuffs = CreateFrame("Frame", nil, health)
 			debuffs:SetHeight(20)
-			debuffs:SetWidth(127)
+			debuffs:SetWidth(sufwidth)
 			debuffs.size = 20
 			debuffs.spacing = 2
 			debuffs.num = 6
@@ -909,7 +873,7 @@ local function Shared(self, unit)
 	if (unit == "pet") then
 		-- health bar
 		local health = CreateFrame('StatusBar', nil, self)
-		health:SetHeight(TukuiDB.Scale(14))
+		health:SetHeight(shpheight)
 		health:SetPoint("TOPLEFT")
 		health:SetPoint("TOPRIGHT")
 		health:SetStatusBarTexture(hpTex)
@@ -941,7 +905,7 @@ local function Shared(self, unit)
 		
 		-- power
 		local power = CreateFrame('StatusBar', nil, self)
-		power:SetHeight(TukuiDB.Scale(2))
+		power:SetHeight(spwrheight)
 		power:SetPoint("TOPLEFT", health, "BOTTOMLEFT", 0, -TukuiDB.mult)
 		power:SetPoint("TOPRIGHT", health, "BOTTOMRIGHT", 0, -TukuiDB.mult)
 		power:SetStatusBarTexture(normTex)
@@ -977,8 +941,8 @@ local function Shared(self, unit)
 		end
 		self.Name = Name
 		
-		-- update pet name, this should fix "UNKNOWN" pet names on pet unit.
-		self:RegisterEvent("UNIT_PET", TukuiDB.UpdateName)
+		-- update pet name, this should fix "UNKNOWN" pet names on pet unit and health/power colors.
+		self:RegisterEvent("UNIT_PET", TukuiDB.updateAllElements)
 	end
 
 	------------------------------------------------------------------------
@@ -986,7 +950,7 @@ local function Shared(self, unit)
 	------------------------------------------------------------------------
 	if (unit == "focus") then
 		local health = CreateFrame('StatusBar', nil, self)
-		health:SetHeight(TukuiDB.Scale(14))
+		health:SetHeight(shpheight)
 		health:SetPoint("TOPLEFT")
 		health:SetPoint("TOPRIGHT")
 		health:SetStatusBarTexture(hpTex)
@@ -1011,7 +975,7 @@ local function Shared(self, unit)
 		
 		-- power
 		local power = CreateFrame('StatusBar', nil, self)
-		power:SetHeight(TukuiDB.Scale(2))
+		power:SetHeight(spwrheight)
 		power:SetPoint("TOPLEFT", health, "BOTTOMLEFT", 0, -TukuiDB.mult)
 		power:SetPoint("TOPRIGHT", health, "BOTTOMRIGHT", 0, -TukuiDB.mult)
 		power:SetStatusBarTexture(normTex)
@@ -1145,7 +1109,7 @@ local function Shared(self, unit)
 		
 		-- health bar
 		local health = CreateFrame('StatusBar', nil, self)
-		health:SetHeight(TukuiDB.Scale(18))
+		health:SetHeight(hpheight)
 		health:SetPoint("TOPLEFT")
 		health:SetPoint("TOPRIGHT")
 		health:SetStatusBarTexture(hpTex)
@@ -1181,7 +1145,7 @@ local function Shared(self, unit)
 		
 		-- power
 		local power = CreateFrame('StatusBar', nil, self)
-		power:SetHeight(TukuiDB.Scale(3))
+		power:SetHeight(pwrheight)
 		power:SetPoint("TOPLEFT", health, "BOTTOMLEFT", 0, -TukuiDB.mult)
 		power:SetPoint("TOPRIGHT", health, "BOTTOMRIGHT", 0, -TukuiDB.mult)
 		power:SetStatusBarTexture(normTex)
@@ -1243,7 +1207,7 @@ local function Shared(self, unit)
 		self:SetAttribute("type2", "focus")
 
 		local health = CreateFrame('StatusBar', nil, self)
-		health:SetHeight(TukuiDB.Scale(19))
+		health:SetHeight(hpheight)
 		health:SetPoint("TOPLEFT")
 		health:SetPoint("TOPRIGHT")
 		health:SetStatusBarTexture(hpTex)
@@ -1278,7 +1242,7 @@ local function Shared(self, unit)
 		end
 
 		local power = CreateFrame('StatusBar', nil, self)
-		power:SetHeight(TukuiDB.Scale(3))
+		power:SetHeight(pwrheight)
 		power:SetPoint("TOPLEFT", health, "BOTTOMLEFT", 0, -TukuiDB.mult)
 		power:SetPoint("TOPRIGHT", health, "BOTTOMRIGHT", 0, -TukuiDB.mult)
 		power:SetStatusBarTexture(normTex)
@@ -1333,8 +1297,8 @@ local function Shared(self, unit)
 			-- alt power bar
 			local AltPowerBar = CreateFrame("StatusBar", nil, self.Health)
 			AltPowerBar:SetFrameLevel(5)
-			AltPowerBar:SetHeight(16)
-			AltPowerBar:SetWidth(200)
+			AltPowerBar:SetHeight(ufheight)
+			AltPowerBar:SetWidth(ufwidth)
 			AltPowerBar:SetStatusBarTexture(TukuiCF.media.normTex)
 			AltPowerBar:GetStatusBarTexture():SetHorizTile(false)
 			AltPowerBar:SetStatusBarColor(.69, .09, .12, 1)
@@ -1348,11 +1312,11 @@ local function Shared(self, unit)
 			
 			-- create buff at left of unit if they are boss units
 			local buffs = CreateFrame("Frame", nil, self)
-			buffs:SetHeight(23)
-			buffs:SetWidth(200)
-			buffs:SetPoint("RIGHT", self, "LEFT", TukuiDB.Scale(-4), 0)
-			buffs.size = 23
-			buffs.num = 3
+			buffs:SetHeight(ufheight)
+			buffs:SetWidth(ufwidth)
+			buffs:SetPoint("RIGHT", self, "LEFT", TukuiDB.Scale(-5), 0)
+			buffs.size = ufheight
+			buffs.num = 5
 			buffs.spacing = 2
 			buffs.initialAnchor = 'RIGHT'
 			buffs["growth-x"] = "LEFT"
@@ -1363,10 +1327,10 @@ local function Shared(self, unit)
 
 		-- create debuff for arena units
 		local debuffs = CreateFrame("Frame", nil, self)
-		debuffs:SetHeight(23)
-		debuffs:SetWidth(200)
-		debuffs:SetPoint('LEFT', self, 'RIGHT', TukuiDB.Scale(4), 0)
-		debuffs.size = 23
+		debuffs:SetHeight(ufheight)
+		debuffs:SetWidth(ufwidth)
+		debuffs:SetPoint('LEFT', self, 'RIGHT', TukuiDB.Scale(5), 0)
+		debuffs.size = ufheight
 		debuffs.num = 5
 		debuffs.spacing = 2
 		debuffs.initialAnchor = 'LEFT'
@@ -1378,17 +1342,17 @@ local function Shared(self, unit)
 		-- trinket feature via trinket plugin
 		if (TukuiCF.arena.unitframes) and (unit and unit:find('arena%d')) then
 			local Trinketbg = CreateFrame("Frame", nil, self)
-			Trinketbg:SetHeight(23)
-			Trinketbg:SetWidth(23)
-			Trinketbg:SetPoint("RIGHT", self, "LEFT", -6, 0)				
+			Trinketbg:SetHeight(ufheight)
+			Trinketbg:SetWidth(ufheight)
+			Trinketbg:SetPoint("RIGHT", self, "LEFT", TukuiDB.Scale(-5), 0)				
 			TukuiDB.SetTemplate(Trinketbg)
 			Trinketbg:SetFrameLevel(0)
 			self.Trinketbg = Trinketbg
 			
 			local Trinket = CreateFrame("Frame", nil, Trinketbg)
 			Trinket:SetAllPoints(Trinketbg)
-			Trinket:SetPoint("TOPLEFT", Trinketbg, TukuiDB.Scale(2), TukuiDB.Scale(-2))
-			Trinket:SetPoint("BOTTOMRIGHT", Trinketbg, TukuiDB.Scale(-2), TukuiDB.Scale(2))
+			Trinket:SetPoint("TOPLEFT", Trinketbg, TukuiDB.Scale(1), TukuiDB.Scale(-1))
+			Trinket:SetPoint("BOTTOMRIGHT", Trinketbg, TukuiDB.Scale(-1), TukuiDB.Scale(1))
 			Trinket:SetFrameLevel(1)
 			Trinket.trinketUseAnnounce = true
 			self.Trinket = Trinket
@@ -1398,19 +1362,21 @@ local function Shared(self, unit)
 		local castbar = CreateFrame("StatusBar", self:GetName().."_Castbar", self)
 		castbar:SetPoint("LEFT", 0, 0)
 		castbar:SetPoint("RIGHT", 0, 0)
-		castbar:SetPoint("BOTTOM", 0, -21)
+		castbar:SetPoint("BOTTOM", 0, (TukuiDB.Scale(-21)))
 		
-		castbar:SetHeight(TukuiDB.Scale(16))
+		castbar:SetHeight(hpheight*0.9)
 		castbar:SetStatusBarTexture(normTex)
 		castbar:SetFrameLevel(6)
 		
-		castbar.bg = CreateFrame("Frame", nil, castbar)
-		TukuiDB.SetCyTemplate(castbar.bg)
-		castbar.bg:SetPoint("TOPLEFT", 0,0)
-		castbar.bg:SetPoint("BOTTOMRIGHT", 0,0)
-		castbar.bg:SetFrameLevel(5)
+		castbar.bg = castbar:CreateTexture(nil, "BORDER")
+		castbar.bg:SetAllPoints(castbar)
+		castbar.bg:SetTexture(normTex)
+		castbar.bg:SetVertexColor(.15, .15, .15)
 
-		castbar.time = TukuiDB.SetFontString(castbar, font3, 12)
+		castbar:SetBackdrop(backdrop)
+		castbar:SetBackdropColor(0, 0, 0)
+
+		castbar.time = TukuiDB.SetFontString(castbar, font2, 12)
 		castbar.time:SetPoint("RIGHT", castbar, "RIGHT", TukuiDB.Scale(-4), 0)
 		castbar.time:SetTextColor(.84, .75, .65)
 		castbar.time:SetJustifyH("RIGHT")
@@ -1429,13 +1395,13 @@ local function Shared(self, unit)
 		castbar.PostChannelStart = TukuiDB.CheckChannel
 		
 		if db.cbicons == true then
-			castbar:SetPoint("LEFT", 19, 0)
+			castbar:SetPoint("LEFT", (castbar:GetHeight()+4), 0)
 			
 			castbar.button = CreateFrame("Frame", nil, castbar)
 			castbar.button:SetHeight(castbar:GetHeight())
 			castbar.button:SetWidth(castbar:GetHeight())
 			castbar.button:SetPoint("RIGHT", castbar, "LEFT", TukuiDB.Scale(-4), 0)
-			TukuiDB.SetCyTemplate(castbar.button)
+			TukuiDB.SetTemplate(castbar.button)
 			
 			castbar.icon = castbar.button:CreateTexture(nil, "ARTWORK")
 			castbar.icon:SetPoint("TOPLEFT", castbar.button, TukuiDB.Scale(1), TukuiDB.Scale(-1))
@@ -1458,7 +1424,7 @@ local function Shared(self, unit)
 		
 		-- health 
 		local health = CreateFrame('StatusBar', nil, self)
-		health:SetHeight(TukuiDB.Scale(15))
+		health:SetHeight(assisttank_height)
 		health:SetPoint("TOPLEFT")
 		health:SetPoint("TOPRIGHT")
 		health:SetStatusBarTexture(normTex)
@@ -1516,31 +1482,26 @@ oUF:RegisterStyle('Tukz', Shared)
 
 -- player
 local player = oUF:Spawn('player', "oUF_Tukz_player")
+player:SetSize(ufwidth, ufheight)
 if TukuiDB.lowversion then
-	player:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "TOPLEFT", TukuiDB.Scale(63.5), TukuiDB.Scale(55))
-	player:SetSize(TukuiDB.Scale(170), TukuiDB.Scale(25))
+	player:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "TOPLEFT", TukuiDB.Scale(TukuiDB.buttonsize+TukuiDB.buttonspacing+7), TukuiDB.Scale(55))
 else
-	player:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "TOPLEFT", TukuiDB.Scale(36), TukuiDB.Scale(57))
-	player:SetSize(TukuiDB.Scale(200), TukuiDB.Scale(25))
+	--player:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "TOPLEFT", TukuiDB.Scale(36), TukuiDB.Scale(57))
+	player:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "TOPLEFT", TukuiDB.Scale(4), TukuiDB.Scale(55))
 end
 
 -- target
 local target = oUF:Spawn('target', "oUF_Tukz_target")
+target:SetSize(ufwidth, ufheight)
 if TukuiDB.lowversion then
-	target:SetPoint("BOTTOMRIGHT", InvTukuiActionBarBackground, "TOPRIGHT", TukuiDB.Scale(-63.5), TukuiDB.Scale(55))
-	target:SetSize(TukuiDB.Scale(170), TukuiDB.Scale(25))
+	target:SetPoint("BOTTOMRIGHT", InvTukuiActionBarBackground, "TOPRIGHT", TukuiDB.Scale(-(TukuiDB.buttonsize+TukuiDB.buttonspacing+3)), TukuiDB.Scale(55))
 else
-	target:SetPoint("BOTTOMRIGHT", InvTukuiActionBarBackground, "TOPRIGHT", TukuiDB.Scale(-36), TukuiDB.Scale(57))
-	target:SetSize(TukuiDB.Scale(200), TukuiDB.Scale(25))
+	target:SetPoint("BOTTOMRIGHT", InvTukuiActionBarBackground, "TOPRIGHT", TukuiDB.Scale(-6), TukuiDB.Scale(55))
 end
 
 -- focus
 local focus = oUF:Spawn('focus', "oUF_Tukz_focus")
-if TukuiDB.lowversion then
-	focus:SetSize(TukuiDB.Scale(76), TukuiDB.Scale(17))
-else
-	focus:SetSize(TukuiDB.Scale(96), TukuiDB.Scale(17))
-end
+focus:SetSize(sufwidth, sufheight)
 if TukuiCF["unitframes"].separatecastbar == true then
 	focus:SetPoint("TOPRIGHT", oUF_Tukz_player, "BOTTOMRIGHT", 0, TukuiDB.Scale(-7))
 else
@@ -1549,11 +1510,7 @@ end
 
 -- tot
 local tot = oUF:Spawn('targettarget', "oUF_Tukz_targettarget")
-if TukuiDB.lowversion then
-	tot:SetSize(TukuiDB.Scale(76), TukuiDB.Scale(17))
-else
-	tot:SetSize(TukuiDB.Scale(96), TukuiDB.Scale(17))
-end
+tot:SetSize(sufwidth, sufheight)
 if TukuiCF["unitframes"].separatecastbar == true then
 	tot:SetPoint("TOPRIGHT", oUF_Tukz_target, "BOTTOMRIGHT", 0, TukuiDB.Scale(-7))
 else
@@ -1562,11 +1519,7 @@ end
 
 -- pet
 local pet = oUF:Spawn('pet', "oUF_Tukz_pet")
-if TukuiDB.lowversion then
-	pet:SetSize(TukuiDB.Scale(76), TukuiDB.Scale(17))
-else
-	pet:SetSize(TukuiDB.Scale(96), TukuiDB.Scale(17))
-end
+pet:SetSize(sufwidth, sufheight)
 if TukuiCF["unitframes"].separatecastbar == true then
 	pet:SetPoint("TOPLEFT", oUF_Tukz_player, "BOTTOMLEFT", 0, TukuiDB.Scale(-7))
 else
@@ -1577,7 +1530,7 @@ end
 if db.showfocustarget then
 	local focustarget = oUF:Spawn("focustarget", "oUF_Tukz_focustarget")
 	focustarget:SetPoint("BOTTOM", UIParent, "BOTTOM", TukuiDB.Scale(-215), TukuiDB.Scale(400))
-	focustarget:SetSize(TukuiDB.Scale(150), TukuiDB.Scale(22))
+	focustarget:SetSize(ufwidth*0.8, ufheight)
 end
 
 -- arena
@@ -1590,11 +1543,7 @@ if TukuiCF.arena.unitframes then
 		else
 			arena[i]:SetPoint("BOTTOM", arena[i-1], "TOP", 0, 35)
 		end
-		if TukuiDB.lowversion then
-			arena[i]:SetSize(TukuiDB.Scale(170), TukuiDB.Scale(23))
-		else
-			arena[i]:SetSize(TukuiDB.Scale(200), TukuiDB.Scale(23))
-		end
+		arena[i]:SetSize(ufwidth, ufheight)
 	end
 end
 
@@ -1617,17 +1566,11 @@ if db.showboss then
 		else
 			boss[i]:SetPoint('BOTTOM', boss[i-1], 'TOP', 0, 35)
 		end
-		if TukuiDB.lowversion then
-			boss[i]:SetSize(TukuiDB.Scale(170), TukuiDB.Scale(23))
-		else
-			boss[i]:SetSize(TukuiDB.Scale(200), TukuiDB.Scale(23))
-		end
+		boss[i]:SetSize(ufwidth, ufheight)
 	end
 end
 
 -- maintank
-local assisttank_width = 70
-local assisttank_height = 15
 if TukuiCF["unitframes"].maintank == true then
 	local tank = oUF:SpawnHeader('oUF_MainTank', nil, 'raid',
 		'oUF-initialConfigFunction', ([[

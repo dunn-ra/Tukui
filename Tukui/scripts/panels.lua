@@ -1,15 +1,17 @@
--- ACTION BAR PANEL
-TukuiDB.buttonsize = TukuiDB.Scale(24)
-TukuiDB.petbuttonsize = TukuiDB.Scale(24)
+-- variables
+local ui = TukuiCF["uisizes"]
+
+TukuiDB.buttonsize = TukuiDB.Scale(ui.btnsize)
+TukuiDB.petbuttonsize = TukuiDB.Scale(ui.petbtnsize)
 TukuiDB.buttonspacing = TukuiDB.Scale(5)
 TukuiDB.petbuttonspacing = TukuiDB.Scale(5)
 
 -- MAIN ACTIONBAR
 local barbg = CreateFrame("Frame", "TukuiActionBarBackground", UIParent)
-if not TukuiDB.lowversion then
-	TukuiDB.CreatePanel(barbg, 1, 1, "BOTTOM", bottompanel, "BOTTOM", 0, TukuiDB.Scale(3))
-else
+if TukuiDB.lowversion then
 	TukuiDB.CreatePanel(barbg, 1, 1, "BOTTOM", bottompanel, "BOTTOM", (((TukuiDB.buttonsize * 2) + (TukuiDB.buttonspacing * 3)) / 2), TukuiDB.Scale(3))
+else
+	TukuiDB.CreatePanel(barbg, 1, 1, "BOTTOM", bottompanel, "BOTTOM", 0, TukuiDB.Scale(3))
 end
 barbg:SetWidth((TukuiDB.buttonsize * 24) + (TukuiDB.buttonspacing * 25))
 barbg:SetHeight(TukuiDB.buttonsize + (TukuiDB.buttonspacing * 2))
@@ -67,7 +69,7 @@ end
 if TukuiCF["actionbar"].cubes == true then
 	-- LEFT CUBE
 	local cubeleft = CreateFrame("Frame", "TukuiCubeLeft", UIParent)
-	TukuiDB.CreateTransPanel(cubeleft, 8, 8, "TOPRIGHT", barbg, "TOPLEFT", 0, TukuiDB.Scale(-5))
+	TukuiDB.CreateTransPanel(cubeleft, 8, 8, "TOPRIGHT", barbg, "TOPLEFT", TukuiDB.Scale(2), TukuiDB.Scale(-5))
 	cubeleft:EnableMouse(true)
 	cubeleft:SetScript("OnMouseDown", function(self, btn)
 	--if TukuiInfoLeftBattleGround and UnitInBattleground("player") then
@@ -78,10 +80,10 @@ if TukuiCF["actionbar"].cubes == true then
 	end)
 	-- RIGHT CUBE
 	local cuberight = CreateFrame("Frame", "TukuiCubeRight", UIParent)
-	if TukuiDB.lowversion ~= true then
-		TukuiDB.CreateTransPanel(cuberight, 8, 8, "TOPLEFT", barbg, "TOPRIGHT", TukuiDB.Scale(-2), TukuiDB.Scale(-5))
+	if TukuiDB.lowversion then
+		TukuiDB.CreateTransPanel(cuberight, 8, 8, "TOPLEFT", barbg, "TOPRIGHT", -((TukuiDB.buttonsize*2)+(TukuiDB.buttonspacing*2)+4), TukuiDB.Scale(-5))
 	else
-		TukuiDB.CreateTransPanel(cuberight, 8, 8, "TOPLEFT", barbg, "TOPRIGHT", TukuiDB.Scale(-60), TukuiDB.Scale(-5))
+		TukuiDB.CreateTransPanel(cuberight, 8, 8, "TOPLEFT", barbg, "TOPRIGHT", TukuiDB.Scale(-4), TukuiDB.Scale(-5))
 	end
 	cuberight:EnableMouse(true)
 	cuberight:SetScript("OnMouseDown", function(self, btn)
@@ -149,12 +151,3 @@ if TukuiCF["chat"].enable == true and TukuiCF["chat"].background == true then
 	chatbg:SetFrameStrata("BACKGROUND")
 	chatbg:SetAlpha(.7)
 end
-
---[[ Rep bar
-if TukuiCF["unitframes"].repbar == true then
-	local RepBarTop = CreateFrame("Frame", "RepBarTop", UIParent)
-	TukuiDB.CreateTransPanel(RepBarTop, (UIParent:GetWidth() / 10), 18, "TOP", UIParent, "TOP", 0, 0)
-	RepBarTop:SetPoint("TOP", UIParent, "TOP", 0, 0)
-	RepBarTop:SetFrameLevel(1)
-	RepBarTop:SetFrameStrata("BACKGROUND")
-end--]]

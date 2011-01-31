@@ -6,6 +6,16 @@
 	["classcolor"] = false,						-- enable full classcolor option (datatext, panels, castbars)
 }
 
+TukuiCF["uisizes"] = {
+	-- UF size
+	["playerwidth"] = 200,						-- width of the unitframes
+	["playerheight"] = 18,						-- height of the healthbar (target frame mirrors size)
+	["btnsize"] = 22,							-- size of the actionbar buttons
+	["petbtnsize"] = 20,						-- size of the pet actionbar buttons
+	["assisttankw"] = 70,						-- width of the assist/maintank frame (if enabled)
+	["assisttankh"] = 15,						-- height of the assist/maintank frame (if enabled)
+}
+
 TukuiCF["unitframes"] = {						-- general options
 	["enable"] = true,							-- do i really need to explain this?
 	-- theme
@@ -26,24 +36,25 @@ TukuiCF["unitframes"] = {						-- general options
 	["playerauras"] = false,					-- enable auras
 	["targetauras"] = true,						-- enable auras on target unit frame	
 	-- UF options
-	["targetpowerpvponly"] = true,				-- enable power text on pvp target only
+	["showthreat"] = false,--NYI						-- enable the threat bar anchored to info left panel
 	["totdebuffs"] = false,						-- enable tot debuffs
-	["focusdebuffs"] = false,					-- enable focus debuffs
+	["focusdebuffs"] = true,					-- enable focus debuffs
 	["showfocustarget"] = true,					-- show focus target
+	["targetpowerpvponly"] = true,				-- enable power text on pvp target only
 	["showtotalhpmp"] = false,					-- change the display of info text on player and target with XXXX/Total.
 	["percentage"] = false,						-- only show percentage for mana and health values
 	["showsmooth"] = true,						-- enable smooth bar
-	["showthreat"] = false,--NYI						-- enable the threat bar anchored to info left panel
 	["charportrait"] = false,					-- do i really need to explain this?
 	["maintank"] = true,						-- enable maintank
 	["mainassist"] = false,						-- enable mainassist
 	["combatfeedback"] = false,					-- enable combattext on player and target.	
+	-- boss frames
+	["showboss"] = true,						-- enable boss unit frames for PVELOL encounters.
 	-- others
 	["positionbychar"] = true,					-- save X, Y position with /uf (movable frame) per character instead of per account.
 	["healcomm"] = true,						-- enable healprediction support.
 	["highThreshold"] = 80,						-- hunter high threshold
 	["lowThreshold"] = 25,						-- global low threshold, for low mana warning.
-	["repbar"] = true,							-- reputation bar for low level chars
 	-- raid layout
 	["showrange"] = true,						-- show range opacity on raidframes
 	["raidalphaoor"] = 0.5,						-- alpha of unitframes when unit is out of range
@@ -54,20 +65,14 @@ TukuiCF["unitframes"] = {						-- general options
 	["gridhealthvertical"] = true,				-- enable vertical grow on health bar for grid mode.
 	["showplayerinparty"] = true,				-- show my player frame in party
 	["gridscale"] = 1,							-- set the healing grid scaling
-	-- boss frames
-	["showboss"] = true,						-- enable boss unit frames for PVELOL encounters.
-	-- priest only plugin
+	-- class specific
+	["runebar"] = true,							-- enable tukui runebar plugin
+	["powerbar"] = true,						-- enable tukui holypower/soulshard plugin
+	["totemtimer"] = true,						-- enable tukui totem timer plugin
+	["combobar"] = true,						-- enable tukui combo bar plugin
 	["ws_show_time"] = false,					-- show time on weakened soul bar
 	["ws_show_player"] = false,					-- show weakened soul bar on player unit
 	["ws_show_target"] = false,					-- show weakened soul bar on target unit	
-	-- death knight only plugin
-	["runebar"] = true,							-- enable tukui runebar plugin
-	-- paladin and warlock plugin
-	["powerbar"] = true,						-- enable tukui holypower/soulshard plugin
-	-- shaman only plugin
-	["totemtimer"] = true,						-- enable tukui totem timer plugin
-	-- rogue and druid plugin
-	["combobar"] = true,						-- enable tukui combo bar plugin
 }
 
 TukuiCF["arena"] = {
@@ -91,6 +96,9 @@ TukuiCF["actionbar"] = {
 
 TukuiCF["classtimer"] = {
 	["enable"] = true,							-- enable classtimer
+	-- config
+	["height"] = 16,							-- height of the classtimer bars
+	["space"] = 2,								-- space between bars
 	["classcolor"] = false, --NYI						-- classcolored bars
 	["layout"] = 3,								-- 1 - above player frame; 2 - above player frame with spacing; 3 - with trinkets; 4 - above player and target frames
 	["bgalpha"] = 0.8,							-- background alpha (0 to 1)
@@ -129,13 +137,14 @@ TukuiCF["cooldown"] = {
 }
 
 TukuiCF["datatext"] = {							-- use 4 and 8 only on highres
+	-- datapanel config
 	["classcolor"] = false,						-- enable classcolored datatext
 	["minimapstats"] = false,					-- enable stats under minimap, stats are 9 and 10
 	-- datatext options
 	["fps_ms"] = 7,								-- show fps and ms on panels
-	["mem"] = 6,								-- show total memory on panels
+	["mem"] = 0,								-- show total memory on panels
 	["bags"] = 0,								-- show space used in bags on panels
-	["gold"] = 3,								-- show your current gold on panels
+	["gold"] = 6,								-- show your current gold on panels
 	["wowtime"] = 8,							-- show time on panels
 	["guild"] = 1,								-- show number on guildmate connected on panels
 	["dur"] = 4,								-- show your equipment durability on panels.
@@ -148,6 +157,7 @@ TukuiCF["datatext"] = {							-- use 4 and 8 only on highres
 	["avd"] = 0,								-- show your current avoidance against the level of the mob your targeting
 	["armor"] = 10,								-- show your armor value against the level mob you are currently targeting
 	["curency"] = 9,							-- show your tracked currency on panels
+	["specswitcher"] = 3,
 	-- misc
 	["battleground"] = false, --NYI					-- enable 3 stats in battleground only that replace stat1,stat2,stat3
 	["time24"] = true,							-- set time to 24h format.
@@ -202,6 +212,7 @@ TukuiCF["others"] = {
 	["pvpautorelease"] = true,					-- enable auto-release in bg or wintergrasp. (not working for shaman, sorry)
 	["raidutility"] = true,						-- toggle menu for raid leaders
 	["markbar"] = true,							-- toggle menu with raid markers
+	--["announce"] = true,						-- announce to raid/party/bg/say conjured items, or portals, or summons
 }
 
 ----------------------------------------------------------------------------
