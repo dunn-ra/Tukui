@@ -7,6 +7,7 @@
 --]]
 if (TukuiCF ~= true and (TukuiCF == nil or TukuiCF["unitframes"] == nil or not TukuiCF["unitframes"]["enable"]) and TukuiCF["classtimer"].enable ~= true ) then return end
 
+local db = TukuiCF["classtimer"]
 local CreateSpellEntry = function( id, castByAnyone, color, unitType, castSpellId )
 	return { id = id, castByAnyone = castByAnyone, color = color, unitType = unitType or 0, castSpellId = castSpellId };
 end
@@ -18,18 +19,18 @@ end
 local classcolor = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[select(2,UnitClass("player"))]
 
 -- Configuration starts here:
-local BAR_HEIGHT = 16; -- Bar height
-local BAR_SPACING = 2; -- Distance between bars
-local LAYOUT = TukuiCF["classtimer"].layout;
-local BACKGROUND_ALPHA = TukuiCF["classtimer"].bgalpha;
-local ICON_POSITION = TukuiCF["classtimer"].iconposition;
-local SPARK = TukuiCF["classtimer"].spark;
-local CAST_SEPARATOR = TukuiCF["classtimer"].separator;
+local BAR_HEIGHT = db.height; -- Bar height
+local BAR_SPACING = db.space; -- Distance between bars
+local LAYOUT = db.layout;
+local BACKGROUND_ALPHA = db.bgalpha;
+local ICON_POSITION = db.iconposition;
+local SPARK = db.spark;
+local CAST_SEPARATOR = db.separator;
 local CAST_SEPARATOR_COLOR = CreateColor( 0, 0, 0, 0.5 );
-local TEXT_MARGIN = TukuiCF["classtimer"].textmargin;
-local PERMANENT_AURA_VALUE = TukuiCF["classtimer"].permanentaura;
-local SORT_DIRECTION = TukuiCF["classtimer"].direction;
-local TENTHS_TRESHOLD = TukuiCF["classtimer"].treshold;
+local TEXT_MARGIN = db.textmargin;
+local PERMANENT_AURA_VALUE = db.permanentaura;
+local SORT_DIRECTION = db.direction;
+local TENTHS_TRESHOLD = db.treshold;
 local MASTER_FONT, STACKS_FONT;
 if ( TukuiCF and TukuiCF["media"] and TukuiCF["media"]["font"] and TukuiCF["media"]["nfont"] ) then
 	MASTER_FONT = { TukuiCF["media"]["font"], 13, "OUTLINE" };
@@ -454,16 +455,17 @@ local CLASS_FILTERS = {
 				CreateSpellEntry( 18223 ),	-- Curse of Exhaustion
 				CreateSpellEntry( 702 ),	-- Curse of Weakness
 			},
-				player = {            
+			player = {            
 				CreateSpellEntry( 17941 ),	-- Shadow trance 
 				CreateSpellEntry( 64371 ),	-- Eradication
 				CreateSpellEntry( 85383 ),	-- Improved Soul Fire proc
 				CreateSpellEntry( 17941 ),	-- Shadow trance
+				CreateSpellEntry( 74434 ),	-- Soulburn
 			},
 			procs = {
 				CreateSpellEntry( 86121 ),	-- Soul Swap
 				CreateSpellEntry( 54274 ), CreateSpellEntry( 54276 ), CreateSpellEntry( 54277 ),	-- Backdraft rank 1/2/3
-				CreateSpellEntry( 71165 ),	-- Molten Cor
+				CreateSpellEntry( 71165 ),	-- Molten Core
 				CreateSpellEntry( 63167 ),	-- Decimation
 				CreateSpellEntry( 47283 ),	-- Empowered Imp
 			},
