@@ -20,7 +20,7 @@ bar:RegisterEvent("PET_BAR_HIDE")
 bar:RegisterEvent("UNIT_PET")
 bar:RegisterEvent("UNIT_FLAGS")
 bar:RegisterEvent("UNIT_AURA")
-bar:SetScript("OnEvent", function(self, event, ...)
+bar:SetScript("OnEvent", function(self, event, arg1)
 	if event == "PLAYER_LOGIN" then	
 		-- bug reported by Affli on t12 BETA
 		PetActionBarFrame.showgrid = 1 -- hack to never hide pet button. :X
@@ -35,7 +35,7 @@ bar:SetScript("OnEvent", function(self, event, ...)
 			TukuiPetActionBarBackground:SetFrameLevel(1)
 			button:SetSize(TukuiDB.petbuttonsize, TukuiDB.petbuttonsize)
 			if i == 1 then
-				button:SetPoint("TOPLEFT", TukuiDB.Scale(3),TukuiDB.Scale(-3))
+				button:SetPoint("TOPLEFT", TukuiDB.Scale(3), TukuiDB.Scale(-9))
 			else
 				button:SetPoint("TOP", _G["PetActionButton"..(i - 1)], "BOTTOM", 0, TukuiDB.Scale(-3))
 			end

@@ -28,7 +28,7 @@ function style(self)
 	Border = TukuiDB.dummy
  
 	Count:ClearAllPoints()
-	Count:SetPoint("BOTTOMRIGHT", 0, TukuiDB.Scale(2))
+	Count:SetPoint("BOTTOMRIGHT", 0, TukuiDB.Scale(-1))
 	Count:SetFont(TukuiCF["media"].font, 11, "OUTLINE")
  
 	Btname:SetText("")
@@ -43,22 +43,17 @@ function style(self)
 		
 		-- create the bg/border panel
 		local panel = CreateFrame("Frame", name.."Panel", self)
-		if TukuiCF["actionbar"].translucid ~= true then
-			TukuiDB.CreatePanel(panel, TukuiDB.buttonsize, TukuiDB.buttonsize, "CENTER", self, "CENTER", 0, 0)
-		else
-			TukuiDB.CreateTransPanel(panel, TukuiDB.buttonsize, TukuiDB.buttonsize, "CENTER", self, "CENTER", 0, 0)
-		end
-	
+		TukuiDB.CreateBtnPanel(panel, TukuiDB.buttonsize, TukuiDB.buttonsize, "CENTER", self, "CENTER", 0, 0)
 		panel:SetFrameStrata(self:GetFrameStrata())
 		panel:SetFrameLevel(self:GetFrameLevel() - 1)
 		
 		Icon:SetTexCoord(.08, .92, .08, .92)
-		Icon:SetPoint("TOPLEFT", Button, TukuiDB.Scale(2), TukuiDB.Scale(-2))
-		Icon:SetPoint("BOTTOMRIGHT", Button, TukuiDB.Scale(-2), TukuiDB.Scale(2))
+		Icon:SetPoint("TOPLEFT", Button, TukuiDB.Scale(1), TukuiDB.Scale(-1))
+		Icon:SetPoint("BOTTOMRIGHT", Button, TukuiDB.Scale(-1), TukuiDB.Scale(1))
 	end
 
 	HotKey:ClearAllPoints()
-	HotKey:SetPoint("TOPRIGHT", 0, TukuiDB.Scale(-3))
+	HotKey:SetPoint("TOPRIGHT", 0, TukuiDB.Scale(-2))
 	HotKey:SetFont(TukuiCF["media"].font, 12, "OUTLINE")
 	HotKey.ClearAllPoints = TukuiDB.dummy
 	HotKey.SetPoint = TukuiDB.dummy
@@ -90,11 +85,7 @@ local function stylesmallbutton(normal, button, icon, name, pet)
 		button:SetHeight(TukuiDB.petbuttonsize)
 		
 		local panel = CreateFrame("Frame", name.."Panel", button)
-		if TukuiCF["actionbar"].translucid ~= true then
-			TukuiDB.CreatePanel(panel, (TukuiDB.petbuttonsize / 1.1), (TukuiDB.petbuttonsize / 1.1), "CENTER", button, "CENTER", 0, 0)
-		else
-			TukuiDB.CreateTransPanel(panel, (TukuiDB.petbuttonsize / 1.1), (TukuiDB.petbuttonsize / 1.1), "CENTER", button, "CENTER", 0, 0)
-		end
+		TukuiDB.CreateBtnPanel(panel, TukuiDB.petbuttonsize, TukuiDB.petbuttonsize, "CENTER", button, "CENTER", 0, 0)
 		panel:SetBackdropColor(unpack(media.backdropcolor))
 		panel:SetFrameStrata(button:GetFrameStrata())
 		panel:SetFrameLevel(button:GetFrameLevel() - 1)
@@ -104,15 +95,15 @@ local function stylesmallbutton(normal, button, icon, name, pet)
 		
 		if pet then
 			local autocast = _G[name.."AutoCastable"]
-			autocast:SetWidth(TukuiDB.Scale(41))
-			autocast:SetHeight(TukuiDB.Scale(40))
+			autocast:SetWidth(TukuiDB.petbuttonsize)
+			autocast:SetHeight(TukuiDB.petbuttonsize)
 			autocast:ClearAllPoints()
 			autocast:SetPoint("CENTER", button, 0, 0)
-			icon:SetPoint("TOPLEFT", button, TukuiDB.Scale(2), TukuiDB.Scale(-2))
-			icon:SetPoint("BOTTOMRIGHT", button, TukuiDB.Scale(-2), TukuiDB.Scale(2))
+			icon:SetPoint("TOPLEFT", button, TukuiDB.Scale(1), TukuiDB.Scale(-1))
+			icon:SetPoint("BOTTOMRIGHT", button, TukuiDB.Scale(-1), TukuiDB.Scale(1))
 		else
-			icon:SetPoint("TOPLEFT", button, TukuiDB.Scale(2), TukuiDB.Scale(-2))
-			icon:SetPoint("BOTTOMRIGHT", button, TukuiDB.Scale(-2), TukuiDB.Scale(2))
+			icon:SetPoint("TOPLEFT", button, TukuiDB.Scale(1), TukuiDB.Scale(-1))
+			icon:SetPoint("BOTTOMRIGHT", button, TukuiDB.Scale(-1), TukuiDB.Scale(1))
 		end
 	end
 	
@@ -181,8 +172,8 @@ for _, name in ipairs( buttonNames ) do
 		end
 		
 		cooldown:ClearAllPoints()
-		cooldown:SetPoint("TOPLEFT", button, "TOPLEFT", 2, -2)
-		cooldown:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -2, 2)
+		cooldown:SetPoint("TOPLEFT", button, "TOPLEFT", 1, -1)
+		cooldown:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -1, 1)
 	end
 end
 
@@ -204,7 +195,7 @@ local function FlyoutButtonPos(self, buttons, direction)
 		local parent = SpellFlyout:GetParent()
 		if not _G["SpellFlyoutButton"..i] then return end
 		
-		if InCombatLockdown() then return end
+		--if InCombatLockdown() then return end
  
 		if direction == "LEFT" then
 			if i == 1 then
@@ -247,9 +238,9 @@ local function styleflyout(self)
 	--Change arrow direction depending on what bar the button is on
 	local arrowDistance
 	if ((SpellFlyout and SpellFlyout:IsShown() and SpellFlyout:GetParent() == self) or GetMouseFocus() == self) then
-			arrowDistance = 5
+		arrowDistance = 5
 	else
-			arrowDistance = 2
+		arrowDistance = 2
 	end
 	
 	if (self:GetParent() == MultiBarBottomRight and TukuiCF.actionbar.rightbars > 1) then

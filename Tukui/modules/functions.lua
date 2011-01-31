@@ -90,6 +90,28 @@ function TukuiDB.CreateTransPanel(f, w, h, a1, p, a2, x, y)
 	end
 end
 
+function TukuiDB.CreateBtnPanel(f, w, h, a1, p, a2, x, y)
+    sh = scale(h)
+    sw = scale(w)
+    f:SetFrameLevel(1)
+    f:SetHeight(sh+2)
+    f:SetWidth(sw+2)
+    f:SetFrameStrata("BACKGROUND")
+    f:SetPoint(a1, p, a2, x, y)
+    f:SetBackdrop({
+      bgFile = TukuiCF["media"].blank,
+      edgeFile = TukuiCF["media"].blank,
+      tile = false, tileSize = 0, edgeSize = mult,
+      insets = { left = TukuiDB.Scale(0), right = TukuiDB.Scale(0), top = TukuiDB.Scale(0), bottom = TukuiDB.Scale(0)}
+    })
+    f:SetBackdropColor(unpack(TukuiCF["media"].transbackdropcolor))
+	if TukuiCF["general"].classcolor == true or TukuiCF["unitframes"].classcolor == true then
+		f:SetBackdropBorderColor(classcolor.r,classcolor.g,classcolor.b,1)
+	else
+		f:SetBackdropBorderColor(0,0,0,1)	
+	end
+end
+
 function TukuiDB.SetCyTemplate(f)
 	f:SetBackdrop({
       bgFile = TukuiCF["media"].blank,
@@ -342,16 +364,16 @@ function TukuiDB.StyleButton(b, checked)
 	hover:SetTexture(1,1,1,0.4)
 	hover:SetHeight(button:GetHeight())
 	hover:SetWidth(button:GetWidth())
-	hover:SetPoint("TOPLEFT",button,2,-2)
-	hover:SetPoint("BOTTOMRIGHT",button,-2,2)
+	hover:SetPoint("TOPLEFT",button,1,-1)
+	hover:SetPoint("BOTTOMRIGHT",button,-1,1)
 	button:SetHighlightTexture(hover)
 
 	local pushed = b:CreateTexture("frame", nil, self) -- pushed
 	pushed:SetTexture(0.9,0.8,0.1,0.4)
 	pushed:SetHeight(button:GetHeight())
 	pushed:SetWidth(button:GetWidth())
-	pushed:SetPoint("TOPLEFT",button,2,-2)
-	pushed:SetPoint("BOTTOMRIGHT",button,-2,2)
+	pushed:SetPoint("TOPLEFT",button,1,-1)
+	pushed:SetPoint("BOTTOMRIGHT",button,-1,1)
 	button:SetPushedTexture(pushed)
  
 	if checked then
@@ -359,8 +381,8 @@ function TukuiDB.StyleButton(b, checked)
 		checked:SetTexture(1,1,1,0.4)
 		checked:SetHeight(button:GetHeight())
 		checked:SetWidth(button:GetWidth())
-		checked:SetPoint("TOPLEFT",button,2,-2)
-		checked:SetPoint("BOTTOMRIGHT",button,-2,2)
+		checked:SetPoint("TOPLEFT",button,1,-1)
+		checked:SetPoint("BOTTOMRIGHT",button,-1,1)
 		button:SetCheckedTexture(checked)
 	end
 end
@@ -484,7 +506,7 @@ do
 					else
 						health.value:SetFormattedText("|cffAF5050%d|r |cffD7BEA5-|r |cff%02x%02x%02x%d%%|r", min, r * 255, g * 255, b * 255, floor(min / max * 100))
 					end
-				elseif unit == "target" or unit == "focus" or (unit and unit:find("boss%d")) then
+				elseif unit == "target" or (unit and unit:find("boss%d")) then
 					if TukuiCF["unitframes"].showtotalhpmp == true then
 						health.value:SetFormattedText("|cff559655%s|r |cffD7BEA5|||r |cff559655%s|r", ShortValue(min), ShortValue(max))
 					elseif TukuiCF["unitframes"].percentage == true then
@@ -494,14 +516,18 @@ do
 					end
 				elseif (unit and unit:find("arena%d")) then
 					health.value:SetText("|cff559655"..ShortValue(min).."|r")
+				elseif unit == "focus" then
+					health.value:SetFormattedText("|cff%02x%02x%02x%d%%|r", r * 255, g * 255, b * 255, floor(min / max * 100))
 				else
 					health.value:SetText("|cff559655-"..ShortValueNegative(max-min).."|r")
 				end
 			else
 				if unit == "player" and health:GetAttribute("normalUnit") ~= "pet" then
 					health.value:SetText("|cff559655"..max.."|r")
-				elseif unit == "target" or unit == "focus" or (unit and unit:find("arena%d")) then
+				elseif unit == "target" or (unit and unit:find("arena%d")) then
 					health.value:SetText("|cff559655"..ShortValue(max).."|r")
+				elseif unit == "focus" then
+					health.value:SetText("|cff559655".."100%".."|r")
 				else
 					health.value:SetText(" ")
 				end
