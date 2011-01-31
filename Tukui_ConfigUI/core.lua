@@ -2,6 +2,7 @@
 local ALLOWED_GROUPS = {
 	["general"]=1,
 	["unitframes"]=1,
+	["uisizes"]=1,
 	["arena"]=1,
 	["actionbar"]=1,
 	["nameplate"]=1,
@@ -72,7 +73,8 @@ local function Local(o)
 	if o == "TukuiConfigUIdatatextcurency" then o = TukuiL.option_datatext_curency end
 	--
 	if o == "TukuiConfigUIdatatextminimapstats" then o = TukuiL.option_datatext_minimapstats end
-	if o == "TukuiConfigUIdatatextclasscolor" then o = TukuiL.option_datatext_classcolor end	
+	if o == "TukuiConfigUIdatatextclasscolor" then o = TukuiL.option_datatext_classcolor end
+	if o == "TukuiConfigUIdatatextspecswitcher" then o = TukuiL.option_datatext_specswitcher end
 
 	-- unit frames
 	if o == "TukuiConfigUIunitframes" then o = TukuiL.option_unitframes_unitframes end
@@ -215,6 +217,19 @@ local function Local(o)
 	if o == "TukuiConfigUIclasstimerpermanentaura" then o = TukuiL.option_classtimer_permanentaura end
 	if o == "TukuiConfigUIclasstimerdirection" then o = TukuiL.option_classtimer_direction end
 	if o == "TukuiConfigUIclasstimertreshold" then o = TukuiL.option_classtimer_treshold end
+	if o == "TukuiConfigUIclasstimerheight" then o = TukuiL.option_classtimer_height end
+	if o == "TukuiConfigUIclasstimerspace" then o = TukuiL.option_classtimer_space end
+	if o == "TukuiConfigUIclasstimerclasscolor" then o = TukuiL.option_classtimer_classcolor end
+
+	-- unitframe size
+	if o == "TukuiConfigUIuisizes" then o = TukuiL.option_uisizes end
+	if o == "TukuiConfigUIuisizesplayerwidth" then o = TukuiL.option_uisizes_playerwidth end
+	if o == "TukuiConfigUIuisizesplayerheight" then o = TukuiL.option_uisizes_playerheight end
+	if o == "TukuiConfigUIuisizesbtnsize" then o = TukuiL.option_uisizes_btnsize end
+	if o == "TukuiConfigUIuisizespetbtnsize" then o = TukuiL.option_uisizes_petbtnsize end
+	if o == "TukuiConfigUIuisizesassisttankw" then o = TukuiL.option_uisizes_assisttankw end
+	if o == "TukuiConfigUIuisizesassisttankh" then o = TukuiL.option_uisizes_assisttankh end
+	
 
 	TukuiDB.option = o
 end

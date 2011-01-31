@@ -52,6 +52,7 @@ TukuiL.option_datatext_curency = "Currency tracker"
 --
 TukuiL.option_datatext_minimapstats = "Enable stats under minimap (use 9 and 10)"
 TukuiL.option_datatext_classcolor = "Enable class colored data text"
+TukuiL.option_datatext_specswitcher = "Datatext displaying your current spec (0 for disabled)"
 
  
 -- unit frames
@@ -194,6 +195,18 @@ TukuiL.option_classtimer_textmargin = "Text and time text margins"
 TukuiL.option_classtimer_permanentaura = "Background for permanent auras (0 for filled, 1 for empty)"
 TukuiL.option_classtimer_direction = "Set direction for buffs (false for ascending, true for descending)"
 TukuiL.option_classtimer_treshold = "Set timer tenths threshold (1 to 60)"
+TukuiL.option_classtimer_height = "Height of bars"
+TukuiL.option_classtimer_space = "Space between bars"
+TukuiL.option_classtimer_classcolor = "Enable classcolored theme (NYI)"
+
+-- unitframe sizes
+TukuiL.option_uisizes = "UF size"
+TukuiL.option_uisizes_playerwidth = "Width of the unitframes"
+TukuiL.option_uisizes_playerheight = "Height of the healthbar"
+TukuiL.option_uisizes_btnsize = "Size of the actionbar buttons"
+TukuiL.option_uisizes_petbtnsize = "Size of the pet actionbar buttons"
+TukuiL.option_uisizes_assisttankw = "Width of the assist/maintank frame (if enabled)"
+TukuiL.option_uisizes_assisttankh = "Height of the assist/maintank frame (if enabled)"
 
 -- buttons
 TukuiL.option_button_reset = "Reset"
