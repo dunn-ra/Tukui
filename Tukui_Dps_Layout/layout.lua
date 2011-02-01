@@ -405,9 +405,6 @@ local function Shared(self, unit)
 
 			-- set holy power bar or shard bar
 			if (TukuiDB.myclass == "WARLOCK" or TukuiDB.myclass == "PALADIN") and db.powerbar == true then
-				-- rescale top shadow border
-				self.shadow:SetPoint("TOPLEFT", TukuiDB.Scale(-2), TukuiDB.Scale(7))
-	
 				local bars = CreateFrame("Frame", nil, self)
 				bars:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, TukuiDB.Scale(1))
 				bars:SetWidth(ufwidth)
@@ -458,8 +455,6 @@ local function Shared(self, unit)
 			
 			-- set combobar for rogue/druid -- credits to jasje
 			if (TukuiDB.myclass == "ROGUE" or TukuiDB.myclass == "DRUID") and db.combobar == true then
-				-- rescale top shadow border
-				self.shadow:SetPoint("TOPLEFT", TukuiDB.Scale(-2), TukuiDB.Scale(7))
 				local CPoints = {}
 				CPoints.unit = PlayerFrame.unit
 				
@@ -486,13 +481,10 @@ local function Shared(self, unit)
 
 			-- deathknight runes
 			if TukuiDB.myclass == "DEATHKNIGHT" and db.runebar == true then
-				-- rescale top shadow border
-				self.shadow:SetPoint("TOPLEFT", TukuiDB.Scale(-2), TukuiDB.Scale(7))
-				
 				local Runes = CreateFrame("Frame", nil, self)
 				Runes:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, TukuiDB.Scale(1))
 				Runes:SetHeight(pwrheight)
-				Runes:SetWidth((ufwidth - 5) / 6)
+				Runes:SetWidth(ufwidth)
 				Runes:SetBackdrop(backdrop)
 				Runes:SetBackdropColor(0, 0, 0)
 
@@ -514,9 +506,6 @@ local function Shared(self, unit)
 			
 			-- shaman totem bar
 			if TukuiDB.myclass == "SHAMAN" and db.totemtimer == true then
-				-- rescale top shadow border
-				self.shadow:SetPoint("TOPLEFT", TukuiDB.Scale(-2), TukuiDB.Scale(7))
-				
 				local TotemBar = {}
 				TotemBar.Destroy = true
 				for i = 1, 4 do
