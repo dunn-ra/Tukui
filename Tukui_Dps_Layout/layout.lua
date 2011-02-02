@@ -238,7 +238,7 @@ local function Shared(self, unit)
 		-- alt power bar
 		local AltPowerBar = CreateFrame("StatusBar", nil, self.Health)
 		AltPowerBar:SetFrameLevel(5)
-		AltPowerBar:SetHeight(ufwidth)
+		AltPowerBar:SetHeight(hpheight)
 		AltPowerBar:SetWidth(ufwidth)
 		AltPowerBar:SetStatusBarTexture(TukuiCF.media.normTex)
 		AltPowerBar:GetStatusBarTexture():SetHorizTile(false)
@@ -462,11 +462,13 @@ local function Shared(self, unit)
 					CPoints[i] = CreateFrame('StatusBar', "ComboPoint"..i, self)
 					CPoints[i]:SetHeight(pwrheight)
 					CPoints[i]:SetWidth((ufwidth - 4) / 5)
+					
 					CPoints[i]:SetStatusBarTexture(normTex)
 					CPoints[i]:GetStatusBarTexture():SetHorizTile(false)
 					CPoints[i]:SetStatusBarColor(0.69, 0.31, 0.31)
 					CPoints[i]:SetBackdrop(backdrop)
 					CPoints[i]:SetBackdropColor(0, 0, 0)
+					
 					if i == 1 then
 						CPoints[i]:SetPoint("BOTTOMLEFT", oUF_Tukz_player, "TOPLEFT", 0, TukuiDB.Scale(1))
 					else
@@ -474,6 +476,11 @@ local function Shared(self, unit)
 					end
 				end
 				
+				CPoints[2]:SetStatusBarColor(0.69, 0.31, 0.31)
+				CPoints[3]:SetStatusBarColor(0.65, 0.63, 0.35)
+				CPoints[4]:SetStatusBarColor(0.65, 0.63, 0.35)
+				CPoints[5]:SetStatusBarColor(0.33, 0.59, 0.33)
+
 				self.CPoints = CPoints
 				self.CPoints.Override = TukuiDB.ComboDisplay
 				self:RegisterEvent("UNIT_COMBO_POINTS", TukuiDB.UpdateCPoints)
@@ -1286,7 +1293,7 @@ local function Shared(self, unit)
 			-- alt power bar
 			local AltPowerBar = CreateFrame("StatusBar", nil, self.Health)
 			AltPowerBar:SetFrameLevel(5)
-			AltPowerBar:SetHeight(ufheight)
+			AltPowerBar:SetHeight(hpheight)
 			AltPowerBar:SetWidth(ufwidth)
 			AltPowerBar:SetStatusBarTexture(TukuiCF.media.normTex)
 			AltPowerBar:GetStatusBarTexture():SetHorizTile(false)
