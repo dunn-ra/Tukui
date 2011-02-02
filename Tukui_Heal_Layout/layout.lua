@@ -238,7 +238,7 @@ local function Shared(self, unit)
 		-- alt power bar
 		local AltPowerBar = CreateFrame("StatusBar", nil, self.Health)
 		AltPowerBar:SetFrameLevel(5)
-		AltPowerBar:SetHeight(hpwidth)
+		AltPowerBar:SetHeight(hpheight)
 		AltPowerBar:SetWidth(ufwidth)
 		AltPowerBar:SetStatusBarTexture(TukuiCF.media.normTex)
 		AltPowerBar:GetStatusBarTexture():SetHorizTile(false)
