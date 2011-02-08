@@ -78,13 +78,13 @@ do
 		bg:SetVertexColor(r * .5, g * .5, b * .5)
 		
 		local border = CreateFrame("Frame", nil, frame)
-		border:SetPoint("TOPLEFT", frame, TukuiDB.Scale(-2), TukuiDB.Scale(2))
-		border:SetPoint("BOTTOMRIGHT", frame, TukuiDB.Scale(2), TukuiDB.Scale(-2))
-		TukuiDB.SetTemplate(border)
+		border:SetPoint("TOPLEFT", frame, TukuiDB.Scale(-1), TukuiDB.Scale(1))
+		border:SetPoint("BOTTOMRIGHT", frame, TukuiDB.Scale(1), TukuiDB.Scale(-1))
+		TukuiDB.SetCyTemplate(border)
 		border:SetFrameLevel(0)
 
 		local text = frame:CreateFontString(nil, 'OVERLAY')
-		text:SetFont(TukuiCF["media"].uffont, 12, "THINOUTLINE")
+		text:SetFont(TukuiCF["media"].font, 12, "THINOUTLINE")
 		text:SetShadowOffset(.8, -.8)
 		text:SetShadowColor(0, 0, 0, 1)
 

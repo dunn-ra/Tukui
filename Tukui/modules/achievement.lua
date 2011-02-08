@@ -15,9 +15,3 @@ end
 
 WorldStateAlwaysUpFrame:ClearAllPoints()
 WorldStateAlwaysUpFrame:SetPoint("TOP", UIParent, "TOP", 0, TukuiDB.Scale(-45))
-
---[[ and talent micro menu
-function TalentMicroButtonAlert_FixAnchors()
-	TalentMicroButtonAlert:ClearAllPoints();
-	TalentMicroButtonAlert:SetPoint("BOTTOM", bottompanel, "TOP", 0, 0)
-end--]]
