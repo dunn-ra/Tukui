@@ -5,7 +5,7 @@
 ## Version: 2.17
 ## RequiredDeps: Tukui
 --]]
-if (TukuiCF ~= true and (TukuiCF == nil or TukuiCF["unitframes"] == nil or not TukuiCF["unitframes"]["enable"]) and TukuiCF["classtimer"].enable ~= true ) then return end
+if (TukuiCF ~= true and (TukuiCF == nil or TukuiCF["unitframes"] == nil or not TukuiCF["unitframes"]["enable"])) or TukuiCF["classtimer"].enable ~= true then return end
 
 local db = TukuiCF["classtimer"]
 local CreateSpellEntry = function( id, castByAnyone, color, unitType, castSpellId )
