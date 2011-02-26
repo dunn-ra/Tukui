@@ -1,0 +1,8 @@
+## Interface: 40000
+## Author: pvtschlag
+## Version: 1.0
+## Title: oUF Necrotic Strike
+## Notes: Necrotic strike debuff support for oUF layouts.
+## RequiredDeps: oUF
+
+oUF_NecroStrike.lua
