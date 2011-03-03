@@ -33,7 +33,7 @@ local function Shared(self, unit)
 	local health = CreateFrame('StatusBar', nil, self)
 	health:SetPoint("TOPLEFT")
 	health:SetPoint("TOPRIGHT")
-	health:Height(27*C["unitframes"].gridscale*T.raidscale)
+	health:Height(27*C["unitframes"].gridscale*(T.raidscale*0.8))
 	health:SetStatusBarTexture(hpTex)
 	self.Health = health
 	
@@ -68,7 +68,7 @@ local function Shared(self, unit)
 	end
 		
 	local power = CreateFrame("StatusBar", nil, self)
-	power:SetHeight(2*C["unitframes"].gridscale*T.raidscale)
+	power:SetHeight(2*C["unitframes"].gridscale*(T.raidscale*0.8))
 	power:Point("TOPLEFT", self.Health, "BOTTOMLEFT", 0, -TukuiDB.mult)
 	power:Point("TOPRIGHT", self.Health, "BOTTOMRIGHT", 0, -TukuiDB.mult)
 	power:SetStatusBarTexture(normTex)
@@ -127,8 +127,8 @@ local function Shared(self, unit)
 	end
 	
 	local ReadyCheck = power:CreateTexture(nil, "OVERLAY")
-	ReadyCheck:Height(12*C["unitframes"].gridscale*T.raidscale)
-	ReadyCheck:Width(12*C["unitframes"].gridscale*T.raidscale)
+	ReadyCheck:Height(12*C["unitframes"].gridscale*(T.raidscale*0.8))
+	ReadyCheck:Width(12*C["unitframes"].gridscale*(T.raidscale*0.8))
 	ReadyCheck:SetPoint('TOP', self, 'TOP')
 	self.ReadyCheck = ReadyCheck
 	
@@ -160,8 +160,8 @@ local function Shared(self, unit)
 		if C["unitframes"].gridhealthvertical then
 			mhpb:SetOrientation("VERTICAL")
 			mhpb:SetPoint('BOTTOM', self.Health:GetStatusBarTexture(), 'TOP', 0, 0)
-			mhpb:Width(60*C["unitframes"].gridscale*T.raidscale)
-			mhpb:Height(30*C["unitframes"].gridscale*T.raidscale)		
+			mhpb:Width(60*C["unitframes"].gridscale*(T.raidscale*0.8))
+			mhpb:Height(30*C["unitframes"].gridscale*(T.raidscale*0.8))
 		else
 			mhpb:SetPoint('TOPLEFT', self.Health:GetStatusBarTexture(), 'TOPRIGHT', 0, 0)
 			mhpb:SetPoint('BOTTOMLEFT', self.Health:GetStatusBarTexture(), 'BOTTOMRIGHT', 0, 0)
@@ -174,12 +174,12 @@ local function Shared(self, unit)
 		if C["unitframes"].gridhealthvertical then
 			ohpb:SetOrientation("VERTICAL")
 			ohpb:SetPoint('BOTTOM', mhpb:GetStatusBarTexture(), 'TOP', 0, 0)
-			ohpb:Width(60*C["unitframes"].gridscale*T.raidscale)
-			ohpb:Height(30*C["unitframes"].gridscale*T.raidscale)
+			ohpb:Width(60*C["unitframes"].gridscale*(T.raidscale*0.8))
+			ohpb:Height(30*C["unitframes"].gridscale*(T.raidscale*0.8))
 		else
 			ohpb:SetPoint('TOPLEFT', mhpb:GetStatusBarTexture(), 'TOPRIGHT', 0, 0)
 			ohpb:SetPoint('BOTTOMLEFT', mhpb:GetStatusBarTexture(), 'BOTTOMRIGHT', 0, 0)
-			ohpb:Width(66*C["unitframes"].gridscale*T.raidscale)
+			ohpb:Width(66*C["unitframes"].gridscale*(T.raidscale*0.8))
 		end
 		ohpb:SetStatusBarTexture(normTex)
 		ohpb:SetStatusBarColor(0,1,0,.25)
@@ -238,8 +238,8 @@ oUF:Factory(function(self)
 				self:SetWidth(header:GetAttribute('initial-width'))
 				self:SetHeight(header:GetAttribute('initial-height'))
 			]],
-			'initial-width', T.Scale(66*C["unitframes"].gridscale*T.raidscale),
-			'initial-height', T.Scale(50*C["unitframes"].gridscale*T.raidscale),	
+			'initial-width', T.Scale(66*C["unitframes"].gridscale*(T.raidscale*0.8)),
+			'initial-height', T.Scale(50*C["unitframes"].gridscale*(T.raidscale*0.8)),
 			"showRaid", true,
 			"xoffset", T.Scale(3),
 			"yOffset", T.Scale(-3),
@@ -260,8 +260,8 @@ oUF:Factory(function(self)
 				self:SetWidth(header:GetAttribute('initial-width'))
 				self:SetHeight(header:GetAttribute('initial-height'))
 			]],
-			'initial-width', T.Scale(62*C["unitframes"].gridscale*T.raidscale),
-			'initial-height', T.Scale(30*C["unitframes"].gridscale*T.raidscale),
+			'initial-width', T.Scale(62*C["unitframes"].gridscale*(T.raidscale*0.8)),
+			'initial-height', T.Scale(30*C["unitframes"].gridscale*(T.raidscale*0.8)),
 			"showParty", true,
 			"showPlayer", C["unitframes"].showplayerinparty, 
 			"showRaid", true, 
@@ -276,7 +276,7 @@ oUF:Factory(function(self)
 			"columnSpacing", T.Scale(6),
 			"columnAnchorPoint", "TOP"		
 		)
-		raid:SetPoint("CENTER", TukuiViewport, "TOP", 0, 120*T.raidscale)
+		raid:SetPoint("CENTER", TukuiViewport, "TOP", 0, 220*T.raidscale)
 		
 		local pets = {} 
 			pets[1] = oUF:Spawn('partypet1', 'oUF_TukuiPartyPet1') 

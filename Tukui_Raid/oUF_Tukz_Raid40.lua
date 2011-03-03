@@ -23,8 +23,10 @@ local function Shared(self, unit)
 	self:SetBackdropColor(0.1, 0.1, 0.1)
 	
 	local health = CreateFrame('StatusBar', nil, self)
-    health:SetAllPoints(self)
-	health:SetStatusBarTexture(C["media"].normTex)
+	health:Height(14)
+	health:SetPoint("TOPLEFT")
+	health:SetPoint("TOPRIGHT")
+	health:SetStatusBarTexture(C["media"].hpTex)
 	self.Health = health
 
 	health.bg = self.Health:CreateTexture(nil, 'BORDER')
@@ -32,7 +34,6 @@ local function Shared(self, unit)
 	health.bg:SetTexture(C["media"].blank)
 	health.bg:SetTexture(0.3, 0.3, 0.3)
 	health.bg.multiplier = (0.3)
-	
 	self.Health.bg = health.bg
 	
 	health.PostUpdate = T.PostUpdatePetColor
@@ -41,43 +42,51 @@ local function Shared(self, unit)
 	if C.unitframes.unicolor == true then
 		health.colorDisconnected = false
 		health.colorClass = false
-		health:SetStatusBarColor(.3, .3, .3, 1)
-		health.bg:SetVertexColor(.1, .1, .1, 1)		
+		health:SetStatusBarColor(unpack(C["media"].healthcolor))
+		health.bg:SetVertexColor(unpack(C["media"].healthdeficit))	
 	else
 		health.colorDisconnected = true
 		health.colorClass = true
 		health.colorReaction = true			
 	end
-	
+	--[[
 	local AggroInd = CreateFrame("Frame", nil, health)
 	AggroInd:SetPoint("TOPLEFT", health, "TOPLEFT", -1, 1)
-	AggroInd:SetPoint("BOTTOMRIGHT", power, "BOTTOMRIGHT", 1, -1)
+	AggroInd:SetPoint("BOTTOMRIGHT", health, "BOTTOMRIGHT", 1, -1)
 	AggroInd:SetTemplate("Default")
 	AggroInd:SetFrameLevel(2)
 	self.AggroInd = AggroInd
-	
+	--]]
 	local name = health:CreateFontString(nil, 'OVERLAY')
-	name:SetFont(font2, 13*T.raidscale, "THINOUTLINE")
-	name:Point("LEFT", self, "RIGHT", 5, 0)
-	self:Tag(name, '[Tukui:namemedium] [Tukui:dead][Tukui:afk]')
+	name:SetFont(font2, 10*T.raidscale, "THINOUTLINE")
+	name:Point("LEFT", self, "LEFT", 5, 0)
+	
+	if TukuiCF["unitframes"].unicolor == true then
+		self:Tag(name, '[Tukui:getnamecolor][Tukui:namemedium] [Tukui:dead][Tukui:afk]')
+	else
+		self:Tag(name, "[Tukui:namemedium] [Tukui:dead][Tukui:afk]")
+		name:SetTextColor(unpack(TukuiCF["media"].tncolor))
+		name:SetShadowColor(0, 0, 0)
+		name:SetShadowOffset(0.75, -0.75)
+	end
 	self.Name = name
 	
 	if C["unitframes"].showsymbols == true then
 		RaidIcon = health:CreateTexture(nil, 'OVERLAY')
-		RaidIcon:Height(14*T.raidscale)
-		RaidIcon:Width(14*T.raidscale)
-		RaidIcon:SetPoint("CENTER", self, "CENTER")
+		RaidIcon:Height(13*T.raidscale)
+		RaidIcon:Width(13*T.raidscale)
+		RaidIcon:SetPoint("RIGHT", self, "RIGHT")
 		RaidIcon:SetTexture("Interface\\AddOns\\Tukui\\medias\\textures\\raidicons.blp") -- thx hankthetank for texture
 		self.RaidIcon = RaidIcon
 	end
-	
+	--[[
 	if C["unitframes"].aggro == true then
 		table.insert(self.__elements, T.UpdateThreat)
 		self:RegisterEvent('PLAYER_TARGET_CHANGED', T.UpdateThreat)
 		self:RegisterEvent('UNIT_THREAT_LIST_UPDATE', T.UpdateThreat)
 		self:RegisterEvent('UNIT_THREAT_SITUATION_UPDATE', T.UpdateThreat)
     end
-	
+	--]]
 	local ReadyCheck = health:CreateTexture(nil, "OVERLAY")
 	ReadyCheck:Height(12*T.raidscale)
 	ReadyCheck:Width(12*T.raidscale)
@@ -117,9 +126,13 @@ oUF:Factory(function(self)
 			self:SetWidth(header:GetAttribute('initial-width'))
 			self:SetHeight(header:GetAttribute('initial-height'))
 		]],
-		'initial-width', T.Scale(100*T.raidscale),
+		'initial-width', T.Scale(80*T.raidscale),
 		'initial-height', T.Scale(12*T.raidscale),
-		"showRaid", true, "groupFilter", "1,2,3,4,5,6,7,8", "groupingOrder", "1,2,3,4,5,6,7,8", "groupBy", "GROUP", "yOffset", T.Scale(-3)
+		"showRaid", true,
+		"groupFilter", "1,2,3,4,5,6,7,8",
+		"groupingOrder", "1,2,3,4,5,6,7,8",
+		"groupBy", "GROUP",
+		"yOffset", T.Scale(-5)
 	)
-	raid:SetPoint('TOPLEFT', UIParent, 15, -18)
+	raid:SetPoint('TOPLEFT', UIParent, 5, -35)
 end)

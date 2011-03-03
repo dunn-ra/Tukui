@@ -23,7 +23,7 @@ local function Shared(self, unit)
 	self:SetBackdropColor(0.1, 0.1, 0.1)
 	
 	local health = CreateFrame('StatusBar', nil, self)
-	health:Height(16)
+	health:Height(13)
 	health:SetPoint("TOPLEFT")
 	health:SetPoint("TOPRIGHT")
 	health:SetStatusBarTexture(C["media"].hpTex)
@@ -82,8 +82,8 @@ local function Shared(self, unit)
 	self.AggroInd = AggroInd
 	
 	local name = health:CreateFontString(nil, 'OVERLAY')
-	name:SetFont(font2, 12*T.raidscale, "THINOUTLINE")
-	name:Point("LEFT", self, "LEFT", 12, 0)
+	name:SetFont(font2, 11*T.raidscale, "THINOUTLINE")
+	name:Point("LEFT", self, "LEFT", 5, 0)
 	
 	if TukuiCF["unitframes"].unicolor == true then
 		self:Tag(name, '[Tukui:getnamecolor][Tukui:namemedium] [Tukui:dead][Tukui:afk]')
@@ -114,7 +114,7 @@ local function Shared(self, unit)
 	local LFDRole = health:CreateTexture(nil, "OVERLAY")
     LFDRole:Height(6*T.raidscale)
     LFDRole:Width(6*T.raidscale)
-	LFDRole:Point("TOPLEFT", 2, -2)
+	LFDRole:Point("LEFT", -3, 0)
 	LFDRole:SetTexture("Interface\\AddOns\\Tukui\\medias\\textures\\lfdicons.blp")
 	self.LFDRole = LFDRole
 	
@@ -158,16 +158,16 @@ oUF:Factory(function(self)
 			self:SetHeight(header:GetAttribute('initial-height'))
 		]],
 		'initial-width', T.Scale(85*T.raidscale),
-		'initial-height', T.Scale(19*T.raidscale),	
+		'initial-height', T.Scale(16*T.raidscale),	
 		"showParty", true,
 		"showPlayer", C["unitframes"].showplayerinparty,
 		"showRaid", true,
 		"groupFilter", "1,2,3,4,5,6,7,8",
 		"groupingOrder", "1,2,3,4,5,6,7,8",
 		"groupBy", "GROUP",
-		"yOffset", T.Scale(-5)
+		"yOffset", T.Scale(-3)
 	)
-	raid:SetPoint('TOPLEFT', UIParent, 15, -300*T.raidscale)
+	raid:SetPoint('TOPLEFT', UIParent, 1, -300*T.raidscale)
 	
 	local pets = {} 
 		pets[1] = oUF:Spawn('partypet1', 'oUF_TukuiPartyPet1') 
