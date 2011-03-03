@@ -98,8 +98,8 @@ if C["actionbar"].cubes == true then
 end
 
 -- MOVE/HIDE SOME ELEMENTS IF CHAT BACKGROUND IS ENABLED -- placeholder TBR
-local movechat = 0
-if C.chat.background then movechat = 10 ileftlv:SetAlpha(0) irightlv:SetAlpha(0) end
+local movechat = 5
+--if C.chat.background then movechat = 10 ileftlv:SetAlpha(0) irightlv:SetAlpha(0) end
 
 -- INFO LEFT (FOR STATS) -- placeholder TBR
 local ileft = CreateFrame("Frame", "TukuiInfoLeft", TukuiBar1)
@@ -146,6 +146,17 @@ local mpright = CreateFrame("Frame", "TukuiDatapanelR"..ii, UIParent)
 	mpright:SetFrameLevel(2)
 	mpright:SetFrameStrata("BACKGROUND")
 	mpright = r[ii]
+end
+
+-- Chat background
+if C.chat.background then
+	local chatleftbg = CreateFrame("Frame", "TukuiChatBackgroundLeft", TukuiViewport)
+	chatleftbg:CreatePanel("Transparent", C.chat.width+12, C.chat.height+12, "BOTTOMLEFT", TukuiViewport, "TOPLEFT", 1, -1)
+	
+	if C.chat.rightpanel == true then
+		local chatrightbg = CreateFrame("Frame", "TukuiChatBackgroundRight", TukuiViewport)
+		chatrightbg:CreatePanel("Transparent", C.chat.width+12, C.chat.height+12, "BOTTOMRIGHT", viewport, "TOPRIGHT", -1, -1)
+	end
 end
 
 -- Battleground stats
