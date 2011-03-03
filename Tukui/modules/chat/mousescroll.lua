@@ -5,7 +5,7 @@ if C["chat"].enable ~= true then return end
 --	Enhance/rewrite a Blizzard feature, chatframe mousewheel.
 ------------------------------------------------------------------------
 
-local numlines = 3
+local numlines = 4
 function FloatingChatFrame_OnMouseScroll(self, delta)
 	if delta < 0 then
 		if IsShiftKeyDown() then

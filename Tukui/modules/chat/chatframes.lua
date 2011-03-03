@@ -58,7 +58,6 @@ local function SetChatStyle(frame)
 	-- always set alpha to 1, don't fade it anymore
 	tab:SetAlpha(1)
 	tab.SetAlpha = UIFrameFadeRemoveFrame
-	
 	if not C.chat.background then
 		-- hide text when setting chat
 		_G[chat.."TabText"]:Hide()
@@ -78,8 +77,8 @@ local function SetChatStyle(frame)
 	_G[chat]:SetFading(false)
 	
 	-- set min height/width to original tukui size
-	_G[chat]:SetMinResize(370,111)
-	_G[chat]:SetMinResize(370,111)
+	_G[chat]:SetMinResize(300,111)
+	_G[chat]:SetMinResize(300,111)
 	
 	-- move the chat edit box
 	_G[chat.."EditBox"]:ClearAllPoints()
@@ -207,35 +206,22 @@ local function SetupChatPosAndFont(self)
 		-- also set original width and height of chatframes 1 and 4 if first time we run tukui.
 		-- doing resize of chat also here for users that hit "cancel" when default installation is show.
 		if i == 1 then
-			chat:Point("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 5, 10)
+			chat:Point("BOTTOMLEFT", TukuiViewport, "TOPLEFT", 5, 3)
 			FCF_SavePositionAndDimensions(chat)
-		elseif i == 4 then--and name == LOOT then
+		elseif (i == 4 and name == LOOT and C.chat.rightpanel == true) then
 			if not chat.isDocked then
 				chat:ClearAllPoints()
-				chat:Point("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -5, 10)
+				chat:Point("BOTTOMRIGHT", TukuiViewport, "TOPRIGHT", -5, 3)
 				chat:SetJustifyH("RIGHT") 
 				FCF_SavePositionAndDimensions(chat)
 			end
 		end
-		
-		--[[Check if chat exists in the bottomright corner
-		if C.chat.background == true and point == "BOTTOMRIGHT" and chat:IsShown() then
-			TukuiChatBackgroundRight:Show()
-			TukuiTabsRightBackground:Show()
-			TukuiLineToABRightAlt:ClearAllPoints()
-			TukuiLineToABRightAlt:Point("LEFT", TukuiBar1, "RIGHT", 0, 16)
-			TukuiLineToABRightAlt:Point("BOTTOMRIGHT", TukuiChatBackgroundRight, "BOTTOMLEFT", 0, 16)			
-		end--]]
 	end
 			
 	-- reposition battle.net popup over chat #1
 	BNToastFrame:HookScript("OnShow", function(self)
 		self:ClearAllPoints()
-		if C.chat.background and TukuiChatBackgroundLeft then
-			self:Point("BOTTOMLEFT", TukuiChatBackgroundLeft, "TOPLEFT", 0, 6)
-		else
-			self:Point("BOTTOMLEFT", ChatFrame1, "TOPLEFT", 0, 6)
-		end
+		self:Point("BOTTOMLEFT", ChatFrame1, "TOPLEFT", 0, 6)
 	end)
 end
 
@@ -257,6 +243,13 @@ end)
 -- Setup temp chat (BN, WHISPER) when needed.
 local function SetupTempChat()
 	local frame = FCF_GetCurrentChatFrame()
+	local id = frame:GetID()
+	local buttonup = _G[format("ChatFrame%sButtonFrameUpButton", id)]
+	
+	-- do a check if we already did a skinning earlier for this temp chat frame
+	if not buttonup:IsShown() then return end
+	
+	-- style it
 	SetChatStyle(frame)
 end
 hooksecurefunc("FCF_OpenTemporaryWindow", SetupTempChat)

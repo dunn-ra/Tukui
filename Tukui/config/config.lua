@@ -148,14 +148,16 @@ C["datatext"] = {
 	["time24"] = true,									-- set time to 24h format.
 	["localtime"] = true,								-- set time to local time instead of server time.
 	["fontsize"] = 10,									-- font size for panels.
-	["panelsize"] = 18,									-- size of the bottom panels
+	["panelsize"] = 16,									-- size of the bottom panels
 }
 
 C["chat"] = {
-	["enable"] = true,                                  -- blah
+	["enable"] = true,                                  -- enable chat feature
 	["whispersound"] = true,                            -- play a sound when receiving whisper
-	["background"] = false, -- TODO
-	["panelsize"] = 380,
+	["background"] = false,								-- chat background
+	["rightpanel"] = false,								-- enable loot frame on right side
+	["width"] = 380,									-- width of the chat frame
+	["height"] = 130,									-- height of the chat frame
 }
 
 C["nameplate"] = {

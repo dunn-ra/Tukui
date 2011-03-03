@@ -13,11 +13,7 @@ local isf = nil
 local function CreatCopyFrame()
 	frame = CreateFrame("Frame", "CopyFrame", UIParent)
 	frame:SetTemplate("Default")
-	if T.lowversion then
-		frame:Width(TukuiBar1:GetWidth() + 10)
-	else
-		frame:Width((TukuiBar1:GetWidth() * 2) + 20)
-	end
+	frame:Width((TukuiBar1:GetWidth() * 2) + 20)
 	frame:Height(250)
 	frame:SetScale(1)
 	frame:Point("BOTTOM", UIParent, "BOTTOM", 0, 10)
@@ -34,11 +30,7 @@ local function CreatCopyFrame()
 	editBox:EnableMouse(true)
 	editBox:SetAutoFocus(false)
 	editBox:SetFontObject(ChatFontNormal)
-	if T.lowversion then
-		editBox:Width(TukuiBar1:GetWidth() + 10)
-	else
-		editBox:Width((TukuiBar1:GetWidth() * 2) + 20)
-	end
+	editBox:Width((TukuiBar1:GetWidth() * 2) + 20)
 	editBox:Height(250)
 	editBox:SetScript("OnEscapePressed", function() frame:Hide() end)
 
@@ -79,9 +71,9 @@ local function ChatCopyButtons()
 	for i = 1, NUM_CHAT_WINDOWS do
 		local cf = _G[format("ChatFrame%d",  i)]
 		local button = CreateFrame("Button", format("ButtonCF%d", i), cf)
-		button:SetPoint("TOPRIGHT", 0, 0)
-		button:SetHeight(T.Scale(20))
-		button:SetWidth(T.Scale(20))
+		button:SetPoint("BOTTOMLEFT", 0, 0)
+		button:SetHeight(T.Scale(25))
+		button:SetWidth(T.Scale(25))
 		button:SetNormalTexture(C.media.copyicon)
 		button:SetAlpha(0)
 		button:SetTemplate("Default")

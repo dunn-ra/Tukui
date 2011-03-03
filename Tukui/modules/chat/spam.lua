@@ -10,7 +10,6 @@ if T.client ~= "enUS" and T.client ~= "enGB" then return end
 ----------------------------------------------------------------------------------
 -- Hide annoying chat text when talent switch.
 ----------------------------------------------------------------------------------
-
 function T.SPELL_FILTER(self, event, arg1)
     if strfind(arg1,"You have unlearned") or strfind(arg1,"You have learned a new spell:") or strfind(arg1,"You have learned a new ability:") or strfind(arg1,"Your pet has unlearned") then
         return true
@@ -22,7 +21,6 @@ ChatFrame_AddMessageEventFilter("CHAT_MSG_SYSTEM", T.SPELL_FILTER)
 -- Hide annoying /sleep commands from goldspammer 
 -- with their hacks for multiple chars.
 ----------------------------------------------------------------------------------
-
 local function GOLDSPAM_FILTER()
 	if GetMinimapZoneText() == "Valley of Strength" or GetMinimapZoneText() == "Trade District" then
 		ChatFrame_AddMessageEventFilter("CHAT_MSG_TEXT_EMOTE", T.FUCKYOU_GOLDSPAMMERS)
