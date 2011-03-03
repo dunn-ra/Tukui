@@ -1,24 +1,9 @@
 ﻿--[[
 	Recount Skin by Darth Android / Telroth - The Venture Co.
-	
-	Skins Recount to look like TelUI.
-	
-	Todo:
-	 + Skin "Reset Data" windows
-	 
-	Available SKIN methods:
-	 
-	:SkinRecountBar(bar) -- Retextures and skins a damage bar
-	
-	:SkinRecountWindow(window) -- Skins a recount window, including the titlebar and buttons
-	
-	Available LAYOUT methods:
-	
-	:PositionRecountWindow(window) -- positions a recount window on screen
-	 
 	(C)2010 Darth Android / Telroth - The Venture Co.
 	File version v91.109
-]]
+--]]
+
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 
 if not IsAddOnLoaded("Recount") or not Mod_AddonSkins then return end
@@ -37,18 +22,18 @@ Mod_AddonSkins:RegisterSkin("Recount",function(Skin, skin, Layout, layout, confi
 	    skin:SkinBackgroundFrame(window.bgMain)
 	    window.bgMain:SetPoint("BOTTOMLEFT",window,"BOTTOMLEFT")
 	    window.bgMain:SetPoint("BOTTOMRIGHT",window,"BOTTOMRIGHT")
-	    window.bgMain:SetPoint("TOP",window,"TOP",0,-30)
+	    window.bgMain:SetPoint("TOP",window,"TOP",0,0)
 	    window.bgMain:SetFrameStrata("LOW")
 	    window.bgMain:SetFrameLevel(31)
 	    window.bgTitle = CreateFrame("Frame",nil,window)
 	    skin:SkinBackgroundFrame(window.bgTitle)
-	    window.bgTitle:SetPoint("TOPRIGHT",window,"TOPRIGHT",0,-10)
-	    window.bgTitle:SetPoint("TOPLEFT",window,"TOPLEFT",0,-9)
-	    window.bgTitle:SetPoint("BOTTOM",window,"TOP",0,-29)
+	    window.bgTitle:SetPoint("TOPRIGHT",window,"TOPRIGHT",0,0)
+	    window.bgTitle:SetPoint("TOPLEFT",window,"TOPLEFT",0,0)
+	    window.bgTitle:SetPoint("BOTTOM",window,"TOP",0,0)
 	    window.bgTitle:SetFrameStrata("LOW")
 	    window.bgTitle:SetFrameLevel(31)
-	    window.CloseButton:SetPoint("TOPRIGHT",window,"TOPRIGHT",-1,-9)
-	    window.Title:SetPoint("TOPLEFT",window,"TOPLEFT",2,-12)
+	    window.CloseButton:SetPoint("TOPRIGHT",window,"TOPRIGHT",0,0)
+	    window.Title:SetPoint("TOPLEFT",window,"TOPLEFT",0,0)
 		window:SetBackdrop(nil)
 		layout:PositionRecountWindow(window)
 	end
