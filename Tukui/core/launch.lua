@@ -81,15 +81,15 @@ local function install()
 			local chatName = FCF_GetChatWindowInfo(chatFrameId)
 			
 			-- set the size of chat frames
-			frame:Size(C["chat"].panelsize+1, 150)
+			frame:Size(C["chat"].width+1, C["chat"].height+1)
 			
 			-- tell wow that we are using new size
-			SetChatWindowSavedDimensions(chatFrameId, T.Scale(C["chat"].panelsize+1), T.Scale(150))
+			SetChatWindowSavedDimensions(chatFrameId, T.Scale(C["chat"].width+1), T.Scale(C["chat"].height+1))
 			
 			-- move general bottom left or Loot (if found) on right
 			if i == 1 then
 				frame:ClearAllPoints()
-				frame:Point("BOTTOMLEFT", TukuiViewport, "TOPLEFT", 0, 6)
+				frame:Point("BOTTOMLEFT", TukuiViewport, "TOPLEFT", 0, 5)
 			end
 					
 			-- save new default position and dimension
@@ -304,8 +304,8 @@ TukuiOnLogon:SetScript("OnEvent", function(self, event)
 		StaticPopup_Show("TUKUIDISABLE_RAID")
 	end
 	
-	print(L.core_welcome1..T.version)
-	print(L.core_welcome2)
+	print(L.core_welcome1..T.version..L.core_welcome2)
+	print(L.core_welcome3)
 end)
 
 ------------------------------------------------------------------------

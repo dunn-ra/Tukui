@@ -170,8 +170,14 @@ L.core_autoinv_enable_c = "Autoinvite ON: "
 L.core_autoinv_disable = "Autoinvite OFF"
 L.core_wf_unlock = "WatchFrame unlock"
 L.core_wf_lock = "WatchFrame lock"
-L.core_welcome1 = "|cffB0171FCyUI|r BETA loaded! Based on |cffB0171FTukui|r - www.tukui.org"
-L.core_welcome2 = "Type |cffFF6347/uihelp|r for more info or |cffFF6347/tc|r for extra configuration"
+
+L.core_welcome1 = "|cffB0171FCyUI|r "
+L.core_welcome2 = " loaded! |cffB0171FTukui|r edit - www.tukui.org"
+L.core_welcome3 = "Type |cffFF6347/uihelp|r for more info or |cffFF6347/tc|r for extra configuration"
+
+tukuilocal.core_welcome1 = "|cffB0171FCyUI|r "
+tukuilocal.core_welcome2 = " loaded! Based on |cffB0171FTukui|r  - www.tukui.org"
+tukuilocal.core_welcome3 = "Type |cffFF6347/uihelp|r for more info or |cffFF6347/tc|r for extra configuration"
 
 L.core_uihelp1 = "|cff00ff00General Slash Commands|r"
 L.core_uihelp2 = "|cffFF0000/moveui|r - Unlock and move elements around the screen."
@@ -217,3 +223,25 @@ L.move_shapeshift = "Move Shapeshift/Totem"
 L.move_achievements = "Move Achievements"
 L.move_roll = "Move Loot Roll Frame"
 L.move_vehicle = "Move Vehicle Seat"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
