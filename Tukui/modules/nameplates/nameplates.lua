@@ -368,37 +368,37 @@ local function SkinObjects(frame)
 	
 	--Create hp backdrop
 	local healthbarbackdrop_tex = hp:CreateTexture(nil, "BORDER")
-	healthbarbackdrop_tex:SetPoint("TOPLEFT", hp, "TOPLEFT", -noscalemult*3, noscalemult*3)
-	healthbarbackdrop_tex:SetPoint("TOPRIGHT", hp, "TOPRIGHT", noscalemult*3, noscalemult*3)
-	healthbarbackdrop_tex:SetHeight(hpHeight + noscalemult*6)
+	healthbarbackdrop_tex:SetPoint("TOPLEFT", hp, "TOPLEFT", -noscalemult*1, noscalemult*1)
+	healthbarbackdrop_tex:SetPoint("TOPRIGHT", hp, "TOPRIGHT", noscalemult*1, noscalemult*1)
+	healthbarbackdrop_tex:SetHeight(hpHeight + noscalemult*2)
 	healthbarbackdrop_tex:SetTexture(unpack(C["media"].backdropcolor))	
 	healthbarbackdrop_tex:SetDrawLayer("BORDER", -1) --This is what was causing all the issues
 	
 	--Create our fake border.. fuck blizz
 	local healthbarborder_tex1 = hp:CreateTexture(nil, "BORDER")
-	healthbarborder_tex1:SetPoint("TOPLEFT", hp, "TOPLEFT", -noscalemult*2, noscalemult*2)
-	healthbarborder_tex1:SetPoint("TOPRIGHT", hp, "TOPRIGHT", noscalemult*2, noscalemult*2)
+	healthbarborder_tex1:SetPoint("TOPLEFT", hp, "TOPLEFT", -noscalemult*1, noscalemult*1)
+	healthbarborder_tex1:SetPoint("TOPRIGHT", hp, "TOPRIGHT", noscalemult*1, noscalemult*1)
 	healthbarborder_tex1:SetHeight(noscalemult)
 	healthbarborder_tex1:SetTexture(unpack(C["media"].bordercolor))
 	frame.healthborder_tex1 = healthbarborder_tex1
 
 	local healthbarborder_tex2 = hp:CreateTexture(nil, "BORDER")
-	healthbarborder_tex2:SetPoint("BOTTOMLEFT", hp, "BOTTOMLEFT", -noscalemult*2, -noscalemult*2)
-	healthbarborder_tex2:SetPoint("BOTTOMRIGHT", hp, "BOTTOMRIGHT", noscalemult*2, -noscalemult*2)
+	healthbarborder_tex2:SetPoint("BOTTOMLEFT", hp, "BOTTOMLEFT", -noscalemult*1, -noscalemult*1)
+	healthbarborder_tex2:SetPoint("BOTTOMRIGHT", hp, "BOTTOMRIGHT", noscalemult*1, -noscalemult*1)
 	healthbarborder_tex2:SetHeight(noscalemult)
 	healthbarborder_tex2:SetTexture(unpack(C["media"].bordercolor))
 	frame.healthborder_tex2 = healthbarborder_tex2
 
 	local healthbarborder_tex3 = hp:CreateTexture(nil, "BORDER")
-	healthbarborder_tex3:SetPoint("TOPLEFT", hp, "TOPLEFT", -noscalemult*2, noscalemult*2)
-	healthbarborder_tex3:SetPoint("BOTTOMLEFT", hp, "BOTTOMLEFT", noscalemult*2, -noscalemult*2)
+	healthbarborder_tex3:SetPoint("TOPLEFT", hp, "TOPLEFT", -noscalemult*1, noscalemult*1)
+	healthbarborder_tex3:SetPoint("BOTTOMLEFT", hp, "BOTTOMLEFT", noscalemult*1, -noscalemult*1)
 	healthbarborder_tex3:SetWidth(noscalemult)
 	healthbarborder_tex3:SetTexture(unpack(C["media"].bordercolor))
 	frame.healthborder_tex3 = healthbarborder_tex3
 
 	local healthbarborder_tex4 = hp:CreateTexture(nil, "BORDER")
-	healthbarborder_tex4:SetPoint("TOPRIGHT", hp, "TOPRIGHT", noscalemult*2, noscalemult*2)
-	healthbarborder_tex4:SetPoint("BOTTOMRIGHT", hp, "BOTTOMRIGHT", -noscalemult*2, -noscalemult*2)
+	healthbarborder_tex4:SetPoint("TOPRIGHT", hp, "TOPRIGHT", noscalemult*1, noscalemult*1)
+	healthbarborder_tex4:SetPoint("BOTTOMRIGHT", hp, "BOTTOMRIGHT", -noscalemult*1, -noscalemult*1)
 	healthbarborder_tex4:SetWidth(noscalemult)
 	healthbarborder_tex4:SetTexture(unpack(C["media"].bordercolor))
 	frame.healthborder_tex4 = healthbarborder_tex4
@@ -443,32 +443,32 @@ local function SkinObjects(frame)
 
 	-- Create Cast Bar Backdrop frame
 	local castbarbackdrop_tex = cb:CreateTexture(nil, "BACKGROUND")
-	castbarbackdrop_tex:SetPoint("TOPLEFT", cb, "TOPLEFT", -noscalemult*3, noscalemult*3)
-	castbarbackdrop_tex:SetPoint("BOTTOMRIGHT", cb, "BOTTOMRIGHT", noscalemult*3, -noscalemult*3)
+	castbarbackdrop_tex:SetPoint("TOPLEFT", cb, "TOPLEFT", -noscalemult*1, noscalemult*1)
+	castbarbackdrop_tex:SetPoint("BOTTOMRIGHT", cb, "BOTTOMRIGHT", noscalemult*1, -noscalemult*1)
 	castbarbackdrop_tex:SetTexture(unpack(C["media"].backdropcolor))
 
 	--Create our fake border.. fuck blizz
 	local castbarborder_tex1 = cb:CreateTexture(nil, "BORDER")
-	castbarborder_tex1:SetPoint("TOPLEFT", cb, "TOPLEFT", -noscalemult*2, noscalemult*2)
-	castbarborder_tex1:SetPoint("TOPRIGHT", cb, "TOPRIGHT", noscalemult*2, noscalemult*2)
+	castbarborder_tex1:SetPoint("TOPLEFT", cb, "TOPLEFT", -noscalemult*1, noscalemult*1)
+	castbarborder_tex1:SetPoint("TOPRIGHT", cb, "TOPRIGHT", noscalemult*1, noscalemult*1)
 	castbarborder_tex1:SetHeight(noscalemult)
 	castbarborder_tex1:SetTexture(unpack(C["media"].bordercolor))	
 
 	local castbarborder_tex2 = cb:CreateTexture(nil, "BORDER")
-	castbarborder_tex2:SetPoint("BOTTOMLEFT", cb, "BOTTOMLEFT", -noscalemult*2, -noscalemult*2)
-	castbarborder_tex2:SetPoint("BOTTOMRIGHT", cb, "BOTTOMRIGHT", noscalemult*2, -noscalemult*2)
+	castbarborder_tex2:SetPoint("BOTTOMLEFT", cb, "BOTTOMLEFT", -noscalemult*1, -noscalemult*1)
+	castbarborder_tex2:SetPoint("BOTTOMRIGHT", cb, "BOTTOMRIGHT", noscalemult*1, -noscalemult*1)
 	castbarborder_tex2:SetHeight(noscalemult)
 	castbarborder_tex2:SetTexture(unpack(C["media"].bordercolor))	
 
 	local castbarborder_tex3 = cb:CreateTexture(nil, "BORDER")
-	castbarborder_tex3:SetPoint("TOPLEFT", cb, "TOPLEFT", -noscalemult*2, noscalemult*2)
-	castbarborder_tex3:SetPoint("BOTTOMLEFT", cb, "BOTTOMLEFT", noscalemult*2, -noscalemult*2)
+	castbarborder_tex3:SetPoint("TOPLEFT", cb, "TOPLEFT", -noscalemult*1, noscalemult*1)
+	castbarborder_tex3:SetPoint("BOTTOMLEFT", cb, "BOTTOMLEFT", noscalemult*1, -noscalemult*1)
 	castbarborder_tex3:SetWidth(noscalemult)
 	castbarborder_tex3:SetTexture(unpack(C["media"].bordercolor))	
 
 	local castbarborder_tex4 = cb:CreateTexture(nil, "BORDER")
-	castbarborder_tex4:SetPoint("TOPRIGHT", cb, "TOPRIGHT", noscalemult*2, noscalemult*2)
-	castbarborder_tex4:SetPoint("BOTTOMRIGHT", cb, "BOTTOMRIGHT", -noscalemult*2, -noscalemult*2)
+	castbarborder_tex4:SetPoint("TOPRIGHT", cb, "TOPRIGHT", noscalemult*1, noscalemult*1)
+	castbarborder_tex4:SetPoint("BOTTOMRIGHT", cb, "BOTTOMRIGHT", -noscalemult*1, -noscalemult*1)
 	castbarborder_tex4:SetWidth(noscalemult)
 	castbarborder_tex4:SetTexture(unpack(C["media"].bordercolor))	
 

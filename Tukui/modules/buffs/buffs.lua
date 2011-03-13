@@ -45,7 +45,7 @@ local function UpdateWeapons(button, slot, active, expiration)
 		button.time:SetFont(C.media.font, 12, "OUTLINE")
 				
 		button.bg = CreateFrame("Frame", nil, button)
-		button.bg:CreatePanel("Default", 30, 30, "CENTER", button, "CENTER", 0, 0)
+		button.bg:CreatePanel("Panels", 30, 30, "CENTER", button, "CENTER", 0, 0)
 		button.bg:SetFrameLevel(button:GetFrameLevel() - 1)
 		button.bg:SetFrameStrata(button:GetFrameStrata())
 		button.bg:SetAlpha(0)

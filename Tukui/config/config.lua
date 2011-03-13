@@ -28,7 +28,7 @@ C["unitframes"] = {
 	["enemyhcolor"] = false,							-- enemy target (players) color by hostility, very useful for healer.
 	["unitcastbar"] = true,                             -- enable tukui castbar
 	["unicolor"] = true,								-- enable unicolor theme
-	["playeraggro"] = false,                             -- color player border to red if you have aggro on current target.
+	["playeraggro"] = false,							-- color player border to red if you have aggro on current target.
 	-- castbar
 	["cccastbar"] = true,								-- enable classcolored castbars
 	["cblatency"] = true,								-- enable castbar latency
@@ -54,7 +54,7 @@ C["unitframes"] = {
 	["maintank"] = false,                               -- enable maintank
 	["mainassist"] = false,                             -- enable mainassist
 	-- raid layout (if one of them is enabled)
-	["enablerf"] = true,-- TODO							-- enable of disable raid frames
+	["enableraidframes"] = true,-- TODO							-- enable of disable raid frames
 	["showrange"] = true,								-- show range opacity on raidframes
 	["raidalphaoor"] = 0.5,								-- alpha of unitframes when unit is out of range
 	["gridonly"] = true, -- TODO non grid				-- enable grid only mode for all healer mode raid layout.
@@ -80,6 +80,14 @@ C["classtimer"] = {
 	["direction"] = true,								-- direction, true for left to right
 	["spark"] = false,									-- marker on the end of the bar
 	["castseparator"] = true,							-- marker to indicate clipping
+}
+
+C["stexperience"] = {
+	["enable"] = true,									-- enable stExperience bar
+	["barheight"] = 16,									-- bar height
+	["barwidth"] = 275,									-- bar width
+	["text"] = true,									-- set to false to hide text
+	["mouseovertext"] = false,							-- set to true to only show text on mouseover
 }
 
 C["arena"] = {
@@ -167,7 +175,7 @@ C["nameplate"] = {
 	["enhancethreat"] = false,			                -- threat features based on if your a tank or not
 	["overlap"] = true,					                -- allow nameplates to overlap
 	["combat"] = false,					                -- only show enemy nameplates in-combat.
-	["goodcolor"] = {75/255,  175/255, 76/255},	        -- good threat color (tank shows this with threat, everyone else without)
+	["goodcolor"] = {0,0,0},	        -- good threat color (tank shows this with threat, everyone else without)
 	["badcolor"] = {0.78, 0.25, 0.25},			        -- bad threat color (opposite of above)
 	["transitioncolor"] = {218/255, 197/255, 92/255},	-- threat color when gaining threat
 }
@@ -204,5 +212,5 @@ C["buffreminder"] = {
 
 C["misc"] = {
 	["duelspam"] = true,
-	["ress"] = false,-- TODO
+	["ress"] = true,-- TODO
 }

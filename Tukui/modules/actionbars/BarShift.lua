@@ -9,8 +9,8 @@ if not C["actionbar"].enable == true then return end
 local TukuiShift = CreateFrame("Frame", "TukuiShiftBar", TukuiBar1)
 TukuiShift:SetPoint("BOTTOMLEFT", TukuiBar1, "TOPLEFT", 4, -T.petbuttonsize)
 TukuiShift:SetWidth((T.petbuttonsize * 5) + (T.petbuttonsize * 4))
-TukuiShift:SetHeight(20)
-TukuiShift:SetFrameStrata("HIGH")
+TukuiShift:SetHeight(10)
+TukuiShift:SetFrameStrata("MEDIUM")
 TukuiShift:SetMovable(true)
 TukuiShift:SetClampedToScreen(true)
 
