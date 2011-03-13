@@ -152,7 +152,7 @@ end
 oUF.TagEvents['Tukui:namelong'] = 'UNIT_NAME_UPDATE'
 oUF.Tags['Tukui:namelong'] = function(unit)
 	local name = UnitName(unit)
-	return utf8sub(name, 25, false)
+	return utf8sub(name, 20, false)
 end
 
 oUF.TagEvents['Tukui:dead'] = 'UNIT_HEALTH'
