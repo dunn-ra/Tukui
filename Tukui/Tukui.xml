@@ -127,7 +127,7 @@
 	<Script file="modules\misc\threatbar.lua"/>
 	<Script file="modules\misc\classtimer.lua"/>
 	<Script file="modules\misc\wipe.lua"/>
-	<Script file="modules\misc\test.lua"/>
+	<Script file="modules\misc\stexperiencebar.lua"/>
 	<Script file="modules\blizzard\achievements.lua"/>
 	<Script file="core\movers.lua"/>
 	<Script file="developer\test.lua"/>
