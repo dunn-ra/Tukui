@@ -119,20 +119,19 @@ end
 oUF:RegisterStyle('TukuiDpsR40', Shared)
 oUF:Factory(function(self)
 	oUF:SetActiveStyle("TukuiDpsR40")
-
-	local raid = self:SpawnHeader("oUF_TukuiDpsRaid40", nil, "custom [@raid26,exists] show;hide", 
-		'oUF-initialConfigFunction', [[
+		local raid = self:SpawnHeader("oUF_TukuiDpsRaid40", nil, "custom [@raid26,exists] show;hide",
+			'oUF-initialConfigFunction', [[
 			local header = self:GetParent()
 			self:SetWidth(header:GetAttribute('initial-width'))
 			self:SetHeight(header:GetAttribute('initial-height'))
-		]],
-		'initial-width', T.Scale(80*T.raidscale),
-		'initial-height', T.Scale(12*T.raidscale),
-		"showRaid", true,
-		"groupFilter", "1,2,3,4,5,6,7,8",
-		"groupingOrder", "1,2,3,4,5,6,7,8",
-		"groupBy", "GROUP",
-		"yOffset", T.Scale(-5)
-	)
-	raid:SetPoint('TOPLEFT', UIParent, 5, -35)
+			]],
+			'initial-width', T.Scale(80*T.raidscale),
+			'initial-height', T.Scale(12*T.raidscale),
+			"showRaid", true,
+			"groupFilter", "1,2,3,4,5,6,7,8",
+			"groupingOrder", "1,2,3,4,5,6,7,8",
+			"groupBy", "GROUP",
+			"yOffset", T.Scale(-5)
+		)
+		raid:SetPoint('TOPLEFT', UIParent, 5, -35)
 end)
