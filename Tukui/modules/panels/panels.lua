@@ -42,7 +42,7 @@ TukuiBar5:SetAlpha(0)
 
 local petbg = CreateFrame("Frame", "TukuiPetBar", UIParent, "SecureHandlerStateTemplate")
 petbg:SetPoint("RIGHT", TukuiBar5, "LEFT", -T.petbuttonsize, 0)
-petbg:SetWidth(T.petbuttonsize)
+petbg:SetWidth(T.petbuttonsize+T.petbuttonspacing)
 petbg:SetHeight((T.petbuttonsize * 10) + (T.petbuttonspacing * 11))
 petbg:SetAlpha(0)
 local ltpetbg1 = CreateFrame("Frame", "TukuiLineToPetActionBarBackground", petbg)

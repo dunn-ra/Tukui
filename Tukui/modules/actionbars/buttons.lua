@@ -38,6 +38,7 @@ local function MoveButtonBar(button, bar)
 			button:Point("RIGHT", UIParent, "RIGHT", -1, T.buttonspacing)
 			button:SetBackdropBorderColor(.86,.07,.23)
 			button.text:SetText("|cffDC143C-|r")
+			TukuiPetBar:SetPoint("RIGHT", TukuiBar5, "LEFT", -T.petbuttonsize, 0)
 		else
 			db.hidebar5 = true
 			TukuiBar4Button:Show()
@@ -47,6 +48,7 @@ local function MoveButtonBar(button, bar)
 			button:SetBackdropBorderColor(.4,.80,0)
 			button.text:SetText("|cff66CD00+|r")
 			button:Show()
+			TukuiPetBar:SetPoint("RIGHT", TukuiBar4, "LEFT", -T.petbuttonsize/2, 0)
 		end
 	end
 	
@@ -59,6 +61,7 @@ local function MoveButtonBar(button, bar)
 			button:SetBackdropBorderColor(.86,.07,.23)
 			button.text:SetText("|cffDC143C-|r")
 			TukuiBar5Button:Show()
+			TukuiPetBar:SetPoint("RIGHT", TukuiBar4, "LEFT", -T.petbuttonsize/2, 0)
 		else
 			db.hidebar4 = true
 			TukuiBar5Button:Hide()
@@ -67,6 +70,7 @@ local function MoveButtonBar(button, bar)
 			button:Point("RIGHT", UIParent, "RIGHT", -1, T.buttonspacing)
 			button:SetBackdropBorderColor(.4,.80,0)
 			button.text:SetText("|cff66CD00+|r")
+			TukuiPetBar:SetPoint("RIGHT", UIParent, "RIGHT", -T.petbuttonsize/2, 0)
 		end
 	end
 end
