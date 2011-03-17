@@ -3,7 +3,7 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 --------------------------------------------------------------------
 -- spec switcher -- credits to sortokk
 --------------------------------------------------------------------
-
+if UnitLevel("player") < 9 then return end
 if C["datatext"].specswitcher and C["datatext"].specswitcher > 0 then
 	local Stat = CreateFrame("Frame")
 	Stat:EnableMouse(true)

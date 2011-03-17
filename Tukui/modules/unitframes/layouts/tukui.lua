@@ -490,18 +490,17 @@ local function Shared(self, unit)
 					TotemBar.Destroy = true
 					for i = 1, 4 do
 						TotemBar[i] = CreateFrame("StatusBar", self:GetName().."_TotemBar"..i, self)
-						if (i == 1) then
+
+						if i == 1 then
 						   TotemBar[i]:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
+						   TotemBar[i]:Width(((ufwidth-3)/4)-1)
 						else
 						   TotemBar[i]:Point("TOPLEFT", TotemBar[i-1], "TOPRIGHT", 1, 0)
+						   TotemBar[i]:Width((ufwidth-3)/4)
 						end
+
 						TotemBar[i]:SetStatusBarTexture(normTex)
 						TotemBar[i]:Height(pwrheight)
-						if i == 4 then
-							TotemBar[i]:Width((ufwidth - 3) / 4)
-						else
-							TotemBar[i]:Width((ufwidth - 4) / 4)
-						end
 						TotemBar[i]:SetBackdrop(backdrop)
 						TotemBar[i]:SetBackdropColor(0, 0, 0)
 						TotemBar[i]:SetMinMaxValues(0, 1)
