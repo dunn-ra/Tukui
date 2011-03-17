@@ -53,15 +53,16 @@ C["media"] = {
 	
 	["healthcolor"] = {.2,.2,.2,1}, -- health color for unicolor theme
 	["althealthcolor"] = {.3,.3,.3,1}, -- health color for raid frames
+	["unihealthcolor"] = {.05,.05,.05,1},
 	
 	["healthdeficit"] = {.24,0,.01,1}, -- health deficit color for unicolor theme
 	
-	["interruptable"] = {.49,.61,.75,1}, -- castbar color of interruptable spells
-	["castbarnorm"] = {.80,.14,.14,1}, -- color of player castbar if classcolor == false and target castbar
+	["interruptable"] = {.80,.14,.14,1}, -- castbar color of interruptable spells
+	["castbarnorm"] = {.49,.61,.75,1}, -- color of player castbar if classcolor == false and target castbar
 	--["interruptable"] = {.85,.1,.1,.75}, -- castbar color of interruptable spells
 	--["castbarnorm"] = {.31,.45,.63,.5}, -- color of player castbar if classcolor == false and target castbar
 	
-	--[-[ classtimer
+	-- classtimer
 	["ctbackdropcolor"] = {0,0,0,.85},
 	["playerbar"] = {.54,.10,.10},
 	["targetbar"] = {.54,.10,.10},
