@@ -26,7 +26,7 @@ local classification = {
 local NeedBackdropBorderRefresh = true
 
 local anchor = CreateFrame("Frame", "TukuiTooltipAnchor", UIParent)
-anchor:SetSize(200,1)
+anchor:SetSize(200,5)
 anchor:SetFrameStrata("TOOLTIP")
 anchor:SetFrameLevel(20)
 anchor:SetClampedToScreen(true)
