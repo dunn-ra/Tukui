@@ -11,13 +11,6 @@ if not C["unitframes"].enable == true then return end
 local font2 = C["media"].uffont
 local font1 = C["media"].font
 local normTex = C["media"].normTex
-local hpTex = C["media"].hpTex
-
--- sizes
-local raidgw = C["ufsizes"].raidhealgwidth
-local raidgh = C["ufsizes"].raidhealghgheight
-local raidw = C["ufsizes"].raidhealhwidth
-local raidh = C["ufsizes"].raidhealhheight
 
 local function Shared(self, unit)
 	self.colors = T.oUF_colors
@@ -33,8 +26,8 @@ local function Shared(self, unit)
 	local health = CreateFrame('StatusBar', nil, self)
 	health:SetPoint("TOPLEFT")
 	health:SetPoint("TOPRIGHT")
-	health:Height(27*C["unitframes"].gridscale*(T.raidscale*0.8))
-	health:SetStatusBarTexture(hpTex)
+	health:Height(28*C["unitframes"].gridscale*T.raidscale)
+	health:SetStatusBarTexture(normTex)
 	self.Health = health
 	
 	if C["unitframes"].gridhealthvertical == true then
@@ -43,7 +36,6 @@ local function Shared(self, unit)
 	
 	health.bg = health:CreateTexture(nil, 'BORDER')
 	health.bg:SetAllPoints(health)
-	health.bg:SetTexture(unpack(C["media"].healthdeficit))
 	self.Health.bg = health.bg
 		
 	health.value = health:CreateFontString(nil, "OVERLAY")
@@ -61,14 +53,16 @@ local function Shared(self, unit)
 		health.colorDisconnected = false
 		health.colorClass = false
 		health:SetStatusBarColor(unpack(C["media"].healthcolor))
+		health.bg:SetTexture(unpack(C["media"].healthdeficit))
 	else
 		health.colorDisconnected = true
 		health.colorClass = true
-		health.colorReaction = true			
+		health.colorReaction = true
+		health.bg:SetTexture(unpack(C["media"].unihealthcolor))
 	end
 		
 	local power = CreateFrame("StatusBar", nil, self)
-	power:SetHeight(2*C["unitframes"].gridscale*(T.raidscale*0.8))
+	power:SetHeight(2*C["unitframes"].gridscale*T.raidscale)
 	power:Point("TOPLEFT", self.Health, "BOTTOMLEFT", 0, -TukuiDB.mult)
 	power:Point("TOPRIGHT", self.Health, "BOTTOMRIGHT", 0, -TukuiDB.mult)
 	power:SetStatusBarTexture(normTex)
@@ -99,7 +93,7 @@ local function Shared(self, unit)
 	
 	local name = health:CreateFontString(nil, "OVERLAY")
     name:SetPoint("CENTER", health, "BOTTOM", TukuiDB.Scale(1), TukuiDB.Scale(8))
-	name:SetFont(font2, 12*C["unitframes"].gridscale*T.raidscale, "THINOUTLINE")
+	name:SetFont(font2, 11*C["unitframes"].gridscale*T.raidscale, "THINOUTLINE")
 	if C["unitframes"].unicolor == true then
 		self:Tag(name, "[Tukui:nametiny]")
 	else
@@ -127,8 +121,8 @@ local function Shared(self, unit)
 	end
 	
 	local ReadyCheck = power:CreateTexture(nil, "OVERLAY")
-	ReadyCheck:Height(12*C["unitframes"].gridscale*(T.raidscale*0.8))
-	ReadyCheck:Width(12*C["unitframes"].gridscale*(T.raidscale*0.8))
+	ReadyCheck:Height(12*C["unitframes"].gridscale*T.raidscale)
+	ReadyCheck:Width(12*C["unitframes"].gridscale*T.raidscale)
 	ReadyCheck:SetPoint('TOP', self, 'TOP')
 	self.ReadyCheck = ReadyCheck
 	
@@ -160,12 +154,12 @@ local function Shared(self, unit)
 		if C["unitframes"].gridhealthvertical then
 			mhpb:SetOrientation("VERTICAL")
 			mhpb:SetPoint('BOTTOM', self.Health:GetStatusBarTexture(), 'TOP', 0, 0)
-			mhpb:Width(60*C["unitframes"].gridscale*(T.raidscale*0.8))
-			mhpb:Height(30*C["unitframes"].gridscale*(T.raidscale*0.8))
+			mhpb:Width(60*C["unitframes"].gridscale*T.raidscale)
+			mhpb:Height(30*C["unitframes"].gridscale*T.raidscale)
 		else
 			mhpb:SetPoint('TOPLEFT', self.Health:GetStatusBarTexture(), 'TOPRIGHT', 0, 0)
 			mhpb:SetPoint('BOTTOMLEFT', self.Health:GetStatusBarTexture(), 'BOTTOMRIGHT', 0, 0)
-			mhpb:Width(66*C["unitframes"].gridscale*T.raidscale)
+			mhpb:Width(60*C["unitframes"].gridscale*T.raidscale)
 		end				
 		mhpb:SetStatusBarTexture(normTex)
 		mhpb:SetStatusBarColor(0,1,.5,.25)
@@ -174,12 +168,12 @@ local function Shared(self, unit)
 		if C["unitframes"].gridhealthvertical then
 			ohpb:SetOrientation("VERTICAL")
 			ohpb:SetPoint('BOTTOM', mhpb:GetStatusBarTexture(), 'TOP', 0, 0)
-			ohpb:Width(60*C["unitframes"].gridscale*(T.raidscale*0.8))
-			ohpb:Height(30*C["unitframes"].gridscale*(T.raidscale*0.8))
+			ohpb:Width(60*C["unitframes"].gridscale*T.raidscale)
+			ohpb:Height(30*C["unitframes"].gridscale*T.raidscale)
 		else
 			ohpb:SetPoint('TOPLEFT', mhpb:GetStatusBarTexture(), 'TOPRIGHT', 0, 0)
 			ohpb:SetPoint('BOTTOMLEFT', mhpb:GetStatusBarTexture(), 'BOTTOMRIGHT', 0, 0)
-			ohpb:Width(66*C["unitframes"].gridscale*(T.raidscale*0.8))
+			ohpb:Width(60*C["unitframes"].gridscale*T.raidscale)
 		end
 		ohpb:SetStatusBarTexture(normTex)
 		ohpb:SetStatusBarColor(0,1,0,.25)
@@ -238,8 +232,8 @@ oUF:Factory(function(self)
 				self:SetWidth(header:GetAttribute('initial-width'))
 				self:SetHeight(header:GetAttribute('initial-height'))
 			]],
-			'initial-width', T.Scale(66*C["unitframes"].gridscale*(T.raidscale*0.8)),
-			'initial-height', T.Scale(50*C["unitframes"].gridscale*(T.raidscale*0.8)),
+			'initial-width', T.Scale(66*C["unitframes"].gridscale*T.raidscale),
+			'initial-height', T.Scale(50*C["unitframes"].gridscale*T.raidscale),	
 			"showRaid", true,
 			"xoffset", T.Scale(3),
 			"yOffset", T.Scale(-3),
@@ -260,23 +254,23 @@ oUF:Factory(function(self)
 				self:SetWidth(header:GetAttribute('initial-width'))
 				self:SetHeight(header:GetAttribute('initial-height'))
 			]],
-			'initial-width', T.Scale(62*C["unitframes"].gridscale*(T.raidscale*0.8)),
-			'initial-height', T.Scale(30*C["unitframes"].gridscale*(T.raidscale*0.8)),
+			'initial-width', T.Scale(60*C["unitframes"].gridscale*T.raidscale),
+			'initial-height', T.Scale(31*C["unitframes"].gridscale*T.raidscale),
 			"showParty", true,
 			"showPlayer", C["unitframes"].showplayerinparty, 
 			"showRaid", true, 
-			"xoffset", T.Scale(4),
-			"yOffset", T.Scale(0),
+			"xoffset", T.Scale(3),
+			"yOffset", T.Scale(-3),
 			"point", "LEFT",
 			"groupFilter", "1,2,3,4,5,6,7,8",
 			"groupingOrder", "8,7,6,5,4,3,2,1",
 			"groupBy", "GROUP",
 			"maxColumns", 8,
 			"unitsPerColumn", 5,
-			"columnSpacing", T.Scale(6),
+			"columnSpacing", T.Scale(3),
 			"columnAnchorPoint", "TOP"		
 		)
-		raid:SetPoint("CENTER", TukuiViewport, "TOP", 0, 220*T.raidscale)
+		raid:SetPoint("BOTTOM", TukuiViewport, "TOP", 0, 110*T.raidscale)
 		
 		local pets = {} 
 			pets[1] = oUF:Spawn('partypet1', 'oUF_TukuiPartyPet1') 
@@ -301,7 +295,7 @@ oUF:Factory(function(self)
 				local numraid = GetNumRaidMembers()
 				local numparty = GetNumPartyMembers()
 				if numparty > 0 and numraid == 0 or numraid > 0 and numraid <= 5 then
-					for i,v in ipairs(pets) do v:Disable() end
+					for i,v in ipairs(pets) do v:Enable() end
 				else
 					for i,v in ipairs(pets) do v:Disable() end
 				end
@@ -318,8 +312,8 @@ MaxGroup:SetScript("OnEvent", function(self)
 	local inInstance, instanceType = IsInInstance()
 	local _, _, _, _, maxPlayers, _, _ = GetInstanceInfo()
 	if inInstance and instanceType == "raid" and maxPlayers ~= 40 then
-		TukuiGrid:SetAttribute("groupFilter", "1,2,3,4,5")
+		TukuiGrid:SetAttribute("groupFilter", "5,4,3,2,1")
 	else
-		TukuiGrid:SetAttribute("groupFilter", "1,2,3,4,5,6,7,8")
+		TukuiGrid:SetAttribute("groupFilter", "8,7,6,5,4,3,2,1")
 	end
 end)

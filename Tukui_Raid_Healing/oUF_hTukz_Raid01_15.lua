@@ -32,9 +32,6 @@ local function Shared(self, unit)
 	
 	health.bg = health:CreateTexture(nil, 'BORDER')
 	health.bg:SetAllPoints(health)
-	health.bg:SetTexture(normTex)
-	health.bg:SetTexture(0.3, 0.3, 0.3)
-	health.bg.multiplier = 0.3
 	self.Health.bg = health.bg
 		
 	health.value = health:CreateFontString(nil, "OVERLAY")
@@ -52,11 +49,12 @@ local function Shared(self, unit)
 		health.colorDisconnected = false
 		health.colorClass = false
 		health:SetStatusBarColor(unpack(C["media"].healthcolor))
-		health.bg:SetVertexColor(unpack(C["media"].healthdeficit))
+		health.bg:SetTexture(unpack(C["media"].healthdeficit))
 	else
 		health.colorDisconnected = true
 		health.colorClass = true
-		health.colorReaction = true			
+		health.colorReaction = true
+		health.bg:SetTexture(unpack(C["media"].unihealthcolor))
 	end
 	
 	local power = CreateFrame("StatusBar", nil, self)
@@ -216,13 +214,7 @@ oUF:Factory(function(self)
 	]],
 	'initial-width', T.Scale(150*T.raidscale),
 	'initial-height', T.Scale(32*T.raidscale),	
-	"showParty", true,
-	"showPlayer", C["unitframes"].showplayerinparty,
-	"showRaid", true,
-	"groupFilter", "1,2,3,4,5,6,7,8",
-	"groupingOrder", "1,2,3,4,5,6,7,8",
-	"groupBy", "GROUP",
-	"yOffset", T.Scale(-4))
+	"showParty", true, "showPlayer", C["unitframes"].showplayerinparty, "showRaid", true, "groupFilter", "1,2,3,4,5,6,7,8", "groupingOrder", "1,2,3,4,5,6,7,8", "groupBy", "GROUP", "yOffset", T.Scale(-4))
 	raid:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 15, -300*T.raidscale)
 	
 	local pets = {} 
@@ -249,7 +241,7 @@ oUF:Factory(function(self)
 			local numparty = GetNumPartyMembers()
 			if numparty > 0 and numraid == 0 or numraid > 0 and numraid <= 5 then
 				raid:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 15, -300*T.raidscale)
-				for i,v in ipairs(pets) do v:Disable() end
+				for i,v in ipairs(pets) do v:Enable() end
 			elseif numraid > 5 and numraid <= 10 then
 				raid:SetPoint('TOPLEFT', UIParent, 15, -260*T.raidscale)
 				for i,v in ipairs(pets) do v:Disable() end
