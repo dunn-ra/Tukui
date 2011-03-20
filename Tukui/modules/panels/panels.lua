@@ -22,7 +22,6 @@ TukuiBar3:SetWidth((T.buttonsize * 12) + (T.buttonspacing * 11))
 TukuiBar3:SetHeight((T.buttonsize) + (T.buttonspacing))
 TukuiBar3:SetFrameStrata("BACKGROUND")
 TukuiBar3:SetFrameLevel(2)
---TukuiBar3:SetAlpha(0)
 
 local TukuiBar4 = CreateFrame("Frame", "TukuiBar4", UIParent)
 TukuiBar4:SetPoint("RIGHT", UIParent, "RIGHT", -20, 0)

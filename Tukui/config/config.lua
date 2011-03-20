@@ -12,14 +12,6 @@ C["ufsizes"] = {
 	["playerheight"] = 16,								-- Height of the hp bar. Power/mana bar will be 1/3 of it
 	["playercastbar"] = 300,							-- player castbar
 	["targetcastbar"] = 250,							-- target castbar
-	--[[
-	["raiddpswidth"] = 120,								-- Width of the raid DPS frames. This is for the 10man, 25 and 40 will be scaled acordingly
-	["raiddpsheight"] = 16,								-- Height of the raid DPS frames
-	["raidhealhwidth"] = 180,							-- Width of the healer raid frames
-	["raidhealhheight"] = 22,							-- Height of the healer raid frames
-	["raidhealgwidth"] = 45,							-- Width of the raid Healer frames, grid enabled
-	["raidhealghgheight"] = 35,							-- Height of the raid healer frames, grid enabled
-	--]]
 }	
 
 C["unitframes"] = {
@@ -83,7 +75,7 @@ C["classtimer"] = {
 }
 
 C["stexperience"] = {
-	["enable"] = true,									-- enable stExperience bar
+	["enable"] = false,									-- enable stExperience bar
 	["barheight"] = 16,									-- bar height
 	["barwidth"] = 275,									-- bar width
 	["text"] = true,									-- set to false to hide text
@@ -162,8 +154,8 @@ C["datatext"] = {
 C["chat"] = {
 	["enable"] = true,                                  -- enable chat feature
 	["whispersound"] = true,                            -- play a sound when receiving whisper
-	["background"] = false,								-- chat background
-	["rightpanel"] = false,								-- enable loot frame on right side
+	["background"] = false, -- TODO								-- chat background
+	["rightpanel"] = true,-- TODO								-- enable loot frame on right side
 	["width"] = 380,									-- width of the chat frame
 	["height"] = 130,									-- height of the chat frame
 }
@@ -175,7 +167,7 @@ C["nameplate"] = {
 	["enhancethreat"] = false,			                -- threat features based on if your a tank or not
 	["overlap"] = true,					                -- allow nameplates to overlap
 	["combat"] = false,					                -- only show enemy nameplates in-combat.
-	["goodcolor"] = {0,0,0},	        -- good threat color (tank shows this with threat, everyone else without)
+	["goodcolor"] = {0,0,0},					        -- good threat color (tank shows this with threat, everyone else without)
 	["badcolor"] = {0.78, 0.25, 0.25},			        -- bad threat color (opposite of above)
 	["transitioncolor"] = {218/255, 197/255, 92/255},	-- threat color when gaining threat
 }
@@ -211,6 +203,6 @@ C["buffreminder"] = {
 }
 
 C["misc"] = {
-	["duelspam"] = true,
+	["duelspam"] = true,								-- removes duel chat spam
 	["ress"] = true,-- TODO
 }
