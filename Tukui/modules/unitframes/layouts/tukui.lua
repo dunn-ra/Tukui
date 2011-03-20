@@ -324,12 +324,12 @@ local function Shared(self, unit)
 					Experience.Rested:SetParent(Experience)
 					Experience.Rested:SetAllPoints(Experience)
 					local Resting = Experience:CreateTexture(nil, "OVERLAY")
-					Resting:SetHeight(28)
-					Resting:SetWidth(28)
+					Resting:SetHeight(22)
+					Resting:SetWidth(22)
 					if T.myclass == "SHAMAN" or T.myclass == "DEATHKNIGHT" or T.myclass == "PALADIN" or T.myclass == "WARLOCK" or T.myclass == "DRUID" or T.myclass == "ROGUE" then
-						Resting:SetPoint("LEFT", -18, 76)
+						Resting:SetPoint("BOTTOMLEFT", -11, (hpheight+4+(pwrheight*2)))
 					else
-						Resting:SetPoint("LEFT", -18, 68)
+						Resting:SetPoint("LEFT", -11, (hpheight+4+pwrheight))
 					end
 					Resting:SetTexture([=[Interface\CharacterFrame\UI-StateIcon]=])
 					Resting:SetTexCoord(0, 0.5, 0, 0.421875)
@@ -608,10 +608,23 @@ local function Shared(self, unit)
 			-- castbar of player and target
 			local castbar = CreateFrame("StatusBar", self:GetName().."CastBar", self)
 			castbar:SetStatusBarTexture(normTex)
-			castbar:Height(hpheight * 1.2)
+			castbar:Height(hpheight*1.2)
 			castbar:Width((T.buttonsize * 9) + (T.buttonspacing * 7))
 			castbar:SetBackdrop(backdrop)
 			castbar:SetBackdropColor(0,0,0)
+			
+			local anchor = CreateFrame("Button", castbar:GetName().."Anchor", UIParent)
+			anchor:Size((T.buttonsize*9)+(T.buttonspacing*7), hpheight*1.2)
+			anchor:SetMovable(true)
+			anchor:SetClampedToScreen(true)
+			anchor:SetTemplate("Default")
+			anchor:SetBackdropBorderColor(1,0,0)
+			anchor:Hide()
+			anchor.text = T.SetFontString(anchor, font1, 12)
+			anchor.text:SetPoint("CENTER")
+			anchor.text:SetText(castbar:GetName())
+			anchor.text.Show = function() anchor:Show() end
+			anchor.text.Hide = function() anchor:Hide() end
 			
 			castbar.bg = castbar:CreateTexture(nil, "BORDER")
 			castbar.bg:SetAllPoints(castbar)
@@ -662,21 +675,30 @@ local function Shared(self, unit)
 				fc:SetScript("OnEvent", function(self, event, addon)
 				if addon == "Tukui_Raid" then
 					if unit == "player" then
-						castbar:SetPoint("BOTTOM", TukuiBar3, "TOP", T.buttonspacing, 12)
+						castbar:SetPoint("CENTER", anchor, "CENTER", 0, 0)
+						anchor:SetPoint("BOTTOM", TukuiBar3Button, "TOP", T.buttonspacing, 12)
 					elseif unit == "target" then
-						castbar:SetPoint("BOTTOM", UIParent, "BOTTOM", T.buttonspacing, 325)
+						castbar:SetPoint("CENTER", anchor, "CENTER", 0, 0)
+						anchor:SetPoint("BOTTOM", UIParent, "BOTTOM", T.buttonspacing, 325)
 					end
 				elseif addon == "Tukui_Raid_Healing" then
-					castbar:Height(hpheight)
-					castbar.button:Size(castbar:GetHeight() * 1.2)
 					if unit == "player" then
-						castbar:SetPoint("CENTER", TukuiBar3, "TOPLEFT", 0, 18)
-						castbar.button:ClearAllPoints()
-						castbar.button:SetPoint("LEFT", -castbar:GetHeight()*1.5, 0)
+						castbar:SetPoint("CENTER", anchor, "CENTER", 0, 0)
+						castbar.button:SetPoint("LEFT", -(castbar:GetHeight() * 2), 0)
+						anchor:SetPoint("RIGHT", TukuiBar3Button, "TOP", -((T.buttonsize*4)+(T.buttonspacing*5)), 5)
 					elseif unit == "target" then
-						castbar:SetPoint("CENTER", TukuiBar3, "TOPRIGHT", 0, 18)
 						castbar.button:ClearAllPoints()
-						castbar.button:SetPoint("RIGHT", castbar:GetHeight()*1.5, 0)
+						castbar:SetPoint("CENTER", anchor, "CENTER", 0, 0)
+						castbar.button:SetPoint("RIGHT", (castbar:GetHeight() * 2), 0)
+						anchor:SetPoint("LEFT", TukuiBar3Button, "TOP", ((T.buttonsize*4)+(T.buttonspacing*5)), 5)
+					end
+				elseif not addon == "Tukui_Raid" or addon == "Tukui_Raid_Healing" then
+					if unit == "player" then
+						castbar:SetPoint("CENTER", anchor, "CENTER", 0, 0)
+						anchor:SetPoint("BOTTOM", TukuiBar3Button, "TOP", T.buttonspacing, 12)
+					elseif unit == "target" then
+						castbar:SetPoint("CENTER", anchor, "CENTER", 0, 0)
+						anchor:SetPoint("BOTTOM", UIParent, "BOTTOM", T.buttonspacing, 325)
 					end
 				end
 			end)
@@ -1530,16 +1552,6 @@ end
 ------------------------------------------------------------------------
 --	Default position of Tukui unitframes
 ------------------------------------------------------------------------
---[[
-local adjust = 0
-if T.lowversion then adjust = 125 end
-
--- for lower reso
-local adjustXY = 0
-local totdebuffs = 0
-if T.lowversion then adjustXY = 24 end
-if C["unitframes"].totdebuffs then totdebuffs = 24 end
---]]
 oUF:RegisterStyle('Tukui', Shared)
 
 -- player
@@ -1558,19 +1570,21 @@ pet:SetPoint("TOPLEFT", TukuiPlayer, "BOTTOMLEFT", 0, -3)
 pet:Size(sufwidth, sufheight)
 -- focus
 local focus = oUF:Spawn('focus', "TukuiFocus")
+focus:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "TOPLEFT", -80, 600)
 focus:Size(ufwidth*0.80, ufheight)
 
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, addon)
 	if addon == "Tukui_Raid" then
-		player:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "TOPLEFT", 0, 140)
-		focus:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "TOPLEFT", -50, 500)
-		target:SetPoint("BOTTOMRIGHT", InvTukuiActionBarBackground, "TOPRIGHT", 0, 140)
+		player:SetPoint("RIGHT", TukuiBar3Button, "LEFT", (T.buttonsize*2+T.buttonspacing), 80)
+		target:SetPoint("LEFT", TukuiBar3Button, "RIGHT", -(T.buttonsize*2+T.buttonspacing), 80)
 	elseif addon == "Tukui_Raid_Healing" then
-		player:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "TOPLEFT", -50, 250)
-		focus:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "TOPLEFT", -50, 60)
-		target:SetPoint("BOTTOMRIGHT", InvTukuiActionBarBackground, "TOPRIGHT", 50, 250)
+		player:SetPoint("RIGHT", TukuiBar3Button, "LEFT", -25, 120)
+		target:SetPoint("LEFT", TukuiBar3Button, "RIGHT", 25, 120)
+	elseif not addon == "Tukui_Raid" or addon == "Tukui_Raid_Healing" then
+		player:SetPoint("RIGHT", TukuiBar3Button, "LEFT", (T.buttonsize*2+T.buttonspacing), 80)
+		target:SetPoint("LEFT", TukuiBar3Button, "RIGHT", -(T.buttonsize*2+T.buttonspacing), 80)
 	end
 end)
 
@@ -1586,9 +1600,9 @@ if C.arena.unitframes then
 	for i = 1, 5 do
 		arena[i] = oUF:Spawn("arena"..i, "TukuiArena"..i)
 		if i == 1 then
-			arena[i]:SetPoint("BOTTOMRIGHT", InvTukuiActionBarBackground, "TOPRIGHT", 150, 400)
+			arena[i]:SetPoint("BOTTOMRIGHT", InvTukuiActionBarBackground, "TOPRIGHT", 150, 500)
 		else
-			arena[i]:SetPoint("BOTTOM", arena[i-1], "TOP", 0, 45)
+			arena[i]:SetPoint("BOTTOM", arena[i-1], "TOP", 0, 35)
 		end
 		arena[i]:Size((ufwidth*0.8), ufheight)
 	end
@@ -1608,9 +1622,9 @@ if C["unitframes"].showboss then
 	for i = 1, MAX_BOSS_FRAMES do
 		boss[i] = oUF:Spawn("boss"..i, "TukuiBoss"..i)
 		if i == 1 then
-			boss[i]:SetPoint("BOTTOMRIGHT", InvTukuiActionBarBackground, "TOPRIGHT", 150, 400)
+			boss[i]:SetPoint("BOTTOMRIGHT", InvTukuiActionBarBackground, "TOPRIGHT", 150, 500)
 		else
-			boss[i]:SetPoint("BOTTOM", boss[i-1], "TOP", 0, 45)
+			boss[i]:SetPoint("BOTTOM", boss[i-1], "TOP", 0, 35)
 		end
 		boss[i]:Size((ufwidth*0.8), ufheight)
 	end

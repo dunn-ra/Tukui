@@ -13,6 +13,8 @@ T.MoverFrames = {
 	TukuiWatchFrameAnchor,
 	TukuiGMFrameAnchor,
 	TukuiVehicleAnchor,
+	TukuiPlayerCastBarAnchor,
+	TukuiTargetCastBarAnchor,
 }
 
 -- used to exec various code if we enable or disable moving
