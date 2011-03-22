@@ -7,6 +7,7 @@ ns._Headers = {}
 
 local T, C, L = unpack(Tukui) -- Import: T - functions, constants, variables; C - config; L - locales
 if not C["unitframes"].enable == true then return end
+if C["unitframes"].enableraidframes ~= true then return end
 
 local font2 = C["media"].uffont
 local font1 = C["media"].font

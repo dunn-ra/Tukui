@@ -7,6 +7,7 @@ ns._Headers = {}
 
 local T, C, L = unpack(Tukui) -- Import: T - functions, constants, variables; C - config; L - locales
 if not C["unitframes"].enable == true then return end
+if C["unitframes"].enableraidframes ~= true then return end
 
 local font2 = C["media"].uffont
 local font1 = C["media"].font
@@ -295,7 +296,7 @@ oUF:Factory(function(self)
 				local numraid = GetNumRaidMembers()
 				local numparty = GetNumPartyMembers()
 				if numparty > 0 and numraid == 0 or numraid > 0 and numraid <= 5 then
-					for i,v in ipairs(pets) do v:Enable() end
+					for i,v in ipairs(pets) do v:Disable() end
 				else
 					for i,v in ipairs(pets) do v:Disable() end
 				end
