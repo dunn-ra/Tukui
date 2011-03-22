@@ -58,6 +58,7 @@ local function SetChatStyle(frame)
 	-- always set alpha to 1, don't fade it anymore
 	tab:SetAlpha(1)
 	tab.SetAlpha = UIFrameFadeRemoveFrame
+	
 	if not C.chat.background then
 		-- hide text when setting chat
 		_G[chat.."TabText"]:Hide()
@@ -66,7 +67,13 @@ local function SetChatStyle(frame)
 		tab:HookScript("OnEnter", function() _G[chat.."TabText"]:Show() end)
 		tab:HookScript("OnLeave", function() _G[chat.."TabText"]:Hide() end)
 	end
-	
+
+	-- recolor tab text with bg
+	if C["chat"].background then
+		_G[chat.."TabText"]:SetTextColor(1,.15,.15)
+		_G[chat.."TabText"].SetTextColor = T.dummy
+	end
+
 	-- yeah baby
 	_G[chat]:SetClampRectInsets(0,0,0,0)
 	
@@ -82,7 +89,11 @@ local function SetChatStyle(frame)
 	
 	-- move the chat edit box
 	_G[chat.."EditBox"]:ClearAllPoints()
-	_G[chat.."EditBox"]:Point("TOPLEFT", TukuiDatapanelL4, 1, -1)
+	if T.lowversion then
+		_G[chat.."EditBox"]:Point("TOPLEFT", TukuiDatapanelL3, 1, -1)
+	else
+		_G[chat.."EditBox"]:Point("TOPLEFT", TukuiDatapanelL4, 1, -1)
+	end
 	_G[chat.."EditBox"]:Point("BOTTOMRIGHT", TukuiDatapanelL1, -1, 1)
 	
 	-- Hide textures
@@ -140,7 +151,11 @@ local function SetChatStyle(frame)
 	local EditBoxBackground = CreateFrame("frame", "TukuiChatchatEditBoxBackground", _G[chat.."EditBox"])
 	EditBoxBackground:CreatePanel("Default", 1, 1, "LEFT", _G[chat.."EditBox"], "LEFT", 0, 0)
 	EditBoxBackground:ClearAllPoints()
-	EditBoxBackground:Point("TOPLEFT", TukuiDatapanelL4, 1, -1)
+	if T.lowversion then
+		EditBoxBackground:Point("TOPLEFT", TukuiDatapanelL3, 1, -1)
+	else
+		EditBoxBackground:Point("TOPLEFT", TukuiDatapanelL4, 1, -1)
+	end
 	EditBoxBackground:Point("BOTTOMRIGHT", TukuiDatapanelL1, -1, 1)
 	EditBoxBackground:SetFrameStrata("LOW")
 	EditBoxBackground:SetFrameLevel(1)
@@ -168,6 +183,7 @@ local function SetChatStyle(frame)
 		origs[_G[chat]] = _G[chat].AddMessage
 		_G[chat].AddMessage = AddMessage
 	end
+	
 	frame.skinned = true
 end
 
@@ -209,10 +225,10 @@ local function SetupChatPosAndFont(self)
 		if i == 1 then
 			chat:Point("BOTTOMLEFT", TukuiViewport, "TOPLEFT", 5, 3)
 			FCF_SavePositionAndDimensions(chat)
-		elseif (i == 4 and name == LOOT and C.chat.rightpanel == true) then
+		elseif i == 4 and name == LOOT and C["chat"].rightpanel == true then
 			if not chat.isDocked then
 				chat:ClearAllPoints()
-				chat:Point("BOTTOMRIGHT", TukuiViewport, "TOPRIGHT", -5, 3)
+				chat:Point("BOTTOMRIGHT", TukuiViewport, "TOPRIGHT", 0, 6)
 				chat:SetJustifyH("RIGHT") 
 				FCF_SavePositionAndDimensions(chat)
 			end

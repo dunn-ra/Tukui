@@ -71,7 +71,9 @@ local function install()
 		FCF_DockFrame(ChatFrame3)
 
 		FCF_OpenNewWindow(LOOT)
-		--FCF_UnDockFrame(ChatFrame4)
+		if C["chat"].rightpanel then
+			FCF_UnDockFrame(ChatFrame4)
+		end
 		FCF_SetLocked(ChatFrame4, 1)
 		ChatFrame4:Show()
 

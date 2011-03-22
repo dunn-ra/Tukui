@@ -1,9 +1,13 @@
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 local pheight = C.datatext.panelsize
-local pwidth = 75
+local pwidth = 78
 
 local TukuiBar1 = CreateFrame("Frame", "TukuiBar1", UIParent, "SecureHandlerStateTemplate")
-TukuiBar1:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOM", 0, pheight+1)
+if T.lowversion then
+	TukuiBar1:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOM", T.buttonsize, pheight+1)
+else
+	TukuiBar1:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOM", 0, pheight+1)
+end
 TukuiBar1:SetWidth((T.buttonsize * 12) + (T.buttonspacing * 11))
 TukuiBar1:SetHeight((T.buttonsize) + (T.buttonspacing))
 TukuiBar1:SetFrameStrata("BACKGROUND")
@@ -11,13 +15,21 @@ TukuiBar1:SetFrameLevel(1)
 
 local TukuiBar2 = CreateFrame("Frame", "TukuiBar2", UIParent)
 TukuiBar2:SetPoint("BOTTOMLEFT", TukuiBar1, "BOTTOMRIGHT", T.buttonspacing, 0)
-TukuiBar2:SetWidth((T.buttonsize * 12) + (T.buttonspacing * 12))
+if T.lowversion then
+	TukuiBar2:SetWidth((T.buttonsize * 10) + (T.buttonspacing * 10))
+else
+	TukuiBar2:SetWidth((T.buttonsize * 12) + (T.buttonspacing * 12))
+end
 TukuiBar2:SetHeight((T.buttonsize) + (T.buttonspacing))
 TukuiBar2:SetFrameStrata("BACKGROUND")
 TukuiBar2:SetFrameLevel(2)
 
 local TukuiBar3 = CreateFrame("Frame", "TukuiBar3", UIParent)
-TukuiBar3:SetPoint("BOTTOMLEFT", TukuiBar1, "TOPRIGHT", -((T.buttonsize * 6) + (T.buttonspacing * 5)), 0)
+if T.lowversion then
+	TukuiBar3:SetPoint("BOTTOMLEFT", TukuiBar1, "TOPRIGHT", -((T.buttonsize * 7) + (T.buttonspacing * 6)), 0)
+else
+	TukuiBar3:SetPoint("BOTTOMLEFT", TukuiBar1, "TOPRIGHT", -((T.buttonsize * 6) + (T.buttonspacing * 5)), 0)
+end
 TukuiBar3:SetWidth((T.buttonsize * 12) + (T.buttonspacing * 11))
 TukuiBar3:SetHeight((T.buttonsize) + (T.buttonspacing))
 TukuiBar3:SetFrameStrata("BACKGROUND")
@@ -123,8 +135,9 @@ viewport:SetFrameStrata("BACKGROUND")
 
 -- Middle panel
 local mpanel = CreateFrame("Frame", "TukuiMiddlePanel", UIParent)
-mpanel:CreatePanel("Panels", 125, pheight, "BOTTOM", UIParent, "BOTTOM", 0, 2)
+mpanel:CreatePanel("Panels", 120, pheight, "BOTTOM", UIParent, "BOTTOM", 0, 2)
 mpanel:SetFrameLevel(2)
+mpanel:SetFrameStrata("BACKGROUND")
 mpanel:SetFrameStrata("BACKGROUND")
 
 -- Left panels
@@ -147,15 +160,34 @@ local mpright = CreateFrame("Frame", "TukuiDatapanelR"..ii, UIParent)
 	mpright = r[ii]
 end
 
+if T.lowversion then
+	TukuiDatapanelR4:Hide()
+	TukuiDatapanelL4:Hide()
+end
+
 -- Chat background
 if C.chat.background then
+	-- left chat
 	local chatleftbg = CreateFrame("Frame", "TukuiChatBackgroundLeft", TukuiViewport)
-	chatleftbg:CreatePanel("Transparent", C.chat.width+12, C.chat.height+12, "BOTTOMLEFT", TukuiViewport, "TOPLEFT", 1, -1)
-	
+	chatleftbg:CreatePanel("Transparent", C.chat.width+12, C.chat.height+33, "BOTTOMLEFT", TukuiViewport, "TOPLEFT", 1, -1)
+
+	-- right chat
 	if C.chat.rightpanel == true then
 		local chatrightbg = CreateFrame("Frame", "TukuiChatBackgroundRight", TukuiViewport)
-		chatrightbg:CreatePanel("Transparent", C.chat.width+12, C.chat.height+12, "BOTTOMRIGHT", viewport, "TOPRIGHT", -1, -1)
+		chatrightbg:CreatePanel("Transparent", C.chat.width, C.chat.height+33, "BOTTOMRIGHT", TukuiViewport, "TOPRIGHT", -1, -1)
+		
+		-- tab
+		local tabsbgright = CreateFrame("Frame", "TukuiTabsRightBackground", TukuiBar1)
+		tabsbgright:CreatePanel("Transparent", C.chat.width-12, 20, "TOP", chatrightbg, "TOP", 0, -4)
+		tabsbgright:SetFrameLevel(2)
+		tabsbgright:SetFrameStrata("BACKGROUND")
 	end
+
+	-- left chat tab
+	local tabsbgleft = CreateFrame("Frame", "TukuiTabsLeftBackground", TukuiBar1)
+	tabsbgleft:CreatePanel("Transparent", C.chat.width, 20, "TOP", chatleftbg, "TOP", 0, -4)
+	tabsbgleft:SetFrameLevel(2)
+	tabsbgleft:SetFrameStrata("BACKGROUND")
 end
 
 -- Battleground stats
