@@ -20,6 +20,7 @@ if C["datatext"].micromenu and C["datatext"].micromenu > 0 then
 
 	local Text  = TukuiInfoLeft:CreateFontString(nil, "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
+	Text:SetShadowOffset(T.mult, -T.mult)
 	T.PP(C["datatext"].micromenu, Text)
 
 	local function OnEvent(self, event, ...)

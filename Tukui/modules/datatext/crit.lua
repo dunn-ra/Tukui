@@ -10,6 +10,7 @@ if C["datatext"].crit and C["datatext"].crit > 0 then
 
 	local Text  = TukuiInfoLeft:CreateFontString(nil, "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
+	Text:SetShadowOffset(T.mult, -T.mult)
 	T.PP(C["datatext"].crit, Text)
 
 	local int = 1
@@ -27,7 +28,7 @@ if C["datatext"].crit and C["datatext"].crit > 0 then
 			CritChance = meleecrit
 		end
 		if int < 0 then
-			Text:SetText(format("%.2f", CritChance) .. "%"..L.datatext_playercrit)
+			Text:SetText(T.DTc..format("%.2f", CritChance) .. "%"..T.DTcr..L.datatext_playercrit)
 			int = 1
 		end     
 	end

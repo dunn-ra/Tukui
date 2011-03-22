@@ -11,6 +11,7 @@ if C["datatext"].currency and C["datatext"].currency > 0 then
 
 	local Text  = TukuiInfoLeft:CreateFontString(nil, "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
+	Text:SetShadowOffset(T.mult, -T.mult)
 	T.PP(C["datatext"].currency, Text)
 	
 	local function update()
@@ -23,7 +24,7 @@ if C["datatext"].currency and C["datatext"].currency > 0 then
 				for _, word in ipairs(words) do
 					_text = _text .. string.sub(word,1,1)
 				end
-				_text = _text .. ": " .. count
+				_text = _text..": "..T.DTc..count..T.DTcr
 			end
 		end
 		

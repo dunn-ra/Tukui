@@ -8,6 +8,7 @@ if not C["datatext"].mastery == nil or C["datatext"].mastery > 0 then
 
 	local Text  = TukuiInfoLeft:CreateFontString(nil, "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
+	Text:SetShadowOffset(T.mult, -T.mult)
 	T.PP(C["datatext"].mastery, Text)
 
 	local int = 1
@@ -15,7 +16,7 @@ if not C["datatext"].mastery == nil or C["datatext"].mastery > 0 then
 	local function Update(self, t)
 		int = int - t
 		if int < 0 then
-			Text:SetText("Mastery: "..GetCombatRating(26))
+			Text:SetText("Mastery: "..T.DTc..GetCombatRating(26)..T.DTcr)
 			int = 1
 		end
 	end

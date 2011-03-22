@@ -12,13 +12,14 @@ if C["datatext"].fps_ms and C["datatext"].fps_ms > 0 then
 
 	local Text  = TukuiInfoLeft:CreateFontString(nil, "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
+	Text:SetShadowOffset(T.mult, -T.mult)
 	T.PP(C["datatext"].fps_ms, Text)
 
 	local int = 1
 	local function Update(self, t)
 		int = int - t
 		if int < 0 then
-			Text:SetText(floor(GetFramerate())..L.datatext_fps..select(3, GetNetStats())..L.datatext_ms)
+			Text:SetText(T.DTc..floor(GetFramerate())..T.DTcr..L.datatext_fps..T.DTc..select(3, GetNetStats())..T.DTcr..L.datatext_ms)
 			self:SetAllPoints(Text)
 			int = 1			
 		end	

@@ -11,6 +11,7 @@ if C["datatext"].power and C["datatext"].power > 0 then
 
 	local Text  = TukuiInfoLeft:CreateFontString(nil, "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
+	Text:SetShadowOffset(T.mult, -T.mult)
 	T.PP(C["datatext"].power, Text)
 
 	local int = 1
@@ -46,7 +47,7 @@ if C["datatext"].power and C["datatext"].power > 0 then
 			tp_pwr = L.datatext_playersp
 		end
 		if int < 0 then
-			Text:SetText(pwr.." ".. tp_pwr)      
+			Text:SetText(T.DTc..pwr..T.DTcr.." ".. tp_pwr)      
 			int = 1
 		end
 	end

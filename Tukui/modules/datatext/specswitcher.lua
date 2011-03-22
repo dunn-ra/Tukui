@@ -12,6 +12,7 @@ if C["datatext"].specswitcher and C["datatext"].specswitcher > 0 then
 
 	local Text  = TukuiMiddlePanel:CreateFontString(nil, "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
+	Text:SetShadowOffset(T.mult, -T.mult)
 	TukuiDB.PP(C["datatext"].specswitcher, Text)
 
 	local int = 1
@@ -24,7 +25,7 @@ if C["datatext"].specswitcher and C["datatext"].specswitcher > 0 then
 			local tree2num = select(5,GetTalentTabInfo(2))
 			local tree3num = select(5,GetTalentTabInfo(3))
 			local majorTree = GetPrimaryTalentTree()
-			Text:SetText(select(2,GetTalentTabInfo(majorTree)).." "..tree1num.."/"..tree2num.."/"..tree3num)
+			Text:SetText(select(2,GetTalentTabInfo(majorTree)).." "..T.DTc..tree1num.."/"..tree2num.."/"..tree3num..T.DTcr)
 		end
 	end
 

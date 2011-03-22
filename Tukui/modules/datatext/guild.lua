@@ -7,7 +7,7 @@ if not C["datatext"].guild or C["datatext"].guild == 0 then return end
 
 local tthead, ttsubh, ttoff = {r=0.4, g=0.78, b=1}, {r=0.75, g=0.9, b=1}, {r=.3,g=1,b=.3}
 local activezone, inactivezone = {r=0.3, g=1.0, b=0.3}, {r=0.65, g=0.65, b=0.65}
-local displayString = string.join("", "%s: ", "|cffFFFFFF", "%d|r")
+local displayString = string.join("", "%s: ", T.DTc, "%d|r")
 local guildInfoString = "%s [%d]"
 local guildInfoString2 = "%s: %d/%d"
 local guildMotDString = "  %s |cffaaaaaa- |cffffffff%s"
@@ -28,6 +28,7 @@ Stat.update = false
 
 local Text  = TukuiInfoLeft:CreateFontString(nil, "OVERLAY")
 Text:SetFont(C.media.font, C["datatext"].fontsize)
+Text:SetShadowOffset(T.mult, -T.mult)
 T.PP(C["datatext"].guild, Text)
 
 local function BuildGuildTable()

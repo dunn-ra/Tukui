@@ -11,6 +11,7 @@ if C["datatext"].gold and C["datatext"].gold > 0 then
 
 	local Text  = TukuiInfoLeft:CreateFontString(nil, "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
+	Text:SetShadowOffset(T.mult, -T.mult)
 	T.PP(C["datatext"].gold, Text)
 
 	local Profit	= 0

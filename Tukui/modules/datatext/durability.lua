@@ -11,6 +11,7 @@ if C["datatext"].dur and C["datatext"].dur > 0 then
 
 	local Text  = TukuiInfoLeft:CreateFontString(nil, "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
+	Text:SetShadowOffset(T.mult, -T.mult)
 	T.PP(C["datatext"].dur, Text)
 
 	local Total = 0
@@ -29,9 +30,9 @@ if C["datatext"].dur and C["datatext"].dur > 0 then
 		table.sort(L.Slots, function(a, b) return a[3] < b[3] end)
 		
 		if Total > 0 then
-			Text:SetText(floor(L.Slots[1][3]*100).."% "..L.datatext_armor)
+			Text:SetText(T.DTc..floor(L.Slots[1][3]*100).."% "..T.DTcr..L.datatext_armor)
 		else
-			Text:SetText("100% "..L.datatext_armor)
+			Text:SetText(T.DTc.."100% "..T.DTcr..L.datatext_armor)
 		end
 		-- Setup Durability Tooltip
 		self:SetAllPoints(Text)

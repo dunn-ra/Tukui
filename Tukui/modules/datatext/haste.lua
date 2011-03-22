@@ -10,6 +10,7 @@ if C["datatext"].haste and C["datatext"].haste > 0 then
 
 	local Text  = TukuiInfoLeft:CreateFontString(nil, "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
+	Text:SetShadowOffset(T.mult, -T.mult)
 	T.PP(C["datatext"].haste, Text)
 
 	local int = 1
@@ -29,7 +30,7 @@ if C["datatext"].haste and C["datatext"].haste > 0 then
 		
 		int = int - t
 		if int < 0 then
-			Text:SetText(haste.." "..L.datatext_playerhaste)
+			Text:SetText(T.DTc..haste..T.DTcr.." "..L.datatext_playerhaste)
 			int = 1
 		end     
 	end

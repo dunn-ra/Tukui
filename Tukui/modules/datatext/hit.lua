@@ -9,6 +9,7 @@ if not C["datatext"].hit == nil or C["datatext"].hit > 0 then
 
 	local Text  = TukuiInfoLeft:CreateFontString(nil, "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
+	Text:SetShadowOffset(T.mult, -T.mult)
 	T.PP(C["datatext"].hit, Text)
 
 	local int = 1
@@ -26,11 +27,11 @@ if not C["datatext"].hit == nil or C["datatext"].hit > 0 then
 
 		if int < 0 then
 			if attackpwr > spellpwr and select(2, UnitClass("Player")) ~= "HUNTER" then
-				Text:SetText(format("%.2f", GetCombatRatingBonus(6)).."% Hit")
+				Text:SetText(format(T.DTc.."%.2f", GetCombatRatingBonus(6)).."%"..T.DTcr.." Hit")
 			elseif select(2, UnitClass("Player")) == "HUNTER" then
-				Text:SetText(format("%.2f", GetCombatRatingBonus(7)).."% Hit")
+				Text:SetText(format(T.DTc.."%.2f", GetCombatRatingBonus(7)).."%"..T.DTcr.." Hit")
 			else
-				Text:SetText(format("%.2f", GetCombatRatingBonus(8)).."% Hit")
+				Text:SetText(format(T.DTc.."%.2f", GetCombatRatingBonus(8)).."%"..T.DTcr.." Hit")
 			end
 			int = 1
 		end

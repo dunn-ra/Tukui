@@ -11,11 +11,12 @@ if C["datatext"].armor and C["datatext"].armor > 0 then
 
 	local Text  = TukuiInfoLeft:CreateFontString(nil, "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
+	Text:SetShadowOffset(T.mult, -T.mult)
 	T.PP(C["datatext"].armor, Text)
 
 	local function Update(self)
 		baseArmor , effectiveArmor, armor, posBuff, negBuff = UnitArmor("player");
-		Text:SetText((effectiveArmor).." "..L.datatext_armor)
+		Text:SetText(T.DTc..(effectiveArmor)..T.DTcr.." "..L.datatext_armor)
 		--Setup Armor Tooltip
 		self:SetAllPoints(Text)
 	end

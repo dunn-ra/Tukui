@@ -23,6 +23,7 @@ Stat:SetFrameLevel(3)
 local Text = Stat:CreateFontString(nil, "OVERLAY")
 Text:SetFont(C.media.font, 10, "OUTLINE")
 --T.PP(C["datatext"].wowtime, Text)
+Text:SetShadowOffset(T.mult, -T.mult)
 Text:SetPoint("CENTER", Minimap, "TOP", 0, -8)
 Text:SetAlpha(0.8)
 

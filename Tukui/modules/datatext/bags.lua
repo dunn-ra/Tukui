@@ -11,6 +11,7 @@ if C["datatext"].bags and C["datatext"].bags > 0 then
 
 	local Text  = TukuiInfoLeft:CreateFontString(nil, "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
+	Text:SetShadowOffset(T.mult, -T.mult)
 	T.PP(C["datatext"].bags, Text)
 
 	local function OnEvent(self, event, ...)
@@ -19,7 +20,7 @@ if C["datatext"].bags and C["datatext"].bags > 0 then
 			free, total = free + GetContainerNumFreeSlots(i), total + GetContainerNumSlots(i)
 		end
 		used = total - free
-		Text:SetText(L.datatext_bags..used.."/"..total)
+		Text:SetText(L.datatext_bags..T.DTc..used.."/"..total..T.DTcr)
 		self:SetAllPoints(Text)
 	end
           
