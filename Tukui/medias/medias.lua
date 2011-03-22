@@ -64,8 +64,8 @@ C["media"] = {
 	
 	-- classtimer
 	["ctbackdropcolor"] = {0,0,0,.85},
-	["playerbar"] = {.54,.10,.10},
-	["targetbar"] = {.54,.10,.10},
+	["playerbar"] = {.33,.59,.33},
+	["targetbar"] = {.33,.59,.33},
 	["targetdebuff"] = {.54,.10,.10},
 	["trinketbar"] = {.54,.10,.10},
 	
