@@ -10,6 +10,16 @@ T.SetFontString = function(parent, fontName, fontHeight, fontStyle)
 	return fs
 end
 
+-- Classcolored Datatext -- thanks Duffed
+if C["datatext"].classcolor == true then
+	C["datatext"].color = T.oUF_colors.class[T.myclass]
+end
+
+-- convert datatext color from rgb decimal to hex
+local dr, dg, db = unpack(C["datatext"].color)
+T.DTc = ("|cff%.2x%.2x%.2x"):format(dr * 255, dg * 255, db * 255)
+T.DTcr = "|r"
+
 -- datatext panel position
 T.PP = function(p, obj)
 	local pheight = C.datatext.panelsize
@@ -67,26 +77,6 @@ T.DataTextTooltipAnchor = function(self)
 	local anchor = "ANCHOR_TOP"
 	local xoff = 0
 	local yoff = T.Scale(5)
-	
-	--[[if panel == TukuiInfoLeft then
-		anchor = "ANCHOR_TOPLEFT"
-	elseif panel == TukuiInfoRight then
-		anchor = "ANCHOR_TOPRIGHT"
-	elseif panel == TukuiMinimapStatsLeft or panel == TukuiMinimapStatsRight then
-		local position = TukuiMinimap:GetPoint()
-		if position:match("LEFT") then
-			anchor = "ANCHOR_BOTTOMRIGHT"
-			yoff = T.Scale(-6)
-			xoff = 0 - TukuiMinimapStatsRight:GetWidth()
-		elseif position:match("RIGHT") then
-			anchor = "ANCHOR_BOTTOMLEFT"
-			yoff = T.Scale(-6)
-			xoff = TukuiMinimapStatsRight:GetWidth()
-		else
-			anchor = "ANCHOR_BOTTOM"
-			yoff = T.Scale(-6)
-		end
-	end--]]
 	
 	return anchor, panel, xoff, yoff
 end
