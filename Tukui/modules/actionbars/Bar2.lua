@@ -24,8 +24,10 @@ for i = 1, 12 do
 	end
 end
 
-for i=7, 12 do
-	local b = _G["MultiBarBottomLeftButton"..i]
-	local b2 = _G["MultiBarBottomLeftButton1"]
-	b:SetFrameLevel(b2:GetFrameLevel() - 2)
+-- remove 4 buttons on low reso to fit bottom bar.
+if T.lowversion then
+	MultiBarBottomLeftButton11:SetAlpha(0)
+	MultiBarBottomLeftButton11:SetScale(0.0001)
+	MultiBarBottomLeftButton12:SetAlpha(0)
+	MultiBarBottomLeftButton12:SetScale(0.0001)
 end

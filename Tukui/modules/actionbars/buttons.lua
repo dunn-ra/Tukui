@@ -23,7 +23,11 @@ local function MoveButtonBar(button, bar)
 		else
 			db.hidebar3 = true
 			button:ClearAllPoints()
-			button:Point("BOTTOMLEFT", TukuiBar1, "TOPRIGHT", -((T.buttonsize*6)+(T.buttonspacing*4)), 2)
+			if T.lowversion then
+				button:Point("BOTTOMLEFT", TukuiBar1, "TOPRIGHT", -((T.buttonsize*7)+(T.buttonspacing*5)), 2)
+			else
+				button:Point("BOTTOMLEFT", TukuiBar1, "TOPRIGHT", -((T.buttonsize*6)+(T.buttonspacing*4)), 2)
+			end
 			button:SetBackdropBorderColor(.4,.80,0)
 			button.text:SetText("|cff66CD00+|r")
 		end

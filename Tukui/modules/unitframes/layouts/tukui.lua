@@ -22,6 +22,8 @@ local uf = C["ufsizes"]
 
 local ufwidth
 local hpheight
+local cbplayer
+local cbtarget
 
 local backdrop = {
 	bgFile = C["media"].blank,
@@ -52,14 +54,16 @@ local function Shared(self, unit)
 	self:CreateShadow("Default")
 	
 	-- unitframe sizes
-	ufwidth = T.Scale(250)
+	ufwidth = T.Scale(uf.playerwidth)
 	hpheight = T.Scale(uf.playerheight)
 	pwrheight = T.Scale(uf.playerheight/4)
 	ufheight = T.Scale(pwrheight+hpheight+1)
 	--assisttank_width = TukuiDB.Scale(ui.assisttankw)
 	--assisttank_height = TukuiDB.Scale(ui.assisttankh)
+	cbplayer = T.Scale(uf.playercastbar)
+	cbtarget = T.Scale(uf.targetcastbar)
 	if T.lowversion then
-		ufwidth = T.Scale(uf.playerwidth*0.85)
+		ufwidth = T.Scale(uf.playerwidth*0.89)
 	end
 	-- small frames
 	sufwidth = T.Scale((ufwidth/5)*2)
@@ -533,11 +537,11 @@ local function Shared(self, unit)
 							CPoints[i]:Width((ufwidth - 6) / 5)
 						end
 					end
-					CPoints[1]:SetStatusBarColor(0.69, 0.31, 0.31)
-					CPoints[2]:SetStatusBarColor(0.69, 0.31, 0.31)
-					CPoints[3]:SetStatusBarColor(0.65, 0.63, 0.35)
-					CPoints[4]:SetStatusBarColor(0.65, 0.63, 0.35)
-					CPoints[5]:SetStatusBarColor(0.33, 0.59, 0.33)
+					CPoints[1]:SetStatusBarColor(.69,.31,.31)
+					CPoints[2]:SetStatusBarColor(.69,.31,.31)
+					CPoints[3]:SetStatusBarColor(.65,.63,.35)
+					CPoints[4]:SetStatusBarColor(.65,.63,.35)
+					CPoints[5]:SetStatusBarColor(.33,.59,.33)
 					self.CPoints = CPoints
 				end
 			end
@@ -574,13 +578,21 @@ local function Shared(self, unit)
 			buffs:SetHeight(26)
 			buffs:SetWidth(252)
 			buffs.size = 26
-			buffs.num = 9
+			if T.lowversion then
+				buffs.num = 9
+			else
+				buffs.num = 9
+			end
 			
 			debuffs:SetHeight(26)
 			debuffs:SetWidth(252)
 			debuffs:SetPoint("BOTTOMLEFT", buffs, "TOPLEFT", -2, 2)
 			debuffs.size = 26
-			debuffs.num = 27
+			if T.lowversion then
+				debuffs.num = 24
+			else
+				debuffs.num = 27
+			end
 						
 			buffs.spacing = 2
 			buffs.initialAnchor = 'TOPLEFT'
@@ -609,7 +621,11 @@ local function Shared(self, unit)
 			local castbar = CreateFrame("StatusBar", self:GetName().."CastBar", self)
 			castbar:SetStatusBarTexture(normTex)
 			castbar:Height(hpheight*1.2)
-			castbar:Width((T.buttonsize * 9) + (T.buttonspacing * 7))
+			if unit == "player" then
+				castbar:Width(cbplayer)
+			elseif unit == "target" then
+				castbar:Width(cbtarget)
+			end
 			castbar:SetBackdrop(backdrop)
 			castbar:SetBackdropColor(0,0,0)
 			
@@ -1552,6 +1568,9 @@ end
 ------------------------------------------------------------------------
 --	Default position of Tukui unitframes
 ------------------------------------------------------------------------
+local adjust = 0
+if T.lowversion then adjust = -25 end
+
 oUF:RegisterStyle('Tukui', Shared)
 
 -- player
@@ -1577,14 +1596,14 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, addon)
 	if addon == "Tukui_Raid" then
-		player:SetPoint("RIGHT", TukuiBar3Button, "LEFT", (T.buttonsize*2+T.buttonspacing), 80)
-		target:SetPoint("LEFT", TukuiBar3Button, "RIGHT", -(T.buttonsize*2+T.buttonspacing), 80)
+		player:SetPoint("RIGHT", TukuiBar3Button, "LEFT", (T.buttonsize*2+T.buttonspacing)+adjust, 80)
+		target:SetPoint("LEFT", TukuiBar3Button, "RIGHT", -(T.buttonsize*2+T.buttonspacing)-adjust, 80)
 	elseif addon == "Tukui_Raid_Healing" then
-		player:SetPoint("RIGHT", TukuiBar3Button, "LEFT", -25, 120)
-		target:SetPoint("LEFT", TukuiBar3Button, "RIGHT", 25, 120)
+		player:SetPoint("RIGHT", TukuiBar3Button, "LEFT", -25-adjust, 120)
+		target:SetPoint("LEFT", TukuiBar3Button, "RIGHT", 25+adjust, 120)
 	elseif not addon == "Tukui_Raid" or addon == "Tukui_Raid_Healing" then
-		player:SetPoint("RIGHT", TukuiBar3Button, "LEFT", (T.buttonsize*2+T.buttonspacing), 80)
-		target:SetPoint("LEFT", TukuiBar3Button, "RIGHT", -(T.buttonsize*2+T.buttonspacing), 80)
+		player:SetPoint("RIGHT", TukuiBar3Button, "LEFT", (T.buttonsize*2+T.buttonspacing)+adjust, 80)
+		target:SetPoint("LEFT", TukuiBar3Button, "RIGHT", -(T.buttonsize*2+T.buttonspacing)-adjust, 80)
 	end
 end)
 
