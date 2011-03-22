@@ -9,8 +9,9 @@ C["general"] = {
 }
 
 C["ufsizes"] = {
-	["playerheight"] = 16,								-- Height of the hp bar. Power/mana bar will be 1/3 of it
-	["playercastbar"] = 300,							-- player castbar
+	["playerheight"] = 16,								-- height of the hp bar. Power/mana bar will be 1/3 of it
+	["playerwidth"] = 250,								-- width of the unitframe
+	["playercastbar"] = 250,							-- player castbar
 	["targetcastbar"] = 250,							-- target castbar
 }	
 
@@ -46,10 +47,10 @@ C["unitframes"] = {
 	["maintank"] = false,                               -- enable maintank
 	["mainassist"] = false,                             -- enable mainassist
 	-- raid layout (if one of them is enabled)
-	["enableraidframes"] = true,-- TODO							-- enable of disable raid frames
+	["enableraidframes"] = true,						-- enable of disable raid frames
 	["showrange"] = true,								-- show range opacity on raidframes
 	["raidalphaoor"] = 0.5,								-- alpha of unitframes when unit is out of range
-	["gridonly"] = true, -- TODO non grid				-- enable grid only mode for all healer mode raid layout.
+	["gridonly"] = true,								-- enable grid only mode for all healer mode raid layout.
 	["showsymbols"] = true,								-- show symbol.
 	["aggro"] = true,									-- show aggro on all raids layouts
 	["raidunitdebuffwatch"] = true,						-- track important spell to watch in pve for grid mode.
@@ -143,21 +144,22 @@ C["datatext"] = {
 	["micromenu"] = 0,									-- micromenu!
 	["specswitcher"] = 5,								-- talent switch the easy way!
 	-- options
-	["classcolored"] = false,-- TODO
+	["classcolor"] = false,								-- classcolored datatext
+	["color"] = {1,.15,.15},							-- if classcolor = false
 	["battleground"] = true,							-- enable 3 stats in battleground only that replace stat1,stat2,stat3.
 	["time24"] = true,									-- set time to 24h format.
 	["localtime"] = true,								-- set time to local time instead of server time.
 	["fontsize"] = 10,									-- font size for panels.
-	["panelsize"] = 16,									-- size of the bottom panels
+	["panelsize"] = 17,									-- size of the bottom panels
 }
 
 C["chat"] = {
 	["enable"] = true,                                  -- enable chat feature
 	["whispersound"] = true,                            -- play a sound when receiving whisper
-	["background"] = false, -- TODO								-- chat background
-	["rightpanel"] = true,-- TODO								-- enable loot frame on right side
-	["width"] = 380,									-- width of the chat frame
-	["height"] = 130,									-- height of the chat frame
+	["background"] = false,								-- chat background
+	["rightpanel"] = false,								-- enable loot frame on right side (/resetui to apply)
+	["width"] = 380,									-- width of the chat frame (/resetui to apply)
+	["height"] = 130,									-- height of the chat frame (/resetui to apply)
 }
 
 C["nameplate"] = {
@@ -204,5 +206,4 @@ C["buffreminder"] = {
 
 C["misc"] = {
 	["duelspam"] = true,								-- removes duel chat spam
-	["ress"] = true,-- TODO
 }
