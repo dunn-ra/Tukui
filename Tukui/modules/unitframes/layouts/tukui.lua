@@ -54,7 +54,11 @@ local function Shared(self, unit)
 	self:CreateShadow("Default")
 	
 	-- unitframe sizes
-	ufwidth = T.Scale(uf.playerwidth)
+	if T.lowversion then
+		ufwidth = T.Scale(180)
+	else
+		ufwidth = T.Scale(250)
+	end
 	hpheight = T.Scale(uf.playerheight)
 	pwrheight = T.Scale(uf.playerheight/4)
 	ufheight = T.Scale(pwrheight+hpheight+1)
@@ -62,9 +66,6 @@ local function Shared(self, unit)
 	--assisttank_height = TukuiDB.Scale(ui.assisttankh)
 	cbplayer = T.Scale(uf.playercastbar)
 	cbtarget = T.Scale(uf.targetcastbar)
-	if T.lowversion then
-		ufwidth = T.Scale(uf.playerwidth*0.89)
-	end
 	-- small frames
 	sufwidth = T.Scale((ufwidth/5)*2)
 	shpheight = T.Scale(hpheight*0.8)
@@ -333,7 +334,7 @@ local function Shared(self, unit)
 					if T.myclass == "SHAMAN" or T.myclass == "DEATHKNIGHT" or T.myclass == "PALADIN" or T.myclass == "WARLOCK" or T.myclass == "DRUID" or T.myclass == "ROGUE" then
 						Resting:SetPoint("BOTTOMLEFT", -11, (hpheight+4+(pwrheight*2)))
 					else
-						Resting:SetPoint("LEFT", -11, (hpheight+4+pwrheight))
+						Resting:SetPoint("BOTTOMLEFT", -11, (hpheight+4+pwrheight))
 					end
 					Resting:SetTexture([=[Interface\CharacterFrame\UI-StateIcon]=])
 					Resting:SetTexCoord(0, 0.5, 0, 0.421875)
@@ -568,32 +569,39 @@ local function Shared(self, unit)
 		if (unit == "target" and C["unitframes"].targetauras) or (unit == "player" and C["unitframes"].playerauras) then
 			local buffs = CreateFrame("Frame", nil, self)
 			local debuffs = CreateFrame("Frame", nil, self)
+			local ba = 0
+			if T.lowversion then ba = 3 end
 			
-			if (T.myclass == "SHAMAN" or T.myclass == "DEATHKNIGHT" or T.myclass == "PALADIN" or T.myclass == "WARLOCK") and (C["unitframes"].playerauras) and (unit == "player") then
-				buffs:SetPoint("TOPLEFT", self, "TOPLEFT", 0, 38)
+			if (T.myclass == "SHAMAN" or T.myclass == "DEATHKNIGHT" or T.myclass == "PALADIN" or T.myclass == "WARLOCK" or T.myclass == "ROGUE") and (C["unitframes"].playerauras) and (unit == "player") and (C["unitframes"].classbar == true) then
+				buffs:SetPoint("TOPLEFT", self, "TOPLEFT", 0, 35-ba)
 			else
-				buffs:SetPoint("TOPLEFT", self, "TOPLEFT", 0, 30)
+				buffs:SetPoint("TOPLEFT", self, "TOPLEFT", 0, 30-ba)
 			end
-			
-			buffs:SetHeight(26)
-			buffs:SetWidth(252)
-			buffs.size = 26
+
 			if T.lowversion then
-				buffs.num = 9
+				buffs:SetHeight(24)
+				buffs:SetWidth(182)
+				buffs.size = 24
+				buffs.num = 7
+				
+				debuffs:SetHeight(24)
+				debuffs:SetWidth(182)
+				debuffs:SetPoint("BOTTOMLEFT", buffs, "TOPLEFT", -2, 2)
+				debuffs.size = 24
+				debuffs.num = 21
 			else
+				buffs:SetHeight(26)
+				buffs:SetWidth(252)
+				buffs.size = 26
 				buffs.num = 9
-			end
-			
-			debuffs:SetHeight(26)
-			debuffs:SetWidth(252)
-			debuffs:SetPoint("BOTTOMLEFT", buffs, "TOPLEFT", -2, 2)
-			debuffs.size = 26
-			if T.lowversion then
+				
+				debuffs:SetHeight(26)
+				debuffs:SetWidth(252)
+				debuffs:SetPoint("BOTTOMLEFT", buffs, "TOPLEFT", -2, 2)
+				debuffs.size = 26
 				debuffs.num = 24
-			else
-				debuffs.num = 27
 			end
-						
+			
 			buffs.spacing = 2
 			buffs.initialAnchor = 'TOPLEFT'
 			buffs.PostCreateIcon = T.PostCreateAura
