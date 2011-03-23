@@ -123,11 +123,7 @@
 	TukuiL.option_tooltip_hidebutton = "행동 단축버튼의 툴팁을 숨김"
 	TukuiL.option_tooltip_hideuf = "개체창의 툴팁을 숨김"
 	TukuiL.option_tooltip_cursor = "커서 툴팁 사용"
- 
-	-- others
-	TukuiL.option_others = "기타"
-	TukuiL.option_others_bg = "전장에서 자동부활을 사용"
- 
+	
 	-- reminder
 	TukuiL.option_reminder = "경고"
 	TukuiL.option_reminder_enable = "보호막, 상, 외침 등에 대한 경고를 사용"
@@ -187,5 +183,58 @@
 	TukuiL.option_resetchar = "해당 캐릭터의 설정을 기본 설정으로 초기화하시겠습니까?"
 	TukuiL.option_resetall = "모든 캐릭터의 설정을 기본 설정으로 초기화하시겠습니까?"
 	TukuiL.option_perchar = "설정을 캐릭터별로 저장하시겠습니까?"
-	TukuiL.option_makeselection = "계속하기전에 선택을 해야합니다."	
+	TukuiL.option_makeselection = "계속하기전에 선택을 해야합니다."
+		
+	-- cyui
+	--nameplates
+	TukuiL.option_nameplates_simplehealth = "Health percentage on nameplates"
+	-- general
+	TukuiL.option_general_classcolor = "Enable full classcolor option (datatext, panels, castbars)"
+	-- ufsizes
+	TukuiL.option_ufsizes = "Unitframe size"
+	TukuiL.option_ufsizes_playerheight = "Height of the hp bar. Power/mana bar will be 1/3 of it"
+	TukuiL.option_ufsizes_playercastbar = "Player castbar width"
+	TukuiL.option_ufsizes_targetcastbar = "Target castbar width"
+	-- datatext
+	TukuiL.option_datatext_panelsize = "Size of the bottom panels"
+	TukuiL.option_datatext_color = "Default datatext oolor"
+	TukuiL.option_datatext_classcolor = "Classcolored datatext"
+	TukuiL.option_datatext_specswitcher = "Talent switcher position (0 for disabled)"
+	-- unit frames
+	TukuiL.option_unitframes_swing = "Enable swing bar"
+	TukuiL.option_unitframes_cccastbar = "Enable classcolored castbars"
+	TukuiL.option_unitframes_displayname = "Show player name on the unitframe"
+	TukuiL.option_unitframes_enableraidframes = "Enable raid frames, keeping choosing layout"
+	-- stexperience
+	TukuiL.option_stexperience = "STExperience bar"
+	TukuiL.option_stexperience_enable = "Enable STExperience bar"
+	TukuiL.option_stexperience_barheight = "Height of the bar"
+	TukuiL.option_stexperience_barwidth = "Width of the bar"
+	TukuiL.option_stexperience_text = "Set to true to hide text"
+	TukuiL.option_stexperience_mouseovertext = "Set to true to only show text on mouseover"
+	-- misc
+	TukuiL.option_misc = "miscellaneous"
+	TukuiL.option_misc_duelspam = "Removes duel chat spam"
+	-- classtimer
+	TukuiL.option_classtimer = "Classtimer"
+	TukuiL.option_classtimer_enable = "Enable classtimer"
+	TukuiL.option_classtimer_classcolor = "Classcolored bars"
+	TukuiL.option_classtimer_barheight = "Bar height"
+	TukuiL.option_classtimer_barspacing = "bar spacing"
+	TukuiL.option_classtimer_direction = "Direction"
+	TukuiL.option_classtimer_spark = "Marker on the end of the bar"
+	TukuiL.option_classtimer_castseparator = "Marker to indicate clipping"
+	TukuiL.option_classtimer_playerbar = "Player color"
+	TukuiL.option_classtimer_targetbar = "Target color"
+	TukuiL.option_classtimer_targetdebuff = "Target debuff color"
+	TukuiL.option_classtimer_trinketbar = "Trinket color"
+	-- chat
+	TukuiL.option_chat_rightpanel = "Enable loot frame on right side (/resetui to apply)"
+	TukuiL.option_chat_width = "Width of the chat frame (/resetui to apply)"
+	TukuiL.option_chat_height = "Height of the chat frame (/resetui to apply)"
+	-- bags
+	TukuiL.option_bags_slots = "Number of column bag slots to display"	
+	TukuiL.option_bags_moveable = "Toggle moveable bags"
+	-- action bar
+	TukuiL.option_actionbar_cubes = "Enable cubes to function as toggles for addons (ex: recount)"
 end

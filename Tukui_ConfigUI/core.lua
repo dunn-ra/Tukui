@@ -5,22 +5,26 @@ local myPlayerName  = UnitName("player")
 
 local ALLOWED_GROUPS = {
 	["general"]=1,
+	["ufsizes"]=1,
 	["unitframes"]=1,
+	["classtimer"]=1,
+	["stexperience"]=1,
 	["arena"]=1,
+	["auras"]=1,
 	["actionbar"]=1,
-	["nameplate"]=1,
 	["bags"]=1,
 	["map"]=1,
 	["loot"]=1,
 	["cooldown"]=1,
 	["datatext"]=1,
 	["chat"]=1,
+	["nameplate"]=1,
 	["tooltip"]=1,
 	["merchant"]=1,
 	["error"]=1,
 	["invite"]=1,
 	["buffreminder"]=1,
-	["auras"]=1,
+	["misc"]=1,
 }
 
 --List of "Table Names" that we do not want to show in the config
@@ -87,7 +91,7 @@ local function Local(o)
 	if o == "TukuiConfigUIdatatextmastery" then o = TukuiL.option_datatext_mastery end	
 
 	-- unit frames
-	if o == "TukuiConfigUIunitframes" then o = TukuiL.option_unitframes_unitframes end
+	if o == "TukuiConfigUIunitframes" then o = TukuiL.option_unitframes end
 	if o == "TukuiConfigUIunitframescombatfeedback" then o = TukuiL.option_unitframes_combatfeedback end
 	if o == "TukuiConfigUIunitframesrunebar" then o = TukuiL.option_unitframes_runebar end
 	if o == "TukuiConfigUIunitframesauratimer" then o = TukuiL.option_unitframes_auratimer end
@@ -156,10 +160,6 @@ local function Local(o)
 	if o == "TukuiConfigUItooltiphideuf" then o = TukuiL.option_tooltip_hideuf end
 	if o == "TukuiConfigUItooltipcursor" then o = TukuiL.option_tooltip_cursor end
 	
-	-- others
-	if o == "TukuiConfigUIothers" then o = TukuiL.option_others end
-	if o == "TukuiConfigUIotherspvpautorelease" then o = TukuiL.option_others_bg end
-	
 	-- reminder
 	if o == "TukuiConfigUIbuffreminder" then o = TukuiL.option_reminder end
 	if o == "TukuiConfigUIbuffreminderenable" then o = TukuiL.option_reminder_enable end
@@ -210,7 +210,60 @@ local function Local(o)
 	-- aura
 	if o == "TukuiConfigUIauras" then o = TukuiL.option_auras end
 	if o == "TukuiConfigUIaurasplayer" then o = TukuiL.option_auras_player end
-
+	
+	-- cyui
+	--nameplates
+	if o == "TukuiConfigUInameplatesimplehealth" then o = TukuiL.option_nameplates_simplehealth end
+	-- general
+	if o == "TukuiConfigUIgeneralclasscolor" then o = TukuiL.option_general_classcolor end
+	-- ufsizes
+	if o == "TukuiConfigUIufsizes" then o = TukuiL.option_ufsizes end
+	if o == "TukuiConfigUIufsizesplayerheight" then o = TukuiL.option_ufsizes_playerheight end
+	if o == "TukuiConfigUIufsizesplayercastbar" then o = TukuiL.option_ufsizes_playercastbar end
+	if o == "TukuiConfigUIufsizestargetcastbar" then o = TukuiL.option_ufsizes_targetcastbar end
+	-- datatext
+	if o == "TukuiConfigUIdatatextpanelsize" then o = TukuiL.option_datatext_panelsize end
+	if o == "TukuiConfigUIdatatextcolor" then o = TukuiL.option_datatext_color end
+	if o == "TukuiConfigUIdatatextclasscolor" then o = TukuiL.option_datatext_classcolor end
+	if o == "TukuiConfigUIdatatextspecswitcher" then o = TukuiL.option_datatext_specswitcher end
+	-- unit frames
+	if o == "TukuiConfigUIunitframesswing" then o = TukuiL.option_unitframes_swing end
+	if o == "TukuiConfigUIunitframescccastbar" then o = TukuiL.option_unitframes_cccastbar end
+	if o == "TukuiConfigUIunitframesdisplayname" then o = TukuiL.option_unitframes_displayname end
+	if o == "TukuiConfigUIunitframesenableraidframes" then o = TukuiL.option_unitframes_enableraidframes end
+	-- stexperience
+	if o == "TukuiConfigUIstexperience" then o = TukuiL.option_stexperience end
+	if o == "TukuiConfigUIstexperienceenable" then o = TukuiL.option_stexperience_enable end
+	if o == "TukuiConfigUIstexperiencebarheight" then o = TukuiL.option_stexperience_barheight end
+	if o == "TukuiConfigUIstexperiencebarwidth" then o = TukuiL.option_stexperience_barwidth end
+	if o == "TukuiConfigUIstexperiencetext" then o = TukuiL.option_stexperience_text end
+	if o == "TukuiConfigUIstexperiencemouseovertext" then o = TukuiL.option_stexperience_mouseovertext end
+	-- misc
+	if o == "TukuiConfigUImisc" then o = TukuiL.option_misc end
+	if o == "TukuiConfigUImiscduelspam" then o = TukuiL.option_misc_duelspam end
+	-- classtimer
+	if o == "TukuiConfigUIclasstimer" then o = TukuiL.option_classtimer end
+	if o == "TukuiConfigUIclasstimerenable" then o = TukuiL.option_classtimer_enable end
+	if o == "TukuiConfigUIclasstimerclasscolor" then o = TukuiL.option_classtimer_classcolor end
+	if o == "TukuiConfigUIclasstimerbarheight" then o = TukuiL.option_classtimer_barheight end
+	if o == "TukuiConfigUIclasstimerbarspacing" then o = TukuiL.option_classtimer_barspacing end
+	if o == "TukuiConfigUIclasstimerdirection" then o = TukuiL.option_classtimer_direction end
+	if o == "TukuiConfigUIclasstimerspark" then o = TukuiL.option_classtimer_spark end
+	if o == "TukuiConfigUIclasstimercastseparator" then o = TukuiL.option_classtimer_castseparator end
+	if o == "TukuiConfigUIclasstimerplayerbar" then o = TukuiL.option_classtimer_playerbar end
+	if o == "TukuiConfigUIclasstimertargetbar" then o = TukuiL.option_classtimer_targetbar end
+	if o == "TukuiConfigUIclasstimertargetdebuff" then o = TukuiL.option_classtimer_targetdebuff end
+	if o == "TukuiConfigUIclasstimertrinketbar" then o = TukuiL.option_classtimer_trinketbar end
+	-- chat
+	if o == "TukuiConfigUIchatrightpanel" then o = TukuiL.option_chat_rightpanel end
+	if o == "TukuiConfigUIchatwidth" then o = TukuiL.option_chat_width end
+	if o == "TukuiConfigUIchatheight" then o = TukuiL.option_chat_height end
+	-- bags
+	if o == "TukuiConfigUIbagsslots" then o = TukuiL.option_bags_slots end	
+	if o == "TukuiConfigUIbagsmoveable" then o = TukuiL.option_bags_moveable end
+	-- action bar
+	if o == "TukuiConfigUIactionbarcubes" then o = TukuiL.option_actionbar_cubes end
+	
 	T.option = o
 end
 
@@ -362,12 +415,12 @@ function CreateTukuiConfigUI()
 		TukuiConfigUI:Show()
 		return
 	end
-	
+	--[[
 	local version = tonumber(T.version)
 	if version < 12.59 then
 		print(TukuiL.option_update)
 	end
-	
+	--]]
 	-- MAIN FRAME
 	local TukuiConfigUI = CreateFrame("Frame","TukuiConfigUI",UIParent)
 	TukuiConfigUI:SetPoint("CENTER", UIParent, "CENTER", 90, 0)
@@ -679,6 +732,7 @@ end
 do
 	SLASH_CONFIG1 = '/tc'
 	SLASH_CONFIG2 = '/tukui'
+	SLASH_CONFIG2 = '/config'
 	function SlashCmdList.CONFIG(msg, editbox)
 		if not TukuiConfigUI or not TukuiConfigUI:IsShown() then
 			CreateTukuiConfigUI()
