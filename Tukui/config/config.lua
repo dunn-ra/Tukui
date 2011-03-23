@@ -5,12 +5,11 @@ C["general"] = {
 	["uiscale"] = 0.71,                                 -- set your value (between 0.64 and 1) of your uiscale if autoscale is off
 	["overridelowtohigh"] = false,                      -- EXPERIMENTAL ONLY! override lower version to higher version on a lower reso.
 	["multisampleprotect"] = true,                      -- i don't recommend this because of shitty border but, voila!
-	["classcolor"] = false,-- TODO						-- enable full classcolor option (datatext, panels, castbars)
+	["classcolor"] = false,								-- enable full classcolor option (datatext, panels, castbars)
 }
 
 C["ufsizes"] = {
 	["playerheight"] = 16,								-- height of the hp bar. Power/mana bar will be 1/3 of it
-	["playerwidth"] = 250,								-- width of the unitframe
 	["playercastbar"] = 250,							-- player castbar
 	["targetcastbar"] = 250,							-- target castbar
 }	
@@ -47,7 +46,7 @@ C["unitframes"] = {
 	["maintank"] = false,                               -- enable maintank
 	["mainassist"] = false,                             -- enable mainassist
 	-- raid layout (if one of them is enabled)
-	["enableraidframes"] = true,						-- enable of disable raid frames
+	["enableraidframes"] = true,						-- enable or disable raid frames
 	["showrange"] = true,								-- show range opacity on raidframes
 	["raidalphaoor"] = 0.5,								-- alpha of unitframes when unit is out of range
 	["gridonly"] = true,								-- enable grid only mode for all healer mode raid layout.
@@ -73,10 +72,15 @@ C["classtimer"] = {
 	["direction"] = true,								-- direction, true for left to right
 	["spark"] = false,									-- marker on the end of the bar
 	["castseparator"] = true,							-- marker to indicate clipping
+	-- color
+	["playerbar"] = {.33,.59,.33},
+	["targetbar"] = {.33,.59,.33},
+	["targetdebuff"] = {.54,.10,.10},
+	["trinketbar"] = {.54,.10,.10},
 }
 
 C["stexperience"] = {
-	["enable"] = false,									-- enable stExperience bar
+	["enable"] = true,									-- enable stExperience bar
 	["barheight"] = 16,									-- bar height
 	["barwidth"] = 275,									-- bar width
 	["text"] = true,									-- set to false to hide text
@@ -156,7 +160,7 @@ C["datatext"] = {
 C["chat"] = {
 	["enable"] = true,                                  -- enable chat feature
 	["whispersound"] = true,                            -- play a sound when receiving whisper
-	["background"] = false,								-- chat background
+	["background"] = true,								-- chat background
 	["rightpanel"] = false,								-- enable loot frame on right side (/resetui to apply)
 	["width"] = 380,									-- width of the chat frame (/resetui to apply)
 	["height"] = 130,									-- height of the chat frame (/resetui to apply)

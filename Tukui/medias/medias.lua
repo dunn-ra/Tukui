@@ -62,12 +62,8 @@ C["media"] = {
 	--["interruptable"] = {.85,.1,.1,.75}, -- castbar color of interruptable spells
 	--["castbarnorm"] = {.31,.45,.63,.5}, -- color of player castbar if classcolor == false and target castbar
 	
-	-- classtimer
+	-- classtimer bg
 	["ctbackdropcolor"] = {0,0,0,.85},
-	["playerbar"] = {.33,.59,.33},
-	["targetbar"] = {.33,.59,.33},
-	["targetdebuff"] = {.54,.10,.10},
-	["trinketbar"] = {.54,.10,.10},
 	
 	["buttonhover"] = [[Interface\AddOns\Tukui\medias\textures\button_hover]],
 	

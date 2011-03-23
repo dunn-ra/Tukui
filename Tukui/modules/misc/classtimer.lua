@@ -1,15 +1,13 @@
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 if C["classtimer"].enable ~= true or C["unitframes"].playerauras == true then return end
 
-local db = C["classtimer"]
-
 local CreateSpellEntry = function(id, castByAnyone, color, unitType, castSpellId)
 	return {id = id, castByAnyone = castByAnyone, color = color, unitType = unitType or 0, castSpellId = castSpellId}
 end
 local CreateColor = function( red, green, blue, alpha )
 	return {red/255, green/255, blue/255, alpha}
 end
-
+local db = C["classtimer"]
 local BAR_HEIGHT = db.barheight
 local BAR_SPACING = db.barspacing
 local SPARK = db.spark
@@ -24,10 +22,10 @@ local TIME_FONT = {C["media"].uffont, 10, "OUTLINE"}
 local STACKS_FONT = {C["media"].uffont, 9, "OUTLINE"}
 local pwrheight = C["ufsizes"].playerheight/4
 if C["classtimer"].classcolor ~= true then
-	PLAYER_BAR_COLOR = C.media.playerbar
-	TARGET_BAR_COLOR = C.media.targetbar
-	TARGET_DEBUFF_COLOR = C.media.targetdebuff
-	TRINKET_BAR_COLOR = C.media.trinketbar
+	PLAYER_BAR_COLOR = C.classtimer.playerbar
+	TARGET_BAR_COLOR = C.classtimer.targetbar
+	TARGET_DEBUFF_COLOR = C.classtimer.targetdebuff
+	TRINKET_BAR_COLOR = C.classtimer.trinketbar
 	PLAYER_DEBUFF_COLOR = nil;
 else
 	classcolor = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[select(2,UnitClass("player"))];
