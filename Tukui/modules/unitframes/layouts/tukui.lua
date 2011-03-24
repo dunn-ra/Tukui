@@ -120,6 +120,7 @@ local function Shared(self, unit)
 		healthBG:SetAllPoints()
 		
 		health.value = T.SetFontString(health, font1, 10)
+		health.value:SetShadowOffset(T.mult, -T.mult)
 		health.value:Point("RIGHT", health, "RIGHT", -5, 0)
 		health.PostUpdate = T.PostUpdateHealth
 				
@@ -131,7 +132,7 @@ local function Shared(self, unit)
 			health.Smooth = true
 		end
 		
-		if C["unitframes"].unicolor == true then
+		if C["unitframes"].classcolor == false then
 			health.colorTapping = false
 			health.colorDisconnected = false
 			health.colorClass = false
@@ -199,14 +200,9 @@ local function Shared(self, unit)
 			portrait:SetFrameLevel(2)
 			portrait:SetAlpha(1)
 			portrait:SetWidth(ufheight*2)
-			portrait:SetHeight(ufheight*2+3)
+			portrait:SetHeight((ufheight*2)-1)
 			if unit == "player" then
-				if T.myclass == "SHAMAN" or T.myclass == "DEATHKNIGHT" or T.myclass == "PALADIN" or T.myclass == "WARLOCK" or T.myclass == "DRUID" or T.myclass == "ROGUE" then
-					portrait:SetHeight(ufheight*2+3+pwrheight)
-					portrait:Point("TOPRIGHT", panel, "TOPLEFT", -5, pwrheight+1)
-				else
-					portrait:Point("TOPRIGHT", panel, "TOPLEFT", -5, 0)
-				end
+				portrait:Point("TOPRIGHT", panel, "TOPLEFT", -5, 0)
 			elseif unit == "target" then
 				portrait:Point("TOPLEFT", panel, "TOPRIGHT", 5, 0)
 			end
@@ -214,7 +210,7 @@ local function Shared(self, unit)
 			self.Portrait = portrait
 			
 			portrait.bg = CreateFrame("Frame", nil, portrait)
-			portrait.bg:CreatePanel("Default", 1, 1, "BOTTOMLEFT", portrait, "BOTTOMLEFT", 0, 0)
+			portrait.bg:CreatePanel("Default", 1, 1, "BOTTOMLEFT", portrait, "BOTTOMLEFT", 0, -1)
 			portrait.bg:Point("TOPRIGHT", portrait, "TOPRIGHT", 0, 0)
 			portrait.bg:SetBackdrop(backdrop)
 			portrait.bg:SetBackdropColor(0,0,0)
@@ -289,7 +285,7 @@ local function Shared(self, unit)
 			local status = T.SetFontString(panel, font1, 12)
 			status:SetPoint("CENTER", panel, "CENTER", 0, 0)
 			status:SetTextColor(0.69, 0.31, 0.31)
-			status:Hide()
+			--status:Hide()
 			self.Status = status
 			self:Tag(status, "[pvp]")
 			
@@ -1455,7 +1451,7 @@ local function Shared(self, unit)
 			Trinketbg:SetHeight(ufheight)
 			Trinketbg:SetWidth(ufheight)
 			Trinketbg:SetPoint("RIGHT", self, "LEFT", -6, 0)				
-			--Trinketbg:SetTemplate("Default")
+			Trinketbg:SetTemplate("Default")
 			Trinketbg:SetFrameLevel(0)
 			self.Trinketbg = Trinketbg
 			
@@ -1589,11 +1585,11 @@ local target = oUF:Spawn('target', "TukuiTarget")
 target:Size(ufwidth, ufheight)
 -- target of target
 local tot = oUF:Spawn('targettarget', "TukuiTargetTarget")
-tot:SetPoint("TOPRIGHT", TukuiTarget, "BOTTOMRIGHT", 0, -3)
+tot:SetPoint("TOPRIGHT", TukuiTarget, "BOTTOMRIGHT", 0, -4)
 tot:Size(sufwidth, sufheight)
 -- pet
 local pet = oUF:Spawn('pet', "TukuiPet")
-pet:SetPoint("TOPLEFT", TukuiPlayer, "BOTTOMLEFT", 0, -3)
+pet:SetPoint("TOPLEFT", TukuiPlayer, "BOTTOMLEFT", 0, -4)
 pet:Size(sufwidth, sufheight)
 -- focus
 local focus = oUF:Spawn('focus', "TukuiFocus")
