@@ -44,10 +44,7 @@
 	<Script file="modules\blizzard\capturebar.lua"/>
 	<Script file="modules\blizzard\gm.lua"/>
 	<Script file="modules\blizzard\ghostframe.lua"/>
-	<Script file="modules\misc\commands.lua"/>
 	<Script file="modules\blizzard\quests.lua"/>
-	<Script file="modules\misc\invite.lua"/>
-	<Script file="modules\misc\damage.lua"/>
 	<Script file="modules\loot\autodez.lua"/>
 	<Script file="modules\blizzard\symbol.lua"/>
 	<Script file="modules\loot\merchant.lua"/>
@@ -61,6 +58,7 @@
 	<Script file="modules\buffs\buffs.lua"/>
 	<Script file="modules\maps\minimap.lua"/>
 	<Script file="modules\panels\panels.lua"/>
+	<Script file="modules\classtimer\classtimer.lua"/>
 	<Script file="modules\datatext\armor.lua"/>
 	<Script file="modules\datatext\avoidance.lua"/>
 	<Script file="modules\datatext\bags.lua"/>
@@ -123,9 +121,11 @@
 	<Script file="modules\notifications\hunterpethappiness.lua"/>	
 	<Script file="modules\misc\altpowerbar.lua"/>
 	<Script file="modules\misc\threatbar.lua"/>
-	<Script file="modules\misc\classtimer.lua"/>
-	<Script file="modules\misc\wipe.lua"/>
-	<Script file="modules\misc\stexperiencebar.lua"/>
+	<Script file="modules\misc\ilvl.lua"/>
+	<Script file="modules\misc\commands.lua"/>
+	<Script file="modules\misc\invite.lua"/>
+	<Script file="modules\misc\damage.lua"/>
+	<Script file="modules\stexperience\stexperiencebar.lua"/>
 	<Script file="modules\blizzard\achievements.lua"/>
 	<Script file="core\movers.lua"/>
 	<Script file="developer\test.lua"/>
