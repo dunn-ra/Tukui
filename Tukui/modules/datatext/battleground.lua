@@ -67,16 +67,19 @@ Stat:EnableMouse(true)
 local Text1  = TukuiBattleGround:CreateFontString(nil, "OVERLAY")
 Text1:SetFont(C.media.font, C["datatext"].fontsize)
 Text1:SetPoint("LEFT", TukuiBattleGround, 20, -1)
+Text1:SetShadowOffset(T.mult, -T.mult)
 Text1:SetHeight(pheight)
 
 local Text2  = TukuiBattleGround:CreateFontString(nil, "OVERLAY")
 Text2:SetFont(C.media.font, C["datatext"].fontsize)
 Text2:SetPoint("CENTER", TukuiBattleGround, 0, -1)
+Text2:SetShadowOffset(T.mult, -T.mult)
 Text2:SetHeight(pheight)
 
 local Text3  = TukuiBattleGround:CreateFontString(nil, "OVERLAY")
 Text3:SetFont(C.media.font, C["datatext"].fontsize)
 Text3:SetPoint("RIGHT", TukuiBattleGround, -20, -1)
+Text3:SetShadowOffset(T.mult, -T.mult)
 Text3:SetHeight(pheight)
 
 local int = 2
@@ -89,15 +92,15 @@ local function Update(self, t)
 		for i=1, numScores do
 			local name, killingBlows, honorableKills, deaths, honorGained, faction, race, class, classToken, damageDone, healingDone, bgRating, ratingChange = GetBattlefieldScore(i)
 			if healingDone > damageDone then
-				dmgtxt = (L.datatext_healing..healingDone)
+				dmgtxt = (L.datatext_healing..T.DTc..healingDone..T.DTcr)
 			else
-				dmgtxt = (L.datatext_damage..damageDone)
+				dmgtxt = (L.datatext_damage..T.DTc..damageDone..T.DTcr)
 			end
 			if ( name ) then
 				if ( name == T.myname ) then
-					Text2:SetText(L.datatext_honor..format('%d', honorGained))
+					Text2:SetText(L.datatext_honor..T.DTc..format('%d', honorGained)..T.DTcr)
 					Text1:SetText(dmgtxt)
-					Text3:SetText(L.datatext_killingblows..killingBlows)
+					Text3:SetText(L.datatext_killingblows..T.DTc..killingBlows..T.DTcr)
 				end   
 			end
 		end 
