@@ -69,11 +69,24 @@ local function SetChatStyle(frame)
 	end
 
 	-- recolor tab text with bg
-	if C["chat"].background then
+	if C.chat.background then
 		_G[chat.."TabText"]:SetTextColor(1,.15,.15)
 		_G[chat.."TabText"].SetTextColor = T.dummy
+		
+		if C.chat.shadow then
+			_G[chat.."TabText"]:SetFont(TukuiCF.media.font, 11, "THINOUTLINE")
+			
+			-- text dropshadoq	
+			for i = 1, 7 do
+				local chat = _G['ChatFrame'..i]
+				local font, path = chat:GetFont()
+				chat:SetFont(TukuiCF.media.font, 12, "THINOUTLINE")
+				chat:SetShadowOffset(0,0)
+				chat:SetShadowColor(0,0,0,0)
+			end
+		end
 	end
-
+	
 	-- yeah baby
 	_G[chat]:SetClampRectInsets(0,0,0,0)
 	
@@ -238,7 +251,11 @@ local function SetupChatPosAndFont(self)
 	-- reposition battle.net popup over chat #1
 	BNToastFrame:HookScript("OnShow", function(self)
 		self:ClearAllPoints()
-		self:Point("BOTTOMLEFT", ChatFrame1, "TOPLEFT", 0, 6)
+		if C.chat.background and TukuiChatBackgroundLeft then
+			self:Point("BOTTOMLEFT", TukuiChatBackgroundLeft, "TOPLEFT", 0, 6)
+		else
+			self:Point("BOTTOMLEFT", ChatFrame1, "TOPLEFT", 0, 6)
+		end
 	end)
 end
 
