@@ -58,7 +58,7 @@
 	TukuiL.option_datatext_mastery = "精通 (輸入0 以停用)"	
  
 	-- unit frames
-	TukuiL.option_unitframes_unitframes = "單位視窗"
+	TukuiL.option_unitframes = "單位視窗"
 	TukuiL.option_unitframes_combatfeedback = "顯示戰鬥資訊於玩家及目標視窗"
 	TukuiL.option_unitframes_runebar = "啟用死亡騎士符文列"
 	TukuiL.option_unitframes_auratimer = "啟用光環上計時"
@@ -95,7 +95,7 @@
 	TukuiL.option_unitframes_range = "隊伍/團隊單位超出距離透明值"
 	TukuiL.option_unitframes_maintank = "啟用主坦克視窗"
 	TukuiL.option_unitframes_mainassist = "啟用主助攻視窗"
-	TukuiL.option_unitframes_unicolor = "啟用特殊顏色模式(灰色生命條)"
+	TukuiL.option_unitframes_classcolor = "啟用特殊顏色模式(灰色生命條)"
 	TukuiL.option_unitframes_totdebuffs = "啟用目標的目標負面狀態(高解析度專用)"
 	TukuiL.option_unitframes_classbar = "啟用職業專用列"
 	TukuiL.option_unitframes_weakenedsoulbar = "啟用虛弱靈魂指示 (牧師)"

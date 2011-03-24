@@ -59,7 +59,7 @@ TukuiL.option_datatext_mastery = "Mastery position (0 for disabled)"
 
  
 -- unit frames
-TukuiL.option_unitframes_unitframes = "Unit Frames"
+TukuiL.option_unitframes = "Unit Frames"
 TukuiL.option_unitframes_combatfeedback = "Combat Feedback on player and target"
 TukuiL.option_unitframes_runebar = "Enable rune bar for Death Knight"
 TukuiL.option_unitframes_auratimer = "Enable timer on auras"
@@ -96,7 +96,7 @@ TukuiL.option_unitframes_manalow = "Low mana indicator (All mana class)"
 TukuiL.option_unitframes_range = "Alpha on Party/Raid unit out of range"
 TukuiL.option_unitframes_maintank = "Enable Main Tank"
 TukuiL.option_unitframes_mainassist = "Enable Main Assist"
-TukuiL.option_unitframes_unicolor = "Enable Unique color theme (grey health bar)"
+TukuiL.option_unitframes_classcolor = "Enable Unique color theme (grey health bar)"
 TukuiL.option_unitframes_totdebuffs = "Enable Target of Target debuffs (High Reso)"
 TukuiL.option_unitframes_classbar = "Enable class bar"
 TukuiL.option_unitframes_weakenedsoulbar = "Enable Weakened Soul bar notification (Priest)"

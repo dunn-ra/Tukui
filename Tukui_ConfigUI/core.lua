@@ -131,7 +131,7 @@ local function Local(o)
 	if o == "TukuiConfigUIunitframesraidalphaoor" then o = TukuiL.option_unitframes_range end
 	if o == "TukuiConfigUIunitframesmaintank" then o = TukuiL.option_unitframes_maintank end
 	if o == "TukuiConfigUIunitframesmainassist" then o = TukuiL.option_unitframes_mainassist end
-	if o == "TukuiConfigUIunitframesunicolor" then o = TukuiL.option_unitframes_unicolor end
+	if o == "TukuiConfigUIunitframesclasscolor" then o = TukuiL.option_unitframes_classcolor end
 	if o == "TukuiConfigUIunitframestotdebuffs" then o = TukuiL.option_unitframes_totdebuffs end
 	if o == "TukuiConfigUIunitframesclassbar" then o = TukuiL.option_unitframes_classbar end
 	if o == "TukuiConfigUIunitframesweakenedsoulbar" then o = TukuiL.option_unitframes_weakenedsoulbar end

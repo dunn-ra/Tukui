@@ -58,7 +58,7 @@ if GetLocale() == "esES" then
 	TukuiL.option_datatext_mastery = "Posición Maestría (0 para desactiva)"	
  
 	-- unit frames
-	TukuiL.option_unitframes_unitframes = "Marcos de Unidad"
+	TukuiL.option_unitframes = "Marcos de Unidad"
 	TukuiL.option_unitframes_combatfeedback = "Mostrar Daño/Curas en los Marcos de Unidad"
 	TukuiL.option_unitframes_runebar = "Habilitar barra de runas para Caballeros de la Muerte"
 	TukuiL.option_unitframes_auratimer = "Habilitar temporizador para Auras"
@@ -95,7 +95,7 @@ if GetLocale() == "esES" then
 	TukuiL.option_unitframes_range = "Alfa en Grupo/Banda que estan fuera de alcance"
 	TukuiL.option_unitframes_maintank = "Habilitar Tanque Principal"
 	TukuiL.option_unitframes_mainassist = "Habilitar Ayudadores Principales"
-	TukuiL.option_unitframes_unicolor = "Habilitar Tema de Color Unico (Barra de vida gris)"
+	TukuiL.option_unitframes_classcolor = "Habilitar Tema de Color Unico (Barra de vida gris)"
 	TukuiL.option_unitframes_totdebuffs = "Habilitar Perjuicios en Objetivo del Objetivo (Resolucion Alta)"
 	TukuiL.option_unitframes_classbar = "Habilitar Barra de Clase"
 	TukuiL.option_unitframes_weakenedsoulbar = "Habilitar Barra de Notificacion de Alma Debilitada (Sacerdote)"

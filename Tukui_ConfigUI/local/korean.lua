@@ -58,7 +58,7 @@
 	TukuiL.option_datatext_mastery = "특화도 위치 (0 이면 미사용)"--@@
  
 	-- unit frames
-	TukuiL.option_unitframes_unitframes = "개체창"
+	TukuiL.option_unitframes = "개체창"
 	TukuiL.option_unitframes_combatfeedback = "플레이어창과 대상창에 받는 피해량 및 치유량을 보여줌"
 	TukuiL.option_unitframes_runebar = "죽음의 기사 룬바를 사용"
 	TukuiL.option_unitframes_auratimer = "강화 및 약화 효과의 지속시간 타이머를 사용"
@@ -95,7 +95,7 @@
 	TukuiL.option_unitframes_range = "거리에 따른 투명도 수치"
 	TukuiL.option_unitframes_maintank = "방어 전담창을 사용"
 	TukuiL.option_unitframes_mainassist = "지원공격 전담창을 사용"
-	TukuiL.option_unitframes_unicolor = "직업색상을 사용"
+	TukuiL.option_unitframes_classcolor = "직업색상을 사용"
 	TukuiL.option_unitframes_totdebuffs = "대상의 대상의 약화 효과를 보여줌 (고해상도 전용)"
 	TukuiL.option_unitframes_classbar = "직업 바 사용"
 	TukuiL.option_unitframes_weakenedsoulbar = "약화된 영혼 알림바 사용 (사제)"

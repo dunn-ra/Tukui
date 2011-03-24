@@ -58,7 +58,7 @@ if GetLocale() == "frFR" then
 	TukuiL.option_datatext_mastery = "Position Maîtrise (0 pour désactiver)"
  
 	-- unit frames
-	TukuiL.option_unitframes_unitframes = "Unit Frames"
+	TukuiL.option_unitframes = "Unit Frames"
 	TukuiL.option_unitframes_combatfeedback = "Feedback des dégâts/soins sur joueur et cible"
 	TukuiL.option_unitframes_runebar = "Afficher la barre de rune pour DK"
 	TukuiL.option_unitframes_auratimer = "Afficher le timer sur les buffs"
@@ -95,7 +95,7 @@ if GetLocale() == "frFR" then
 	TukuiL.option_unitframes_range = "Transparence sur unité de Groupe/Raid hors de portée"
 	TukuiL.option_unitframes_maintank = "Afficher Main Tank"
 	TukuiL.option_unitframes_mainassist = "Afficher Main Heal"
-	TukuiL.option_unitframes_unicolor = "Afficher le thème avec une seule couleur (barre de vie grise)"
+	TukuiL.option_unitframes_classcolor = "Afficher le thème avec une seule couleur (barre de vie grise)"
 	TukuiL.option_unitframes_totdebuffs = "Afficher les debuffs de la cible de la cible (interface Haute Resolution)"
 	TukuiL.option_unitframes_classbar = "Afficher la barre de classe"
 	TukuiL.option_unitframes_weakenedsoulbar = "Afficher la barre de debuff âme affaiblie (pour prêtres)"

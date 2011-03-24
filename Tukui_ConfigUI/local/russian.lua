@@ -58,7 +58,7 @@
 	TukuiL.option_datatext_mastery = "Mастерство (0 для отключения)"	
  
 	-- unit frames
-	TukuiL.option_unitframes_unitframes = "Рамки юнитов"
+	TukuiL.option_unitframes = "Рамки юнитов"
 	TukuiL.option_unitframes_combatfeedback = "Текст боя на рамках игрока и цели"
 	TukuiL.option_unitframes_runebar = "Включить панель рун для Рыцарей Смерти"
 	TukuiL.option_unitframes_auratimer = "Включить таймер аур"
@@ -95,7 +95,7 @@
 	TukuiL.option_unitframes_range = "Прозрачность рамок группы/рейда вне зоны досягаемости"
 	TukuiL.option_unitframes_maintank = "Включить отображение главного танка"
 	TukuiL.option_unitframes_mainassist = "Включить отображение наводчика"
-	TukuiL.option_unitframes_unicolor = "Включить унифицированную цветовую схему (серая полоса здоровья)"
+	TukuiL.option_unitframes_classcolor = "Включить унифицированную цветовую схему (серая полоса здоровья)"
 	TukuiL.option_unitframes_totdebuffs = "Включить дебаффы цели цели (Высокое разрешение)"
 	TukuiL.option_unitframes_classbar = "Включить классовую панель"
 	TukuiL.option_unitframes_weakenedsoulbar = "Включить уведомление Ослабленной души (для Приста)"

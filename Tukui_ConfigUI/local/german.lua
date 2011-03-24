@@ -58,7 +58,7 @@
 	TukuiL.option_datatext_mastery = "Meisterschaft Position (0 wenn deaktiviert)"
  
 	-- unit frames
-	TukuiL.option_unitframes_unitframes = "Unitframes"
+	TukuiL.option_unitframes = "Unitframes"
 	TukuiL.option_unitframes_combatfeedback = "Kampfmeldungen auf Spieler und Ziel"
 	TukuiL.option_unitframes_runebar = "Aktiviere Runenleiste für Todesritter"
 	TukuiL.option_unitframes_auratimer = "Aktiviere Dauer auf Stärkungs- und Schwächungszaubern"
@@ -95,7 +95,7 @@
 	TukuiL.option_unitframes_range = "Transparenz der Schlachtzug- und Gruppenfenster wenn außer Reichweite"
 	TukuiL.option_unitframes_maintank = "Main Tank Anzeige aktivieren"
 	TukuiL.option_unitframes_mainassist = "Main Assist Anzeige aktivieren"
-	TukuiL.option_unitframes_unicolor = "Einheitliches Farbschema (graue Lebensbalken) aktivieren"
+	TukuiL.option_unitframes_classcolor = "Einheitliches Farbschema (graue Lebensbalken) aktivieren"
 	TukuiL.option_unitframes_totdebuffs = "Ziel vom Ziel Schwächungszauber anzeigen (hohe Auflösung)"
 	TukuiL.option_unitframes_classbar = "Klassen Leiste aktivieren"
 	TukuiL.option_unitframes_weakenedsoulbar = "Aktiviere 'Geschwächte Seele' Anzeige (Priester)"
