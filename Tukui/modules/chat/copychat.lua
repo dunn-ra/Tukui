@@ -13,7 +13,7 @@ local isf = nil
 local function CreatCopyFrame()
 	frame = CreateFrame("Frame", "CopyFrame", UIParent)
 	frame:SetTemplate("Default")
-	frame:Width((TukuiBar1:GetWidth() * 2) + 20)
+	frame:Width((TukuiBar1:GetWidth() * 1.5) + 20)
 	frame:Height(250)
 	frame:SetScale(1)
 	frame:Point("BOTTOM", UIParent, "BOTTOM", 0, 10)
@@ -71,7 +71,7 @@ local function ChatCopyButtons()
 	for i = 1, NUM_CHAT_WINDOWS do
 		local cf = _G[format("ChatFrame%d",  i)]
 		local button = CreateFrame("Button", format("ButtonCF%d", i), cf)
-		button:SetPoint("BOTTOMLEFT", 0, 0)
+		button:SetPoint("BOTTOMLEFT", 0, 10)
 		button:SetHeight(T.Scale(25))
 		button:SetWidth(T.Scale(25))
 		button:SetNormalTexture(C.media.copyicon)
