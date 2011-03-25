@@ -63,9 +63,9 @@ local function Shared(self, unit)
 	name:Point("LEFT", self, "LEFT", 5, 0)
 	
 	if TukuiCF["unitframes"].unicolor == true then
-		self:Tag(name, '[Tukui:getnamecolor][Tukui:namemedium] [Tukui:dead][Tukui:afk]')
+		self:Tag(name, '[Tukui:getnamecolor][Tukui:nameshort] [Tukui:dead][Tukui:afk]')
 	else
-		self:Tag(name, "[Tukui:namemedium] [Tukui:dead][Tukui:afk]")
+		self:Tag(name, "[Tukui:nameshort] [Tukui:dead][Tukui:afk]")
 		name:SetTextColor(unpack(TukuiCF["media"].tncolor))
 		name:SetShadowColor(0, 0, 0)
 		name:SetShadowOffset(0.75, -0.75)
