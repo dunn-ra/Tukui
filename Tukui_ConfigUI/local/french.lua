@@ -95,7 +95,7 @@ if GetLocale() == "frFR" then
 	TukuiL.option_unitframes_range = "Transparence sur unité de Groupe/Raid hors de portée"
 	TukuiL.option_unitframes_maintank = "Afficher Main Tank"
 	TukuiL.option_unitframes_mainassist = "Afficher Main Heal"
-	TukuiL.option_unitframes_classcolor = "Afficher le thème avec une seule couleur (barre de vie grise)"
+	TukuiL.option_unitframes_unicolor = "Afficher le thème avec une seule couleur (barre de vie grise)"
 	TukuiL.option_unitframes_totdebuffs = "Afficher les debuffs de la cible de la cible (interface Haute Resolution)"
 	TukuiL.option_unitframes_classbar = "Afficher la barre de classe"
 	TukuiL.option_unitframes_weakenedsoulbar = "Afficher la barre de debuff âme affaiblie (pour prêtres)"

@@ -95,7 +95,7 @@
 	TukuiL.option_unitframes_range = "Прозрачность рамок группы/рейда вне зоны досягаемости"
 	TukuiL.option_unitframes_maintank = "Включить отображение главного танка"
 	TukuiL.option_unitframes_mainassist = "Включить отображение наводчика"
-	TukuiL.option_unitframes_classcolor = "Включить унифицированную цветовую схему (серая полоса здоровья)"
+	TukuiL.option_unitframes_unicolor = "Включить унифицированную цветовую схему (серая полоса здоровья)"
 	TukuiL.option_unitframes_totdebuffs = "Включить дебаффы цели цели (Высокое разрешение)"
 	TukuiL.option_unitframes_classbar = "Включить классовую панель"
 	TukuiL.option_unitframes_weakenedsoulbar = "Включить уведомление Ослабленной души (для Приста)"

@@ -95,7 +95,7 @@
 	TukuiL.option_unitframes_range = "거리에 따른 투명도 수치"
 	TukuiL.option_unitframes_maintank = "방어 전담창을 사용"
 	TukuiL.option_unitframes_mainassist = "지원공격 전담창을 사용"
-	TukuiL.option_unitframes_classcolor = "직업색상을 사용"
+	TukuiL.option_unitframes_unicolor = "직업색상을 사용"
 	TukuiL.option_unitframes_totdebuffs = "대상의 대상의 약화 효과를 보여줌 (고해상도 전용)"
 	TukuiL.option_unitframes_classbar = "직업 바 사용"
 	TukuiL.option_unitframes_weakenedsoulbar = "약화된 영혼 알림바 사용 (사제)"

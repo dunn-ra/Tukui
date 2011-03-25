@@ -95,7 +95,7 @@
 	TukuiL.option_unitframes_range = "Transparenz der Schlachtzug- und Gruppenfenster wenn außer Reichweite"
 	TukuiL.option_unitframes_maintank = "Main Tank Anzeige aktivieren"
 	TukuiL.option_unitframes_mainassist = "Main Assist Anzeige aktivieren"
-	TukuiL.option_unitframes_classcolor = "Einheitliches Farbschema (graue Lebensbalken) aktivieren"
+	TukuiL.option_unitframes_unicolor = "Einheitliches Farbschema (graue Lebensbalken) aktivieren"
 	TukuiL.option_unitframes_totdebuffs = "Ziel vom Ziel Schwächungszauber anzeigen (hohe Auflösung)"
 	TukuiL.option_unitframes_classbar = "Klassen Leiste aktivieren"
 	TukuiL.option_unitframes_weakenedsoulbar = "Aktiviere 'Geschwächte Seele' Anzeige (Priester)"
