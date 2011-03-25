@@ -7,7 +7,7 @@ local TEXTURE = C["media"].normTex
 local FONT = C["media"].font
 local FONTSIZE = 10
 local FONTFLAG = "THINOUTLINE"
-local hpHeight = 12
+local hpHeight = 10
 local hpWidth = 110
 local iconSize = 25		--Size of all Icons, RaidIcon/ClassIcon/Castbar Icon
 local cbHeight = 5
@@ -20,7 +20,7 @@ local noscalemult = T.mult * C["general"].uiscale
 
 --Change defaults if we are showing health text or not
 if C["nameplate"].showhealth ~= true then
-	hpHeight = 7
+	hpHeight = 5
 	iconSize = 20
 end
 
@@ -115,10 +115,10 @@ local function UpdateThreat(frame, elapsed)
 				frame.healthborder_tex4:SetTexture(1, 0, 0)
 			end
 		else
-			frame.healthborder_tex1:SetTexture(unpack(C["media"].bordercolor))
-			frame.healthborder_tex2:SetTexture(unpack(C["media"].bordercolor))
-			frame.healthborder_tex3:SetTexture(unpack(C["media"].bordercolor))
-			frame.healthborder_tex4:SetTexture(unpack(C["media"].bordercolor))
+			frame.healthborder_tex1:SetTexture(unpack(C["media"].nameplatecolor))
+			frame.healthborder_tex2:SetTexture(unpack(C["media"].nameplatecolor))
+			frame.healthborder_tex3:SetTexture(unpack(C["media"].nameplatecolor))
+			frame.healthborder_tex4:SetTexture(unpack(C["media"].nameplatecolor))
 		end
 
 		--Set colors to their original, fixes reloading UI with a nameplate shown, not being colored correctly
@@ -193,16 +193,16 @@ local function UpdateThreat(frame, elapsed)
 			frame.healthborder_tex3:SetTexture(1, 0, 0)
 			frame.healthborder_tex4:SetTexture(1, 0, 0)
 		else
-			frame.healthborder_tex1:SetTexture(unpack(C["media"].bordercolor))
-			frame.healthborder_tex2:SetTexture(unpack(C["media"].bordercolor))
-			frame.healthborder_tex3:SetTexture(unpack(C["media"].bordercolor))
-			frame.healthborder_tex4:SetTexture(unpack(C["media"].bordercolor))
+			frame.healthborder_tex1:SetTexture(unpack(C["media"].nameplatecolor))
+			frame.healthborder_tex2:SetTexture(unpack(C["media"].nameplatecolor))
+			frame.healthborder_tex3:SetTexture(unpack(C["media"].nameplatecolor))
+			frame.healthborder_tex4:SetTexture(unpack(C["media"].nameplatecolor))
 		end
 	elseif (frame.hasclass ~= true and frame.isFriendly ~= true) and C["nameplate"].enhancethreat == true then
-		frame.healthborder_tex1:SetTexture(unpack(C["media"].bordercolor))
-		frame.healthborder_tex2:SetTexture(unpack(C["media"].bordercolor))
-		frame.healthborder_tex3:SetTexture(unpack(C["media"].bordercolor))
-		frame.healthborder_tex4:SetTexture(unpack(C["media"].bordercolor))
+		frame.healthborder_tex1:SetTexture(unpack(C["media"].nameplatecolor))
+		frame.healthborder_tex2:SetTexture(unpack(C["media"].nameplatecolor))
+		frame.healthborder_tex3:SetTexture(unpack(C["media"].nameplatecolor))
+		frame.healthborder_tex4:SetTexture(unpack(C["media"].nameplatecolor))
 	end
 end
 
@@ -214,8 +214,8 @@ local function UpdateCastbar(frame)
 	frame:SetPoint('TOP', frame:GetParent().hp, 'BOTTOM', 0, -8)
 	frame:GetStatusBarTexture():SetHorizTile(true)
 
-	if(not frame.shield:IsShown()) then
-		frame:SetStatusBarColor(0.78, 0.25, 0.25, 1)
+	if (not frame.shield:IsShown()) then
+		frame:SetStatusBarColor(unpack(C["media"].interruptable))
 	end
 end	
 
@@ -296,7 +296,7 @@ local function UpdateObjects(frame)
 	--Have to reposition this here so it doesnt resize after being hidden
 	frame.hp:ClearAllPoints()
 	frame.hp:SetSize(hpWidth, hpHeight)
-	frame.hp:SetPoint('TOP', frame, 'TOP', 0, -noscalemult*3)
+	frame.hp:SetPoint('TOP', frame, 'TOP', 0, -noscalemult)
 	frame.hp:GetStatusBarTexture():SetHorizTile(true)
 
 	--Determine if its an Enemy Player frame
@@ -343,8 +343,8 @@ local function UpdateObjects(frame)
 		frame.hp.level:SetText("B")
 		frame.hp.level:SetTextColor(0.8, 0.05, 0)
 		frame.hp.level:Show()
-	elseif not elite and level == mylevel then
-		frame.hp.level:Hide()
+	--elseif not elite and level == mylevel then
+		--frame.hp.level:Hide()
 	else
 		frame.hp.level:SetText(level..(elite and "+" or ""))
 		frame.hp.level:Show()
@@ -368,39 +368,39 @@ local function SkinObjects(frame)
 	
 	--Create hp backdrop
 	local healthbarbackdrop_tex = hp:CreateTexture(nil, "BORDER")
-	healthbarbackdrop_tex:SetPoint("TOPLEFT", hp, "TOPLEFT", -noscalemult*1, noscalemult*1)
-	healthbarbackdrop_tex:SetPoint("TOPRIGHT", hp, "TOPRIGHT", noscalemult*1, noscalemult*1)
-	healthbarbackdrop_tex:SetHeight(hpHeight + noscalemult*2)
+	healthbarbackdrop_tex:SetPoint("TOPLEFT", hp, "TOPLEFT", -noscalemult, noscalemult)
+	healthbarbackdrop_tex:SetPoint("TOPRIGHT", hp, "TOPRIGHT", noscalemult, noscalemult)
+	healthbarbackdrop_tex:SetHeight(hpHeight + noscalemult)
 	healthbarbackdrop_tex:SetTexture(unpack(C["media"].backdropcolor))	
 	healthbarbackdrop_tex:SetDrawLayer("BORDER", -1) --This is what was causing all the issues
 	
 	--Create our fake border.. fuck blizz
 	local healthbarborder_tex1 = hp:CreateTexture(nil, "BORDER")
-	healthbarborder_tex1:SetPoint("TOPLEFT", hp, "TOPLEFT", -noscalemult*1, noscalemult*1)
-	healthbarborder_tex1:SetPoint("TOPRIGHT", hp, "TOPRIGHT", noscalemult*1, noscalemult*1)
+	healthbarborder_tex1:SetPoint("TOPLEFT", hp, "TOPLEFT", -noscalemult, noscalemult)
+	healthbarborder_tex1:SetPoint("TOPRIGHT", hp, "TOPRIGHT", noscalemult, noscalemult)
 	healthbarborder_tex1:SetHeight(noscalemult)
-	healthbarborder_tex1:SetTexture(unpack(C["media"].bordercolor))
+	healthbarborder_tex1:SetTexture(unpack(C["media"].nameplatecolor))
 	frame.healthborder_tex1 = healthbarborder_tex1
 
 	local healthbarborder_tex2 = hp:CreateTexture(nil, "BORDER")
-	healthbarborder_tex2:SetPoint("BOTTOMLEFT", hp, "BOTTOMLEFT", -noscalemult*1, -noscalemult*1)
-	healthbarborder_tex2:SetPoint("BOTTOMRIGHT", hp, "BOTTOMRIGHT", noscalemult*1, -noscalemult*1)
+	healthbarborder_tex2:SetPoint("BOTTOMLEFT", hp, "BOTTOMLEFT", -noscalemult, -noscalemult)
+	healthbarborder_tex2:SetPoint("BOTTOMRIGHT", hp, "BOTTOMRIGHT", noscalemult, -noscalemult)
 	healthbarborder_tex2:SetHeight(noscalemult)
-	healthbarborder_tex2:SetTexture(unpack(C["media"].bordercolor))
+	healthbarborder_tex2:SetTexture(unpack(C["media"].nameplatecolor))
 	frame.healthborder_tex2 = healthbarborder_tex2
 
 	local healthbarborder_tex3 = hp:CreateTexture(nil, "BORDER")
-	healthbarborder_tex3:SetPoint("TOPLEFT", hp, "TOPLEFT", -noscalemult*1, noscalemult*1)
-	healthbarborder_tex3:SetPoint("BOTTOMLEFT", hp, "BOTTOMLEFT", noscalemult*1, -noscalemult*1)
+	healthbarborder_tex3:SetPoint("TOPLEFT", hp, "TOPLEFT", -noscalemult, noscalemult)
+	healthbarborder_tex3:SetPoint("BOTTOMLEFT", hp, "BOTTOMLEFT", noscalemult, -noscalemult)
 	healthbarborder_tex3:SetWidth(noscalemult)
-	healthbarborder_tex3:SetTexture(unpack(C["media"].bordercolor))
+	healthbarborder_tex3:SetTexture(unpack(C["media"].nameplatecolor))
 	frame.healthborder_tex3 = healthbarborder_tex3
 
 	local healthbarborder_tex4 = hp:CreateTexture(nil, "BORDER")
-	healthbarborder_tex4:SetPoint("TOPRIGHT", hp, "TOPRIGHT", noscalemult*1, noscalemult*1)
-	healthbarborder_tex4:SetPoint("BOTTOMRIGHT", hp, "BOTTOMRIGHT", -noscalemult*1, -noscalemult*1)
+	healthbarborder_tex4:SetPoint("TOPRIGHT", hp, "TOPRIGHT", noscalemult, noscalemult)
+	healthbarborder_tex4:SetPoint("BOTTOMRIGHT", hp, "BOTTOMRIGHT", -noscalemult, -noscalemult)
 	healthbarborder_tex4:SetWidth(noscalemult)
-	healthbarborder_tex4:SetTexture(unpack(C["media"].bordercolor))
+	healthbarborder_tex4:SetTexture(unpack(C["media"].nameplatecolor))
 	frame.healthborder_tex4 = healthbarborder_tex4
 
 	hp:SetStatusBarTexture(TEXTURE)
@@ -443,34 +443,34 @@ local function SkinObjects(frame)
 
 	-- Create Cast Bar Backdrop frame
 	local castbarbackdrop_tex = cb:CreateTexture(nil, "BACKGROUND")
-	castbarbackdrop_tex:SetPoint("TOPLEFT", cb, "TOPLEFT", -noscalemult*1, noscalemult*1)
-	castbarbackdrop_tex:SetPoint("BOTTOMRIGHT", cb, "BOTTOMRIGHT", noscalemult*1, -noscalemult*1)
+	castbarbackdrop_tex:SetPoint("TOPLEFT", cb, "TOPLEFT", -noscalemult, noscalemult)
+	castbarbackdrop_tex:SetPoint("BOTTOMRIGHT", cb, "BOTTOMRIGHT", noscalemult, -noscalemult)
 	castbarbackdrop_tex:SetTexture(unpack(C["media"].backdropcolor))
 
 	--Create our fake border.. fuck blizz
 	local castbarborder_tex1 = cb:CreateTexture(nil, "BORDER")
-	castbarborder_tex1:SetPoint("TOPLEFT", cb, "TOPLEFT", -noscalemult*1, noscalemult*1)
-	castbarborder_tex1:SetPoint("TOPRIGHT", cb, "TOPRIGHT", noscalemult*1, noscalemult*1)
+	castbarborder_tex1:SetPoint("TOPLEFT", cb, "TOPLEFT", -noscalemult, noscalemult)
+	castbarborder_tex1:SetPoint("TOPRIGHT", cb, "TOPRIGHT", noscalemult, noscalemult)
 	castbarborder_tex1:SetHeight(noscalemult)
-	castbarborder_tex1:SetTexture(unpack(C["media"].bordercolor))	
+	castbarborder_tex1:SetTexture(unpack(C["media"].nameplatecolor))	
 
 	local castbarborder_tex2 = cb:CreateTexture(nil, "BORDER")
-	castbarborder_tex2:SetPoint("BOTTOMLEFT", cb, "BOTTOMLEFT", -noscalemult*1, -noscalemult*1)
-	castbarborder_tex2:SetPoint("BOTTOMRIGHT", cb, "BOTTOMRIGHT", noscalemult*1, -noscalemult*1)
+	castbarborder_tex2:SetPoint("BOTTOMLEFT", cb, "BOTTOMLEFT", -noscalemult, -noscalemult)
+	castbarborder_tex2:SetPoint("BOTTOMRIGHT", cb, "BOTTOMRIGHT", noscalemult, -noscalemult)
 	castbarborder_tex2:SetHeight(noscalemult)
-	castbarborder_tex2:SetTexture(unpack(C["media"].bordercolor))	
+	castbarborder_tex2:SetTexture(unpack(C["media"].nameplatecolor))	
 
 	local castbarborder_tex3 = cb:CreateTexture(nil, "BORDER")
-	castbarborder_tex3:SetPoint("TOPLEFT", cb, "TOPLEFT", -noscalemult*1, noscalemult*1)
-	castbarborder_tex3:SetPoint("BOTTOMLEFT", cb, "BOTTOMLEFT", noscalemult*1, -noscalemult*1)
+	castbarborder_tex3:SetPoint("TOPLEFT", cb, "TOPLEFT", -noscalemult, noscalemult)
+	castbarborder_tex3:SetPoint("BOTTOMLEFT", cb, "BOTTOMLEFT", noscalemult, -noscalemult)
 	castbarborder_tex3:SetWidth(noscalemult)
-	castbarborder_tex3:SetTexture(unpack(C["media"].bordercolor))	
+	castbarborder_tex3:SetTexture(unpack(C["media"].nameplatecolor))	
 
 	local castbarborder_tex4 = cb:CreateTexture(nil, "BORDER")
-	castbarborder_tex4:SetPoint("TOPRIGHT", cb, "TOPRIGHT", noscalemult*1, noscalemult*1)
-	castbarborder_tex4:SetPoint("BOTTOMRIGHT", cb, "BOTTOMRIGHT", -noscalemult*1, -noscalemult*1)
+	castbarborder_tex4:SetPoint("TOPRIGHT", cb, "TOPRIGHT", noscalemult, noscalemult)
+	castbarborder_tex4:SetPoint("BOTTOMRIGHT", cb, "BOTTOMRIGHT", -noscalemult, -noscalemult)
 	castbarborder_tex4:SetWidth(noscalemult)
-	castbarborder_tex4:SetTexture(unpack(C["media"].bordercolor))	
+	castbarborder_tex4:SetTexture(unpack(C["media"].nameplatecolor))	
 
 	--Setup CastBar Icon
 	cbicon:ClearAllPoints()
@@ -482,14 +482,14 @@ local function SkinObjects(frame)
 
 	-- Create Cast Icon Backdrop frame
 	local casticonbackdrop_tex = cb:CreateTexture(nil, "BACKGROUND")
-	casticonbackdrop_tex:SetPoint("TOPLEFT", cbicon, "TOPLEFT", -noscalemult*3, noscalemult*3)
-	casticonbackdrop_tex:SetPoint("BOTTOMRIGHT", cbicon, "BOTTOMRIGHT", noscalemult*3, -noscalemult*3)
+	casticonbackdrop_tex:SetPoint("TOPLEFT", cbicon, "TOPLEFT", -noscalemult, noscalemult)
+	casticonbackdrop_tex:SetPoint("BOTTOMRIGHT", cbicon, "BOTTOMRIGHT", noscalemult, -noscalemult)
 	casticonbackdrop_tex:SetTexture(unpack(C["media"].backdropcolor))
 
 	local casticonborder_tex = cb:CreateTexture(nil, "BORDER")
-	casticonborder_tex:SetPoint("TOPLEFT", cbicon, "TOPLEFT", -noscalemult*2, noscalemult*2)
-	casticonborder_tex:SetPoint("BOTTOMRIGHT", cbicon, "BOTTOMRIGHT", noscalemult*2, -noscalemult*2)
-	casticonborder_tex:SetTexture(unpack(C["media"].bordercolor))	
+	casticonborder_tex:SetPoint("TOPLEFT", cbicon, "TOPLEFT", -noscalemult, noscalemult)
+	casticonborder_tex:SetPoint("BOTTOMRIGHT", cbicon, "BOTTOMRIGHT", noscalemult, -noscalemult)
+	casticonborder_tex:SetTexture(unpack(C["media"].nameplatecolor))	
 
 	--Create Cast Backdrop Frame
 	local casticonbackdrop2_tex = cb:CreateTexture(nil, "ARTWORK")
