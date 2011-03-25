@@ -132,7 +132,7 @@ local function Shared(self, unit)
 			health.Smooth = true
 		end
 		
-		if C["unitframes"].classcolor == false then
+		if C["unitframes"].unicolor == true then
 			health.colorTapping = false
 			health.colorDisconnected = false
 			health.colorClass = false
@@ -176,7 +176,7 @@ local function Shared(self, unit)
 		if C["unitframes"].unicolor == true then
 			power.colorTapping = true
 			power.colorClass = true
-			powerBG.multiplier = 0.1				
+			--powerBG.multiplier = 0.1				
 		else
 			power.colorPower = true
 		end
@@ -726,6 +726,23 @@ local function Shared(self, unit)
 			self.Castbar = castbar
 			self.Castbar.Time = castbar.time
 			self.Castbar.Icon = castbar.icon
+			
+			-- swing bar
+			if C.unitframes.swing == true then
+				local swing = CreateFrame("StatusBar", self:GetName().."SwingBar", UIParent)
+				swing:Size(TukuiPlayerCastBar:GetWidth(), 4)
+				swing:SetPoint("TOP", TukuiPlayerCastBar, "BOTTOM", 0, -1)
+
+				swing.bg = CreateFrame("Frame", nil, swing)
+				swing.bg:SetAllPoints(swing)
+				
+				swing.texture = normTex
+				swing.color = {1,1,1,1}
+				swing.textureBG = normTex
+				swing.colorBG = {0,0,0,.5}
+				
+				self.Swing = swing
+			end
 		end
 		
 		-- add combat feedback support
@@ -859,7 +876,7 @@ local function Shared(self, unit)
 		
 		if C["unitframes"].unicolor == true then
 			power.colorClass = true
-			powerBG.multiplier = 0.1				
+			--powerBG.multiplier = 0.1				
 		else
 			power.colorPower = true
 		end
@@ -966,7 +983,7 @@ local function Shared(self, unit)
 		
 		if C["unitframes"].unicolor == true then
 			power.colorClass = true
-			powerBG.multiplier = 0.1				
+			--powerBG.multiplier = 0.1				
 		else
 			power.colorPower = true
 		end
@@ -1097,7 +1114,7 @@ local function Shared(self, unit)
 		
 		if C["unitframes"].unicolor == true then
 			power.colorClass = true
-			powerBG.multiplier = 0.1				
+			--powerBG.multiplier = 0.1				
 		else
 			power.colorPower = true
 		end
@@ -1211,7 +1228,7 @@ local function Shared(self, unit)
 		
 		if C["unitframes"].unicolor == true then
 			power.colorClass = true
-			powerBG.multiplier = 0.1				
+			--powerBG.multiplier = 0.1				
 		else
 			power.colorPower = true
 		end
@@ -1375,7 +1392,7 @@ local function Shared(self, unit)
 		
 		if C["unitframes"].unicolor == true then
 			power.colorClass = true
-			powerBG.multiplier = 0.1				
+			--powerBG.multiplier = 0.1				
 		else
 			power.colorPower = true
 		end
