@@ -19,7 +19,7 @@ C["unitframes"] = {
 	-- theme
 	["enemyhcolor"] = false,							-- enemy target (players) color by hostility, very useful for healer.
 	["unitcastbar"] = true,                             -- enable tukui castbar
-	["unicolor"] = true,								-- enable unicolor theme
+	["unicolor"] = true,								-- enable classcolored frames
 	["playeraggro"] = false,							-- color player border to red if you have aggro on current target.
 	-- castbar
 	["cccastbar"] = true,								-- enable classcolored castbars
@@ -76,7 +76,7 @@ C["classtimer"] = {
 	["playerbar"] = {.33,.59,.33},
 	["targetbar"] = {.33,.59,.33},
 	["targetdebuff"] = {.54,.10,.10},
-	["trinketbar"] = {.54,.10,.10},
+	["trinketbar"] = {1,.75,.14},
 }
 
 C["stexperience"] = {
@@ -160,10 +160,11 @@ C["datatext"] = {
 C["chat"] = {
 	["enable"] = true,                                  -- enable chat feature
 	["whispersound"] = true,                            -- play a sound when receiving whisper
-	["background"] = true,								-- chat background
+	["background"] = false,								-- chat background
 	["rightpanel"] = false,								-- enable loot frame on right side (/resetui to apply)
 	["width"] = 380,									-- width of the chat frame (/resetui to apply)
 	["height"] = 130,									-- height of the chat frame (/resetui to apply)
+	["shadow"] = false,									-- add a drop shadow to the chat text
 }
 
 C["nameplate"] = {
@@ -173,9 +174,10 @@ C["nameplate"] = {
 	["enhancethreat"] = false,			                -- threat features based on if your a tank or not
 	["overlap"] = true,					                -- allow nameplates to overlap
 	["combat"] = false,					                -- only show enemy nameplates in-combat.
-	["goodcolor"] = {0,0,0},					        -- good threat color (tank shows this with threat, everyone else without)
-	["badcolor"] = {0.78, 0.25, 0.25},			        -- bad threat color (opposite of above)
+	["goodcolor"] = {75/255, 175/255, 76/255},			-- good threat color (tank shows this with threat, everyone else without)
+	["badcolor"] = {0.78, 0.25, 0.25},					-- bad threat color (opposite of above)
 	["transitioncolor"] = {218/255, 197/255, 92/255},	-- threat color when gaining threat
+	["classicon"] = true,								-- add class icon to nameplate
 }
 
 C["tooltip"] = {
