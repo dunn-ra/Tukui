@@ -50,12 +50,15 @@ C["unitframes"] = {
 	["showrange"] = true,								-- show range opacity on raidframes
 	["raidalphaoor"] = 0.5,								-- alpha of unitframes when unit is out of range
 	["gridonly"] = true,								-- enable grid only mode for all healer mode raid layout.
+	["dpsdebuff"] = true,								-- enable tracking of debuffs on dps layout (alternate mode)
+	["debuffnumber"] = 5,								-- number of debuffs to show on dps/heal raid layout	
 	["showsymbols"] = true,								-- show symbol.
 	["aggro"] = true,									-- show aggro on all raids layouts
 	["raidunitdebuffwatch"] = true,						-- track important spell to watch in pve for grid mode.
 	["gridhealthvertical"] = true,						-- enable vertical grow on health bar for grid mode.
 	["showplayerinparty"] = true,						-- show my player frame in party
 	["gridscale"] = 1,									-- set the healing grid scaling
+	["pets"] = false,									-- enable pet layout
 	-- boss frames
 	["showboss"] = true,								-- reskin the boss frame
 	-- priest only plugin
@@ -177,7 +180,6 @@ C["nameplate"] = {
 	["goodcolor"] = {75/255, 175/255, 76/255},			-- good threat color (tank shows this with threat, everyone else without)
 	["badcolor"] = {0.78, 0.25, 0.25},					-- bad threat color (opposite of above)
 	["transitioncolor"] = {218/255, 197/255, 92/255},	-- threat color when gaining threat
-	["classicon"] = true,								-- add class icon to nameplate
 }
 
 C["tooltip"] = {
@@ -212,4 +214,5 @@ C["buffreminder"] = {
 
 C["misc"] = {
 	["duelspam"] = true,								-- removes duel chat spam
+	["announceinterrupt"] = true,						-- announce interrupt to /p or /r
 }

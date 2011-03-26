@@ -58,6 +58,7 @@ local function Stuffing_OnShow()
 
 	Stuffing:Layout()
 	Stuffing:SearchReset()
+	collectgarbage("collect")
 end
 
 

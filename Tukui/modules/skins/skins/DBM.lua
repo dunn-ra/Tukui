@@ -245,7 +245,6 @@ local UploadDBM = function()
 	DBT_SavedOptions["DBM"].BarXOffset=0
 	DBT_SavedOptions["DBM"].BarYOffset=3
 	DBT_SavedOptions["DBM"].IconLeft=true
-	DBT_SavedOptions["DBM"].ExpandUpwards=true
 	DBT_SavedOptions["DBM"].Texture=C["media"].normTex
 	DBT_SavedOptions["DBM"].IconRight=false
 end
@@ -289,4 +288,3 @@ StaticPopupDialogs["TUKUIDBM"] = {
     whileDead = 1,
     hideOnEscape = true,
 }
-
