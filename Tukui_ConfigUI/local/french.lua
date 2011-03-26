@@ -185,6 +185,10 @@ if GetLocale() == "frFR" then
 	TukuiL.option_makeselection = "Vous devez faire un choix pour continuer."
 	
 	-- cyui
+	-- unit frames
+	TukuiL.option_unitframes_debuffnumber = "Number of debuffs to show on dps/heal raid layout"
+	TukuiL.option_unitframes_dpsdebuff = "Enable tracking of debuffs on dps layout (alternate mode)"
+	TukuiL.option_unitframes_pets = "Enable pet layout"
 	--nameplates
 	TukuiL.option_nameplates_simplehealth = "Health percentage on nameplates"
 	-- general
@@ -212,15 +216,16 @@ if GetLocale() == "frFR" then
 	TukuiL.option_stexperience_text = "Set to true to hide text"
 	TukuiL.option_stexperience_mouseovertext = "Set to true to only show text on mouseover"
 	-- misc
-	TukuiL.option_misc = "miscellaneous"
+	TukuiL.option_misc = "Miscellaneous"
 	TukuiL.option_misc_duelspam = "Removes duel chat spam"
+	TukuiL.option_misc_announceinterrupt = "Announces succesful interrupts raid or party chat"
 	-- classtimer
 	TukuiL.option_classtimer = "Classtimer"
 	TukuiL.option_classtimer_enable = "Enable classtimer"
 	TukuiL.option_classtimer_classcolor = "Classcolored bars"
 	TukuiL.option_classtimer_barheight = "Bar height"
 	TukuiL.option_classtimer_barspacing = "bar spacing"
-	TukuiL.option_classtimer_direction = "Direction"
+	TukuiL.option_classtimer_direction = "Direction (tick to right, or viceversa)"
 	TukuiL.option_classtimer_spark = "Marker on the end of the bar"
 	TukuiL.option_classtimer_castseparator = "Marker to indicate clipping"
 	TukuiL.option_classtimer_playerbar = "Player color"
@@ -231,6 +236,7 @@ if GetLocale() == "frFR" then
 	TukuiL.option_chat_rightpanel = "Enable loot frame on right side (/resetui to apply)"
 	TukuiL.option_chat_width = "Width of the chat frame (/resetui to apply)"
 	TukuiL.option_chat_height = "Height of the chat frame (/resetui to apply)"
+	TukuiL.option_chat_height = "Add a shadow offset to chat text"
 	-- bags
 	TukuiL.option_bags_slots = "Number of column bag slots to display"	
 	TukuiL.option_bags_moveable = "Toggle moveable bags"

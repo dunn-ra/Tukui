@@ -212,6 +212,10 @@ local function Local(o)
 	if o == "TukuiConfigUIaurasplayer" then o = TukuiL.option_auras_player end
 	
 	-- cyui
+	-- unit frames
+	if o == "TukuiConfigUIunitframesdebuffnumber" then o = TukuiL.option_unitframes_debuffnumber end
+	if o == "TukuiConfigUIunitframesdpsdebuff" then o = TukuiL.option_unitframes_dpsdebuff end
+	if o == "TukuiConfigUIunitframespets" then o = TukuiL.option_unitframes_pets end
 	--nameplates
 	if o == "TukuiConfigUInameplatesimplehealth" then o = TukuiL.option_nameplates_simplehealth end
 	-- general
@@ -241,6 +245,7 @@ local function Local(o)
 	-- misc
 	if o == "TukuiConfigUImisc" then o = TukuiL.option_misc end
 	if o == "TukuiConfigUImiscduelspam" then o = TukuiL.option_misc_duelspam end
+	if o == "TukuiConfigUImiscannounceinterrupt" then o = TukuiL.option_misc_announceinterrupt end
 	-- classtimer
 	if o == "TukuiConfigUIclasstimer" then o = TukuiL.option_classtimer end
 	if o == "TukuiConfigUIclasstimerenable" then o = TukuiL.option_classtimer_enable end
@@ -258,6 +263,7 @@ local function Local(o)
 	if o == "TukuiConfigUIchatrightpanel" then o = TukuiL.option_chat_rightpanel end
 	if o == "TukuiConfigUIchatwidth" then o = TukuiL.option_chat_width end
 	if o == "TukuiConfigUIchatheight" then o = TukuiL.option_chat_height end
+	if o == "TukuiConfigUIchatshadow" then o = TukuiL.option_chat_shadow end
 	-- bags
 	if o == "TukuiConfigUIbagsslots" then o = TukuiL.option_bags_slots end	
 	if o == "TukuiConfigUIbagsmoveable" then o = TukuiL.option_bags_moveable end
