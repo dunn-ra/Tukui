@@ -125,6 +125,7 @@
 	<Script file="modules\misc\commands.lua"/>
 	<Script file="modules\misc\invite.lua"/>
 	<Script file="modules\misc\damage.lua"/>
+	<Script file="modules\misc\announce.lua"/>
 	<Script file="modules\stexperience\stexperiencebar.lua"/>
 	<Script file="modules\blizzard\achievements.lua"/>
 	<Script file="core\movers.lua"/>
