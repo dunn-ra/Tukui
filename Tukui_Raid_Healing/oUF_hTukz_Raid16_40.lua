@@ -11,7 +11,8 @@ if C["unitframes"].enableraidframes ~= true then return end
 
 local font2 = C["media"].uffont
 local font1 = C["media"].font
-local normTex = C["media"].normTex
+--local normTex = C["media"].normTex
+local normTex = C["media"].shpTex
 
 local function Shared(self, unit)
 	self.colors = T.oUF_colors
@@ -264,7 +265,7 @@ oUF:Factory(function(self)
 			"yOffset", T.Scale(-3),
 			"point", "LEFT",
 			"groupFilter", "1,2,3,4,5,6,7,8",
-			"groupingOrder", "8,7,6,5,4,3,2,1",
+			"groupingOrder", "1,2,3,4,5,6,7,8",
 			"groupBy", "GROUP",
 			"maxColumns", 8,
 			"unitsPerColumn", 5,
@@ -273,35 +274,37 @@ oUF:Factory(function(self)
 		)
 		raid:SetPoint("BOTTOM", TukuiViewport, "TOP", 0, 110*T.raidscale)
 		
-		local pets = {} 
-			pets[1] = oUF:Spawn('partypet1', 'oUF_TukuiPartyPet1') 
-			pets[1]:Point('TOPLEFT', raid, 'TOPLEFT', 0, -50*C["unitframes"].gridscale*T.raidscale + -3)
-			pets[1]:Size(66*C["unitframes"].gridscale*T.raidscale, 50*C["unitframes"].gridscale*T.raidscale)
-		for i =2, 4 do 
-			pets[i] = oUF:Spawn('partypet'..i, 'oUF_TukuiPartyPet'..i) 
-			pets[i]:Point('LEFT', pets[i-1], 'RIGHT', 3, 0)
-			pets[i]:Size(66*C["unitframes"].gridscale*T.raidscale, 50*C["unitframes"].gridscale*T.raidscale)
-		end
-		
-		local ShowPet = CreateFrame("Frame")
-		ShowPet:RegisterEvent("PLAYER_ENTERING_WORLD")
-		ShowPet:RegisterEvent("RAID_ROSTER_UPDATE")
-		ShowPet:RegisterEvent("PARTY_LEADER_CHANGED")
-		ShowPet:RegisterEvent("PARTY_MEMBERS_CHANGED")
-		ShowPet:SetScript("OnEvent", function(self)
-			if InCombatLockdown() then
-				self:RegisterEvent("PLAYER_REGEN_ENABLED")
-			else
-				self:UnregisterEvent("PLAYER_REGEN_ENABLED")
-				local numraid = GetNumRaidMembers()
-				local numparty = GetNumPartyMembers()
-				if numparty > 0 and numraid == 0 or numraid > 0 and numraid <= 5 then
-					for i,v in ipairs(pets) do v:Disable() end
-				else
-					for i,v in ipairs(pets) do v:Disable() end
-				end
+		if C.unitframes.pets then
+			local pets = {} 
+				pets[1] = oUF:Spawn('partypet1', 'oUF_TukuiPartyPet1') 
+				pets[1]:Point('TOPLEFT', raid, 'TOPLEFT', 0, -50*C["unitframes"].gridscale*T.raidscale + -3)
+				pets[1]:Size(66*C["unitframes"].gridscale*T.raidscale, 50*C["unitframes"].gridscale*T.raidscale)
+			for i = 2, 4 do 
+				pets[i] = oUF:Spawn('partypet'..i, 'oUF_TukuiPartyPet'..i) 
+				pets[i]:Point('LEFT', pets[i-1], 'RIGHT', 3, 0)
+				pets[i]:Size(66*C["unitframes"].gridscale*T.raidscale, 50*C["unitframes"].gridscale*T.raidscale)
 			end
-		end)		
+			
+			local ShowPet = CreateFrame("Frame")
+			ShowPet:RegisterEvent("PLAYER_ENTERING_WORLD")
+			ShowPet:RegisterEvent("RAID_ROSTER_UPDATE")
+			ShowPet:RegisterEvent("PARTY_LEADER_CHANGED")
+			ShowPet:RegisterEvent("PARTY_MEMBERS_CHANGED")
+			ShowPet:SetScript("OnEvent", function(self)
+				if InCombatLockdown() then
+					self:RegisterEvent("PLAYER_REGEN_ENABLED")
+				else
+					self:UnregisterEvent("PLAYER_REGEN_ENABLED")
+					local numraid = GetNumRaidMembers()
+					local numparty = GetNumPartyMembers()
+					if numparty > 0 and numraid == 0 or numraid > 0 and numraid <= 5 then
+						for i,v in ipairs(pets) do v:Disable() end
+					else
+						for i,v in ipairs(pets) do v:Disable() end
+					end
+				end
+			end)
+		end
 	end
 end)
 

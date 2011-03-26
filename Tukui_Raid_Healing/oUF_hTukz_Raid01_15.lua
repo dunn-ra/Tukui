@@ -11,7 +11,9 @@ if C["unitframes"].enableraidframes ~= true then return end
 
 local font2 = C["media"].uffont
 local font1 = C["media"].font
-local normTex = C["media"].normTex
+--local normTex = C["media"].normTex
+local normTex = C["media"].shpTex
+local dn = C["unitframes"].debuffnumber
 
 local function Shared(self, unit)
 	self.colors = T.oUF_colors
@@ -152,7 +154,7 @@ local function Shared(self, unit)
     debuffs.size = 26
     debuffs.spacing = 2
     debuffs.initialAnchor = 'LEFT'
-	debuffs.num = 5
+	debuffs.num = dn
 	debuffs.PostCreateIcon = T.PostCreateAura
 	debuffs.PostUpdateIcon = T.PostUpdateAura
 	self.Debuffs = debuffs

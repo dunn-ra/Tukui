@@ -27,7 +27,7 @@ local function Shared(self, unit)
 	health:Height(14)
 	health:SetPoint("TOPLEFT")
 	health:SetPoint("TOPRIGHT")
-	health:SetStatusBarTexture(C["media"].hpTex)
+	health:SetStatusBarTexture(C["media"].shpTex)
 	self.Health = health
 
 	health.bg = self.Health:CreateTexture(nil, 'BORDER')

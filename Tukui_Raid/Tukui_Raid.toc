@@ -7,4 +7,5 @@
 ## RequiredDeps: Tukui
 
 oUF_Tukz_Raid01_25.lua
+oUF_Tukz_Raid01_25_alt.lua
 oUF_Tukz_Raid40.lua

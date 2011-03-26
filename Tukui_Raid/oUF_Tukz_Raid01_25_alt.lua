@@ -6,11 +6,11 @@ ns._Objects = {}
 ns._Headers = {}
 
 local T, C, L = unpack(Tukui) -- Import: T - functions, constants, variables; C - config; L - locales
-if not C["unitframes"].enable == true or C["unitframes"].dpsdebuff == true then return end
 if C["unitframes"].enableraidframes ~= true then return end
 
 local font2 = C["media"].uffont
 local font1 = C["media"].font
+local dn = C["unitframes"].debuffnumber
 
 local function Shared(self, unit)
 	self.colors = T.oUF_colors
@@ -24,7 +24,7 @@ local function Shared(self, unit)
 	self:SetBackdropColor(0.1, 0.1, 0.1)
 	
 	local health = CreateFrame('StatusBar', nil, self)
-	health:Height(13)
+	health:Height(17)
 	health:SetPoint("TOPLEFT")
 	health:SetPoint("TOPRIGHT")
 	health:SetStatusBarTexture(C["media"].shpTex)
@@ -84,7 +84,7 @@ local function Shared(self, unit)
 	
 	local name = health:CreateFontString(nil, 'OVERLAY')
 	name:SetFont(font2, 11*T.raidscale, "THINOUTLINE")
-	name:Point("LEFT", self, "LEFT", 5, 0)
+	name:Point("LEFT", self, "LEFT", 5, 2)
 	
 	if TukuiCF["unitframes"].unicolor == true then
 		self:Tag(name, '[Tukui:getnamecolor][Tukui:namemedium] [Tukui:dead][Tukui:afk]')
@@ -125,6 +125,22 @@ local function Shared(self, unit)
 	ReadyCheck:SetPoint('CENTER')
 	self.ReadyCheck = ReadyCheck
 	
+	local debuffs = CreateFrame('Frame', nil, self)
+    debuffs:SetPoint('LEFT', self, 'RIGHT', 4, 0)
+    debuffs:SetHeight(20)
+    debuffs:SetWidth(200)
+    debuffs.size = 20
+    debuffs.spacing = 2
+    debuffs.initialAnchor = 'LEFT'
+	debuffs.num = dn
+	debuffs.PostCreateIcon = T.PostCreateAura
+	debuffs.PostUpdateIcon = T.PostUpdateAura
+	self.Debuffs = debuffs
+	
+	self.DebuffHighlightAlpha = 1
+	self.DebuffHighlightBackdrop = true
+	self.DebuffHighlightFilter = true
+	
 	--local picon = self.Health:CreateTexture(nil, 'OVERLAY')
 	--picon:SetPoint('CENTER', self.Health)
 	--picon:SetSize(16, 16)
@@ -158,26 +174,28 @@ oUF:Factory(function(self)
 			self:SetWidth(header:GetAttribute('initial-width'))
 			self:SetHeight(header:GetAttribute('initial-height'))
 		]],
-		'initial-width', T.Scale(85*T.raidscale),
-		'initial-height', T.Scale(16*T.raidscale),	
+		'initial-width', T.Scale(95*T.raidscale),
+		'initial-height', T.Scale(20*T.raidscale),	
 		"showParty", true,
 		"showPlayer", C["unitframes"].showplayerinparty,
 		"showRaid", true,
 		"groupFilter", "1,2,3,4,5,6,7,8",
 		"groupingOrder", "1,2,3,4,5,6,7,8",
 		"groupBy", "GROUP",
-		"yOffset", T.Scale(-3)
+		"yOffset", T.Scale(-4)
 	)
 	raid:SetPoint('TOPLEFT', UIParent, 1, -300*T.raidscale)
 	
-	local pets = {} 
-		pets[1] = oUF:Spawn('partypet1', 'oUF_TukuiPartyPet1') 
-		pets[1]:SetPoint('TOPLEFT', raid, 'TOPLEFT', 0, -120*T.raidscale)
-		pets[1]:SetSize(T.Scale(120*T.raidscale), T.Scale(16*T.raidscale))
-	for i =2, 4 do 
-		pets[i] = oUF:Spawn('partypet'..i, 'oUF_TukuiPartyPet'..i) 
-		pets[i]:SetPoint('TOP', pets[i-1], 'BOTTOM', 0, -8)
-		pets[i]:SetSize(T.Scale(120*T.raidscale), T.Scale(16*T.raidscale))
+	if C.unitframes.pets then
+		local pets = {} 
+			pets[1] = oUF:Spawn('partypet1', 'oUF_TukuiPartyPet1') 
+			pets[1]:SetPoint('TOPLEFT', raid, 'TOPLEFT', 0, -120*T.raidscale)
+			pets[1]:SetSize(T.Scale(95*T.raidscale), T.Scale(15*T.raidscale))
+		for i =2, 4 do 
+			pets[i] = oUF:Spawn('partypet'..i, 'oUF_TukuiPartyPet'..i) 
+			pets[i]:SetPoint('TOP', pets[i-1], 'BOTTOM', 0, -8)
+			pets[i]:SetSize(T.Scale(95*T.raidscale), T.Scale(15*T.raidscale))
+		end
 	end
 	
 	local RaidMove = CreateFrame("Frame")
@@ -194,18 +212,18 @@ oUF:Factory(function(self)
 			local numparty = GetNumPartyMembers()
 			if numparty > 0 and numraid == 0 or numraid > 0 and numraid <= 5 then
 				raid:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 10, -399*T.raidscale)
-				for i,v in ipairs(pets) do v:Disable() end
+				if C.unitframes.pets then for i,v in ipairs(pets) do v:Disable() end end
 			elseif numraid > 5 and numraid < 11 then
 				raid:SetPoint('TOPLEFT', UIParent, 15, -300*T.raidscale)
-				for i,v in ipairs(pets) do v:Disable() end
+				if C.unitframes.pets then for i,v in ipairs(pets) do v:Disable() end end
 			elseif numraid > 10 and numraid < 16 then
 				raid:SetPoint('TOPLEFT', UIParent, 15, -230*T.raidscale)
-				for i,v in ipairs(pets) do v:Disable() end
+				if C.unitframes.pets then for i,v in ipairs(pets) do v:Disable() end end
 			elseif numraid > 15 and numraid < 26 then
 				raid:SetPoint('TOPLEFT', UIParent, 15, -150*T.raidscale)
-				for i,v in ipairs(pets) do v:Disable() end
+				if C.unitframes.pets then for i,v in ipairs(pets) do v:Disable() end end
 			elseif numraid > 25 then
-				for i,v in ipairs(pets) do v:Disable() end
+				if C.unitframes.pets then for i,v in ipairs(pets) do v:Disable() end end
 			end
 		end
 	end)

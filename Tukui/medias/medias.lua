@@ -34,6 +34,7 @@ C["media"] = {
 	-- textures
 	["normTex"] = [[Interface\AddOns\Tukui\medias\textures\normTex]], -- texture used for tukui powerbar/altbar/castbar/etc
 	["hpTex"] = [[Interface\AddOns\Tukui\medias\textures\hpTex]], -- texture used for tukui healthbar
+	["shpTex"] = [[Interface\AddOns\Tukui\medias\textures\shpTex]], -- texture used for small tukui healthbar
 	["glowTex"] = [[Interface\AddOns\Tukui\medias\textures\glowTex]], -- the glow text around some frame.
 	["bubbleTex"] = [[Interface\AddOns\Tukui\medias\textures\bubbleTex]], -- unitframes combo points
 	["copyicon"] = [[Interface\AddOns\Tukui\medias\textures\copy]], -- copy icon
