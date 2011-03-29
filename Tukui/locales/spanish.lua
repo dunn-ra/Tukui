@@ -185,6 +185,10 @@ if T.client == "esES" then
 	L.core_uihelp9 = "|cffFF0000/resetui|r - Resetea Tukui por completo."
 	L.core_uihelp10 = "|cffFF0000/rd|r - Deshacer banda."
 	L.core_uihelp11 = "|cffFF0000/ainv|r - Activa el autoinvitar via palabra clave en susurro. Puedes escoger la palabra clave escribiendo `/ainv palabraclave`"
+	L.core_uihelp12 = "|cffFF0000/tukuidbm|r - DBM skinner options."
+	L.core_uihelp13 = "|cffFF0000/wipeactbars|r - Useful for a respec, removes all spells from your actionbars."
+	L.core_uihelp14 = "|cffFF0000/hb|r - Easy keybinding, just mouseover your spell/actionbar and press a key."
+	L.core_uihelp15 = "|cffFF0000/config|r - Ingame configuration menu."
 	L.core_uihelp100 = "(Sube el chat para ver mas comandos ...)"
  
 	L.symbol_CLEAR = "Nada"

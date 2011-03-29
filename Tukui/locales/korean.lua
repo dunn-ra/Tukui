@@ -192,6 +192,10 @@ if T.client == "koKR" then
 	L.core_uihelp9 = "|cffFF0000/resetui|r - Tukui를 기본값으로 초기화 합니다."
 	L.core_uihelp10 = "|cffFF0000/rd|r - 공격대를 해체합니다."
 	L.core_uihelp11 = "|cffFF0000/ainv|r - 자동초대 기능을 사용합니다. '/ainv 단어'를 입력하여 해당 단어가 들어간 귓속말이 올 경우 자동으로 초대를 합니다."
+	L.core_uihelp12 = "|cffFF0000/tukuidbm|r - DBM skinner options."
+	L.core_uihelp13 = "|cffFF0000/wipeactbars|r - Useful for a respec, removes all spells from your actionbars."
+	L.core_uihelp14 = "|cffFF0000/hb|r - Easy keybinding, just mouseover your spell/actionbar and press a key."
+	L.core_uihelp15 = "|cffFF0000/config|r - Ingame configuration menu."
 	L.core_uihelp100 = "(위로 올리십시오 ...)"
  
 	L.symbol_CLEAR = "초기화"

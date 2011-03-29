@@ -185,6 +185,10 @@ if T.client == "deDE" then
 	L.core_uihelp9 = "|cffFF0000/resetui|r - Auf Tukui Standard zurücksetzen."
 	L.core_uihelp10 = "|cffFF0000/rd|r - Raid auflösen."
 	L.core_uihelp11 = "|cffFF0000/ainv|r - Automatische Gruppeneinladung beim Anflüstern mit Schlüsselwort aktivieren. Du kannst dein eigenes Schlüsselwort mit `/ainv myword` einstellen"
+	L.core_uihelp12 = "|cffFF0000/tukuidbm|r - DBM skinner options."
+	L.core_uihelp13 = "|cffFF0000/wipeactbars|r - Useful for a respec, removes all spells from your actionbars."
+	L.core_uihelp14 = "|cffFF0000/hb|r - Easy keybinding, just mouseover your spell/actionbar and press a key."
+	L.core_uihelp15 = "|cffFF0000/config|r - Ingame configuration menu."
 	L.core_uihelp100 = "(Hochscrollen wenn du mehr Befehle sehen willst ...)"
  
 	L.symbol_CLEAR = "Entfernen" 

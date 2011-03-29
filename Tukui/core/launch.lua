@@ -199,7 +199,6 @@ local function install()
 end
 
 local function cvar()
-
 end
 
 local function DisableTukui()
@@ -332,6 +331,7 @@ local function UIHelp()
 	print(L.core_uihelp12)
 	print(L.core_uihelp13)
 	print(L.core_uihelp14)
+	print(L.core_uihelp15)
 	print(" ")
 	print(L.core_uihelp100)
 end
