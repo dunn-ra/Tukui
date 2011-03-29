@@ -230,10 +230,9 @@ local UploadDBM = function()
 	DBM_SavedOptions.WarningIconLeft=false
 	DBM_SavedOptions.WarningIconRight=false
 	DBM_SavedOptions["WarningColors"] = {{["b"] = classcolor.b, ["g"] = classcolor.g, ["r"] = classcolor.r,},
-                             {["b"] = classcolor.b, ["g"] = classcolor.g, ["r"] = classcolor.r,},
-                             {["b"] = classcolor.b, ["g"] = classcolor.g, ["r"] = classcolor.r,},
-                             {["b"] = classcolor.b, ["g"] = classcolor.g, ["r"] = classcolor.r,},}
-
+										{["b"] = classcolor.b, ["g"] = classcolor.g, ["r"] = classcolor.r,},
+										{["b"] = classcolor.b, ["g"] = classcolor.g, ["r"] = classcolor.r,},
+										{["b"] = classcolor.b, ["g"] = classcolor.g, ["r"] = classcolor.r,},}
 	DBT_SavedOptions["DBM"].StartColorR=classcolor.r
 	DBT_SavedOptions["DBM"].StartColorG=classcolor.g
 	DBT_SavedOptions["DBM"].StartColorB=classcolor.b
@@ -243,7 +242,7 @@ local UploadDBM = function()
 	DBT_SavedOptions["DBM"].Scale=1
 	DBT_SavedOptions["DBM"].HugeScale=1
 	DBT_SavedOptions["DBM"].BarXOffset=0
-	DBT_SavedOptions["DBM"].BarYOffset=3
+	DBT_SavedOptions["DBM"].BarYOffset=25
 	DBT_SavedOptions["DBM"].IconLeft=true
 	DBT_SavedOptions["DBM"].Texture=C["media"].normTex
 	DBT_SavedOptions["DBM"].IconRight=false
@@ -264,7 +263,6 @@ local function healthdemo()
 end
 
 SLASH_TUKUIDBM1 = "/tukuidbm"
-SLASH_TUKUIDBM2 = "/dbmskin" -- backwards compatbility, to be removed in the future.
 SlashCmdList["TUKUIDBM"] = function(msg)
 	if(msg=="apply") then
 		StaticPopup_Show("TUKUIDBM")        
