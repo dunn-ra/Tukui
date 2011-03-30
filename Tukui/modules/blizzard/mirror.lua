@@ -18,10 +18,10 @@ local _DEFAULTS = {
 	};
 
 	colors = {
-		EXHAUSTION = {1, .9, 0};
-		BREATH = {0.31, 0.45, 0.63};
-		DEATH = {1, .7, 0};
-		FEIGNDEATH = {1, .7, 0};
+		EXHAUSTION = {1,.9,0};
+		BREATH = {.31,.45,.63};
+		DEATH = {1,.7,0};
+		FEIGNDEATH = {1,.7,0};
 	};
 }
 
@@ -80,15 +80,15 @@ do
 		bg:SetVertexColor(r * .5, g * .5, b * .5)
 		
 		local border = CreateFrame("Frame", nil, frame)
-		border:Point("TOPLEFT", frame, -2, 2)
-		border:Point("BOTTOMRIGHT", frame, 2, -2)
+		border:Point("TOPLEFT", frame, 0, 0)
+		border:Point("BOTTOMRIGHT", frame, 0, 0)
 		border:SetTemplate("Default")
 		border:SetFrameLevel(0)
 
 		local text = frame:CreateFontString(nil, 'OVERLAY')
 		text:SetFont(C["media"].uffont, 12, "THINOUTLINE")
-		text:SetShadowOffset(.8, -.8)
-		text:SetShadowColor(0, 0, 0, 1)
+		text:SetShadowOffset(T.mult, -T.mult)
+		text:SetShadowColor(0,0,0,1)
 
 		text:SetJustifyH'CENTER'
 		text:SetTextColor(1, 1, 1)
