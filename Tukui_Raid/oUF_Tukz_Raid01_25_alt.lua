@@ -21,7 +21,7 @@ local function Shared(self, unit)
 	self.menu = T.SpawnMenu
 	
 	self:SetBackdrop({bgFile = C["media"].blank, insets = {top = -T.mult, left = -T.mult, bottom = -T.mult, right = -T.mult}})
-	self:SetBackdropColor(0.1, 0.1, 0.1)
+	self:SetBackdropColor(0,0,0)
 	
 	local health = CreateFrame('StatusBar', nil, self)
 	health:Height(17)
