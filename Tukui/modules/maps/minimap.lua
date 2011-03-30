@@ -7,7 +7,7 @@ local TukuiMinimap = CreateFrame("Frame", "TukuiMinimap", UIParent)
 TukuiMinimap:CreatePanel("Default", 1, 1, "CENTER", UIParent, "CENTER", 0, 0)
 TukuiMinimap:RegisterEvent("ADDON_LOADED")
 TukuiMinimap:Point("TOPRIGHT", UIParent, "TOPRIGHT", -5, -5)
-TukuiMinimap:Size(130)
+TukuiMinimap:Size(135)
 TukuiMinimap:SetClampedToScreen(true)
 TukuiMinimap:SetMovable(true)
 TukuiMinimap.text = T.SetFontString(TukuiMinimap, C.media.uffont, 12)
@@ -20,8 +20,8 @@ MinimapCluster:Kill()
 -- Parent Minimap into our Map frame.
 Minimap:SetParent(TukuiMinimap)
 Minimap:ClearAllPoints()
-Minimap:Point("TOPLEFT", 2, -2)
-Minimap:Point("BOTTOMRIGHT", -2, 2)
+Minimap:Point("TOPLEFT", 1, -1)
+Minimap:Point("BOTTOMRIGHT", -1, 1)
 
 -- Hide Border
 MinimapBorder:Hide()
@@ -219,7 +219,7 @@ local coord_Update = function(self,t)
 	x = math.floor(100 * x)
 	y = math.floor(100 * y)
 	if x == 0 and y == 0 then
-		m_coord_text:SetText("X _ X")
+		m_coord_text:SetText(" ")
 	else
 		if x < 10 then
 			xt = "0"..x

@@ -94,6 +94,9 @@ local function UpdateTooltip(self)
 			if TukuiBags and TukuiBags:IsShown() then
 				self:ClearAllPoints()
 				self:SetPoint("BOTTOMRIGHT", TukuiBags, "TOPRIGHT", 0, x)
+			elseif C.chat.background and TukuiChatBackgroundRight then
+				self:ClearAllPoints()
+				self:SetPoint("BOTTOMRIGHT", TukuiChatBackgroundRight, "TOPRIGHT", -5, x)
 			elseif IsAddOnLoaded("Recount") and Recount_MainWindow:IsShown() then
 				self:ClearAllPoints()
 				self:SetPoint("BOTTOMRIGHT", Recount_MainWindow, "TOPRIGHT", 0, -x)

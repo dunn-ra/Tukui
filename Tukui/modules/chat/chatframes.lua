@@ -103,11 +103,11 @@ local function SetChatStyle(frame)
 	-- move the chat edit box
 	_G[chat.."EditBox"]:ClearAllPoints()
 	if T.lowversion then
-		_G[chat.."EditBox"]:Point("TOPLEFT", TukuiDatapanelL3, 1, -1)
+		_G[chat.."EditBox"]:Point("TOPLEFT", TukuiDatapanelL3, 0, 0)
 	else
-		_G[chat.."EditBox"]:Point("TOPLEFT", TukuiDatapanelL4, 1, -1)
+		_G[chat.."EditBox"]:Point("TOPLEFT", TukuiDatapanelL4, 0, 0)
 	end
-	_G[chat.."EditBox"]:Point("BOTTOMRIGHT", TukuiDatapanelL1, -1, 1)
+	_G[chat.."EditBox"]:Point("BOTTOMRIGHT", TukuiDatapanelL1, 0, 0)
 	
 	-- Hide textures
 	for j = 1, #CHAT_FRAME_TEXTURES do
@@ -165,11 +165,11 @@ local function SetChatStyle(frame)
 	EditBoxBackground:CreatePanel("Default", 1, 1, "LEFT", _G[chat.."EditBox"], "LEFT", 0, 0)
 	EditBoxBackground:ClearAllPoints()
 	if T.lowversion then
-		EditBoxBackground:Point("TOPLEFT", TukuiDatapanelL3, 1, -1)
+		EditBoxBackground:Point("TOPLEFT", TukuiDatapanelL3, 0, 0)
 	else
-		EditBoxBackground:Point("TOPLEFT", TukuiDatapanelL4, 1, -1)
+		EditBoxBackground:Point("TOPLEFT", TukuiDatapanelL4, 0, 0)
 	end
-	EditBoxBackground:Point("BOTTOMRIGHT", TukuiDatapanelL1, -1, 1)
+	EditBoxBackground:Point("BOTTOMRIGHT", TukuiDatapanelL1, 0, 0)
 	EditBoxBackground:SetFrameStrata("LOW")
 	EditBoxBackground:SetFrameLevel(1)
 	
@@ -241,7 +241,7 @@ local function SetupChatPosAndFont(self)
 		elseif i == 4 and name == LOOT and C["chat"].rightpanel == true then
 			if not chat.isDocked then
 				chat:ClearAllPoints()
-				chat:Point("BOTTOMRIGHT", TukuiViewport, "TOPRIGHT", 0, 6)
+				chat:Point("BOTTOMRIGHT", TukuiViewport, "TOPRIGHT", -5, 3)
 				chat:SetJustifyH("RIGHT") 
 				FCF_SavePositionAndDimensions(chat)
 			end
