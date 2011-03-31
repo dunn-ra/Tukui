@@ -1108,8 +1108,8 @@ local function Shared(self, unit)
 		power.PostUpdate = T.PostUpdatePower
 		
 		if C["unitframes"].unicolor == true then
-			power.colorClass = true
 			--powerBG.multiplier = 0.1				
+			power.colorClass = true
 		else
 			power.colorPower = true
 		end
@@ -1574,7 +1574,7 @@ end
 --	Default position of Tukui unitframes
 ------------------------------------------------------------------------
 local adjust = 0
-local offset = (T.buttonsize*3)+(T.buttonspacing*3)
+local offset = (T.buttonsize*2)+(T.buttonspacing*2)
 if T.lowversion then adjust = -25 end
 
 oUF:RegisterStyle('Tukui', Shared)

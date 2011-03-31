@@ -6,6 +6,7 @@ ns._Objects = {}
 ns._Headers = {}
 
 local T, C, L = unpack(Tukui) -- Import: T - functions, constants, variables; C - config; L - locales
+
 if not C["unitframes"].enable == true then return end
 if C["unitframes"].enableraidframes ~= true then return end
 
@@ -50,14 +51,7 @@ local function Shared(self, unit)
 		health.colorClass = true
 		health.colorReaction = true			
 	end
-	--[[
-	local AggroInd = CreateFrame("Frame", nil, health)
-	AggroInd:SetPoint("TOPLEFT", health, "TOPLEFT", -1, 1)
-	AggroInd:SetPoint("BOTTOMRIGHT", health, "BOTTOMRIGHT", 1, -1)
-	AggroInd:SetTemplate("Default")
-	AggroInd:SetFrameLevel(2)
-	self.AggroInd = AggroInd
-	--]]
+	
 	local name = health:CreateFontString(nil, 'OVERLAY')
 	name:SetFont(font2, 10*T.raidscale, "THINOUTLINE")
 	name:Point("LEFT", self, "LEFT", 5, 0)
@@ -80,14 +74,14 @@ local function Shared(self, unit)
 		RaidIcon:SetTexture("Interface\\AddOns\\Tukui\\medias\\textures\\raidicons.blp") -- thx hankthetank for texture
 		self.RaidIcon = RaidIcon
 	end
-	--[[
-	if C["unitframes"].aggro == true then
-		table.insert(self.__elements, T.UpdateThreat)
-		self:RegisterEvent('PLAYER_TARGET_CHANGED', T.UpdateThreat)
-		self:RegisterEvent('UNIT_THREAT_LIST_UPDATE', T.UpdateThreat)
-		self:RegisterEvent('UNIT_THREAT_SITUATION_UPDATE', T.UpdateThreat)
-    end
-	--]]
+	
+	local LFDRole = health:CreateTexture(nil, "OVERLAY")
+    LFDRole:Height(6*T.raidscale)
+    LFDRole:Width(6*T.raidscale)
+	LFDRole:Point("LEFT", -3, 0)
+	LFDRole:SetTexture("Interface\\AddOns\\Tukui\\medias\\textures\\lfdicons.blp")
+	self.LFDRole = LFDRole
+	
 	local ReadyCheck = health:CreateTexture(nil, "OVERLAY")
 	ReadyCheck:Height(12*T.raidscale)
 	ReadyCheck:Width(12*T.raidscale)
