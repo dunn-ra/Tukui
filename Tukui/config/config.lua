@@ -25,7 +25,7 @@ C["unitframes"] = {
 	["cccastbar"] = true,								-- enable classcolored castbars
 	["cblatency"] = true,								-- enable castbar latency
 	["cbicons"] = true,                                 -- enable icons on castbar
-	["swing"] = false,-- TODO							-- swing bar
+	["swing"] = false,									-- swing bar
 	-- auras
 	["auratimer"] = true,                               -- enable timers on buffs/debuffs
 	["auratextscale"] = 11,                             -- the font size of buffs/debuffs timers on unitframes
@@ -111,7 +111,7 @@ C["actionbar"] = {
 
 C["bags"] = {
 	["enable"] = true,                                  -- enable an all in one bag mod that fit tukui perfectly
-	["slots"] = 13,										-- number of column bag slots to display
+	["slots"] = 14,										-- number of column bag slots to display
 	["moveable"] = true,								-- toggle moveable bags
 }
 
@@ -214,5 +214,7 @@ C["buffreminder"] = {
 
 C["misc"] = {
 	["duelspam"] = true,								-- removes duel chat spam
-	["announceinterrupt"] = true,						-- announce interrupt to /p or /r
+	["yConjured"] = true,								-- announces conjured item
+	["yAnnouncer"] = true,								-- announces interrupts and spellsteals to /p or /r
+	["yReagents"] = true,								-- auto reagent buyer
 }
