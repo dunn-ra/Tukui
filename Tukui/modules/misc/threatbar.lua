@@ -9,10 +9,13 @@ local aggroColors = {
 
 -- create the bar
 local TukuiThreatBar = CreateFrame("StatusBar", "TukuiThreatBar", TukuiDatapanelR1)
-TukuiThreatBar:CreatePanel("Panels", 1, 1, "TOPLEFT", TukuiDatapanelR1, "BOTTOMRIGHT", 0, 0)
 TukuiThreatBar:ClearAllPoints()
-TukuiThreatBar:Point("TOPLEFT", TukuiDatapanelR1, 0, 0)
-TukuiThreatBar:Point("BOTTOMRIGHT", TukuiDatapanelR4, 0, 0)
+TukuiThreatBar:Point("TOPLEFT", TukuiDatapanelR1, "TOPLEFT", 1, -1)
+if T.lowversion then
+	TukuiThreatBar:Point("BOTTOMRIGHT", TukuiDatapanelR3, "BOTTOMRIGHT", -1, 1)
+else
+	TukuiThreatBar:Point("BOTTOMRIGHT", TukuiDatapanelR4, "BOTTOMRIGHT", -1, 1)
+end
 TukuiThreatBar:SetFrameLevel(10)
 
 TukuiThreatBar:SetStatusBarTexture(C.media.normTex)
@@ -23,6 +26,8 @@ TukuiThreatBar:SetMinMaxValues(0, 100)
 
 TukuiThreatBar.text = T.SetFontString(TukuiThreatBar, C.media.font, 12)
 TukuiThreatBar.text:Point("RIGHT", TukuiThreatBar, "RIGHT", -30, 0)
+TukuiThreatBar.text:SetShadowOffset(T.mult, -T.mult)
+TukuiThreatBar.text:SetShadowColor(0,0,0,1)
 
 TukuiThreatBar.Title = T.SetFontString(TukuiThreatBar, C.media.font, 12)
 TukuiThreatBar.Title:SetText(L.unitframes_ouf_threattext)
