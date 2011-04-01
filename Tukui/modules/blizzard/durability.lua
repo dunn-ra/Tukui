@@ -4,6 +4,6 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 hooksecurefunc(DurabilityFrame,"SetPoint",function(self,_,parent)
     if (parent == "MinimapCluster") or (parent == _G["MinimapCluster"]) then
         self:ClearAllPoints()
-		self:Point("BOTTOM", UIParent, "BOTTOM", 0, 275)
+		self:Point("TOP", Minimap, "BOTTOM", 0, -35)
     end
 end)

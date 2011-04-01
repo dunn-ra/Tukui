@@ -1,7 +1,7 @@
 --[[
-Tukui_DBM skin by Affli@RU-Howling Fjord
-All rights reserved.
-Thanks ALZA, Shestak, Fernir, Tukz and everyone i've forgot to mention.
+	Tukui_DBM skin by Affli@RU-Howling Fjord
+	All rights reserved.
+	Thanks ALZA, Shestak, Fernir, Tukz and everyone i've forgot to mention.
 ]]--
 local T, C, L = unpack(Tukui) -- Import: T - functions, constants, variables; C - config; L - locales
 

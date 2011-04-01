@@ -35,7 +35,7 @@ C["unitframes"] = {
 	-- UF options
 	["lowThreshold"] = 25,                              -- global low threshold, for low mana warning.
 	["targetpowerpvponly"] = false,                     -- enable power text on pvp target only
-	["totdebuffs"] = false,--TODO                             -- enable tot debuffs
+	["totdebuffs"] = true,	                           -- enable tot debuffs
 	["showtotalhpmp"] = false,                          -- change the display of info text on player and target with XXXX/Total.
 	["showsmooth"] = true,                              -- enable smooth bar
 	["charportrait"] = false,							-- do i really need to explain this?
@@ -214,7 +214,6 @@ C["buffreminder"] = {
 
 C["misc"] = {
 	["duelspam"] = true,								-- removes duel chat spam
-	["yConjured"] = true,								-- announces conjured item
-	["yAnnouncer"] = true,								-- announces interrupts and spellsteals to /p or /r
-	["yReagents"] = true,								-- auto reagent buyer
+	["interrupt"] = true,								-- announces interrupts and spellsteals to /p or /r
+	["restocker"] = true,								-- auto reagent buyer
 }

@@ -111,7 +111,7 @@ T.TukuiShiftBarUpdate = function()
 			end
 
 			if isCastable then
-				icon:SetVertexColor(1.0, 1.0, 1.0)-- TODO
+				icon:SetVertexColor(1.0, 1.0, 1.0)
 			else
 				icon:SetVertexColor(0.4, 0.4, 0.4)
 			end
