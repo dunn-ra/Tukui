@@ -891,15 +891,15 @@ local function Shared(self, unit)
 		self:Tag(Name, '[Tukui:getnamecolor][Tukui:nameshort]')
 		self.Name = Name
 		
-		if C["unitframes"].totdebuffs == true and T.lowversion ~= true then
+		if C["unitframes"].totdebuffs == true then
 			local debuffs = CreateFrame("Frame", nil, health)
-			debuffs:SetHeight(20)
-			debuffs:SetWidth(127)
-			debuffs.size = 20
+			debuffs:SetHeight(ufheight)
+			debuffs:SetWidth(sufwidth)
+			debuffs.size = ufheight
 			debuffs.spacing = 2
-			debuffs.num = 6
+			debuffs.num = 4
 
-			debuffs:SetPoint("TOPLEFT", health, "TOPLEFT", -0.5, 24)
+			debuffs:SetPoint("TOPLEFT", panel, "BOTTOMLEFT", 0, -3)
 			debuffs.initialAnchor = "TOPLEFT"
 			debuffs["growth-y"] = "UP"
 			debuffs.PostCreateIcon = T.PostCreateAura
@@ -991,38 +991,6 @@ local function Shared(self, unit)
 
 		self:Tag(Name, '[Tukui:getnamecolor][Tukui:nameshort] [Tukui:diffcolor][level]')
 		self.Name = Name
-		--[[
-		if (C["unitframes"].unitcastbar == true) then
-			local castbar = CreateFrame("StatusBar", self:GetName().."CastBar", self)
-			castbar:SetStatusBarTexture(normTex)
-			self.Castbar = castbar
-			
-			if not T.lowversion then
-				castbar.bg = castbar:CreateTexture(nil, "BORDER")
-				castbar.bg:SetAllPoints(castbar)
-				castbar.bg:SetTexture(normTex)
-				castbar.bg:SetVertexColor(0.15, 0.15, 0.15)
-				castbar:SetFrameLevel(6)
-				castbar:Point("TOPLEFT", panel, 2, -2)
-				castbar:Point("BOTTOMRIGHT", panel, -2, 2)
-				
-				castbar.CustomTimeText = T.CustomCastTimeText
-				castbar.CustomDelayText = T.CustomCastDelayText
-				castbar.PostCastStart = T.CheckCast
-				castbar.PostChannelStart = T.CheckChannel
-
-				castbar.time = T.SetFontString(castbar, font1, 12)
-				castbar.time:Point("RIGHT", panel, "RIGHT", -4, 0)
-				castbar.time:SetTextColor(0.84, 0.75, 0.65)
-				castbar.time:SetJustifyH("RIGHT")
-
-				castbar.Text = T.SetFontString(castbar, font1, 12)
-				castbar.Text:Point("LEFT", panel, "LEFT", 4, 0)
-				castbar.Text:SetTextColor(0.84, 0.75, 0.65)
-				
-				self.Castbar.Time = castbar.time
-			end
-		end--]]
 		
 		-- update pet name, this should fix "UNKNOWN" pet names on pet unit, health and bar color sometime being "grayish".
 		self:RegisterEvent("UNIT_PET", T.updateAllElements)
@@ -1574,7 +1542,7 @@ end
 --	Default position of Tukui unitframes
 ------------------------------------------------------------------------
 local adjust = 0
-local offset = (T.buttonsize*2)+(T.buttonspacing*2)
+local offset = (T.buttonsize*1.5)+(T.buttonspacing*1.5)
 if T.lowversion then adjust = -25 end
 
 oUF:RegisterStyle('Tukui', Shared)
@@ -1602,14 +1570,14 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, addon)
 	if addon == "Tukui_Raid" then
-		player:SetPoint("TOPRIGHT", TukuiBar3Button, "LEFT", -(offset+adjust), 80)
-		target:SetPoint("TOPLEFT", TukuiBar3Button, "RIGHT", offset-adjust, 80)
+		player:SetPoint("TOPRIGHT", TukuiBar3Button, "LEFT", -(adjust+offset), 80)
+		target:SetPoint("TOPLEFT", TukuiBar3Button, "RIGHT", adjust+offset, 80)
 	elseif addon == "Tukui_Raid_Healing" then
-		player:SetPoint("TOPRIGHT", TukuiBar3Button, "LEFT", -(25+offset+adjust), 120)
-		target:SetPoint("TOPLEFT", TukuiBar3Button, "RIGHT", 25+offset+adjust, 120)
+		player:SetPoint("TOPRIGHT", TukuiBar3Button, "LEFT", -(25+offset*2+adjust), 125)
+		target:SetPoint("TOPLEFT", TukuiBar3Button, "RIGHT", 25+offset*2+adjust, 125)
 	elseif not addon == "Tukui_Raid" or addon == "Tukui_Raid_Healing" then
-		player:SetPoint("TOPRIGHT", TukuiBar3Button, "LEFT", -(offset+adjust), 80)
-		target:SetPoint("TOPLEFT", TukuiBar3Button, "RIGHT", offset-adjust, 80)
+		player:SetPoint("TOPRIGHT", TukuiBar3Button, "LEFT", -(adjust+offset), 80)
+		target:SetPoint("TOPLEFT", TukuiBar3Button, "RIGHT", adjust+offset, 80)
 	end
 end)
 
