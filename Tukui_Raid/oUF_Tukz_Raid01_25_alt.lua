@@ -6,6 +6,7 @@ ns._Objects = {}
 ns._Headers = {}
 
 local T, C, L = unpack(Tukui) -- Import: T - functions, constants, variables; C - config; L - locales
+if not C["unitframes"].enable == true or not C["unitframes"].dpsdebuff == true then return end
 if C["unitframes"].enableraidframes ~= true then return end
 
 local font2 = C["media"].uffont
@@ -164,11 +165,11 @@ local function Shared(self, unit)
 	return self
 end
 
-oUF:RegisterStyle('TukuiDpsP05R10R15R25', Shared)
+oUF:RegisterStyle('TukuiDpsP05R10R15R25db', Shared)
 oUF:Factory(function(self)
-	oUF:SetActiveStyle("TukuiDpsP05R10R15R25")
+	oUF:SetActiveStyle("TukuiDpsP05R10R15R25db")
 
-	local raid = self:SpawnHeader("oUF_TukuiDpsRaid05101525", nil, "custom [@raid26,exists] hide;show",
+	local raid = self:SpawnHeader("oUF_TukuiDpsRaid05101525db", nil, "custom [@raid26,exists] hide;show",
 		'oUF-initialConfigFunction', [[
 			local header = self:GetParent()
 			self:SetWidth(header:GetAttribute('initial-width'))
