@@ -245,7 +245,9 @@ local function Local(o)
 	-- misc
 	if o == "TukuiConfigUImisc" then o = TukuiL.option_misc end
 	if o == "TukuiConfigUImiscduelspam" then o = TukuiL.option_misc_duelspam end
-	if o == "TukuiConfigUImiscannounceinterrupt" then o = TukuiL.option_misc_announceinterrupt end
+	if o == "TukuiConfigUImiscinterrupt" then o = TukuiL.option_misc_interrupt end
+	if o == "TukuiConfigUImiscrestocker" then o = TukuiL.option_misc_restocker end
+	
 	-- classtimer
 	if o == "TukuiConfigUIclasstimer" then o = TukuiL.option_classtimer end
 	if o == "TukuiConfigUIclasstimerenable" then o = TukuiL.option_classtimer_enable end
@@ -421,12 +423,12 @@ function CreateTukuiConfigUI()
 		TukuiConfigUI:Show()
 		return
 	end
-	--[[
+	
 	local version = tonumber(T.version)
-	if version < 12.59 then
+	if version < 2.0 then
 		print(TukuiL.option_update)
 	end
-	--]]
+	
 	-- MAIN FRAME
 	local TukuiConfigUI = CreateFrame("Frame","TukuiConfigUI",UIParent)
 	TukuiConfigUI:SetPoint("CENTER", UIParent, "CENTER", 90, 0)
@@ -736,9 +738,7 @@ function CreateTukuiConfigUI()
 end
 
 do
-	SLASH_CONFIG1 = '/tc'
-	SLASH_CONFIG2 = '/tukui'
-	SLASH_CONFIG2 = '/config'
+	SLASH_CONFIG1 = '/config'
 	function SlashCmdList.CONFIG(msg, editbox)
 		if not TukuiConfigUI or not TukuiConfigUI:IsShown() then
 			CreateTukuiConfigUI()

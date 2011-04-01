@@ -219,13 +219,14 @@ if GetLocale() == "esES" then
 	-- misc
 	TukuiL.option_misc = "Miscellaneous"
 	TukuiL.option_misc_duelspam = "Removes duel chat spam"
-	TukuiL.option_misc_announceinterrupt = "Announces succesful interrupts raid or party chat"
+	TukuiL.option_misc_interrupt = "Announces succesful interrupts to raid or party chat"
+	TukuiL.option_misc_restocker = "Auto reagent buyer"
 	-- classtimer
 	TukuiL.option_classtimer = "Classtimer"
 	TukuiL.option_classtimer_enable = "Enable classtimer"
 	TukuiL.option_classtimer_classcolor = "Classcolored bars"
 	TukuiL.option_classtimer_barheight = "Bar height"
-	TukuiL.option_classtimer_barspacing = "bar spacing"
+	TukuiL.option_classtimer_barspacing = "Bar spacing"
 	TukuiL.option_classtimer_direction = "Direction (tick to right, or viceversa)"
 	TukuiL.option_classtimer_spark = "Marker on the end of the bar"
 	TukuiL.option_classtimer_castseparator = "Marker to indicate clipping"
@@ -237,7 +238,7 @@ if GetLocale() == "esES" then
 	TukuiL.option_chat_rightpanel = "Enable loot frame on right side (/resetui to apply)"
 	TukuiL.option_chat_width = "Width of the chat frame (/resetui to apply)"
 	TukuiL.option_chat_height = "Height of the chat frame (/resetui to apply)"
-	TukuiL.option_chat_height = "Add a shadow offset to chat text"
+	TukuiL.option_chat_shadow = "Add a shadow offset to chat text"
 	-- bags
 	TukuiL.option_bags_slots = "Number of column bag slots to display"	
 	TukuiL.option_bags_moveable = "Toggle moveable bags"
