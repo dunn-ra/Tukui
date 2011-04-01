@@ -4,8 +4,8 @@
 	
 	<Script file="core\init.lua"/>
 	<Script file="core\constants.lua"/>
-	<Script file="core\movers.lua"/>
 	<Script file="core\configui.lua"/>
+	
 	<Script file="locales\english.lua"/>
 	<Script file="locales\french.lua"/>
 	<Script file="locales\russian.lua"/>
@@ -153,6 +153,7 @@
 	<Script file="modules\misc\raidmarker.lua"/>
 	<Script file="modules\misc\raidutility.lua"/>
 	<Script file="modules\misc\threatbar.lua"/>
+	<Script file="modules\misc\zRestock.lua"/>
 	
 	<Script file="modules\stexperience\stexperiencebar.lua"/>
 	
@@ -161,6 +162,8 @@
 	<Script file="developer\test.lua"/>
 	
 	<Script file="modules\hoopla\yConjured.lua"/>
-	<Script file="modules\hoopla\yAnnounce.lua"/>
-	<Script file="modules\hoopla\ressa.lua"/>
+	<Script file="modules\hoopla\yInterrupt.lua"/>
+	<Script file="modules\hoopla\yRess.lua"/>
+	
+	<Script file="core\movers.lua"/>
 </Ui>
