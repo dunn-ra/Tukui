@@ -896,7 +896,7 @@ local function Shared(self, unit)
 			debuffs:SetHeight(ufheight)
 			debuffs:SetWidth(sufwidth)
 			debuffs.size = ufheight
-			debuffs.spacing = 2
+			debuffs.spacing = 5
 			debuffs.num = 4
 
 			debuffs:SetPoint("TOPLEFT", panel, "BOTTOMLEFT", 0, -3)
