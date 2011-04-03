@@ -4,7 +4,7 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 --------------------------------------------------------------------------
 
 local anchor = CreateFrame("Frame", "TukuiVehicleAnchor", UIParent)
-anchor:Point("TOP", TukuiMinimap, "BOTTOM", 0, -35)
+anchor:Point("TOP", UIParent, "TOP", 0, -250)
 anchor:Size(120, 20)
 anchor:SetMovable(true)
 anchor:SetClampedToScreen(true)
