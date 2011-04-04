@@ -73,7 +73,6 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			"GhostFrameContentsFrame",
 			"ColorPickerFrame",
 			"StackSplitFrame",
-			"ReadyCheckFrame",
 		}
 
 		-- reskin popup buttons
@@ -118,7 +117,6 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			"Quit", 
 			"Continue", 
 			"MacOptions",
-			"Help",
 		}
 		
 		for i = 1, getn(BlizzardMenuButtons) do

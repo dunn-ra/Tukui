@@ -6,6 +6,7 @@ local aggroColors = {
 	[2] = {166/255, 171/255,  26/255},
 	[3] = {163/255,  24/255,  24/255},
 }
+local pheight = C.datatext.panelsize
 
 -- create the bar
 local TukuiThreatBar = CreateFrame("StatusBar", "TukuiThreatBar", TukuiDatapanelR1)
@@ -24,18 +25,27 @@ TukuiThreatBar:SetBackdrop({bgFile = C.media.blank})
 TukuiThreatBar:SetBackdropColor(0, 0, 0, 0)
 TukuiThreatBar:SetMinMaxValues(0, 100)
 
-TukuiThreatBar.text = T.SetFontString(TukuiThreatBar, C.media.font, 12)
-TukuiThreatBar.text:Point("RIGHT", TukuiThreatBar, "RIGHT", -30, 0)
+TukuiThreatBar.text = T.SetFontString(TukuiThreatBar, C.media.font, C.datatext.fontsize+1)
+TukuiThreatBar.text:Point("RIGHT", TukuiThreatBar, "RIGHT", T.Scale(-30), 0)
 TukuiThreatBar.text:SetShadowOffset(T.mult, -T.mult)
 TukuiThreatBar.text:SetShadowColor(0,0,0,1)
 
-TukuiThreatBar.Title = T.SetFontString(TukuiThreatBar, C.media.font, 12)
+TukuiThreatBar.Title = T.SetFontString(TukuiThreatBar, C.media.font, C.datatext.fontsize)
 TukuiThreatBar.Title:SetText(L.unitframes_ouf_threattext)
 TukuiThreatBar.Title:SetPoint("LEFT", TukuiThreatBar, "LEFT", T.Scale(30), 0)
-	  
+
 TukuiThreatBar.bg = TukuiThreatBar:CreateTexture(nil, 'BORDER')
 TukuiThreatBar.bg:SetAllPoints(TukuiThreatBar)
-TukuiThreatBar.bg:SetTexture(.1,.1,.1)
+TukuiThreatBar.bg:SetTexture(unpack(C["media"].pbackdropcolor))
+
+TukuiThreatBar.border = TukuiThreatBar:CreateTexture(nil, 'BORDER')
+TukuiThreatBar.border:Point("TOPLEFT", TukuiDatapanelR1, "TOPLEFT", 0, 0)
+if T.lowversion then
+	TukuiThreatBar.border:Point("BOTTOMRIGHT", TukuiDatapanelR3, "BOTTOMRIGHT", 0, 0)
+else
+	TukuiThreatBar.border:Point("BOTTOMRIGHT", TukuiDatapanelR4, "BOTTOMRIGHT", 0, 0)
+end
+TukuiThreatBar.border:SetTexture(0,0,0)
 
 -- event func
 local function OnEvent(self, event, ...)
@@ -101,5 +111,3 @@ TukuiThreatBar.unit = "player"
 TukuiThreatBar.tar = TukuiThreatBar.unit.."target"
 TukuiThreatBar.Colors = aggroColors
 TukuiThreatBar:SetAlpha(0)
-
--- THAT'S IT!

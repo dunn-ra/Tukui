@@ -700,7 +700,7 @@ local function Shared(self, unit)
 						anchor:SetPoint("BOTTOM", TukuiBar3Button, "TOP", T.buttonspacing, 12)
 					elseif unit == "target" then
 						castbar:SetPoint("CENTER", anchor, "CENTER", 0, 0)
-						anchor:SetPoint("BOTTOM", UIParent, "BOTTOM", T.buttonspacing, 325)
+						anchor:SetPoint("BOTTOM", TukuiBar3Button, "BOTTOM", T.buttonspacing, 265)
 					end
 				elseif addon == "Tukui_Raid_Healing" then
 					if unit == "player" then
@@ -719,7 +719,7 @@ local function Shared(self, unit)
 						anchor:SetPoint("BOTTOM", TukuiBar3Button, "TOP", T.buttonspacing, 12)
 					elseif unit == "target" then
 						castbar:SetPoint("CENTER", anchor, "CENTER", 0, 0)
-						anchor:SetPoint("BOTTOM", UIParent, "BOTTOM", T.buttonspacing, 325)
+						anchor:SetPoint("BOTTOM", TukuiBar3Button, "BOTTOM", T.buttonspacing, 265)
 					end
 				end
 			end)
@@ -896,7 +896,7 @@ local function Shared(self, unit)
 			debuffs:SetHeight(ufheight)
 			debuffs:SetWidth(sufwidth)
 			debuffs.size = ufheight
-			debuffs.spacing = 5
+			debuffs.spacing = 3
 			debuffs.num = 4
 
 			debuffs:SetPoint("TOPLEFT", panel, "BOTTOMLEFT", 0, -3)
@@ -1570,14 +1570,14 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, addon)
 	if addon == "Tukui_Raid" then
-		player:SetPoint("TOPRIGHT", TukuiBar3Button, "LEFT", -(adjust+offset), 80)
-		target:SetPoint("TOPLEFT", TukuiBar3Button, "RIGHT", adjust+offset, 80)
+		player:SetPoint("TOPRIGHT", TukuiBar3Button, "LEFT", -(adjust+offset), 95)
+		target:SetPoint("TOPLEFT", TukuiBar3Button, "RIGHT", adjust+offset, 95)
 	elseif addon == "Tukui_Raid_Healing" then
 		player:SetPoint("TOPRIGHT", TukuiBar3Button, "LEFT", -(25+offset*2+adjust), 125)
 		target:SetPoint("TOPLEFT", TukuiBar3Button, "RIGHT", 25+offset*2+adjust, 125)
 	elseif not addon == "Tukui_Raid" or addon == "Tukui_Raid_Healing" then
-		player:SetPoint("TOPRIGHT", TukuiBar3Button, "LEFT", -(adjust+offset), 80)
-		target:SetPoint("TOPLEFT", TukuiBar3Button, "RIGHT", adjust+offset, 80)
+		player:SetPoint("TOPRIGHT", TukuiBar3Button, "LEFT", -(adjust+offset), 95)
+		target:SetPoint("TOPLEFT", TukuiBar3Button, "RIGHT", adjust+offset, 95)
 	end
 end)
 

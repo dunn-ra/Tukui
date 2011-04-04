@@ -1,9 +1,11 @@
---[[ -- stExperienceBar by Safturento - http://www.wowinterface.com/downloads/info17672-stExperienceBar.html
-## Interface: 40000
-## Author: Safturento
-## Version: 2.2
-## Title: |cffe76a6ast|rExperienceBar
-## Notes: Minimalist experience & reputation bar
+--[[ 
+	-- stExperienceBar by Safturento
+	## Interface: 40000
+	## Author: Safturento
+	## Version: 2.2
+	## Title: |cffe76a6ast|rExperienceBar
+	## Notes: Minimalist experience & reputation bar
+	-- http://www.wowinterface.com/downloads/info17672-stExperienceBar.html
 --]]
 
 local T, C, L = unpack(Tukui) -- Import: T - functions, constants, variables; C - config; L - locales

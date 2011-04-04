@@ -63,6 +63,8 @@ C["media"] = {
 	--["interruptable"] = {.85,.1,.1,.75}, -- castbar color of interruptable spells
 	--["castbarnorm"] = {.31,.45,.63,.5}, -- color of player castbar if classcolor == false and target castbar
 	
+	-- raidutility border
+	["rucolor"] = {.80,0,0},
 	-- classtimer bg
 	["ctbackdropcolor"] = {0,0,0,.85},
 	-- nameplate border
