@@ -83,6 +83,17 @@ local function Shared(self, unit)
 	InvFrame:SetFrameLevel(5)
 	InvFrame:SetAllPoints()
 	
+	-- oUF_Fader
+	if C.unitframes.fader == true then
+		self.Fader = {
+			[1] = {Combat = 1, Instance = 1},
+			[2] = {PlayerTarget = 1, Dead = 1},
+			[3] = {notPlayerMaxHealth = 0.7, notPlayerMaxMana = 0.7, Stealth = 0.7},
+			[4] = {notCombat = 0, Resting = 0, PlayerMaxHealth = 0, PlayerMaxMana = 0}
+		}
+		self.NormalAlpha = 1
+	end
+	
 	-- symbols, now put the symbol on the frame we created above.
 	local RaidIcon = InvFrame:CreateTexture(nil, "OVERLAY")
 	RaidIcon:SetTexture("Interface\\AddOns\\Tukui\\medias\\textures\\raidicons.blp") -- thx hankthetank for texture
