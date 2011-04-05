@@ -9,7 +9,7 @@ C["general"] = {
 }
 
 C["ufsizes"] = {
-	["playerheight"] = 16,								-- height of the hp bar. Power/mana bar will be 1/3 of it
+	["playerheight"] = 18,								-- height of the hp bar. Power/mana bar will be 1/3 of it
 	["playercastbar"] = 250,							-- player castbar
 	["targetcastbar"] = 250,							-- target castbar
 }	
@@ -21,6 +21,7 @@ C["unitframes"] = {
 	["unitcastbar"] = true,                             -- enable tukui castbar
 	["unicolor"] = true,								-- enable classcolored frames
 	["playeraggro"] = false,							-- color player border to red if you have aggro on current target.
+	["fader"] = true,									-- enable fading unitframes when ooc, resting, etc
 	-- castbar
 	["cccastbar"] = true,								-- enable classcolored castbars
 	["cblatency"] = true,								-- enable castbar latency
@@ -98,10 +99,15 @@ C["auras"] = {
 	["player"] = true,									-- enable tukui buffs/debuffs
 }
 
+C["bars"] = {
+	["threat"] = true,									-- enable threabar
+	["vengeance"] = true,								-- enable vengeance bar
+}
+
 C["actionbar"] = {
 	["enable"] = true,									-- enable tukui action bars
 	["hotkey"] = true,									-- enable hotkey display because it was a lot requested
-	["hideshapeshift"] = false,							-- hide shapeshift or totembar because it was a lot requested.
+	["hideshapeshift"] = true,							-- hide shapeshift or totembar because it was a lot requested.
 	["cubes"] = true,									-- enable cubes to function as toggles for addons (ex: recount)
 	["showgrid"] = true,								-- show grid on empty button
 	["buttonsize"] = 24,                                -- normal buttons size
@@ -194,6 +200,8 @@ C["merchant"] = {
 	["sellgrays"] = true,								-- automaticly sell grays?
 	["autorepair"] = true,								-- automaticly repair?
 	["sellmisc"] = true,								-- sell defined items automatically
+	["restocker"] = true,								-- auto reagent buyer
+		["number"] = 60,								-- number of reagents to buy
 }
 
 C["error"] = {
@@ -215,5 +223,4 @@ C["buffreminder"] = {
 C["misc"] = {
 	["duelspam"] = true,								-- removes duel chat spam
 	["interrupt"] = true,								-- announces interrupts and spellsteals to /p or /r
-	["restocker"] = true,								-- auto reagent buyer
 }

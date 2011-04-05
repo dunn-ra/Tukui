@@ -1,6 +1,6 @@
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 
-if C["misc"].restocker ~= true then return end
+if C["merchant"].restocker ~= true then return end
 
 --[[
 	-- addon by Zxian
@@ -17,28 +17,29 @@ if C["misc"].restocker ~= true then return end
 
 local verbose = false
 local items = {}
+local n = C["merchant"].number
 
 if T.myclass == "ROGUE" then
 	items = {
-		[6947]	= 60,		-- Instant Poison
-		[2892]	= 60,		-- Deadly Poison
-		[3775]	= 100,		-- Cripping Poison
-		[5237]	= 60,		-- Mind-Numbing Poison
-		[10918]	= 100,		-- Wound Poison
+		[6947]	= n,		-- Instant Poison
+		[2892]	= n,		-- Deadly Poison
+		[3775]	= n,		-- Cripping Poison
+		[5237]	= n,		-- Mind-Numbing Poison
+		[10918]	= n,		-- Wound Poison
 	}
 elseif T.myclass == "MAGE" then
 	items = {
-		[17020] = 200,		-- Arcane Powder
-		[17031] = 60, 		-- Rune of Teleportation
-		[17032] = 60,		-- Rune of Portals
+		[17020] = n,		-- Arcane Powder
+		[17031] = n, 		-- Rune of Teleportation
+		[17032] = n,		-- Rune of Portals
 	}
 elseif T.myclass == "SHAMAN" then
 	items = {
-		[17030] = 40,		-- Ankh
+		[17030] = n,		-- Ankh
 	}
 elseif T.myclass == "DRUID" then
 	items = {
-		[17034] = 40,		-- Maple Seed
+		[17034] = n,		-- Maple Seed
 	}
 end
 
