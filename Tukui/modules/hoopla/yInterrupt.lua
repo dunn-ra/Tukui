@@ -7,22 +7,22 @@ function ShowSpellLink(spellID)
 end
 
 local function OnEvent(self, event, ...)
-if (event == "COMBAT_LOG_EVENT_UNFILTERED") then
-	local timestamp, eventType, sourceGUID, sourceName, sourceFlags, destGUID, destName, destFlags, spellID, spellName, _, extraskillID, extraskillname = ...
-	if (eventType == "SPELL_INTERRUPT") and sourceName == UnitName("player") then
-		if UnitInParty("player") and GetNumPartyMembers() > 0 then
-			SendChatMessage(GetSpellLink(extraskillID).." interrupted", "PARTY")
-		elseif UnitInRaid("player") and GetRealNumRaidMembers() > 5 then
-			SendChatMessage(GetSpellLink(extraskillID).." interrupted", "Raid")
-		end
-	elseif (eventType == "SPELL_STOLEN") and sourceName == UnitName("player") then
-		if UnitInParty("player") and GetNumPartyMembers() > 0 then
-			SendChatMessage(GetSpellLink(extraskillID).." stolen", "PARTY")
-		elseif UniInRaid("player") and GetRealNumRaidMembers() > 5 then
-			SendChatMessage(GetSpellLink(extraskillID).." stolen", "Raid")
+	if (event == "COMBAT_LOG_EVENT_UNFILTERED") then
+		local timestamp, eventType, sourceGUID, sourceName, sourceFlags, destGUID, destName, destFlags, spellID, spellName, _, extraskillID, extraskillname = ...
+		if (eventType == "SPELL_INTERRUPT") and sourceName == UnitName("player") then
+			if UnitInRaid("player") and GetNumRaidMembers() > 1 then
+				SendChatMessage(GetSpellLink(extraskillID).." interrupted", "RAID")
+			elseif UnitInParty("player") and GetNumPartyMembers() < 5 then
+				SendChatMessage(GetSpellLink(extraskillID).." interrupted", "PARTY")
+			end
+		elseif (eventType == "SPELL_STOLEN") and sourceName == UnitName("player") then
+			if UnitInRaid("player") and GetNumRaidMembers() > 1 then
+				SendChatMessage(GetSpellLink(extraskillID).." stolen", "RAID")
+			elseif UnitInParty("player") and GetNumPartyMembers() < 5 then
+				SendChatMessage(GetSpellLink(extraskillID).." stolen", "PARTY")
+			end
 		end
 	end
-end
 end
 
 local yAnnounce = CreateFrame("Frame")
