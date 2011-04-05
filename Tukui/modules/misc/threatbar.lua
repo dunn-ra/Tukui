@@ -1,5 +1,6 @@
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
--- Very simple threat bar for T.
+
+if C.bars.threat ~= true then return end
 
 local aggroColors = {
 	[1] = {12/255, 151/255,  15/255},
