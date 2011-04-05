@@ -208,6 +208,7 @@ if GetLocale() == "frFR" then
 	TukuiL.option_unitframes_cccastbar = "Enable classcolored castbars"
 	TukuiL.option_unitframes_displayname = "Show player name on the unitframe"
 	TukuiL.option_unitframes_enableraidframes = "Enable raid frames, keeping choosing layout"
+	TukuiL.option_unitframes_fader = "Enable fading unitframes when ooc, resting, etc"
 	-- stexperience
 	TukuiL.option_stexperience = "STExperience bar"
 	TukuiL.option_stexperience_enable = "Enable STExperience bar"
@@ -215,6 +216,9 @@ if GetLocale() == "frFR" then
 	TukuiL.option_stexperience_barwidth = "Width of the bar"
 	TukuiL.option_stexperience_text = "Set to true to hide text"
 	TukuiL.option_stexperience_mouseovertext = "Set to true to only show text on mouseover"
+	--merchant
+	TukuiL.option_merchant_restocker = "Auto reagent buyer"
+	TukuiL.option_merchant_number = "Number of reagents to buy"
 	-- misc
 	TukuiL.option_misc = "Miscellaneous"
 	TukuiL.option_misc_duelspam = "Removes duel chat spam"

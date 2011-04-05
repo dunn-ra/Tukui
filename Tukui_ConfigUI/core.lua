@@ -235,6 +235,7 @@ local function Local(o)
 	if o == "TukuiConfigUIunitframescccastbar" then o = TukuiL.option_unitframes_cccastbar end
 	if o == "TukuiConfigUIunitframesdisplayname" then o = TukuiL.option_unitframes_displayname end
 	if o == "TukuiConfigUIunitframesenableraidframes" then o = TukuiL.option_unitframes_enableraidframes end
+	if o == "TukuiConfigUIunitframesfader" then o = TukuiL.option_unitframes_fader end
 	-- stexperience
 	if o == "TukuiConfigUIstexperience" then o = TukuiL.option_stexperience end
 	if o == "TukuiConfigUIstexperienceenable" then o = TukuiL.option_stexperience_enable end
@@ -242,12 +243,13 @@ local function Local(o)
 	if o == "TukuiConfigUIstexperiencebarwidth" then o = TukuiL.option_stexperience_barwidth end
 	if o == "TukuiConfigUIstexperiencetext" then o = TukuiL.option_stexperience_text end
 	if o == "TukuiConfigUIstexperiencemouseovertext" then o = TukuiL.option_stexperience_mouseovertext end
+	--merchant
+	if o == "TukuiConfigUImerchantrestocker" then o = TukuiL.option_merchant_restocker end
+	if o == "TukuiConfigUImerchantnumber" then o = TukuiL.option_merchant_number end
 	-- misc
 	if o == "TukuiConfigUImisc" then o = TukuiL.option_misc end
 	if o == "TukuiConfigUImiscduelspam" then o = TukuiL.option_misc_duelspam end
 	if o == "TukuiConfigUImiscinterrupt" then o = TukuiL.option_misc_interrupt end
-	if o == "TukuiConfigUImiscrestocker" then o = TukuiL.option_misc_restocker end
-	
 	-- classtimer
 	if o == "TukuiConfigUIclasstimer" then o = TukuiL.option_classtimer end
 	if o == "TukuiConfigUIclasstimerenable" then o = TukuiL.option_classtimer_enable end
