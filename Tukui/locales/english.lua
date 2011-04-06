@@ -222,3 +222,7 @@ L.move_debuffs = "Move Player Debuffs"
 L.move_shapeshift = "Move Shapeshift/Totem"
 L.move_achievements = "Move Achievements"
 L.move_roll = "Move Loot Roll Frame"
+L.move_vehicle = "Move Vehicle Seat"
+
+L.core_raidutil = "Raid Utility"
+L.core_raidutil_disbandgroup = "Disband Group"
