@@ -25,7 +25,7 @@ local function Shared(self, unit)
 	self:SetBackdropColor(0,0,0)
 	
 	local health = CreateFrame('StatusBar', nil, self)
-	health:Height(12)
+	health:Height((T.Scale(12*T.raidscale)))
 	health:SetPoint("TOPLEFT")
 	health:SetPoint("TOPRIGHT")
 	health:SetStatusBarTexture(C["media"].shpTex)
@@ -126,7 +126,7 @@ oUF:Factory(function(self)
 			"groupFilter", "1,2,3,4,5,6,7,8",
 			"groupingOrder", "1,2,3,4,5,6,7,8",
 			"groupBy", "GROUP",
-			"yOffset", T.Scale(-5)
+			"yOffset", T.Scale(-5*T.raidscale)
 		)
 		raid:SetPoint('TOPLEFT', UIParent, 5, -35)
 end)

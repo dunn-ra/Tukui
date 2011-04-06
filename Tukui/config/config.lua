@@ -9,7 +9,7 @@ C["general"] = {
 }
 
 C["ufsizes"] = {
-	["playerheight"] = 18,								-- height of the hp bar. Power/mana bar will be 1/3 of it
+	["unitheight"] = 18,								-- height of the hp bar. Power/mana bar will be 1/3 of it
 	["playercastbar"] = 250,							-- player castbar
 	["targetcastbar"] = 250,							-- target castbar
 }	

@@ -55,23 +55,23 @@ local function Shared(self, unit)
 	self:CreateShadow("Default")
 	
 	-- unitframe sizes
-	if T.lowversion then
-		ufwidth = T.Scale(180)
-	else
-		ufwidth = T.Scale(250)
-	end
-	hpheight = T.Scale(uf.playerheight)
-	pwrheight = T.Scale(uf.playerheight/4)
-	ufheight = T.Scale(pwrheight+hpheight+1)
-	--assisttank_width = TukuiDB.Scale(ui.assisttankw)
-	--assisttank_height = TukuiDB.Scale(ui.assisttankh)
-	cbplayer = T.Scale(uf.playercastbar)
-	cbtarget = T.Scale(uf.targetcastbar)
+	local adjustw = 0
+	local adjusth = 0
+	if T.lowversion then adjustw = 70 adjusth = 3 end
+	
+	ufwidth = T.Scale(250-adjustw)						-- width of the player/target unitframes
+	hpheight = T.Scale(uf.unitheight-adjusth)			-- height of the hp bar on the player/target frames
+	pwrheight = T.Scale((uf.unitheight-adjusth)/4)		-- height of the power/rage/mana bar on the player/target frames
+	ufheight = T.Scale(pwrheight+hpheight+1)			-- total height of player/target frames
+	--assisttank_width = TukuiDB.Scale(ui.assisttankw)	-- width of the tank/assist frames
+	--assisttank_height = TukuiDB.Scale(ui.assisttankh)	-- height of the tank/assist frames
+	cbplayer = T.Scale(uf.playercastbar-adjustw)		-- player castbar
+	cbtarget = T.Scale(uf.targetcastbar-adjustw)		-- target castbar
 	-- small frames
-	sufwidth = T.Scale((ufwidth/5)*2)
-	shpheight = T.Scale(hpheight*0.8)
-	spwrheight = T.Scale(pwrheight*0.8)
-	sufheight = T.Scale(ufheight*0.8)
+	sufwidth = T.Scale((ufwidth/5)*2)					-- width for tot/pet frames
+	shpheight = T.Scale(hpheight*0.8)					-- height for tot/pet frames
+	spwrheight = T.Scale(pwrheight*0.8)					-- height for the power/rage/mana bar on the tot/pet frames
+	sufheight = T.Scale(ufheight*0.8)					-- total height for tot/pet frames
 	
 	------------------------------------------------------------------------
 	--	Features we want for all units at the same time
@@ -447,7 +447,11 @@ local function Shared(self, unit)
 						
 						if i == 1 then
 							bars[i]:SetPoint("LEFT", bars)
-							bars[i]:Width((ufwidth - 3) / 3)
+							if T.lowversion then
+								bars[i]:Width(((ufwidth-3)/3)+1)
+							else
+								bars[i]:Width((ufwidth-3)/3)
+							end
 							bars[i].bg:SetAllPoints(bars[i])
 						else
 							bars[i]:Point("LEFT", bars[i-1], "RIGHT", 1, 0)
@@ -481,9 +485,13 @@ local function Shared(self, unit)
 						Runes[i] = CreateFrame("StatusBar", self:GetName().."_Runes"..i, health)
 						Runes[i]:SetHeight(pwrheight)
 						if i == 1 then
-							Runes[i]:Width(((ufwidth - 7) / 6) -1)
+							if T.lowversion then
+								Runes[i]:Width(((ufwidth-7)/6)+1)
+							else
+								Runes[i]:Width(((ufwidth-7)/6)-1)
+							end
 						else
-							Runes[i]:Width((ufwidth - 7) / 6)
+							Runes[i]:Width((ufwidth-7)/6)
 						end
 						if (i == 1) then
 							Runes[i]:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
@@ -505,11 +513,15 @@ local function Shared(self, unit)
 						TotemBar[i] = CreateFrame("StatusBar", self:GetName().."_TotemBar"..i, self)
 
 						if i == 1 then
-						   TotemBar[i]:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
-						   TotemBar[i]:Width(((ufwidth-3)/4)-1)
+							TotemBar[i]:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
+							if T.lowversion then
+								TotemBar[i]:Width(((ufwidth-3)/4)+1)
+							else
+								TotemBar[i]:Width(((ufwidth-3)/4)-1)
+							end
 						else
-						   TotemBar[i]:Point("TOPLEFT", TotemBar[i-1], "TOPRIGHT", 1, 0)
-						   TotemBar[i]:Width((ufwidth-3)/4)
+							TotemBar[i]:Point("TOPLEFT", TotemBar[i-1], "TOPRIGHT", 1, 0)
+							TotemBar[i]:Width((ufwidth-3)/4)
 						end
 
 						TotemBar[i]:SetStatusBarTexture(normTex)
@@ -540,7 +552,11 @@ local function Shared(self, unit)
 
 						if i == 1 then
 							CPoints[i]:Point("BOTTOMLEFT", TukuiPlayer, "TOPLEFT", 0, 1)
-							CPoints[i]:Width(((ufwidth - 6) / 5)+1)
+							if T.lowversion then
+								CPoints[i]:Width(((ufwidth-6)/5)-1)
+							else
+								CPoints[i]:Width(((ufwidth-6)/5)+1)
+							end
 						else
 							CPoints[i]:Point("TOPLEFT", CPoints[i-1], "TOPRIGHT", 1, 0)
 							CPoints[i]:Width((ufwidth - 6) / 5)
@@ -706,12 +722,14 @@ local function Shared(self, unit)
 				fc:RegisterEvent("ADDON_LOADED")
 				fc:SetScript("OnEvent", function(self, event, addon)
 				if addon == "Tukui_Raid" then
+					local adjust = 0
+					if T.lowversion then adjust = 65 end
 					if unit == "player" then
 						castbar:SetPoint("CENTER", anchor, "CENTER", 0, 0)
 						anchor:SetPoint("BOTTOM", TukuiBar3Button, "TOP", T.buttonspacing, 12)
 					elseif unit == "target" then
 						castbar:SetPoint("CENTER", anchor, "CENTER", 0, 0)
-						anchor:SetPoint("BOTTOM", TukuiBar3Button, "BOTTOM", T.buttonspacing, 265)
+						anchor:SetPoint("BOTTOM", TukuiBar3Button, "BOTTOM", T.buttonspacing, 265-adjust)
 					end
 				elseif addon == "Tukui_Raid_Healing" then
 					if unit == "player" then
@@ -730,7 +748,7 @@ local function Shared(self, unit)
 						anchor:SetPoint("BOTTOM", TukuiBar3Button, "TOP", T.buttonspacing, 12)
 					elseif unit == "target" then
 						castbar:SetPoint("CENTER", anchor, "CENTER", 0, 0)
-						anchor:SetPoint("BOTTOM", TukuiBar3Button, "BOTTOM", T.buttonspacing, 265)
+						anchor:SetPoint("BOTTOM", TukuiBar3Button, "BOTTOM", T.buttonspacing, 265-adjust)
 					end
 				end
 			end)
@@ -903,12 +921,15 @@ local function Shared(self, unit)
 		self.Name = Name
 		
 		if C["unitframes"].totdebuffs == true then
+			local n = 4
+			if T.lowversion then n = 3 end
+			
 			local debuffs = CreateFrame("Frame", nil, health)
 			debuffs:SetHeight(ufheight)
 			debuffs:SetWidth(sufwidth)
 			debuffs.size = ufheight
 			debuffs.spacing = 3
-			debuffs.num = 4
+			debuffs.num = n
 
 			debuffs:SetPoint("TOPLEFT", panel, "BOTTOMLEFT", 0, -3)
 			debuffs.initialAnchor = "TOPLEFT"
@@ -1575,20 +1596,20 @@ pet:Size(sufwidth, sufheight)
 -- focus
 local focus = oUF:Spawn('focus', "TukuiFocus")
 focus:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "TOPLEFT", -80, 600)
-focus:Size(ufwidth*0.80, ufheight)
+focus:Size(ufwidth*0.8, ufheight)
 
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, addon)
 	if addon == "Tukui_Raid" then
-		player:SetPoint("TOPRIGHT", TukuiBar3Button, "LEFT", -(adjust+offset), 95)
-		target:SetPoint("TOPLEFT", TukuiBar3Button, "RIGHT", adjust+offset, 95)
+		player:SetPoint("TOPRIGHT", TukuiBar3Button, "LEFT", -(offset), 95)
+		target:SetPoint("TOPLEFT", TukuiBar3Button, "RIGHT", offset, 95)
 	elseif addon == "Tukui_Raid_Healing" then
 		player:SetPoint("TOPRIGHT", TukuiBar3Button, "LEFT", -(25+offset*2+adjust), 125)
 		target:SetPoint("TOPLEFT", TukuiBar3Button, "RIGHT", 25+offset*2+adjust, 125)
 	elseif not addon == "Tukui_Raid" or addon == "Tukui_Raid_Healing" then
-		player:SetPoint("TOPRIGHT", TukuiBar3Button, "LEFT", -(adjust+offset), 95)
-		target:SetPoint("TOPLEFT", TukuiBar3Button, "RIGHT", adjust+offset, 95)
+		player:SetPoint("TOPRIGHT", TukuiBar3Button, "LEFT", -(offset), 95)
+		target:SetPoint("TOPLEFT", TukuiBar3Button, "RIGHT", offset, 95)
 	end
 end)
 

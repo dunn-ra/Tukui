@@ -2,6 +2,8 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 -- This is the file for our action bars settings in game via mouseover buttons around action bars.
 
 local bs = (T.buttonsize*3)+(T.buttonspacing*2)
+local adjust = 0
+if T.lowversion then adjust = T.buttonsize+T.buttonspacing end
 
 local function ShowOrHideBar(bar, button)
 	local db = TukuiDataPerChar
@@ -26,11 +28,7 @@ local function MoveButtonBar(button, bar)
 		else
 			db.hidebar3 = true
 			button:ClearAllPoints()
-			if T.lowversion then
-				button:Point("BOTTOMLEFT", TukuiBar1, "TOPRIGHT", -((T.buttonsize*5)+(T.buttonspacing*2)), 2)
-			else
-				button:Point("BOTTOMLEFT", TukuiBar1, "TOPRIGHT", -((T.buttonsize*3)+T.buttonspacing), 2)
-			end
+			button:Point("BOTTOMLEFT", TukuiBar1, "TOPRIGHT", -(((T.buttonsize*3)+T.buttonspacing)+adjust), 2)
 			button:SetBackdropBorderColor(.4,.80,0)
 			button.text:Point("CENTER", 0, T.Scale(1))
 			button.text:SetText("|cff66CD00+|r")

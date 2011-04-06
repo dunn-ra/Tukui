@@ -196,7 +196,11 @@ if C["datatext"].battleground == true then
 	bgframe:CreatePanel("Panels", 1, 1, "RIGHT", TukuiMiddlePanel, "LEFT", 0, 0)
 	bgframe:ClearAllPoints()
 	bgframe:Height(pheight)
-	bgframe:Point("TOPLEFT", TukuiDatapanelL4, 0, 0)
+	if T.lowversion then
+		bgframe:Point("TOPLEFT", TukuiDatapanelL3, 0, 0)
+	else
+		bgframe:Point("TOPLEFT", TukuiDatapanelL4, 0, 0)
+	end
 	bgframe:Point("BOTTOMRIGHT", TukuiDatapanelL1, 0, 0)
 	bgframe:SetFrameStrata("LOW")
 	bgframe:SetFrameLevel(0)

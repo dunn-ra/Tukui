@@ -25,7 +25,7 @@ local function Shared(self, unit)
 	self:SetBackdropColor(0,0,0)
 	
 	local health = CreateFrame('StatusBar', nil, self)
-	health:Height(17)
+	health:Height(T.Scale(17*T.raidscale))
 	health:SetPoint("TOPLEFT")
 	health:SetPoint("TOPRIGHT")
 	health:SetStatusBarTexture(C["media"].shpTex)
@@ -53,7 +53,7 @@ local function Shared(self, unit)
 	end
 	
 	local power = CreateFrame("StatusBar", nil, self)
-	power:Height(2)
+	power:Height(T.Scale(2*T.raidscale))
 	power:Point("TOPLEFT", health, "BOTTOMLEFT", 0, -1)
 	power:SetPoint("TOPRIGHT", health, "BOTTOMRIGHT", 0, -1)
 	power:SetStatusBarTexture(C["media"].normTex)
@@ -128,9 +128,9 @@ local function Shared(self, unit)
 	
 	local debuffs = CreateFrame('Frame', nil, self)
     debuffs:SetPoint('LEFT', self, 'RIGHT', 4, 0)
-    debuffs:SetHeight(20)
-    debuffs:SetWidth(200)
-    debuffs.size = 20
+    debuffs:SetHeight(T.Scale(20*T.raidscale))
+    debuffs:SetWidth(T.Scale(200*T.raidscale))
+    debuffs.size = (T.Scale(20*T.raidscale))
     debuffs.spacing = 2
     debuffs.initialAnchor = 'LEFT'
 	debuffs.num = dn
@@ -183,7 +183,7 @@ oUF:Factory(function(self)
 		"groupFilter", "1,2,3,4,5,6,7,8",
 		"groupingOrder", "1,2,3,4,5,6,7,8",
 		"groupBy", "GROUP",
-		"yOffset", T.Scale(-4)
+		"yOffset", T.Scale(-4*T.raidscale)
 	)
 	raid:SetPoint('TOPLEFT', UIParent, 1, -300*T.raidscale)
 	
