@@ -88,7 +88,7 @@ local function Shared(self, unit)
 		self.Fader = {
 			[1] = {Combat = 1, Instance = 1},
 			[2] = {PlayerTarget = 1, Dead = 1},
-			[3] = {notPlayerMaxHealth = 0.7, notPlayerMaxMana = 0.7, Stealth = 0.7},
+			[3] = {notPlayerMaxHealth = 0.7, Stealth = 0.7},
 			[4] = {notCombat = 0, Resting = 0, PlayerMaxHealth = 0, PlayerMaxMana = 0}
 		}
 		self.NormalAlpha = 1
