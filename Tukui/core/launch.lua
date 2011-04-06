@@ -249,6 +249,28 @@ StaticPopupDialogs["TUKUIDISABLE_RAID"] = {
 	whileDead = 1,
 }
 
+StaticPopupDialogs["BUY_BANK_SLOT"] = {
+	text = CONFIRM_BUY_BANK_SLOT,
+	button1 = YES,
+	button2 = NO,
+	OnAccept = function(self)
+		PurchaseSlot()
+	end,
+	OnShow = function(self)
+		MoneyFrame_Update(self.moneyFrame, GetBankSlotCost())
+	end,
+	hasMoneyFrame = 1,
+	timeout = 0,
+	hideOnEscape = 1,
+}
+
+StaticPopupDialogs["CANNOT_BUY_BANK_SLOT"] = {
+text = L.bags_noslots,
+button1 = ACCEPT,
+timeout = 0,
+whileDead = 1,
+}
+
 ------------------------------------------------------------------------
 --	On login function, look for some infos!
 ------------------------------------------------------------------------
@@ -324,7 +346,6 @@ local function UIHelp()
 	print(L.core_uihelp5)
 	print(L.core_uihelp6)
 	print(L.core_uihelp7)
-	print(L.core_uihelp8)
 	print(L.core_uihelp9)
 	print(L.core_uihelp10)
 	print(L.core_uihelp11)

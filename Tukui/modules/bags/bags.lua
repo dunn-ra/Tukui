@@ -37,7 +37,6 @@ local Loc = setmetatable({}, {
 	end
 })
 
-
 local function Print (x)
 	DEFAULT_CHAT_FRAME:AddMessage("|cffC495DDTukui:|r " .. x)
 end
@@ -52,7 +51,6 @@ local function Stuffing_Sort(args)
 	Stuffing:SortBags()
 end
 
-
 local function Stuffing_OnShow()
 	Stuffing:PLAYERBANKSLOTS_CHANGED(29)	-- XXX: hack to force bag frame update
 
@@ -61,7 +59,6 @@ local function Stuffing_OnShow()
 	collectgarbage("collect")
 end
 
-
 local function StuffingBank_OnHide()
 	CloseBankFrame()
 	if Stuffing.frame:IsShown() then
@@ -69,23 +66,19 @@ local function StuffingBank_OnHide()
 	end
 end
 
-
 local function Stuffing_OnHide()
 	if Stuffing.bankFrame and Stuffing.bankFrame:IsShown() then
 		Stuffing.bankFrame:Hide()
 	end
 end
 
-
 local function Stuffing_Open()
 	Stuffing.frame:Show()
 end
 
-
 local function Stuffing_Close()
 	Stuffing.frame:Hide()
 end
-
 
 local function Stuffing_Toggle()
 	if Stuffing.frame:IsShown() then
@@ -95,7 +88,6 @@ local function Stuffing_Toggle()
 	end
 end
 
-
 local function Stuffing_ToggleBag(id)
 	if id == -2 then
 		ToggleKeyRing()
@@ -104,10 +96,7 @@ local function Stuffing_ToggleBag(id)
 	Stuffing_Toggle()
 end
 
-
---
 -- bag slot stuff
---
 local trashParent = CreateFrame("Frame", nil, UIParent)
 local trashButton = {}
 local trashBag = {}
@@ -188,7 +177,6 @@ function Stuffing:SlotUpdate(b)
 	b.frame:Show()
 end
 
-
 function Stuffing:BagSlotUpdate(bag)
 	if not self.buttons then
 		return
@@ -200,7 +188,6 @@ function Stuffing:BagSlotUpdate(bag)
 		end
 	end
 end
-
 
 function Stuffing:BagFrameSlotNew (slot, p)
 	for _, v in ipairs(self.bagframe_buttons) do
@@ -237,7 +224,6 @@ function Stuffing:BagFrameSlotNew (slot, p)
 
 	return ret
 end
-
 
 function Stuffing:SlotNew (bag, slot)
 	for _, v in ipairs(self.buttons) do
@@ -292,9 +278,7 @@ function Stuffing:SlotNew (bag, slot)
 	return ret, true
 end
 
-
 -- from OneBag
- 
 local BAGTYPE_PROFESSION = 0x0008 + 0x0010 + 0x0020 + 0x0040 + 0x0080 + 0x0200 + 0x0400
 local BAGTYPE_FISHING = 32768
 
@@ -309,7 +293,6 @@ function Stuffing:BagType(bag)
 
 	return ST_NORMAL
 end
-
 
 function Stuffing:BagNew (bag, f)
 	for i, v in pairs(self.bags) do
@@ -348,7 +331,6 @@ function Stuffing:BagNew (bag, f)
 	return ret
 end
 
-
 function Stuffing:SearchUpdate(str)
 	str = string.lower(str)
 
@@ -367,7 +349,6 @@ function Stuffing:SearchUpdate(str)
 		end
 	end
 end
-
 
 function Stuffing:SearchReset()
 	for _, b in ipairs(self.buttons) do
@@ -430,7 +411,36 @@ function Stuffing:CreateBagFrame(w)
 	end)
 	f.b_close:RegisterForClicks("AnyUp")
 	f.b_close:GetNormalTexture():SetDesaturated(1)
-
+	
+	-- Create Buy Bags Button -- credits Elv22
+	if w == "Bank" then
+		f.b_purchase = CreateFrame("Button", "Stuffing_PurchaseButton"..w, f)
+		f.b_purchase:Size(70, 20)
+		f.b_purchase:Point("TOPLEFT", 12, -5)
+		f.b_purchase:RegisterForClicks("AnyUp")
+		f.b_purchase:SetTemplate("Transparent", true)
+		f.b_purchase:SetScript("OnEnter", function(self)
+			local color = RAID_CLASS_COLORS[T.myclass]
+			self:SetBackdropBorderColor(color.r, color.g, color.b)
+		end)
+		f.b_purchase:SetScript("OnLeave", function(self)
+			self:SetBackdropBorderColor(unpack(C["media"].bordercolor))
+		end)
+		
+		f.b_purchase:SetScript("OnClick", function(self, btn)
+			local _, full = GetNumBankSlots()
+			if not full then
+				StaticPopup_Show("BUY_BANK_SLOT")
+			else
+				StaticPopup_Show("CANNOT_BUY_BANK_SLOT")
+			end
+		end)
+		f.b_purchase:FontString("text", C["media"].font, 12)
+		f.b_purchase.text:SetPoint("CENTER")
+		f.b_purchase.text:SetText("Purchase")
+		f.b_purchase:SetFontString(f.b_purchase.text)
+	end
+	
 	-- create the bags frame
 	local fb = CreateFrame ("Frame", n .. "BagsFrame", f)
 	fb:Point("BOTTOMLEFT", f, "TOPLEFT", 0, 2)
@@ -439,7 +449,6 @@ function Stuffing:CreateBagFrame(w)
 
 	return f
 end
-
 
 function Stuffing:InitBank()
 	if self.bankFrame then
@@ -451,16 +460,13 @@ function Stuffing:InitBank()
 	self.bankFrame = f
 end
 
-
 local parent_startmoving = function(self)
 	StartMoving(self:GetParent())
 end
 
-
 local parent_stopmovingorsizing = function (self)
 	StopMoving(self:GetParent())
 end
-
 
 function Stuffing:InitBags()
 	if self.frame then
@@ -501,8 +507,7 @@ function Stuffing:InitBags()
 	editbox:SetScript("OnEditFocusGained", editbox.HighlightText)
 	editbox:SetScript("OnTextChanged", updateSearch)
 	editbox:SetText(L.bags_search)
-
-
+	
 	local detail = f:CreateFontString(nil, "ARTWORK", "GameFontHighlightLarge")
 	detail:Point("TOPLEFT", f, 12, -10)
 	detail:Point("RIGHT",-(16 + 24), 0)
@@ -569,7 +574,6 @@ function Stuffing:InitBags()
 	f:Hide()
 end
 
-
 function Stuffing:Layout(lb)
 	local slots = 0
 	local rows = 0
@@ -621,8 +625,8 @@ function Stuffing:Layout(lb)
 		fb:SetBackdropColor(unpack(C["media"].backdropcolor))
 		fb:SetBackdropBorderColor(unpack(C["media"].bordercolor))
 
-		local bsize = 30
-		if lb then bsize = 37 end
+		local bsize = 25
+		if lb then bsize = 30 end
 
 		local w = 2 * 12
 		w = w + ((#bs - 1) * bsize)
@@ -634,9 +638,7 @@ function Stuffing:Layout(lb)
 	else
 		fb:Hide()
 	end
-
-
-
+	
 	local idx = 0
 	for _, v in ipairs(bs) do
 		if (not lb and v <= 3 ) or (lb and v ~= -1) then
@@ -647,7 +649,7 @@ function Stuffing:Layout(lb)
 
 			local xoff = 12
 
-			xoff = xoff + (idx * bsize) -- 31)
+			xoff = xoff + (idx * bsize)
 			xoff = xoff + (idx * 4)
 
 			b.frame:ClearAllPoints()
@@ -658,8 +660,7 @@ function Stuffing:Layout(lb)
 			idx = idx + 1
 		end
 	end
-
-
+	
 	for _, i in ipairs(bs) do
 		local x = GetContainerNumSlots(i)
 		if x > 0 then
@@ -670,8 +671,7 @@ function Stuffing:Layout(lb)
 			slots = slots + GetContainerNumSlots(i)
 		end
 	end
-
-
+	
 	rows = floor (slots / cols)
 	if (slots % cols) ~= 0 then
 		rows = rows + 1
@@ -679,8 +679,7 @@ function Stuffing:Layout(lb)
 
 	f:Width(cols * 28 + (cols - 1) * 4 + 12 * 2)
 	f:Height(rows * 28 + (rows - 1) * 4 + off + 12 * 2)
-
-
+	
 	local idx = 0
 	for _, i in ipairs(bs) do
 		local bag_cnt = GetContainerNumSlots(i)
@@ -740,7 +739,6 @@ function Stuffing:Layout(lb)
 	end
 end
 
-
 function Stuffing:SetBagsForSorting(c)
 	Stuffing_Open()
 
@@ -796,49 +794,6 @@ function Stuffing:SetBagsForSorting(c)
 	Print(bids)
 end
 
-
--- slash command handler
-local function StuffingSlashCmd(Cmd)
-	local cmd, args = strsplit(" ", Cmd:lower(), 2)
-
-	if cmd == "config" then
-		Stuffing_OpenConfig()
-	elseif cmd == "sort" then
-		Stuffing_Sort(args)
-	elseif cmd == "psort" then
-		Stuffing_Sort("c/p")
-	elseif cmd == "stack" then
-		Stuffing:SetBagsForSorting(args)
-		Stuffing:Restack()
-	elseif cmd == "test" then
-		Stuffing:SetBagsForSorting(args)
-	elseif cmd == "purchase" then
-		-- XXX
-		if Stuffing.bankFrame and Stuffing.bankFrame:IsShown() then
-			local cnt, full = GetNumBankSlots()
-			if full then
-				Print(L.bags_noslots)
-				return
-			end
-
-			if args == "yes" then
-				PurchaseSlot()
-				return
-			end
-
-			Print(string.format(L.bags_costs, GetBankSlotCost() / 10000))
-			Print(L.bags_buyslots)
-		else
-			Print(L.bags_openbank)
-		end
-	else
-		Print("sort - " .. L.bags_sort)
-		Print("stack - " .. L.bags_stack)
-		Print("purchase - " .. L.bags_buybankslot)
-	end
-end
-
-
 function Stuffing:ADDON_LOADED(addon)
 	if addon ~= "Tukui" then
 		return nil
@@ -852,10 +807,7 @@ function Stuffing:ADDON_LOADED(addon)
 	self:RegisterEvent("PLAYERBANKSLOTS_CHANGED")
 
 	self:RegisterEvent("BAG_CLOSED")
-
-	SlashCmdList["STUFFING"] = StuffingSlashCmd
-	SLASH_STUFFING1 = "/bags"
-
+	
 	self:InitBags()
 	
 	tinsert(UISpecialFrames,"TukuiBags")
