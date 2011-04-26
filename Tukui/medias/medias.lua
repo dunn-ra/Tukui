@@ -52,24 +52,10 @@ C["media"] = {
 	["altbordercolor"] = {.3,.3,.3}, -- alternative border color, mainly for unitframes text panels.
 	["tncolor"] = {1,.98,.80,1}, -- text color for normal colored theme
 	
-	["healthcolor"] = {.2,.2,.2,1}, -- health color for unicolor theme
-	["althealthcolor"] = {.3,.3,.3,1}, -- health color for raid frames
-	["unihealthcolor"] = {.05,.05,.05,1},
-	
-	["healthdeficit"] = {.24,0,.01,1}, -- health deficit color for unicolor theme
-	--0.78, 0.25, 0.25, 1)
-	["interruptable"] = {.80,.14,.14,1}, -- castbar color of interruptable spells
-	["castbarnorm"] = {.49,.61,.75,1}, -- color of player castbar if classcolor == false and target castbar
-	--["interruptable"] = {.85,.1,.1,.75}, -- castbar color of interruptable spells
-	--["castbarnorm"] = {.31,.45,.63,.5}, -- color of player castbar if classcolor == false and target castbar
-	
-	-- raidutility border
-	["rucolor"] = {.80,0,0},
 	-- classtimer bg
 	["ctbackdropcolor"] = {0,0,0,.85},
 	-- nameplate border
 	["nameplatecolor"] = {0,0,0},
-	
 	
 	["buttonhover"] = [[Interface\AddOns\Tukui\medias\textures\button_hover]],
 	
