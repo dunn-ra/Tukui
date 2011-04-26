@@ -12,6 +12,7 @@ C["ufsizes"] = {
 	["unitheight"] = 18,								-- height of the hp bar. Power/mana bar will be 1/3 of it
 	["playercastbar"] = 250,							-- player castbar
 	["targetcastbar"] = 250,							-- target castbar
+	["uffontsize"] = 11,								-- size of the unitframe fonts (hp and mana text)
 }	
 
 C["unitframes"] = {
@@ -19,7 +20,11 @@ C["unitframes"] = {
 	-- theme
 	["enemyhcolor"] = false,							-- enemy target (players) color by hostility, very useful for healer.
 	["unitcastbar"] = true,                             -- enable tukui castbar
-	["unicolor"] = true,								-- enable classcolored frames
+	["unicolor"] = false,								-- enable classcolored frames
+	["hpcolor"] = {.2,.2,.2,1},							-- health color for unicolor theme
+	["hpcoloralt"] = {.3,.3,.3,1},						-- health color for raid frames
+	["hpbg"] = {.24,0,.01,1},							-- health deficit color for unicolor theme
+	["hpbgc"] = {.05,.05,.05,1},						-- health deficit color for class colored theme
 	["playeraggro"] = false,							-- color player border to red if you have aggro on current target.
 	["fader"] = true,									-- enable fading unitframes when ooc, resting, etc
 	-- castbar
@@ -27,6 +32,8 @@ C["unitframes"] = {
 	["cblatency"] = true,								-- enable castbar latency
 	["cbicons"] = true,                                 -- enable icons on castbar
 	["swing"] = false,									-- swing bar
+	["interruptable"] = {.80,.14,.14,1},				-- castbar color of interruptable spells
+	["castbar"] = {.49,.61,.75,1},						-- color of player castbar if classcolor == false and target castbar
 	-- auras
 	["auratimer"] = true,                               -- enable timers on buffs/debuffs
 	["auratextscale"] = 11,                             -- the font size of buffs/debuffs timers on unitframes
@@ -36,7 +43,7 @@ C["unitframes"] = {
 	-- UF options
 	["lowThreshold"] = 25,                              -- global low threshold, for low mana warning.
 	["targetpowerpvponly"] = false,                     -- enable power text on pvp target only
-	["totdebuffs"] = true,	                           -- enable tot debuffs
+	["totdebuffs"] = false,	                           -- enable tot debuffs
 	["showtotalhpmp"] = false,                          -- change the display of info text on player and target with XXXX/Total.
 	["showsmooth"] = true,                              -- enable smooth bar
 	["charportrait"] = false,							-- do i really need to explain this?
@@ -152,13 +159,14 @@ C["datatext"] = {
 	["avd"] = 0,										-- show your current avoidance against the level of the mob your targeting
 	["armor"] = 0,										-- show your armor value against the level mob you are currently targeting
 	["currency"] = 0,									-- show your tracked currency on panels
+	["regen"] = 0,                                      -- show mana regeneration
 	["hit"] = 8,										-- show your hit percentage
 	["mastery"] = 0,									-- show mastery value
 	["micromenu"] = 0,									-- micromenu!
 	["specswitcher"] = 5,								-- talent switch the easy way!
 	-- options
 	["classcolor"] = false,								-- classcolored datatext
-	["color"] = {1,.15,.15},							-- if classcolor = false
+		["color"] = {1,.15,.15},							-- if classcolor = false
 	["battleground"] = true,							-- enable 3 stats in battleground only that replace stat1,stat2,stat3.
 	["time24"] = true,									-- set time to 24h format.
 	["localtime"] = true,								-- set time to local time instead of server time.
@@ -181,7 +189,6 @@ C["nameplate"] = {
 	["showhealth"] = false,				                -- show health text on nameplate
 	["simplehealth"] = true,							-- health percentage on nameplate
 	["enhancethreat"] = false,			                -- threat features based on if your a tank or not
-	["overlap"] = true,					                -- allow nameplates to overlap
 	["combat"] = false,					                -- only show enemy nameplates in-combat.
 	["goodcolor"] = {75/255, 175/255, 76/255},			-- good threat color (tank shows this with threat, everyone else without)
 	["badcolor"] = {0.78, 0.25, 0.25},					-- bad threat color (opposite of above)
@@ -193,6 +200,7 @@ C["tooltip"] = {
 	["hidecombat"] = false,								-- hide bottom-right tooltip when in combat
 	["hidebuttons"] = false,							-- always hide action bar buttons tooltip.
 	["hideuf"] = false,									-- hide tooltip on unitframes
+	["recount"] = true,									-- parent tooltip to recount if visible
 	["cursor"] = false,									-- tooltip via cursor only
 }
 
