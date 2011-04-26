@@ -223,4 +223,95 @@ if T.client == "frFR" then
 	L.move_achievements = "Bouger la fenêtre des Hauts-Faits"
 	L.move_roll = "Bouger la fenêtre d'attribution du butin"
 	L.move_vehicle = "Bouger le schéma du véhicule"
+	
+	-------------------------------------------------
+	-- INSTALLATION
+	-------------------------------------------------
+
+	-- headers
+	L.install_header_1 = "Bienvenue"
+	L.install_header_2 = "1. Principal"
+	L.install_header_3 = "2. Unitframes"
+	L.install_header_4 = "3. Caractéristiques"
+	L.install_header_5 = "4. Ce que vous devez savoir !"
+	L.install_header_6 = "5. Commandes"
+	L.install_header_7 = "6. Terminé"
+	L.install_header_8 = "1. Options Principales"
+	L.install_header_9 = "2. Social"
+	L.install_header_10= "3. Cadres"
+	L.install_header_11= "4. Succès !"
+
+	L.install_init_line_1 = "Thank you for choosing |cffB0171F|cffB0171FCyUI|r|r, a Tukui edit!"
+	L.install_init_line_2 = "You will be guided through the installation process in a few simple steps. At each step, you can decide whether or not you want to apply or skip the presented settings."
+	L.install_init_line_3 = "You are also given the possibility to be shown a brief tutorial on some of the features of Tukui."
+	L.install_init_line_4 = "Press the 'Tutorial' button to read the guide, or press 'Install' to skip this step."
+
+	-- tutorial 1
+	L.tutorial_step_1_line_1 = "This quick tutorial will show you some of the features in |cffB0171FCyUI|r."
+	L.tutorial_step_1_line_2 = "First, the essentials that you should know before you can play with this UI."
+	L.tutorial_step_1_line_3 = "This installer is partially character-specific. While some of the settings that will be applied later on are account-wide, you need to run the install script for each new character running |cffB0171FCyUI|r. The script is run on every new character logging for the first time. You can also access the in game configuration menu by typing |cffFF6347/config|r."
+	L.tutorial_step_1_line_4 = ""
+
+	-- tutorial 2
+	L.tutorial_step_2_line_1 = "Tukui includes an embedded version of oUF (oUFTukui) created by Haste. This handles all of the unitframes on the screen, the buffs and debuffs, and the class-specific elements."
+	L.tutorial_step_2_line_2 = "You can visit WoWInterface.com for more information about oUF and how to use it."
+	L.tutorial_step_2_line_3 = "Depending on your role, you can either display a healer friendly raid frame, with bigger frames and also more information, such as your HoTs and the target's debuffs. You can enable it by typing |cffFF6347/heal|r. Also, a more simple, striped version is available, targeted at tanks and dpsers; to enable it, type |cffFF6347/dps|r. Of course, personal preference plays a part in choosing the right raid frames for you."
+	L.tutorial_step_2_line_4 = "To easily change the unitframe position, just type |cffFF6347/moveui|r."
+
+	-- tutorial 3
+	L.tutorial_step_3_line_1 = "Tukui, and therefore |cffB0171FCyUI|r, is just a redesign of the default Blizzard interface. Almost every feature available on the default UI is also available through |cffB0171FCyUI|r. Extra features are available, such as auto selling grey items, auto repairing your gear, a custom made bag system, heads up information on your char."
+	L.tutorial_step_3_line_2 = "Tukui is built around the idea that not everyone likes having every addon available out there. The high customizability of the UI is also why it's one of the most popular interfaces around. Since 2009, thousands of user have been using Tukui, either as a base for a custom UI (much like |cffB0171FCyUI|r, which is a modification of the Tukui engine), as well as more advanced users, that don't like to rely on specific addons to enjoy their game time. Don't forget to take a look at the other Edited Packages available on the Tukui website!"
+	L.tutorial_step_3_line_3 = "Visit www.tukui.org for extra AddOns, or download them on www.WoWInterface.com and customize your game experience!"
+	L.tutorial_step_3_line_4 = ""
+
+	-- tutorial 4
+	L.tutorial_step_4_line_1 = "Mouseover the right side of your screen to be able to setup, on the fly, extra actionbars. You can do the same on the bottom actionbars! The unitframes will adjust accordingly, if necessary."
+	L.tutorial_step_4_line_2 = "On the left bottom side of the chat frame, you have a copy chat function. Just mouseover and click it, and you are able to copy the text."
+	L.tutorial_step_4_line_3 = "Mouseover, right and left click on the different datapanels. There are tons of additional information available to you, about your guild, friends, your character!"
+	L.tutorial_step_4_line_4 = "Clicking on the [X] button on the bag frame displays a drop menu, with additional features. A purchase button is also available when your bank slots are opened. Drop menus are also available by clicking on the minimap; use them to easier access informational tabs or the tracking feature."
+
+	-- tutorial 5
+	L.tutorial_step_5_line_1 = "Several slash commands are also available:"
+	L.tutorial_step_5_line_2 = "|cffFF6347/moveui|r to move the frames around your screen; |cffFF6347/disable|r [addon] or |cffFF6347/enable|r [addon] to easylly toggle addons; |cffFF6347/rc|r to initiate a ready check; |cffFF6347/rd|r to disband a party or raid;"
+	L.tutorial_step_5_line_3 = "|cffFF6347/wipeactbar|r to delete all spells from your actionbars; |cffFF6347/ainv|r [keyword] autoinvite people that whisper you that word or |cffFF6347/ainv|r off to disable it; |cffFF6347/tt|r to whisper your target; |cffFF6347/gm|r opens the Help menu."
+	L.tutorial_step_5_line_4 = "|cffFF6347/config|r toggles the configuration menu. |cffFF6347/install|r, |cffFF6347/resetui|r or |cffFF6347/tutorial|r loads this installer. |cffFF6347/frame|r prints the name and parent of the frame pointed by your mouse."
+
+	-- tutorial 6
+	L.tutorial_step_6_line_1 = "And that's it, you're done!"
+	L.tutorial_step_6_line_2 = "If you need to check the tutorial again, just type |cffFF6347/tutorial|r"
+	L.tutorial_step_6_line_3 = "Now you can procced installing the UI if you haven't done so yet, or if you need to reset it to the defaults."
+	L.tutorial_step_6_line_4 = ""
+
+	-- install step 1
+	L.install_step_1_line_1 = "These steps will apply the core settings to the UI."
+	L.install_step_1_line_2 = "These are |cffff0000recommended|r for all users, unless you only want specific options to be applied."
+	L.install_step_1_line_3 = "Click 'Continue' to apply the basic variables (recommended)."
+	L.install_step_1_line_4 = "Or click 'Skip' if you want to maintain your settings."
+
+	-- install step 2
+	L.install_step_2_line_0 = "Another chat addon is found. We will ignore this step. Please press skip to proced with the installation."
+	L.install_step_2_line_1 = "The second step is to prepare the chat frame."
+	L.install_step_2_line_2 = "Recommended if you're a new user, but former |cffB0171FCyUI|r users can skip this step."
+	L.install_step_2_line_3 = "Don't worry if the chat font appears too big or too small. After the reload it will rever back to normal size."
+	L.install_step_2_line_4 = "Click 'Continue' to apply the settings, or click 'Skip' if you wish to skip this step."
+
+	-- install step 3
+	L.install_step_3_line_1 = "Last step it to apply the default frame positions."
+	L.install_step_3_line_2 = "It is |cffff0000recommended|r for every new user."
+	L.install_step_3_line_3 = ""
+	L.install_step_3_line_4 = "Click 'Continue' to apply the settings, or click 'Skip' if you wish to skip this step."
+
+	-- install step 4
+	L.install_step_4_line_1 = "Installation is complete."
+	L.install_step_4_line_2 = "Please click the 'Finish' button to reload the UI."
+	L.install_step_4_line_3 = "Enjoy |cffB0171FCyUI|r!"
+	L.install_step_4_line_4 = "Visit www.tukui.org for feedback, help or more information regarding the project!"
+
+	L.install_button_tutorial = "Tutoriel"
+	L.install_button_install = "Installation"
+	L.install_button_next = "Suivant"
+	L.install_button_skip = "Passer"
+	L.install_button_continue = "Continuer"
+	L.install_button_finish = "Terminer"
+	L.install_button_close = "Fermer"
 end
