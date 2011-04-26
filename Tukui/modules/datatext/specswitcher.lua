@@ -3,7 +3,6 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 --------------------------------------------------------------------
 -- spec switcher -- credits to sortokk
 --------------------------------------------------------------------
-if UnitLevel("player") < 9 then return end
 if C["datatext"].specswitcher and C["datatext"].specswitcher > 0 then
 	local Stat = CreateFrame("Frame")
 	Stat:EnableMouse(true)
@@ -13,7 +12,7 @@ if C["datatext"].specswitcher and C["datatext"].specswitcher > 0 then
 	local Text  = TukuiMiddlePanel:CreateFontString(nil, "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
 	Text:SetShadowOffset(T.mult, -T.mult)
-	TukuiDB.PP(C["datatext"].specswitcher, Text)
+	T.PP(C["datatext"].specswitcher, Text)
 
 	local int = 1
 
@@ -54,14 +53,14 @@ if C["datatext"].specswitcher and C["datatext"].specswitcher > 0 then
 		self:SetScript("OnEnter", function(self)
 			if not InCombatLockdown() then
 				self.hovered = true
-				GameTooltip:SetOwner(self, "ANCHOR_TOP", 0, TukuiDB.Scale(6));
+				GameTooltip:SetOwner(self, "ANCHOR_TOP", 0, T.Scale(6));
 				GameTooltip:ClearAllPoints()
-				GameTooltip:SetPoint("BOTTOM", self, "TOP", 0, TukuiDB.mult)
+				GameTooltip:SetPoint("BOTTOM", self, "TOP", 0, T.mult)
 				GameTooltip:ClearLines()
 
 				if(hs) then
-					GameTooltip:AddLine((c == 1 and "* " or "  ") .. select(2,GetTalentTabInfo(majorTree1)).." "..group1tree1.."|r/"..group1tree2.."|r/"..group1tree3.."|r")
-					GameTooltip:AddLine((c == 2 and "* " or "  ") .. select(2,GetTalentTabInfo(majorTree2)).." "..group2tree1.."|r/"..group2tree2.."|r/"..group2tree3.."|r")
+					GameTooltip:AddLine((c == 1 and "* " or "  ")..select(2,GetTalentTabInfo(majorTree1)).." "..group1tree1.."|r/"..group1tree2.."|r/"..group1tree3.."|r")
+					GameTooltip:AddLine((c == 2 and "* " or "  ")..select(2,GetTalentTabInfo(majorTree2)).." "..group2tree1.."|r/"..group2tree2.."|r/"..group2tree3.."|r")
 				else
 					GameTooltip:AddLine(select(2,GetTalentTabInfo(majorTree1)).." "..group1tree1.."|r/"..group1tree2.."|r/"..group1tree3.."|r")
 				end

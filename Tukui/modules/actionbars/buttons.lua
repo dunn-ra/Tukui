@@ -149,7 +149,7 @@ vehicleleft:SetBackdropBorderColor(.86,.07,.23)
 vehicleleft:RegisterForClicks("AnyUp")
 vehicleleft:SetScript("OnClick", function() VehicleExit() end)
 vehicleleft.text = T.SetFontString(vehicleleft, C.media.uffont, 20)
-vehicleleft.text:SetPoint("CENTER", 0, T.Scale(3))
+vehicleleft.text:Point("CENTER", 0, 3)
 vehicleleft.text:SetText("|cffDC143C-|r")
 RegisterStateDriver(vehicleleft, "visibility", "[target=vehicle,exists] show;hide")
 

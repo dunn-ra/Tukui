@@ -160,3 +160,14 @@ protection:SetScript("OnEvent", function(self, event)
 	enable = false
 	moving()
 end)
+
+local function ToggleMovers()
+	TukuiCubeLeft:SetScript("OnMouseDown", function(self)
+		if InCombatLockdown() then print(ERR_NOT_IN_COMBAT) return end
+		if btn == "RightButton" then
+			if enable then return end
+			enable = false
+			moving()
+		end
+	end)
+end

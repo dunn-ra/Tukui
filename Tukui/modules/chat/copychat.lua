@@ -70,10 +70,10 @@ end
 local function ChatCopyButtons()
 	for i = 1, NUM_CHAT_WINDOWS do
 		local cf = _G[format("ChatFrame%d",  i)]
-		local button = CreateFrame("Button", format("ButtonCF%d", i), cf)
+		local button = CreateFrame("Button", format("TukuiButtonCF%d", i), cf)
 		button:SetPoint("BOTTOMLEFT", 0, 10)
-		button:SetHeight(T.Scale(25))
-		button:SetWidth(T.Scale(25))
+		button:Height(25)
+		button:Width(25)
 		button:SetNormalTexture(C.media.copyicon)
 		button:SetAlpha(0)
 		button:SetTemplate("Default")

@@ -37,7 +37,6 @@
 	<Script file="modules\unitframes\templates\colors.lua"/>
 	
 	<Script file="core\uiscale.lua"/>
-	<Script file="core\deprecated.lua"/>
 	<Script file="core\api.lua"/>
 	<Script file="core\functions.lua"/>
 	<Script file="core\launch.lua"/>
@@ -95,6 +94,7 @@
 	<Script file="modules\datatext\hit.lua"/>
 	<Script file="modules\datatext\micromenu.lua"/>
 	<Script file="modules\datatext\mastery.lua"/>
+	<Script file="modules\datatext\regen.lua"/>
 	<Script file="modules\datatext\specswitcher.lua"/>
 	
 	<Script file="modules\actionbars\Bind.lua"/>
@@ -142,7 +142,6 @@
 	<Script file="modules\unitframes\tags\tags.lua"/>
 	<Script file="modules\unitframes\layouts\tukui.lua"/>
 	
-	<Script file="modules\notifications\hunterpethappiness.lua"/>
 	<Script file="modules\notifications\selfbuffs.lua"/>
 	
 	<Script file="modules\misc\altpowerbar.lua"/>
@@ -165,4 +164,6 @@
 	<Script file="modules\hoopla\yInterrupt.lua"/>
 	
 	<Script file="core\movers.lua"/>
+	
+	<Script file="modules\chat\blizzfixrealidlink.lua"/>
 </Ui>

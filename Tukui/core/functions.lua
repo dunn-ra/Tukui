@@ -551,7 +551,7 @@ local CreateAuraTimer = function(self, elapsed)
 end
 
 T.PostCreateAura = function(element, button)
-	T.SetTemplate(button)
+	button:SetTemplate("Default")
 	
 	button.remaining = T.SetFontString(button, C["media"].font, C["unitframes"].auratextscale, "THINOUTLINE")
 	button.remaining:Point("CENTER", 1, 0)
@@ -601,6 +601,12 @@ T.PostUpdateAura = function(icons, unit, icon, index, offset, filter, isDebuff, 
 			icon:SetBackdropBorderColor(color.r * 0.6, color.g * 0.6, color.b * 0.6)
 			icon.icon:SetDesaturated(false)
 		end
+	else
+		if (isStealable or ((T.myclass == "MAGE" or T.myclass == "PRIEST" or T.myclass == "SHAMAN") and dtype == "Magic")) and not UnitIsFriend("player", unit) then
+			icon:SetBackdropBorderColor(1, 0.85, 0, 1)
+		else
+			icon:SetBackdropBorderColor(unpack(C.media.bordercolor))
+		end
 	end
 	
 	if duration and duration > 0 then
@@ -629,18 +635,24 @@ T.HidePortrait = function(self, unit)
 	end
 end
 
+T.PortraitUpdate = function(self, unit)
+	if self:GetModel() and self:GetModel().find and self:GetModel():find("worgenmale") then
+		self:SetCamera(1)
+	end
+end
+
 local CheckInterrupt = function(self, unit)
 	if unit == "vehicle" then unit = "player" end
 	
 	if C["unitframes"].cccastbar ~= true then
 		if self.interrupt and UnitCanAttack("player", unit) then
-			self:SetStatusBarColor(unpack(C["media"].interruptable))
+			self:SetStatusBarColor(unpack(C["unitframes"].interruptable))
 		else
-			self:SetStatusBarColor(unpack(C["media"].castbarnorm))
+			self:SetStatusBarColor(unpack(C["unitframes"].castbar))
 		end
 	else
 		if self.interrupt and UnitCanAttack("player", unit) then
-			self:SetStatusBarColor(unpack(C["media"].interruptable))
+			self:SetStatusBarColor(unpack(C["unitframes"].interruptable))
 		else
 			self:SetStatusBarColor(unpack(oUF.colors.class[select(2, UnitClass(unit))]))
 		end
@@ -872,8 +884,8 @@ T.createAuraWatch = function(self, unit)
 			local icon = CreateFrame("Frame", nil, auras)
 			icon.spellID = spell[1]
 			icon.anyUnit = spell[4]
-			icon:SetWidth(T.Scale(6*C["unitframes"].gridscale))
-			icon:SetHeight(T.Scale(6*C["unitframes"].gridscale))
+			icon:Width(6*C["unitframes"].gridscale)
+			icon:Height(6*C["unitframes"].gridscale)
 			icon:SetPoint(spell[2], 0, 0)
 
 			local tex = icon:CreateTexture(nil, "OVERLAY")
@@ -886,8 +898,9 @@ T.createAuraWatch = function(self, unit)
 			end
 
 			local count = icon:CreateFontString(nil, "OVERLAY")
-			count:SetFont(C["media"].uffont, 8*C["unitframes"].gridscale, "THINOUTLINE")
+			count:SetFont(C["media"].uffont, 9*C["unitframes"].gridscale, "THINOUTLINE")
 			count:SetPoint("CENTER", unpack(T.countOffsets[spell[2]]))
+			count:SetShadowOffset(T.mult, -T.mult)
 			icon.count = count
 
 			auras.icons[spell[1]] = icon
