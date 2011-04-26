@@ -51,13 +51,13 @@ local function Shared(self, unit)
 	if C.unitframes.unicolor == true then
 		health.colorDisconnected = false
 		health.colorClass = false
-		health:SetStatusBarColor(unpack(C["media"].healthcolor))
-		health.bg:SetTexture(unpack(C["media"].healthdeficit))
+		health:SetStatusBarColor(unpack(C["unitframes"].hpcolor))
+		health.bg:SetTexture(unpack(C["unitframes"].hpbg))
 	else
 		health.colorDisconnected = true
 		health.colorClass = true
 		health.colorReaction = true
-		health.bg:SetTexture(unpack(C["media"].unihealthcolor))
+		health.bg:SetTexture(unpack(C["unitframes"].uni))
 	end
 	
 	local power = CreateFrame("StatusBar", nil, self)

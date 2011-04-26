@@ -44,8 +44,8 @@ local function Shared(self, unit)
 	if C.unitframes.unicolor == true then
 		health.colorDisconnected = false
 		health.colorClass = false
-		health:SetStatusBarColor(unpack(C["media"].healthcolor))
-		health.bg:SetVertexColor(unpack(C["media"].healthdeficit))	
+		health:SetStatusBarColor(unpack(C["unitframes"].hpcolor))
+		health.bg:SetVertexColor(unpack(C["unitframes"].hpbg))	
 	else
 		health.colorDisconnected = true
 		health.colorClass = true
@@ -56,11 +56,11 @@ local function Shared(self, unit)
 	name:SetFont(font2, 10*T.raidscale, "THINOUTLINE")
 	name:Point("LEFT", self, "LEFT", 5, 0)
 	
-	if TukuiCF["unitframes"].unicolor == true then
+	if C["unitframes"].unicolor == true then
 		self:Tag(name, '[Tukui:getnamecolor][Tukui:nameshort] [Tukui:dead][Tukui:afk]')
 	else
 		self:Tag(name, "[Tukui:nameshort] [Tukui:dead][Tukui:afk]")
-		name:SetTextColor(unpack(TukuiCF["media"].tncolor))
+		name:SetTextColor(unpack(C["media"].tncolor))
 		name:SetShadowColor(0, 0, 0)
 		name:SetShadowOffset(0.75, -0.75)
 	end

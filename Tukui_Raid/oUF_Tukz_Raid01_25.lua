@@ -43,8 +43,8 @@ local function Shared(self, unit)
 	if C.unitframes.unicolor == true then
 		health.colorDisconnected = false
 		health.colorClass = false
-		health:SetStatusBarColor(unpack(C["media"].healthcolor))
-		health.bg:SetVertexColor(unpack(C["media"].healthdeficit))
+		health:SetStatusBarColor(unpack(C["unitframes"].hpcolor))
+		health.bg:SetVertexColor(unpack(C["unitframes"].hpbg))
 	else
 		health.colorDisconnected = true	
 		health.colorClass = true
@@ -86,11 +86,11 @@ local function Shared(self, unit)
 	name:SetFont(font2, 11*T.raidscale, "THINOUTLINE")
 	name:Point("LEFT", self, "LEFT", 5, 0)
 	
-	if TukuiCF["unitframes"].unicolor == true then
+	if C["unitframes"].unicolor == true then
 		self:Tag(name, '[Tukui:getnamecolor][Tukui:namemedium] [Tukui:dead][Tukui:afk]')
 	else
 		self:Tag(name, "[Tukui:namemedium] [Tukui:dead][Tukui:afk]")
-		name:SetTextColor(unpack(TukuiCF["media"].tncolor))
+		name:SetTextColor(unpack(C["media"].tncolor))
 		name:SetShadowColor(0, 0, 0)
 		name:SetShadowOffset(0.75, -0.75)
 	end
@@ -173,11 +173,11 @@ oUF:Factory(function(self)
 	local pets = {} 
 		pets[1] = oUF:Spawn('partypet1', 'oUF_TukuiPartyPet1') 
 		pets[1]:SetPoint('TOPLEFT', raid, 'TOPLEFT', 0, -120*T.raidscale)
-		pets[1]:SetSize(T.Scale(120*T.raidscale), T.Scale(16*T.raidscale))
+		pets[1]:Size(120*T.raidscale, 16*T.raidscale)
 	for i =2, 4 do 
 		pets[i] = oUF:Spawn('partypet'..i, 'oUF_TukuiPartyPet'..i) 
 		pets[i]:SetPoint('TOP', pets[i-1], 'BOTTOM', 0, -8)
-		pets[i]:SetSize(T.Scale(120*T.raidscale), T.Scale(16*T.raidscale))
+		pets[i]:Size(120*T.raidscale, 16*T.raidscale)
 	end
 	
 	local RaidMove = CreateFrame("Frame")

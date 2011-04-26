@@ -54,19 +54,19 @@ local function Shared(self, unit)
 	if C.unitframes.unicolor == true then
 		health.colorDisconnected = false
 		health.colorClass = false
-		health:SetStatusBarColor(unpack(C["media"].healthcolor))
-		health.bg:SetTexture(unpack(C["media"].healthdeficit))
+		health:SetStatusBarColor(unpack(C["unitframes"].hpcolor))
+		health.bg:SetTexture(unpack(C["unitframes"].hpbg))
 	else
 		health.colorDisconnected = true
 		health.colorClass = true
 		health.colorReaction = true
-		health.bg:SetTexture(unpack(C["media"].unihealthcolor))
+		health.bg:SetTexture(unpack(C["unitframes"].uni))
 	end
 		
 	local power = CreateFrame("StatusBar", nil, self)
 	power:SetHeight(2*C["unitframes"].gridscale*T.raidscale)
-	power:Point("TOPLEFT", self.Health, "BOTTOMLEFT", 0, -TukuiDB.mult)
-	power:Point("TOPRIGHT", self.Health, "BOTTOMRIGHT", 0, -TukuiDB.mult)
+	power:Point("TOPLEFT", self.Health, "BOTTOMLEFT", 0, -T.mult)
+	power:Point("TOPRIGHT", self.Health, "BOTTOMRIGHT", 0, -T.mult)
 	power:SetStatusBarTexture(normTex)
 	self.Power = power
 
@@ -94,7 +94,7 @@ local function Shared(self, unit)
 	self.AggroInd = AggroInd
 	
 	local name = health:CreateFontString(nil, "OVERLAY")
-    name:SetPoint("CENTER", health, "BOTTOM", TukuiDB.Scale(1), TukuiDB.Scale(8))
+    name:SetPoint("CENTER", health, "BOTTOM", T.Scale(1), T.Scale(8))
 	name:SetFont(font2, 11*C["unitframes"].gridscale*T.raidscale, "THINOUTLINE")
 	if C["unitframes"].unicolor == true then
 		self:Tag(name, "[Tukui:nametiny]")
@@ -105,6 +105,13 @@ local function Shared(self, unit)
 		name:SetShadowOffset(1.25, -1.25)
 	end
 	self.Name = name
+	
+	local LFDRole = health:CreateTexture(nil, "OVERLAY")
+    LFDRole:Height(6*T.raidscale)
+    LFDRole:Width(6*T.raidscale)
+	LFDRole:Point("TOP", 0, 3)
+	LFDRole:SetTexture("Interface\\AddOns\\Tukui\\medias\\textures\\lfdicons.blp")
+	self.LFDRole = LFDRole
 	
     if C["unitframes"].aggro == true then
 		table.insert(self.__elements, T.UpdateThreat)
@@ -208,8 +215,8 @@ local function Shared(self, unit)
 		
 		if C["unitframes"].auratimer then
 			RaidDebuffs.cd = CreateFrame('Cooldown', nil, RaidDebuffs)
-			RaidDebuffs.cd:SetPoint("TOPLEFT", T.Scale(2), T.Scale(-2))
-			RaidDebuffs.cd:SetPoint("BOTTOMRIGHT", T.Scale(-2), T.Scale(2))
+			RaidDebuffs.cd:Point("TOPLEFT", 2, -2)
+			RaidDebuffs.cd:Point("BOTTOMRIGHT", -2, 2)
 			RaidDebuffs.cd.noOCC = true -- remove this line if you want cooldown number on it
 		end
 		
