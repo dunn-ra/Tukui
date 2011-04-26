@@ -190,6 +190,17 @@
 	TukuiL.option_unitframes_debuffnumber = "Number of debuffs to show on dps/heal raid layout"
 	TukuiL.option_unitframes_dpsdebuff = "Enable tracking of debuffs on dps layout (alternate mode)"
 	TukuiL.option_unitframes_pets = "Enable pet layout"
+	TukuiL.option_unitframes_swing = "Enable swing bar"
+	TukuiL.option_unitframes_cccastbar = "Enable classcolored castbars"
+	TukuiL.option_unitframes_displayname = "Show player name on the unitframe"
+	TukuiL.option_unitframes_enableraidframes = "Enable raid frames, keeping choosing layout"
+	TukuiL.option_unitframes_fader = "Enable fading unitframes when ooc, resting, etc"
+	TukuiL.option_unitframes_hpcolor = "Health color for unicolor theme"
+	TukuiL.option_unitframes_hpcoloralt = "Health color for raid frames"
+	TukuiL.option_unitframes_hpbg = "Health deficit color for unicolor theme"
+	TukuiL.option_unitframes_hpbgc = "Health deficit color for class colored theme"
+	TukuiL.option_unitframes_interruptable = "Castbar color of interruptable spells"
+	TukuiL.option_unitframes_castbar = "Color of player castbar if classcolor == false and target castbar"
 	--nameplates
 	TukuiL.option_nameplates_simplehealth = "Health percentage on nameplates"
 	-- general
@@ -199,17 +210,13 @@
 	TukuiL.option_ufsizes_playerheight = "Height of the hp bar. Power/mana bar will be 1/3 of it"
 	TukuiL.option_ufsizes_playercastbar = "Player castbar width"
 	TukuiL.option_ufsizes_targetcastbar = "Target castbar width"
+	TukuiL.option_ufsizes_unitheight = "Height of the hp bar. Power/mana bar will be 1/3 of it"
+	TukuiL.option_ufsizes_uffontsize = "Size of the unitframe fonts (hp and mana text)"
 	-- datatext
 	TukuiL.option_datatext_panelsize = "Size of the bottom panels"
 	TukuiL.option_datatext_color = "Default datatext oolor"
 	TukuiL.option_datatext_classcolor = "Classcolored datatext"
 	TukuiL.option_datatext_specswitcher = "Talent switcher position (0 for disabled)"
-	-- unit frames
-	TukuiL.option_unitframes_swing = "Enable swing bar"
-	TukuiL.option_unitframes_cccastbar = "Enable classcolored castbars"
-	TukuiL.option_unitframes_displayname = "Show player name on the unitframe"
-	TukuiL.option_unitframes_enableraidframes = "Enable raid frames, keeping choosing layout"
-	TukuiL.option_unitframes_fader = "Enable fading unitframes when ooc, resting, etc"
 	-- stexperience
 	TukuiL.option_stexperience = "STExperience bar"
 	TukuiL.option_stexperience_enable = "Enable STExperience bar"
@@ -224,13 +231,12 @@
 	TukuiL.option_misc = "Miscellaneous"
 	TukuiL.option_misc_duelspam = "Removes duel chat spam"
 	TukuiL.option_misc_interrupt = "Announces succesful interrupts to raid or party chat"
-	TukuiL.option_misc_restocker = "Auto reagent buyer"
 	-- classtimer
 	TukuiL.option_classtimer = "Classtimer"
 	TukuiL.option_classtimer_enable = "Enable classtimer"
 	TukuiL.option_classtimer_classcolor = "Classcolored bars"
 	TukuiL.option_classtimer_barheight = "Bar height"
-	TukuiL.option_classtimer_barspacing = "bar spacing"
+	TukuiL.option_classtimer_barspacing = "Bar spacing"
 	TukuiL.option_classtimer_direction = "Direction (tick to right, or viceversa)"
 	TukuiL.option_classtimer_spark = "Marker on the end of the bar"
 	TukuiL.option_classtimer_castseparator = "Marker to indicate clipping"
@@ -246,6 +252,8 @@
 	-- bags
 	TukuiL.option_bags_slots = "Number of column bag slots to display"	
 	TukuiL.option_bags_moveable = "Toggle moveable bags"
+	-- tooltip
+	TukuiL.option_tooltip_recount = "Parent tooltip to recount if visible"
 	-- action bar
 	TukuiL.option_actionbar_cubes = "Enable cubes to function as toggles for addons (ex: recount)"
 end

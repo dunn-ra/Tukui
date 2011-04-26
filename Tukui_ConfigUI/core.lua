@@ -89,7 +89,8 @@ local function Local(o)
 	if o == "TukuiConfigUIdatatextmicromenu" then o = TukuiL.option_datatext_micromenu end
 	if o == "TukuiConfigUIdatatexthit" then o = TukuiL.option_datatext_hit end	
 	if o == "TukuiConfigUIdatatextmastery" then o = TukuiL.option_datatext_mastery end	
-
+	if o == "TukuiConfigUIdatatextregen" then o = MANA_REGEN end
+	
 	-- unit frames
 	if o == "TukuiConfigUIunitframes" then o = TukuiL.option_unitframes end
 	if o == "TukuiConfigUIunitframescombatfeedback" then o = TukuiL.option_unitframes_combatfeedback end
@@ -216,6 +217,12 @@ local function Local(o)
 	if o == "TukuiConfigUIunitframesdebuffnumber" then o = TukuiL.option_unitframes_debuffnumber end
 	if o == "TukuiConfigUIunitframesdpsdebuff" then o = TukuiL.option_unitframes_dpsdebuff end
 	if o == "TukuiConfigUIunitframespets" then o = TukuiL.option_unitframes_pets end
+	if o == "TukuiConfigUIunitframeshpcolor" then o = TukuiL.option_unitframes_hpcolor end
+	if o == "TukuiConfigUIunitframeshpcoloralt" then o = TukuiL.option_unitframes_hpcoloralt end
+	if o == "TukuiConfigUIunitframeshpbg" then o = TukuiL.option_unitframes_hpbg end
+	if o == "TukuiConfigUIunitframesuni" then o = TukuiL.option_unitframes_uni end
+	if o == "TukuiConfigUIunitframesinterruptable" then o = TukuiL.option_unitframes_interruptable end
+	if o == "TukuiConfigUIunitframescastbar" then o = TukuiL.option_unitframes_castbar end
 	--nameplates
 	if o == "TukuiConfigUInameplatesimplehealth" then o = TukuiL.option_nameplates_simplehealth end
 	-- general
@@ -225,6 +232,8 @@ local function Local(o)
 	if o == "TukuiConfigUIufsizesplayerheight" then o = TukuiL.option_ufsizes_playerheight end
 	if o == "TukuiConfigUIufsizesplayercastbar" then o = TukuiL.option_ufsizes_playercastbar end
 	if o == "TukuiConfigUIufsizestargetcastbar" then o = TukuiL.option_ufsizes_targetcastbar end
+	if o == "TukuiConfigUIufsizesunitheight" then o = TukuiL.option_ufsizes_unitheight end
+	if o == "TukuiConfigUIufsizesuffontsize" then o = TukuiL.option_ufsizes_uffontsize end
 	-- datatext
 	if o == "TukuiConfigUIdatatextpanelsize" then o = TukuiL.option_datatext_panelsize end
 	if o == "TukuiConfigUIdatatextcolor" then o = TukuiL.option_datatext_color end
@@ -271,6 +280,8 @@ local function Local(o)
 	-- bags
 	if o == "TukuiConfigUIbagsslots" then o = TukuiL.option_bags_slots end	
 	if o == "TukuiConfigUIbagsmoveable" then o = TukuiL.option_bags_moveable end
+	-- tooltip
+	if o == "TukuiConfigUItooltiprecount" then o = TukuiL.option_tooltip_recount end
 	-- action bar
 	if o == "TukuiConfigUIactionbarcubes" then o = TukuiL.option_actionbar_cubes end
 	
