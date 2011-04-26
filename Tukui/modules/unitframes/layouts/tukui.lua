@@ -63,8 +63,8 @@ local function Shared(self, unit)
 	hpheight = T.Scale(uf.unitheight-adjusth)			-- height of the hp bar on the player/target frames
 	pwrheight = T.Scale((uf.unitheight-adjusth)/4)		-- height of the power/rage/mana bar on the player/target frames
 	ufheight = T.Scale(pwrheight+hpheight+1)			-- total height of player/target frames
-	--assisttank_width = TukuiDB.Scale(ui.assisttankw)	-- width of the tank/assist frames
-	--assisttank_height = TukuiDB.Scale(ui.assisttankh)	-- height of the tank/assist frames
+	--assisttank_width = T.Scale(ui.assisttankw)	-- width of the tank/assist frames
+	--assisttank_height = T.Scale(ui.assisttankh)	-- height of the tank/assist frames
 	cbplayer = T.Scale(uf.playercastbar-adjustw)		-- player castbar
 	cbtarget = T.Scale(uf.targetcastbar-adjustw)		-- target castbar
 	-- small frames
@@ -148,14 +148,14 @@ local function Shared(self, unit)
 			health.colorTapping = false
 			health.colorDisconnected = false
 			health.colorClass = false
-			health:SetStatusBarColor(unpack(C["media"].healthcolor))
-			healthBG:SetTexture(unpack(C["media"].healthdeficit))
+			health:SetStatusBarColor(unpack(C["unitframes"].hpcolor))
+			healthBG:SetTexture(unpack(C["unitframes"].hpbg))
 		else
 			health.colorDisconnected = true
 			health.colorTapping = true	
 			health.colorClass = true
 			health.colorReaction = true
-			healthBG:SetTexture(unpack(C["media"].unihealthcolor))
+			healthBG:SetTexture(unpack(C["unitframes"].hpbgc))
 		end
 
 		-- power
@@ -219,6 +219,7 @@ local function Shared(self, unit)
 				portrait:Point("TOPLEFT", panel, "TOPRIGHT", 5, 0)
 			end
 			table.insert(self.__elements, T.HidePortrait)
+			portrait.PostUpdate = T.PortraitUpdate --Worgen Fix (Hydra)
 			self.Portrait = portrait
 			
 			portrait.bg = CreateFrame("Frame", nil, portrait)
@@ -336,6 +337,8 @@ local function Shared(self, unit)
 					Experience.Rested = CreateFrame('StatusBar', nil, self)
 					Experience.Rested:SetParent(Experience)
 					Experience.Rested:SetAllPoints(Experience)
+					Experience.Rested:SetStatusBarTexture(normTex)
+					Experience.Rested:SetStatusBarColor(1, 0, 1, 0.2)
 					local Resting = Experience:CreateTexture(nil, "OVERLAY")
 					Resting:SetHeight(22)
 					Resting:SetWidth(22)
@@ -437,10 +440,10 @@ local function Shared(self, unit)
 
 						bars[i].bg = bars[i]:CreateTexture(nil, 'BORDER')
 						
-						if TukuiDB.myclass == "WARLOCK" then
+						if T.myclass == "WARLOCK" then
 							bars[i]:SetStatusBarColor(153/255,102/255,204/255)
 							bars[i].bg:SetTexture(255/255,102/255,104/255)
-						elseif TukuiDB.myclass == "PALADIN" then
+						elseif T.myclass == "PALADIN" then
 							bars[i]:SetStatusBarColor(228/255,225/255,16/255)
 							bars[i].bg:SetTexture(228/255,225/255,16/255)
 						end
@@ -610,7 +613,7 @@ local function Shared(self, unit)
 				
 				debuffs:SetHeight(24)
 				debuffs:SetWidth(182)
-				debuffs:SetPoint("BOTTOMLEFT", buffs, "TOPLEFT", -2, 2)
+				debuffs:Point("BOTTOMLEFT", buffs, "TOPLEFT", -2, 2)
 				debuffs.size = 24
 				debuffs.num = 21
 			else
@@ -621,7 +624,7 @@ local function Shared(self, unit)
 				
 				debuffs:SetHeight(26)
 				debuffs:SetWidth(252)
-				debuffs:SetPoint("BOTTOMLEFT", buffs, "TOPLEFT", -2, 2)
+				debuffs:Point("BOTTOMLEFT", buffs, "TOPLEFT", -2, 2)
 				debuffs.size = 26
 				debuffs.num = 24
 			end
@@ -859,7 +862,7 @@ local function Shared(self, unit)
 		-- health bar background
 		local healthBG = health:CreateTexture(nil, 'BORDER')
 		healthBG:SetAllPoints()
-		healthBG:SetTexture(unpack(C["media"].healthdeficit))
+		healthBG:SetTexture(unpack(C["unitframes"].hpbg))
 	
 		health.value = T.SetFontString(health, font1, 10)
 		health.value:Point("RIGHT", health, "RIGHT", -2, 0)
@@ -876,7 +879,7 @@ local function Shared(self, unit)
 		if C["unitframes"].unicolor == true then
 			health.colorDisconnected = false
 			health.colorClass = false
-			health:SetStatusBarColor(unpack(C["media"].healthcolor))	
+			health:SetStatusBarColor(unpack(C["unitframes"].hpcolor))
 		else
 			health.colorDisconnected = true
 			health.colorClass = true
@@ -966,7 +969,7 @@ local function Shared(self, unit)
 		-- health bar background
 		local healthBG = health:CreateTexture(nil, 'BORDER')
 		healthBG:SetAllPoints()
-		healthBG:SetTexture(unpack(C["media"].healthdeficit))
+		healthBG:SetTexture(unpack(C["unitframes"].hpbg))
 	
 		health.value = T.SetFontString(health, font1, 10)
 		health.value:Point("RIGHT", health, "RIGHT", -2, 0)
@@ -983,7 +986,7 @@ local function Shared(self, unit)
 		if C["unitframes"].unicolor == true then
 			health.colorDisconnected = false
 			health.colorClass = false
-			health:SetStatusBarColor(unpack(C["media"].healthcolor))	
+			health:SetStatusBarColor(unpack(C["unitframes"].hpcolor))
 		else
 			health.colorDisconnected = true
 			health.colorClass = true
@@ -1059,7 +1062,7 @@ local function Shared(self, unit)
 		
 		local healthBG = health:CreateTexture(nil, 'BORDER')
 		healthBG:SetAllPoints()
-		healthBG:SetTexture(unpack(C["media"].healthdeficit))
+		healthBG:SetTexture(unpack(C["unitframes"].hpbg))
 
 		health.value = T.SetFontString(health, font1, 10)
 		health.value:Point("RIGHT", health, "RIGHT", -5, 0)
@@ -1076,7 +1079,7 @@ local function Shared(self, unit)
 		if C["unitframes"].unicolor == true then
 			health.colorDisconnected = false
 			health.colorClass = false
-			health:SetStatusBarColor(unpack(C["media"].healthcolor))
+			health:SetStatusBarColor(unpack(C["unitframes"].hpcolor))
 		else
 			health.colorDisconnected = true
 			health.colorClass = true
@@ -1141,6 +1144,48 @@ local function Shared(self, unit)
 		debuffs.PostCreateIcon = T.PostCreateAura
 		debuffs.PostUpdateIcon = T.PostUpdateAura
 		self.Debuffs = debuffs
+		
+		local castbar = CreateFrame("StatusBar", self:GetName().."CastBar", self)
+		castbar:SetStatusBarTexture(normTex)
+		castbar:Height(hpheight*0.8)
+		castbar:SetPoint("LEFT", castbar:GetHeight()*1.6, 0)
+		castbar:SetPoint("RIGHT", 0, 0)
+		castbar:SetPoint("BOTTOM", 0, -18)
+		castbar:SetBackdrop(backdrop)
+		castbar:SetBackdropColor(0, 0, 0)
+		
+		castbar.bg = castbar:CreateTexture(nil, "BORDER")
+		castbar.bg:SetAllPoints(castbar)
+		castbar.bg:SetTexture(normTex)
+		castbar.bg:SetVertexColor(.15, .15, .15)
+		
+		castbar.time = T.SetFontString(castbar, font1, 11)
+		castbar.time:Point("RIGHT", castbar, "RIGHT", -5, 1)
+		castbar.time:SetTextColor(0.84, 0.75, 0.65)
+		castbar.time:SetJustifyH("RIGHT")
+		castbar.CustomTimeText = T.CustomCastTimeText
+		
+		castbar.Text = T.SetFontString(castbar, font1, 12)
+		castbar.Text:Point("LEFT", castbar, "LEFT", 8, 1)
+		castbar.Text:SetTextColor(0.84, 0.75, 0.65)
+		
+		castbar.CustomDelayText = T.CustomCastDelayText
+		castbar.PostCastStart = T.CheckCast
+		castbar.PostChannelStart = T.CheckChannel
+		
+		castbar.button = CreateFrame("Frame", nil, castbar)
+		castbar.button:Size(castbar:GetHeight()*1.2)
+		castbar.button:SetTemplate("Buffs")
+		castbar.button:SetPoint("LEFT", -castbar:GetHeight()*1.6, 0)
+
+		castbar.icon = castbar.button:CreateTexture(nil, "ARTWORK")
+		castbar.icon:Point("TOPLEFT", castbar.button, 2, -2)
+		castbar.icon:Point("BOTTOMRIGHT", castbar.button, -2, 2)
+		castbar.icon:SetTexCoord(0.08, 0.92, 0.08, .92)
+		
+		self.Castbar = castbar
+		self.Castbar.Time = castbar.time
+		self.Castbar.Icon = castbar.icon
 	end
 	
 	------------------------------------------------------------------------
@@ -1173,7 +1218,7 @@ local function Shared(self, unit)
 		
 		local healthBG = health:CreateTexture(nil, 'BORDER')
 		healthBG:SetAllPoints()
-		healthBG:SetTexture(unpack(C["media"].healthdeficit))
+		healthBG:SetTexture(unpack(C["unitframes"].hpbg))
 
 		health.value = T.SetFontString(health, font1, 10)
 		health.value:Point("RIGHT", health, "RIGHT", -5, 0)
@@ -1190,7 +1235,7 @@ local function Shared(self, unit)
 		if C["unitframes"].unicolor == true then
 			health.colorDisconnected = false
 			health.colorClass = false
-			health:SetStatusBarColor(unpack(C["media"].healthcolor))	
+			health:SetStatusBarColor(unpack(C["unitframes"].hpcolor))
 		else
 			health.colorDisconnected = true
 			health.colorClass = true
@@ -1333,7 +1378,7 @@ local function Shared(self, unit)
 		-- health bar background
 		local healthBG = health:CreateTexture(nil, 'BORDER')
 		healthBG:SetAllPoints()
-		healthBG:SetTexture(unpack(C["media"].healthdeficit))
+		healthBG:SetTexture(unpack(C["unitframes"].hpbg))
 		
 		health.value = T.SetFontString(health, font1, 11)
 		health.value:Point("RIGHT", health, "RIGHT", -2, 0)
@@ -1345,7 +1390,7 @@ local function Shared(self, unit)
 		if C["unitframes"].unicolor == true then
 			health.colorDisconnected = false
 			health.colorClass = false
-			health:SetStatusBarColor(unpack(C["media"].healthcolor))	
+			health:SetStatusBarColor(unpack(C["unitframes"].hpcolor))
 		else
 			health.colorDisconnected = true
 			health.colorClass = true
@@ -1461,8 +1506,8 @@ local function Shared(self, unit)
 			
 			local Trinket = CreateFrame("Frame", nil, Trinketbg)
 			Trinket:SetAllPoints(Trinketbg)
-			Trinket:SetPoint("TOPLEFT", Trinketbg, 1, -1)
-			Trinket:SetPoint("BOTTOMRIGHT", Trinketbg, -1, 1)
+			Trinket:Point("TOPLEFT", Trinketbg, 1, -1)
+			Trinket:Point("BOTTOMRIGHT", Trinketbg, -1, 1)
 			Trinket:SetFrameLevel(1)
 			Trinket.trinketUseAnnounce = true
 			self.Trinket = Trinket
@@ -1615,7 +1660,7 @@ end)
 
 if C.unitframes.showfocustarget then
 	local focustarget = oUF:Spawn("focustarget", "TukuiFocusTarget")
-	focustarget:SetPoint("TOP", focus, "BOTTOM", 0, -15)
+	focustarget:SetPoint("TOP", focus, "BOTTOM", 0, -30)
 	focustarget:Size(ufwidth*0.80, ufheight)
 end
 
