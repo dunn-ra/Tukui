@@ -940,7 +940,7 @@ local function OnUnitFramesLoad(self, event, addon)
 				result.stacks = stacks
 				
 				local bar = CreateFrame("StatusBar", nil, result, nil)
-				bar:SetStatusBarTexture(TukuiCF["media"].normTex)
+				bar:SetStatusBarTexture(C["media"].normTex)
 				bar:SetPoint("TOPLEFT", result, "TOPLEFT", BAR_HEIGHT+2, -1)
 				bar:SetPoint("BOTTOMRIGHT", result, "BOTTOMRIGHT", 0, 1)
 				result.bar = bar
