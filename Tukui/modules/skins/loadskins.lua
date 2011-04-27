@@ -15,7 +15,7 @@
 	
 	function CustomSkin:SkinBackgroundFrame(frame)
 		self:SkinFrame(frame)
-		TukuiDB.CreateShadow(frame)
+		T.CreateShadow(frame)
 	end
 	
 	Here we're modifying the :SkinBackground() method to add shadows. Note that self is a reference to the skin object,
@@ -49,15 +49,15 @@
 
 -- Don't run if TelUI is loaded, or TukUI isn't.
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
-if IsAddOnLoaded("TelUI") or Mod_AddonSkins or not IsAddOnLoaded("Tukui") or not TukuiDB then return end
+if IsAddOnLoaded("TelUI") or Mod_AddonSkins or not IsAddOnLoaded("Tukui") or not T then return end
 
-local TukVer = tonumber(TukuiDB.version)
+local TukVer = tonumber(T.version)
 
 Mod_AddonSkins = CreateFrame("Frame")
 local Mod_AddonSkins = Mod_AddonSkins
 
 function Mod_AddonSkins:SkinFrame(frame)
-	TukuiDB.SetTemplate(frame)
+	T.SetTemplate(frame)
 end
 
 function Mod_AddonSkins:SkinBackgroundFrame(frame)
@@ -66,7 +66,7 @@ end
 
 function Mod_AddonSkins:SkinButton(button)
 	self:SkinFrame(button)
-	TukuiDB.StyleButton(button,button.GetCheckedTexture and button:GetCheckedTexture())
+	T.StyleButton(button,button.GetCheckedTexture and button:GetCheckedTexture())
 end
 
 function Mod_AddonSkins:SkinActionButton(button)
@@ -98,17 +98,17 @@ function Mod_AddonSkins:SkinActionButton(button)
 	button.cd = button.cd or _G[name.."Cooldown"]
 end
 
-Mod_AddonSkins.barTexture = TukuiCF.media.normTex
-Mod_AddonSkins.bgTexture = TukuiCF.media.blank
-Mod_AddonSkins.font = TukuiCF.media.font
-Mod_AddonSkins.smallFont = TukuiCF.media.font
+Mod_AddonSkins.barTexture = C.media.normTex
+Mod_AddonSkins.bgTexture = C.media.blank
+Mod_AddonSkins.font = C.media.font
+Mod_AddonSkins.smallFont = C.media.font
 Mod_AddonSkins.fontSize = 12
-Mod_AddonSkins.buttonSize = TukuiDB.Scale(27)
-Mod_AddonSkins.buttonSpacing = TukuiDB.Scale(4)
-Mod_AddonSkins.borderWidth = TukuiDB.Scale(2)
+Mod_AddonSkins.buttonSize = T.Scale(27)
+Mod_AddonSkins.buttonSpacing = T.Scale(4)
+Mod_AddonSkins.borderWidth = T.Scale(2)
 Mod_AddonSkins.buttonZoom = {.08,.92,.08,.92}
-Mod_AddonSkins.barSpacing = TukuiDB.Scale(1)
-Mod_AddonSkins.barHeight = TukuiDB.Scale(20)
+Mod_AddonSkins.barSpacing = T.Scale(1)
+Mod_AddonSkins.barHeight = T.Scale(20)
 Mod_AddonSkins.skins = {}
 Mod_AddonSkins.__index = Mod_AddonSkins
 
