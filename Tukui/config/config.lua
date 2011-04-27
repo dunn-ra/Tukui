@@ -20,7 +20,7 @@ C["unitframes"] = {
 	-- theme
 	["enemyhcolor"] = false,							-- enemy target (players) color by hostility, very useful for healer.
 	["unitcastbar"] = true,                             -- enable tukui castbar
-	["unicolor"] = false,								-- enable classcolored frames
+	["unicolor"] = true,								-- enable classcolored frames
 	["hpcolor"] = {.2,.2,.2,1},							-- health color for unicolor theme
 	["hpcoloralt"] = {.3,.3,.3,1},						-- health color for raid frames
 	["hpbg"] = {.24,0,.01,1},							-- health deficit color for unicolor theme
