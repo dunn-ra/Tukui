@@ -1,5 +1,4 @@
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
--- This is the file for our action bars settings in game via mouseover buttons around action bars.
 
 local bs = (T.buttonsize*3)+(T.buttonspacing*2)
 local adjust = 0
@@ -46,7 +45,7 @@ local function MoveButtonBar(button, bar)
 			button.text:SetText("|cffDC143C-|r")
 			TukuiPetBar:SetPoint("RIGHT", TukuiBar5, "LEFT", -T.petbuttonsize, 0)
 		else
-			db.hidebar5 = true -- DONE!
+			db.hidebar5 = true
 			TukuiBar4Button:Show()
 			button:ClearAllPoints()
 			button:Height(bs)
@@ -83,12 +82,10 @@ local function MoveButtonBar(button, bar)
 	end
 end
 
-local function DrPepper(self, bar) -- guess what! :P
-	-- yep, you cannot drink DrPepper while in combat. :(
+local function DrPepper(self, bar)
 	if InCombatLockdown() then print(ERR_NOT_IN_COMBAT) return end
 	
 	local button = self
-	
 	ShowOrHideBar(bar, button)
 	MoveButtonBar(button, bar)
 end
@@ -108,7 +105,7 @@ TukuiBar3Button.text = T.SetFontString(TukuiBar3Button, C.media.uffont, 20)
 TukuiBar3Button.text:Point("CENTER", 0, T.Scale(3))
 TukuiBar3Button.text:SetText("|cffDC143C-|r")
 
-local TukuiBar4Button = CreateFrame("Button", "TukuiBar4Button", UIParent) -- DONE!
+local TukuiBar4Button = CreateFrame("Button", "TukuiBar4Button", UIParent)
 TukuiBar4Button:Width(12)
 TukuiBar4Button:Height(bs)
 TukuiBar4Button:Point("TOPRIGHT", UIParent, "RIGHT", -1, 0)
@@ -139,7 +136,7 @@ TukuiBar5Button.text = T.SetFontString(TukuiBar5Button, C.media.uffont, 20)
 TukuiBar5Button.text:Point("CENTER", 0, T.Scale(1))
 TukuiBar5Button.text:SetText("|cffDC143C-|r")
 
--- exit vehicle button on left side of bottom action bar
+-- exit vehicle button
 local vehicleleft = CreateFrame("Button", "TukuiExitVehicleButtonLeft", UIParent, "SecureHandlerClickTemplate")
 vehicleleft:SetAllPoints(TukuiBar3Button)
 vehicleleft:SetFrameStrata(TukuiBar3Button:GetFrameStrata())
@@ -152,10 +149,6 @@ vehicleleft.text = T.SetFontString(vehicleleft, C.media.uffont, 20)
 vehicleleft.text:Point("CENTER", 0, 3)
 vehicleleft.text:SetText("|cffDC143C-|r")
 RegisterStateDriver(vehicleleft, "visibility", "[target=vehicle,exists] show;hide")
-
---------------------------------------------------------------
--- DrPepper taste is really good with Vodka. 
---------------------------------------------------------------
 
 local init = CreateFrame("Frame")
 init:RegisterEvent("VARIABLES_LOADED")

@@ -437,10 +437,10 @@ function CreateTukuiConfigUI()
 		return
 	end
 	
-	local version = tonumber(T.version)
-	if version < 2.0 then
-		print(TukuiL.option_update)
-	end
+	--local version = tonumber(T.version)
+	--if version < 2.0 then
+		--print(TukuiL.option_update)
+	--end
 	
 	-- MAIN FRAME
 	local TukuiConfigUI = CreateFrame("Frame","TukuiConfigUI",UIParent)

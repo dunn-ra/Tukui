@@ -8,7 +8,7 @@
 	
 	File version v91.109
 	(C)2010 Darth Android / Telroth - The Venture Co.
---]]
+--]-]
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 
 if not Mod_AddonSkins or not IsAddOnLoaded("Omen") then return end
@@ -75,3 +75,4 @@ Mod_AddonSkins:RegisterSkin("Omen",function(Skin, skin, Layout, layout, config)
 	Omen:ReAnchorBars()
 	Omen:ResizeBars()
 end)
+--]]
