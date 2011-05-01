@@ -97,6 +97,23 @@ local function SetTemplate(f, t, tex)
 	f:SetBackdropBorderColor(borderr, borderg, borderb)
 end
 
+local function CreateBackdrop(f, t, tex)
+	if not t then t = "Default" end
+	
+	local b = CreateFrame("Frame", nil, f)
+	b:Point("TOPLEFT", -1, 1)
+	b:Point("BOTTOMRIGHT", 1, -1)
+	b:SetTemplate(t, tex)
+	
+	if f:GetFrameLevel() - 1 >= 0 then
+		b:SetFrameLevel(f:GetFrameLevel() - 1)
+	else
+		b:SetFrameLevel(0)
+	end
+	
+	f.backdrop = b
+end
+
 local function CreatePanel(f, t, w, h, a1, p, a2, x, y)
 	GetTemplate(t)
 	
@@ -244,11 +261,22 @@ local function HighlightUnit(f, r, g, b)
 	f:RegisterEvent("PLAYER_TARGET_CHANGED", HighlightTarget)
 end
 
+local function StripTextures(object)
+	for i=1, object:GetNumRegions() do
+		local region = select(i, object:GetRegions())
+		if region:GetObjectType() == "Texture" then
+			region:SetTexture(nil)
+		end
+	end
+end
+
 local function addapi(object)
 	local mt = getmetatable(object).__index
 	if not object.Size then mt.Size = Size end
 	if not object.Point then mt.Point = Point end
 	if not object.SetTemplate then mt.SetTemplate = SetTemplate end
+	if not object.CreateBackdrop then mt.CreateBackdrop = CreateBackdrop end
+	if not object.StripTextures then mt.StripTextures = StripTextures end
 	if not object.CreatePanel then mt.CreatePanel = CreatePanel end
 	if not object.CreateShadow then mt.CreateShadow = CreateShadow end
 	if not object.Kill then mt.Kill = Kill end
