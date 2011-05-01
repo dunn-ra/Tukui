@@ -108,7 +108,6 @@ C["auras"] = {
 
 C["bars"] = {
 	["threat"] = true,									-- enable threabar
-	["vengeance"] = true,								-- enable vengeance bar
 }
 
 C["actionbar"] = {
@@ -189,6 +188,7 @@ C["nameplate"] = {
 	["showhealth"] = false,				                -- show health text on nameplate
 	["simplehealth"] = true,							-- health percentage on nameplate
 	["enhancethreat"] = false,			                -- threat features based on if your a tank or not
+	["hidelevel"] = true,								-- hides level if mob is the same level as the character
 	["combat"] = false,					                -- only show enemy nameplates in-combat.
 	["goodcolor"] = {75/255, 175/255, 76/255},			-- good threat color (tank shows this with threat, everyone else without)
 	["badcolor"] = {0.78, 0.25, 0.25},					-- bad threat color (opposite of above)
