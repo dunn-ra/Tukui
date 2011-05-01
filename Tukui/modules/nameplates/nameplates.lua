@@ -1,13 +1,13 @@
 ﻿local T, C, L = unpack(select(2, ...)) -- Import Functions/Constants, Config, Locales
 
---Base code by Dawn (dNameplates), Rewritten by Elv22
+--Base code by Dawn (dNameplates), rewritten by Elv22
 if not C["nameplate"].enable == true then return end
 
 local TEXTURE = C["media"].normTex
 local FONT = C["media"].font
 local FONTSIZE = 10
 local FONTFLAG = "THINOUTLINE"
-local hpHeight = 10
+local hpHeight = 12
 local hpWidth = 110
 local iconSize = 25		--Size of all Icons, RaidIcon/ClassIcon/Castbar Icon
 local cbHeight = 5
@@ -20,7 +20,7 @@ local noscalemult = T.mult * C["general"].uiscale
 
 --Change defaults if we are showing health text or not
 if C["nameplate"].showhealth ~= true then
-	hpHeight = 5
+	hpHeight = 6
 	iconSize = 20
 end
 
@@ -139,7 +139,7 @@ local function SetVirtualBorder(parent, r, g, b, a)
 	parent.borderright:SetTexture(r, g, b)
 end
 
---Color the castbar depending on if we can interrupt or not,
+--Color the castbar depending on if we can interrupt or not, 
 --also resize it as nameplates somehow manage to resize some frames when they reappear after being hidden
 local function UpdateCastbar(frame)
 	frame:ClearAllPoints()
@@ -147,19 +147,19 @@ local function UpdateCastbar(frame)
 	frame:SetPoint('TOP', frame:GetParent().hp, 'BOTTOM', 0, -8)
 	frame:GetStatusBarTexture():SetHorizTile(true)
 	if(frame.shield:IsShown()) then
-		frame:SetStatusBarColor(unpack(C["unitframes"].interruptable))
+		frame:SetStatusBarColor(0.78, 0.25, 0.25, 1)
 	end
 end	
 
 --Determine whether or not the cast is Channelled or a Regular cast so we can grab the proper Cast Name
 local function UpdateCastText(frame, curValue)
 	local minValue, maxValue = frame:GetMinMaxValues()
-
+	
 	if UnitChannelInfo("target") then
 		frame.time:SetFormattedText("%.1f ", curValue)
 		frame.name:SetText(select(1, (UnitChannelInfo("target"))))
 	end
-
+	
 	if UnitCastingInfo("target") then
 		frame.time:SetFormattedText("%.1f ", maxValue - curValue)
 		frame.name:SetText(select(1, (UnitCastingInfo("target"))))
@@ -206,7 +206,7 @@ local function Colorize(frame)
 			return
 		end
 	end
-
+	
 	if g+b == 0 then -- hostile
 		r,g,b = 222/255, 95/255,  95/255
 		frame.isFriendly = false
@@ -231,15 +231,15 @@ end
 --size settings when it gets reshown
 local function UpdateObjects(frame)
 	local frame = frame:GetParent()
-
-	local r, g, b = frame.hp:GetStatusBarColor()
 	
+	local r, g, b = frame.hp:GetStatusBarColor()
+
 	--Have to reposition this here so it doesnt resize after being hidden
 	frame.hp:ClearAllPoints()
 	frame.hp:SetSize(hpWidth, hpHeight)	
 	frame.hp:SetPoint('TOP', frame, 'TOP', 0, -15)
 	frame.hp:GetStatusBarTexture():SetHorizTile(true)
-	
+			
 	--Colorize Plate
 	Colorize(frame)
 	frame.hp.rcolor, frame.hp.gcolor, frame.hp.bcolor = frame.hp:GetStatusBarColor()
@@ -249,31 +249,33 @@ local function UpdateObjects(frame)
 	if C["nameplate"].enhancethreat == true then
 		frame.hp.name:SetTextColor(frame.hp.rcolor, frame.hp.gcolor, frame.hp.bcolor)
 	end
-
+	
 	--Set the name text
 	frame.hp.name:SetText(frame.hp.oldname:GetText())
-
+	
 	--Setup level text
 	local level, elite, mylevel = tonumber(frame.hp.oldlevel:GetText()), frame.hp.elite:IsShown(), UnitLevel("player")
 	frame.hp.level:ClearAllPoints()
 	if C["nameplate"].showhealth == true then
 		frame.hp.level:SetPoint("RIGHT", frame.hp, "RIGHT", 2, 0)
 	else
-		frame.hp.level:SetPoint("RIGHT", frame.hp, "LEFT", -1, 0)
+		frame.hp.level:SetPoint("LEFT", frame.hp, "RIGHT", 2, 0)
 	end
-
+	
 	frame.hp.level:SetTextColor(frame.hp.oldlevel:GetTextColor())
 	if frame.hp.boss:IsShown() then
 		frame.hp.level:SetText("??")
 		frame.hp.level:SetTextColor(0.8, 0.05, 0)
 		frame.hp.level:Show()
 	elseif not elite and level == mylevel then
-		frame.hp.level:Hide()
+		if C["nameplate"].hidelevel == true then
+			frame.hp.level:Hide()
+		end
 	else
 		frame.hp.level:SetText(level..(elite and "+" or ""))
 		frame.hp.level:Show()
 	end
-
+	
 	frame.overlay:ClearAllPoints()
 	frame.overlay:SetAllPoints(frame.hp)
 
@@ -285,7 +287,7 @@ local function SkinObjects(frame)
 	local hp, cb = frame:GetChildren()
 	local threat, hpborder, overlay, oldname, oldlevel, bossicon, raidicon, elite = frame:GetRegions()
 	local _, cbborder, cbshield, cbicon = cb:GetRegions()
-	
+
 	--Health Bar
 	frame.healthOriginal = hp
 	hp:SetFrameLevel(1)
@@ -297,26 +299,26 @@ local function SkinObjects(frame)
 	hp.level:SetFont(FONT, FONTSIZE, FONTFLAG)
 	hp.level:SetShadowColor(0, 0, 0, 0.4)
 	hp.level:SetTextColor(1, 1, 1)
-	hp.level:SetShadowOffset(T.mult, -T.mult)
+	hp.level:SetShadowOffset(T.mult, -T.mult)	
 	hp.oldlevel = oldlevel
 	hp.boss = bossicon
 	hp.elite = elite
 	
 	--Create Health Text
 	if C["nameplate"].showhealth == true then
-		hp.value = hp:CreateFontString(nil, "OVERLAY")
+		hp.value = hp:CreateFontString(nil, "OVERLAY")	
 		hp.value:SetFont(FONT, FONTSIZE, FONTFLAG)
 		hp.value:SetShadowColor(0, 0, 0, 0.4)
 		hp.value:SetPoint("CENTER", hp)
 		hp.value:SetTextColor(1,1,1)
 		hp.value:SetShadowOffset(T.mult, -T.mult)
 	elseif C["nameplate"].simplehealth == true then
-		hp.value = hp:CreateFontString(nil, "OVERLAY")
+		hp.value = hp:CreateFontString(nil, "OVERLAY")	
 		hp.value:SetFont(FONT, 7, FONTFLAG)
 		hp.value:SetShadowColor(0, 0, 0, 0.4)
-		hp.value:SetPoint("RIGHT", hp, "RIGHT", -5, 0)
+		hp.value:SetPoint("LEFT", hp, 5, 0)
 		hp.value:SetTextColor(1,1,1)
-		hp.value:SetShadowOffset(T.mult, -T.mult)
+		hp.value:SetShadowOffset(.25, -.25)
 	end
 	
 	--Create Name Text
@@ -330,7 +332,7 @@ local function SkinObjects(frame)
 	
 	hp.hpbg = hp:CreateTexture(nil, 'BORDER')
 	hp.hpbg:SetAllPoints(hp)
-	hp.hpbg:SetTexture(1,1,1,0.25)
+	hp.hpbg:SetTexture(1,1,1,0.25) 		
 	
 	hp:HookScript('OnShow', UpdateObjects)
 	frame.hp = hp
@@ -354,11 +356,11 @@ local function SkinObjects(frame)
 	cb.name:SetFont(FONT, FONTSIZE, FONTFLAG)
 	cb.name:SetTextColor(1, 1, 1)
 	cb.name:SetShadowColor(0, 0, 0, 0.4)
-	cb.name:SetShadowOffset(T.mult, -T.mult)
+	cb.name:SetShadowOffset(T.mult, -T.mult)		
 	
 	--Setup CastBar Icon
 	cbicon:ClearAllPoints()
-	cbicon:SetPoint("TOPLEFT", hp, "TOPRIGHT", 8, 0)
+	cbicon:SetPoint("TOPLEFT", hp, "TOPRIGHT", 8, 0)		
 	cbicon:SetSize(iconSize, iconSize)
 	cbicon:SetTexCoord(.07, .93, .07, .93)
 	cbicon:SetDrawLayer("OVERLAY")
@@ -370,21 +372,21 @@ local function SkinObjects(frame)
 	cbshield:SetPoint("TOP", cb, "BOTTOM")
 	cb:HookScript('OnShow', UpdateCastbar)
 	cb:HookScript('OnSizeChanged', OnSizeChanged)
-	cb:HookScript('OnValueChanged', OnValueChanged)
+	cb:HookScript('OnValueChanged', OnValueChanged)			
 	frame.cb = cb
-
+	
 	--Highlight
 	overlay:SetTexture(1,1,1,0.15)
-	overlay:SetAllPoints(hp)
+	overlay:SetAllPoints(hp)	
 	frame.overlay = overlay
-	
+
 	--Reposition and Resize RaidIcon
 	raidicon:ClearAllPoints()
 	raidicon:SetPoint("BOTTOM", hp, "TOP", 0, 16)
 	raidicon:SetSize(iconSize*1.4, iconSize*1.4)
 	raidicon:SetTexture([[Interface\AddOns\Tukui\medias\textures\raidicons.blp]])
 	frame.raidicon = raidicon
-
+	
 	--Hide Old Stuff
 	QueueObject(frame, oldlevel)
 	QueueObject(frame, threat)
@@ -394,7 +396,7 @@ local function SkinObjects(frame)
 	QueueObject(frame, oldname)
 	QueueObject(frame, bossicon)
 	QueueObject(frame, elite)
-
+	
 	UpdateObjects(hp)
 	UpdateCastbar(cb)
 	
@@ -431,7 +433,7 @@ local function UpdateThreat(frame, elapsed)
 				else
 					frame.hp:SetStatusBarColor(goodR, goodG, goodB)
 					frame.hp.hpbg:SetTexture(goodR, goodG, goodB, 0.25)
-				end
+				end		
 			else
 				--Set colors to their original, not in combat
 				frame.hp:SetStatusBarColor(frame.hp.rcolor, frame.hp.gcolor, frame.hp.bcolor)
@@ -451,7 +453,7 @@ local function UpdateThreat(frame, elapsed)
 				end
 			else
 				--Losing/Gaining Threat
-				frame.hp:SetStatusBarColor(transitionR, transitionG, transitionB)
+				frame.hp:SetStatusBarColor(transitionR, transitionG, transitionB)	
 				frame.hp.hpbg:SetTexture(transitionR, transitionG, transitionB, 0.25)
 			end
 		end
@@ -494,8 +496,10 @@ local function ShowHealth(frame, ...)
 	
 	if C["nameplate"].showhealth == true then
 		frame.hp.value:SetText(T.ShortValue(valueHealth).." - "..(string.format("%d%%", math.floor((valueHealth/maxHealth)*100))))
+	elseif C["nameplate"].simplehealth == true then
+		frame.hp.value:SetText((string.format("%d%%", math.floor((valueHealth/maxHealth)*100))))
 	end
-	
+			
 	--Setup frame shadow to change depending on enemy players health, also setup targetted unit to have white shadow
 	if frame.hasClass == true or frame.isFriendly == true then
 		if(d <= 50 and d >= 20) then
@@ -525,7 +529,7 @@ local function HookFrames(...)
 	for index = 1, select('#', ...) do
 		local frame = select(index, ...)
 		local region = frame:GetRegions()
-
+		
 		if(not frames[frame] and (frame:GetName() and frame:GetName():find("NamePlate%d")) and region and region:GetObjectType() == 'Texture' and region:GetTexture() == OVERLAY) then
 			SkinObjects(frame)
 			frame.region = region
@@ -543,12 +547,12 @@ CreateFrame('Frame'):SetScript('OnUpdate', function(self, elapsed)
 	if(self.elapsed and self.elapsed > 0.2) then
 		ForEachPlate(UpdateThreat, self.elapsed)
 		ForEachPlate(AdjustNameLevel)
-		
 		self.elapsed = 0
 	else
 		self.elapsed = (self.elapsed or 0) + elapsed
 	end
-
+	
+	ForEachPlate(ShowHealth)
 	ForEachPlate(CheckBlacklist)
 	ForEachPlate(HideDrunkenText)
 end)
