@@ -3,8 +3,7 @@
 	<Script file="developer\commands.lua"/>
 	
 	<Script file="core\init.lua"/>
-	<Script file="core\constants.lua"/>	
-	
+	<Script file="core\constants.lua"/>
 	
 	<Script file="locales\english.lua"/>
 	<Script file="locales\french.lua"/>
@@ -16,7 +15,7 @@
 	
 	<Script file="config\config.lua"/>
 	<Script file="config\profiles.lua"/>
-	<Script file="medias\medias.lua"/>	
+	<Script file="medias\medias.lua"/>
 	<Script file="core\configui.lua"/>
 	
 	<Include file="modules\unitframes\core\oUF\oUF.xml"/>
@@ -49,6 +48,7 @@
 	<Script file="modules\blizzard\capturebar.lua"/>
 	<Script file="modules\blizzard\gm.lua"/>
 	<Script file="modules\blizzard\ghostframe.lua"/>
+	<Script file="modules\blizzard\timertracker.lua"/>
 	<Script file="modules\blizzard\quests.lua"/>
 	<Script file="modules\blizzard\symbol.lua"/>
 	<Script file="modules\blizzard\kill.lua"/>
@@ -161,7 +161,10 @@
 	
 	<Script file="developer\test.lua"/>
 	
+	<Script file="modules\hoopla\yConjured.lua"/>
 	<Script file="modules\hoopla\yInterrupt.lua"/>
+	<Script file="modules\hoopla\yRess.lua"/>
+	<Script file="modules\hoopla\yCooldown.lua"/>
 	
 	<Script file="core\movers.lua"/>
 	
