@@ -1,5 +1,4 @@
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
-
+local T, C, L = unpack(select(2, ...))
 if IsAddOnLoaded("SmellyPowerBar") then return end
 
 PlayerPowerBarAlt:UnregisterEvent("UNIT_POWER_BAR_SHOW")
@@ -17,12 +16,12 @@ local AltPowerBarStatus = CreateFrame("StatusBar", "TukuiAltPowerBarStatus", Alt
 AltPowerBarStatus:SetFrameLevel(AltPowerBar:GetFrameLevel() + 1)
 AltPowerBarStatus:SetStatusBarTexture(C.media.normTex)
 AltPowerBarStatus:SetMinMaxValues(0, 100)
-AltPowerBarStatus:Point("TOPLEFT", TukuiMiddlePanel, "TOPLEFT", 0, 0)
-AltPowerBarStatus:Point("BOTTOMRIGHT", TukuiMiddlePanel, "BOTTOMRIGHT", 0, 0)
+AltPowerBarStatus:Point("TOPLEFT", TukuiMiddlePanel, "TOPLEFT", 1, -1)
+AltPowerBarStatus:Point("BOTTOMRIGHT", TukuiMiddlePanel, "BOTTOMRIGHT", -1, 1)
 
 local AltPowerText = AltPowerBarStatus:CreateFontString(nil, "OVERLAY")
-AltPowerText:SetFont(C.media.font, 11)
-AltPowerText:Point("CENTER", AltPowerBar, "CENTER", 0, 0)
+AltPowerText:SetFont(C.media.font, C.datatext.fontsize)
+AltPowerText:Point("CENTER", AltPowerBar, "CENTER", 0, -1)
 AltPowerText:SetShadowColor(0, 0, 0)
 AltPowerText:SetShadowOffset(1.25, -1.25)
 
@@ -51,6 +50,7 @@ AltPowerBarStatus:SetScript("OnUpdate", function(self, elapsed)
 		self:SetValue(power)
 		AltPowerText:SetText(power.." / "..mpower)
 		local r, g, b = oUFTukui.ColorGradient(power/mpower, 0,.8,0,.8,.8,0,.8,0,0)
+		AltPowerBarStatus:SetStatusBarColor(r, g, b)
 		self.TimeSinceLastUpdate = 0
 	end
 end)
