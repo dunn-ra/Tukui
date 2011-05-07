@@ -77,7 +77,10 @@ local function SetChatStyle(frame)
 		tab:HookScript("OnEnter", function() _G[chat.."TabText"]:Show() end)
 		tab:HookScript("OnLeave", function() _G[chat.."TabText"]:Hide() end)
 	end
-
+	
+	-- change tab font
+	_G[chat.."TabText"]:SetFont(C.media.font, 11)
+	
 	-- recolor tab text with bg
 	if C.chat.background then
 		_G[chat.."TabText"]:SetTextColor(1,.15,.15)
