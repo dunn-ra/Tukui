@@ -1,15 +1,8 @@
 ﻿--[[
 	Omen skin by Darth Android / Telroth - The Venture Co.
-	Skins Omen to look like TelUI.
-	
-	Todo:
-	+ Reorganize to allow skin subclass overrides
-	+ Reorganize to allow layout subclass overrides
-	
-	File version v91.109
+	File version v91.110
 	(C)2010 Darth Android / Telroth - The Venture Co.
---]-]
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+]]
 
 if not Mod_AddonSkins or not IsAddOnLoaded("Omen") then return end
 local Omen = LibStub("AceAddon-3.0"):GetAddon("Omen")
@@ -74,5 +67,6 @@ Mod_AddonSkins:RegisterSkin("Omen",function(Skin, skin, Layout, layout, config)
 	Omen:UpdateBackdrop()
 	Omen:ReAnchorBars()
 	Omen:ResizeBars()
+
 end)
---]]
+

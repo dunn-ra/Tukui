@@ -1,55 +1,11 @@
 ﻿--[[
-	(C)2010 Darth Android / Telroth - The Venture Co.
-		
-	Compatibility layer for TukUI v10 and v11
-	
-	Provides the base implementation of Mod_AddonSkins, Skin, Layout, and TelUI.config needed to
-	support skinning inside of the TukUI environment. There is no OOP or memory management
-	available.
-	
-	*TukUI Edit Authors*
-	These skins can be easily hooked by defining methods in the CustomSkin object. There are several
-	base functions defined by this file, and each skin has its own functions which can be hooked. Please
-	check the headers of each file for a list and description of what methods can be customized. An example of overriding
-	a skin would be as follows:
-	
-	function CustomSkin:SkinBackgroundFrame(frame)
-		self:SkinFrame(frame)
-		T.CreateShadow(frame)
-	end
-	
-	Here we're modifying the :SkinBackground() method to add shadows. Note that self is a reference to the skin object,
-	which means you can call any of the other skinning functions from it. The above block of code may be placed anywhere
-	in your own addon or code, so long as it is executed before the PLAYER_LOGIN event fires. To remove a skin customization,
-	simply dereference the function like so:
-	
-	CustomSkin.SkinBackgroundFrame = nil
-	
-	This will cause the skins to fall back to the default skinning function. *PLEASE NOTE* All skinning functions must be able
-	to handle being called with the same arguments many times. This means that Adding shadows or highlights must be able to
-	check if they've already created and attached a shadow, to prevent memory leaks. Some of these functions are called many
-	times a second with the same frame! Due to the way that these skins are implemented with TukUI, both SKIN functions and
-	LAYOUT functions are customized through CustomSkin.
-	
-	Availble SKIN methods:
-	
-	:SkinFrame(frame) -- Applies a basic skin to the frame "frame". This method will be called to skin any frames created or managed
-	by the skins, including frames that are stacked on top of one another.
-	
-	:SkinBackgroundFrame(frame) -- Similar to :SkinFrame(frame), this method only handles frames which are directly above the WorldFrame,
-	or which are the base of a UI element. This is where you want to apply your shadows and such.
-	
-	:SkinFrame(frame) -- Applies a skin to a frame, which will be used as a panel against the background
-	
-	:SkinButton(button) -- This method will skin a button, including icon, to fit within the skin.	
-	
 	File version v91.109
 	(C)2010 Darth Android / Telroth-The Venture Co.
 ]]
 
 -- Don't run if TelUI is loaded, or TukUI isn't.
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
-if IsAddOnLoaded("TelUI") or Mod_AddonSkins or not IsAddOnLoaded("Tukui") or not T then return end
+local T, C, L = unpack(Tukui) -- Import: T - functions, constants, variables; C - config; L - locales
+if IsAddOnLoaded("TelUI") or Mod_AddonSkins or not IsAddOnLoaded("Tukui") then return end
 
 local TukVer = tonumber(T.version)
 
@@ -57,16 +13,18 @@ Mod_AddonSkins = CreateFrame("Frame")
 local Mod_AddonSkins = Mod_AddonSkins
 
 function Mod_AddonSkins:SkinFrame(frame)
-	T.SetTemplate(frame)
+	frame:SetTemplate("Default")
+	frame:CreateShadow("Default")
 end
 
 function Mod_AddonSkins:SkinBackgroundFrame(frame)
-	self:SkinFrame(frame)
+	frame:SetTemplate("Transparent")
+	frame:CreateShadow("Default")
 end
 
 function Mod_AddonSkins:SkinButton(button)
 	self:SkinFrame(button)
-	T.StyleButton(button,button.GetCheckedTexture and button:GetCheckedTexture())
+	button:StyleButton(button.GetCheckedTexture and button:GetCheckedTexture())
 end
 
 function Mod_AddonSkins:SkinActionButton(button)
@@ -98,15 +56,16 @@ function Mod_AddonSkins:SkinActionButton(button)
 	button.cd = button.cd or _G[name.."Cooldown"]
 end
 
-Mod_AddonSkins.barTexture = C.media.normTex
-Mod_AddonSkins.bgTexture = C.media.blank
-Mod_AddonSkins.font = C.media.font
-Mod_AddonSkins.smallFont = C.media.font
+Mod_AddonSkins.barTexture = C["media"].normTex
+Mod_AddonSkins.bgTexture = C["media"].blank
+Mod_AddonSkins.font = C["media"].font
+Mod_AddonSkins.smallFont = C["media"].font
 Mod_AddonSkins.fontSize = 12
-Mod_AddonSkins.buttonSize = T.Scale(27)
-Mod_AddonSkins.buttonSpacing = T.Scale(4)
+Mod_AddonSkins.fontFlags = "OUTLINE"
+Mod_AddonSkins.buttonSize = T.buttonsize
+Mod_AddonSkins.buttonSpacing = T.buttonspacing
 Mod_AddonSkins.borderWidth = T.Scale(2)
-Mod_AddonSkins.buttonZoom = {.08,.92,.08,.92}
+Mod_AddonSkins.buttonZoom = { .08, .92, .08, .92} 
 Mod_AddonSkins.barSpacing = T.Scale(1)
 Mod_AddonSkins.barHeight = T.Scale(20)
 Mod_AddonSkins.skins = {}
