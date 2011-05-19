@@ -31,6 +31,9 @@ C["media"] = {
 	["kr_uffont"] = [[Fonts\2002.TTF]], -- general font of unitframes
 	["kr_dmgfont"] = [[Fonts\2002.TTF]], -- general font of dmg / sct
 	
+	-- fonts (GLOBAL)
+	["pixelfont"] = [=[Interface\Addons\Tukui\medias\fonts\pixel_font.ttf]=], -- general font of tukui
+	
 	-- textures
 	["normTex"] = [[Interface\AddOns\Tukui\medias\textures\normTex]], -- texture used for tukui powerbar/altbar/castbar/etc
 	["hpTex"] = [[Interface\AddOns\Tukui\medias\textures\hpTex]], -- texture used for tukui healthbar
