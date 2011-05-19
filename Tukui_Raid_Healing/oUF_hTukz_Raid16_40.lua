@@ -279,19 +279,19 @@ oUF:Factory(function(self)
 			"columnSpacing", T.Scale(3),
 			"columnAnchorPoint", "TOP"		
 		)
-		raid:SetPoint("BOTTOM", TukuiViewport, "TOP", 0, 110*T.raidscale)
+		raid:SetPoint("BOTTOM", TukuiViewport, "TOP", 0, 90*T.raidscale)
+		
+		local pets = {} 
+			pets[1] = oUF:Spawn('partypet1', 'oUF_TukuiPartyPet1') 
+			pets[1]:Point('TOPLEFT', raid, 'TOPLEFT', 0, -50*C["unitframes"].gridscale*T.raidscale + -3)
+			pets[1]:Size(60*C["unitframes"].gridscale*T.raidscale, 31*C["unitframes"].gridscale*T.raidscale)
+		for i = 2, 4 do 
+			pets[i] = oUF:Spawn('partypet'..i, 'oUF_TukuiPartyPet'..i) 
+			pets[i]:Point('LEFT', pets[i-1], 'RIGHT', 3, 0)
+			pets[i]:Size(60*C["unitframes"].gridscale*T.raidscale, 31*C["unitframes"].gridscale*T.raidscale)
+		end
 		
 		if C.unitframes.pets then
-			local pets = {} 
-				pets[1] = oUF:Spawn('partypet1', 'oUF_TukuiPartyPet1') 
-				pets[1]:Point('TOPLEFT', raid, 'TOPLEFT', 0, -50*C["unitframes"].gridscale*T.raidscale + -3)
-				pets[1]:Size(66*C["unitframes"].gridscale*T.raidscale, 50*C["unitframes"].gridscale*T.raidscale)
-			for i = 2, 4 do 
-				pets[i] = oUF:Spawn('partypet'..i, 'oUF_TukuiPartyPet'..i) 
-				pets[i]:Point('LEFT', pets[i-1], 'RIGHT', 3, 0)
-				pets[i]:Size(66*C["unitframes"].gridscale*T.raidscale, 50*C["unitframes"].gridscale*T.raidscale)
-			end
-			
 			local ShowPet = CreateFrame("Frame")
 			ShowPet:RegisterEvent("PLAYER_ENTERING_WORLD")
 			ShowPet:RegisterEvent("RAID_ROSTER_UPDATE")
