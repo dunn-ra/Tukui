@@ -150,6 +150,7 @@
 	<Script file="modules\misc\invite.lua"/>
 	<Script file="modules\misc\raidutilities.lua"/>
 	<Script file="modules\misc\zRestock.lua"/>
+	<Script file="modules\misc\threatbar.lua"/>
 	
 	<Script file="modules\stexperience\stexperiencebar.lua"/>
 	
