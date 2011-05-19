@@ -126,7 +126,6 @@
 	<Script file="modules\loot\lootframe.lua"/>
 	<Script file="modules\loot\rollframe.lua"/>
 	
-	<Script file="modules\maps\worldmap.lua"/>
 	<Script file="modules\maps\zonemap.lua"/>
 	
 	<Script file="modules\blizzard\mirror.lua"/>
@@ -149,10 +148,7 @@
 	<Script file="modules\misc\commands.lua"/>
 	<Script file="modules\misc\damage.lua"/>
 	<Script file="modules\misc\invite.lua"/>
-	<Script file="modules\misc\raidmarker.lua"/>
-	<Script file="modules\misc\raidutility.lua"/>
-	<Script file="modules\misc\threatbar.lua"/>
-	<Script file="modules\misc\vengeancebar.lua"/>
+	<Script file="modules\misc\raidutilities.lua"/>
 	<Script file="modules\misc\zRestock.lua"/>
 	
 	<Script file="modules\stexperience\stexperiencebar.lua"/>
@@ -161,10 +157,7 @@
 	
 	<Script file="developer\test.lua"/>
 	
-	<Script file="modules\hoopla\yConjured.lua"/>
 	<Script file="modules\hoopla\yInterrupt.lua"/>
-	<Script file="modules\hoopla\yRess.lua"/>
-	<Script file="modules\hoopla\yCooldown.lua"/>
 	
 	<Script file="core\movers.lua"/>
 	
