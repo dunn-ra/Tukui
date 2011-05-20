@@ -190,42 +190,48 @@ oUF:Factory(function(self)
 	local pets = {} 
 		pets[1] = oUF:Spawn('partypet1', 'oUF_TukuiPartyPet1') 
 		pets[1]:SetPoint('TOPLEFT', raid, 'TOPLEFT', 0, -120*T.raidscale)
-		pets[1]:Size(95*T.raidscale, 15*T.raidscale)
+		pets[1]:Size(95*T.raidscale, 20*T.raidscale)
 	for i =2, 4 do 
 		pets[i] = oUF:Spawn('partypet'..i, 'oUF_TukuiPartyPet'..i) 
 		pets[i]:SetPoint('TOP', pets[i-1], 'BOTTOM', 0, -8)
-		pets[i]:Size(95*T.raidscale, 15*T.raidscale)
+		pets[i]:Size(95*T.raidscale, 20*T.raidscale)
 	end
 	
-	if C.unitframes.pets == true then	
-		local RaidMove = CreateFrame("Frame")
-		RaidMove:RegisterEvent("PLAYER_LOGIN")
-		RaidMove:RegisterEvent("RAID_ROSTER_UPDATE")
-		RaidMove:RegisterEvent("PARTY_LEADER_CHANGED")
-		RaidMove:RegisterEvent("PARTY_MEMBERS_CHANGED")
-		RaidMove:SetScript("OnEvent", function(self)
-			if InCombatLockdown() then
-				self:RegisterEvent("PLAYER_REGEN_ENABLED")
-			else
-				self:UnregisterEvent("PLAYER_REGEN_ENABLED")
-				local numraid = GetNumRaidMembers()
-				local numparty = GetNumPartyMembers()
-				if numparty > 0 and numraid == 0 or numraid > 0 and numraid <= 5 then
-					raid:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 10, -399*T.raidscale)
+	local RaidMove = CreateFrame("Frame")
+	RaidMove:RegisterEvent("PLAYER_LOGIN")
+	RaidMove:RegisterEvent("RAID_ROSTER_UPDATE")
+	RaidMove:RegisterEvent("PARTY_LEADER_CHANGED")
+	RaidMove:RegisterEvent("PARTY_MEMBERS_CHANGED")
+	RaidMove:SetScript("OnEvent", function(self)
+		if InCombatLockdown() then
+			self:RegisterEvent("PLAYER_REGEN_ENABLED")
+		else
+			self:UnregisterEvent("PLAYER_REGEN_ENABLED")
+			local numraid = GetNumRaidMembers()
+			local numparty = GetNumPartyMembers()
+			if numparty > 0 and numraid == 0 or numraid > 0 and numraid <= 5 then
+				raid:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 15, -399*T.raidscale)
+				if C["unitframes"].pets == true then
 					for i,v in ipairs(pets) do v:Enable() end
-				elseif numraid > 5 and numraid < 11 then
-					raid:SetPoint('TOPLEFT', UIParent, 15, -300*T.raidscale)
-					for i,v in ipairs(pets) do v:Enable() end
-				elseif numraid > 10 and numraid < 16 then
-					raid:SetPoint('TOPLEFT', UIParent, 15, -230*T.raidscale)
-					for i,v in ipairs(pets) do v:Enable() end
-				elseif numraid > 15 and numraid < 26 then
-					raid:SetPoint('TOPLEFT', UIParent, 15, -150*T.raidscale)
-					for i,v in ipairs(pets) do v:Enable() end
-				elseif numraid > 25 then
-					for i,v in ipairs(pets) do v:Enable() end
+				else
+					for i,v in ipairs(pets) do v:Disable() end
 				end
+			elseif numraid > 5 and numraid < 11 then
+				raid:SetPoint('TOPLEFT', UIParent, 15, -350*T.raidscale)
+				if C["unitframes"].pets == true then
+					for i,v in ipairs(pets) do v:Enable() end
+				else
+					for i,v in ipairs(pets) do v:Disable() end
+				end
+			elseif numraid > 10 and numraid < 16 then
+				raid:SetPoint('TOPLEFT', UIParent, 15, -280*T.raidscale)
+				for i,v in ipairs(pets) do v:Disable() end
+			elseif numraid > 15 and numraid < 26 then
+				raid:SetPoint('TOPLEFT', UIParent, 15, -172*T.raidscale)
+				for i,v in ipairs(pets) do v:Disable() end
+			elseif numraid > 25 then
+				for i,v in ipairs(pets) do v:Disable() end
 			end
-		end)
-	end
+		end
+	end)
 end)

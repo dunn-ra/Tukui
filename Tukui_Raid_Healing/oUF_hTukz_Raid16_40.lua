@@ -305,7 +305,11 @@ oUF:Factory(function(self)
 					local numraid = GetNumRaidMembers()
 					local numparty = GetNumPartyMembers()
 					if numparty > 0 and numraid == 0 or numraid > 0 and numraid <= 5 then
-						for i,v in ipairs(pets) do v:Disable() end
+						if C["unitframes"].pets == true then
+							for i,v in ipairs(pets) do v:Enable() end
+						else
+							for i,v in ipairs(pets) do v:Disable() end
+						end
 					else
 						for i,v in ipairs(pets) do v:Disable() end
 					end
