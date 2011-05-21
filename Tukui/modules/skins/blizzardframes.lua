@@ -1,13 +1,13 @@
-local T, C, L, DB = unpack(select(2, ...)) -- Import Functions/Constants, Config, Locales
+local T, C, L = unpack(select(2, ...)) -- Import Functions/Constants, Config, Locales
 
 local FONT = C["media"].font
 local FONTSIZE = 18
 local FONTFLAG = "THINOUTLINE"
 
 --[[
-		To do:
-		(PTR) War Games tab of the PVP Frame
-		(PTR) Statusbar on the PVP Frame
+	To do:
+	(PTR) War Games tab of the PVP Frame
+	(PTR) Statusbar on the PVP Frame
 --]]
 
 local function SetModifiedBackdrop(self)
@@ -17,12 +17,8 @@ local function SetModifiedBackdrop(self)
 end
 
 local function SetOriginalBackdrop(self)
-	local color = RAID_CLASS_COLORS[T.myclass]
-	if C["general"].classcolortheme == true then
-		self:SetBackdropBorderColor(color.r, color.g, color.b)
-	else
-		self:SetTemplate("Default")
-	end
+	self:SetBackdropColor(unpack(C["media"].backdropcolor))
+	self:SetBackdropBorderColor(unpack(C["media"].bordercolor))
 end
 
 local function SkinButton(f, strip)
@@ -206,9 +202,9 @@ local function SkinCloseButton(f, point)
 	end
 end
 
-local ElvuiSkin = CreateFrame("Frame")
-ElvuiSkin:RegisterEvent("ADDON_LOADED")
-ElvuiSkin:SetScript("OnEvent", function(self, event, addon)
+local TukuiSkin = CreateFrame("Frame")
+TukuiSkin:RegisterEvent("ADDON_LOADED")
+TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 	if IsAddOnLoaded("Skinner") or IsAddOnLoaded("Aurora") then return end
 	
 	if addon == "Blizzard_ReforgingUI" then
@@ -571,7 +567,7 @@ ElvuiSkin:SetScript("OnEvent", function(self, event, addon)
 			--Initiate fucked up method of creating a backdrop
 			frame.bg1 = frame:CreateTexture(nil, "BACKGROUND")
 			frame.bg1:SetDrawLayer("BACKGROUND", 4)
-			frame.bg1:SetTexture(C["media"].glossTex) --Default TukUI users this is normTex, glossTex doesn't exist
+			frame.bg1:SetTexture(C["media"].normTex)
 			frame.bg1:SetVertexColor(unpack(C["media"].backdropcolor))
 			frame.bg1:Point("TOPLEFT", T.mult*4, -T.mult*4)
 			frame.bg1:Point("BOTTOMRIGHT", -T.mult*4, T.mult*4)				
@@ -3347,13 +3343,6 @@ ElvuiSkin:SetScript("OnEvent", function(self, event, addon)
 				if event == "PLAYER_LOGIN" then
 					if not GetCVarBool("miniWorldMap") then
 						ToggleFrame(WorldMapFrame)
-						WorldMapFrameSizeDownButton:Click()	
-						WorldMapFrameSizeUpButton:Click()					
-						ToggleFrame(WorldMapFrame)
-					else
-						ToggleFrame(WorldMapFrame)
-						WorldMapFrameSizeUpButton:Click()
-						WorldMapFrameSizeDownButton:Click()
 						ToggleFrame(WorldMapFrame)
 					end
 				end
@@ -4813,9 +4802,9 @@ ElvuiSkin:SetScript("OnEvent", function(self, event, addon)
 			}
 			
 			for i = 1, getn(BlizzardMenuButtons) do
-				local ElvuiMenuButtons = _G["GameMenuButton"..BlizzardMenuButtons[i]]
-				if ElvuiMenuButtons then
-					SkinButton(ElvuiMenuButtons)
+				local TukuiMenuButtons = _G["GameMenuButton"..BlizzardMenuButtons[i]]
+				if TukuiMenuButtons then
+					SkinButton(TukuiMenuButtons)
 				end
 			end
 			
@@ -4837,8 +4826,10 @@ ElvuiSkin:SetScript("OnEvent", function(self, event, addon)
 				local x = CreateFrame("Frame", nil, GhostFrame)
 				x:SetFrameStrata("MEDIUM")
 				x:SetTemplate("Default")
-				x:SetPoint("TOPLEFT", GhostFrameContentsFrameIcon, "TOPLEFT", T.Scale(-2), T.Scale(2))
-				x:SetPoint("BOTTOMRIGHT", GhostFrameContentsFrameIcon, "BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
+				x:SetPoint("RIGHT", GhostFrameContentsFrameIcon, "LEFT", 10, 3)
+				x:SetSize(43,43)
+				
+				--x:SetPoint("BOTTOMRIGHT", GhostFrameContentsFrameIcon, "BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
 				local tex = x:CreateTexture(nil, "OVERLAY")
 				tex:SetTexture("Interface\\Icons\\spell_holy_guardianspirit")
 				tex:SetTexCoord(0.1, 0.9, 0.1, 0.9)
@@ -4887,9 +4878,9 @@ ElvuiSkin:SetScript("OnEvent", function(self, event, addon)
 			}
 			
 			for i = 1, getn(BlizzardButtons) do
-				local ElvuiButtons = _G[BlizzardButtons[i]]
-				if ElvuiButtons then
-					SkinButton(ElvuiButtons)
+				local TukuiButtons = _G[BlizzardButtons[i]]
+				if TukuiButtons then
+					SkinButton(TukuiButtons)
 				end
 			end
 			
@@ -4903,8 +4894,10 @@ ElvuiSkin:SetScript("OnEvent", function(self, event, addon)
 			_G["InterfaceOptionsFrameOkay"]:ClearAllPoints()
 			_G["InterfaceOptionsFrameOkay"]:SetPoint("RIGHT",_G["InterfaceOptionsFrameCancel"],"LEFT", -4,0)
 			_G["ReadyCheckFrameYesButton"]:SetParent(_G["ReadyCheckFrame"])
-			_G["ReadyCheckFrameNoButton"]:SetParent(_G["ReadyCheckFrame"]) 
-			_G["ReadyCheckFrameYesButton"]:SetPoint("RIGHT", _G["ReadyCheckFrame"], "CENTER", -1, 0)
+			_G["ReadyCheckFrameNoButton"]:SetParent(_G["ReadyCheckFrame"])
+			_G["ReadyCheckFrameYesButton"]:ClearAllPoints()
+			_G["ReadyCheckFrameNoButton"]:ClearAllPoints()
+			_G["ReadyCheckFrameYesButton"]:SetPoint("RIGHT", _G["ReadyCheckFrame"], "CENTER", -2, -20)
 			_G["ReadyCheckFrameNoButton"]:SetPoint("LEFT", _G["ReadyCheckFrameYesButton"], "RIGHT", 3, 0)
 			_G["ReadyCheckFrameText"]:SetParent(_G["ReadyCheckFrame"])	
 			_G["ReadyCheckFrameText"]:ClearAllPoints()
