@@ -13,7 +13,6 @@ local ALLOWED_GROUPS = {
 	["auras"]=1,
 	["actionbar"]=1,
 	["bags"]=1,
-	["map"]=1,
 	["loot"]=1,
 	["cooldown"]=1,
 	["datatext"]=1,
@@ -144,10 +143,6 @@ local function Local(o)
 	if o == "TukuiConfigUIlootlootframe" then o = TukuiL.option_loot_enableloot end
 	if o == "TukuiConfigUIlootautogreed" then o = TukuiL.option_loot_autogreed end
 	if o == "TukuiConfigUIlootrolllootframe" then o = TukuiL.option_loot_enableroll end
-	
-	-- map
-	if o == "TukuiConfigUImap" then o = TukuiL.option_map end
-	if o == "TukuiConfigUImapenable" then o = TukuiL.option_map_enable end
 	
 	-- invite
 	if o == "TukuiConfigUIinvite" then o = TukuiL.option_invite end
