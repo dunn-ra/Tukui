@@ -105,7 +105,6 @@ local TRINKET_FILTER = {
 	CreateSpellEntry( 92318 ), -- Dire Magic (H Bell of Enraging Resonance)
 	CreateSpellEntry( 91184 ), -- Grounded Soul (Fall of Mortality)
 	CreateSpellEntry( 92332 ), -- Grounded Soul (H Fall of Mortality)
-	CreateSpellEntry( 91836 ), -- Forged Fury (Fury of Angerforge)
 	CreateSpellEntry( 91027 ), -- Heart's Revelation (Heart of Ignacious)
 	CreateSpellEntry( 91041 ), -- Heart's Judgement (Heart of Ignacious)
 	CreateSpellEntry( 92325 ), -- Heart's Revelation (H Heart of Ignacious)
@@ -128,6 +127,13 @@ local TRINKET_FILTER = {
 	CreateSpellEntry( 92216 ), -- Surge of Conquest	(PvP Strength Trinket)
 	CreateSpellEntry( 91832 ), -- Raw Fury Fury of Angerforge)
 	CreateSpellEntry( 91836 ), -- Forged Fury (Fury of Angerforge)
+	
+	-- Enchants
+	CreateSpellEntry( 74245 ), -- Landslide
+	CreateSpellEntry( 74221 ), -- Hurricane
+	
+	-- Professions
+	CreateSpellEntry( 74497 ), -- Lifeblood (Herbalism)
 
 	-- Racials
 	CreateSpellEntry( 20954 ), -- Stoneform (Dwarf)
@@ -137,7 +143,9 @@ local TRINKET_FILTER = {
 	CreateSpellEntry( 7744 ), -- Will of the Forsaken (Undead)
 	CreateSpellEntry( 26297 ), -- Berserking (Troll)
 	CreateSpellEntry( 33702 ), CreateSpellEntry( 33697 ), CreateSpellEntry( 20572 ), -- Blood Fury (orc racial)
-
+	
+	-- Raid buffs
+	CreateSpellEntry( 80627 ), -- Stolen Power
 	
 	--T11 set procs
 	CreateSpellEntry( 90459 ), -- DK DPS
@@ -175,7 +183,6 @@ local CLASS_FILTERS = {
 			CreateSpellEntry( 49016 ), -- Unholy Frenzy
 			CreateSpellEntry( 57330 ), -- Horn of Winter
 			CreateSpellEntry( 70654 ), -- Blood Armor
-			CreateSpellEntry( 77535 ), -- Blood Shield
 			CreateSpellEntry( 55233 ), -- Vampiric Blood
 			CreateSpellEntry( 81141 ), -- Blood Swarm
 			CreateSpellEntry( 45529 ), -- Blood Tap
@@ -190,6 +197,7 @@ local CLASS_FILTERS = {
 			CreateSpellEntry( 64856 ), -- Blade barrier
 			CreateSpellEntry( 70657 ), -- Advantage
 			CreateSpellEntry( 81340 ), -- Sudden Doom
+			CreateSpellEntry( 77535 ), -- Blood Shield
 		}		},
 	DRUID = { 
 		target = { 
@@ -204,7 +212,7 @@ local CLASS_FILTERS = {
 			CreateSpellEntry( 2637 ), -- Hibernate
 			CreateSpellEntry( 2908 ), -- Soothe
 			CreateSpellEntry( 50259 ), -- Feral Charge (Cat) - daze
-			CreateSpellEntry( 45334 ), -- Feral Charge (Bear) - immobilize
+			CreateSpellEntry( 91565 ), -- Feral Charge (Bear) - immobilize
 			CreateSpellEntry( 58180 ), -- Infected Wounds
 			CreateSpellEntry( 6795 ), -- Growl
 			CreateSpellEntry( 5209 ), -- Challenging Roar

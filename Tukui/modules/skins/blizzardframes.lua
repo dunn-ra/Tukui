@@ -42,7 +42,7 @@ local function SkinButton(f, strip)
 	
 	if strip then f:StripTextures() end
 	
-	f:SetTemplate("Default", true)
+	f:SetTemplate("Default")
 	f:HookScript("OnEnter", SetModifiedBackdrop)
 	f:HookScript("OnLeave", SetOriginalBackdrop)
 end
@@ -3149,6 +3149,15 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 				
 				navButtonFrameLevel(self)
 			end)
+			
+			SkinButton(HelpFrameGM_ResponseNeedMoreHelp)
+			SkinButton(HelpFrameGM_ResponseCancel)
+			for i=1, HelpFrameGM_Response:GetNumChildren() do
+				local child = select(i, HelpFrameGM_Response:GetChildren())
+				if child and child:GetObjectType() == "Frame" and not child:GetName() then
+					child:SetTemplate("Default")
+				end
+			end
 		end
 	
 		--Trade Frame
@@ -3488,7 +3497,6 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 		--WorldMap
 		do
 			WorldMapFrame:CreateBackdrop("Default")
-			WorldMapDetailFrame:SetFrameLevel(WorldMapDetailFrame:GetFrameLevel() + 1)
 			WorldMapDetailFrame.backdrop = CreateFrame("Frame", nil, WorldMapFrame)
 			WorldMapDetailFrame.backdrop:SetTemplate("Default")
 			WorldMapDetailFrame.backdrop:Point("TOPLEFT", WorldMapDetailFrame, "TOPLEFT", -2, 2)
@@ -3604,12 +3612,63 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			hooksecurefunc("WorldMap_ToggleSizeUp", FixSkin)
 			
 			WorldMapFrame:RegisterEvent("PLAYER_LOGIN")
+			WorldMapFrame:RegisterEvent("PLAYER_REGEN_ENABLED") -- fix taint with small map & big map
+			WorldMapFrame:RegisterEvent("PLAYER_REGEN_DISABLED") -- fix taint with small map & big map
 			WorldMapFrame:HookScript("OnEvent", function(self, event)
 				if event == "PLAYER_LOGIN" then
 					if not GetCVarBool("miniWorldMap") then
 						ToggleFrame(WorldMapFrame)
 						ToggleFrame(WorldMapFrame)
 					end
+				elseif event == "PLAYER_REGEN_DISABLED" then
+					HideUIPanel(WorldMapFrame)
+					
+					if not miniWorldMap and WatchFrame.showObjectives then
+						WorldMapFrame_SetFullMapView()
+					end
+				
+					WorldMapFrameSizeDownButton:Disable()
+					WorldMapFrameSizeUpButton:Disable()
+					
+					HideUIPanel(WorldMapFrame)
+					WatchFrame.showObjectives = nil
+					WorldMapQuestShowObjectives:SetChecked(false)
+					WorldMapTitleButton:Hide()
+					WorldMapBlobFrame:Hide()
+					WorldMapPOIFrame:Hide()
+
+					WorldMapQuestShowObjectives.Show = T.dummy
+					WorldMapTitleButton.Show = T.dummy
+					WorldMapBlobFrame.Show = T.dummy
+					WorldMapPOIFrame.Show = T.dummy       
+
+					WatchFrame_Update()
+					
+					WorldMapQuestShowObjectives:Hide()
+				elseif event == "PLAYER_REGEN_ENABLED" then
+					WorldMapFrameSizeDownButton:Enable()
+					WorldMapFrameSizeUpButton:Enable()
+					
+					WorldMapQuestShowObjectives.Show = WorldMapQuestShowObjectives:Show()
+					WorldMapTitleButton.Show = WorldMapTitleButton:Show()
+					WorldMapBlobFrame.Show = WorldMapBlobFrame:Show()
+					WorldMapPOIFrame.Show = WorldMapPOIFrame:Show()
+
+					WorldMapTitleButton:Show()
+
+					WatchFrame.showObjectives = true
+					WorldMapQuestShowObjectives:SetChecked(true)
+					
+					if not miniWorldMap and WatchFrame.showObjectives then
+						WorldMapFrame_SetQuestMapView()
+					end
+
+					WorldMapBlobFrame:Show()
+					WorldMapPOIFrame:Show()
+
+					WatchFrame_Update()
+					
+					WorldMapQuestShowObjectives:Show()
 				end
 			end)
 			
@@ -3627,15 +3686,6 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			local int = 0
 			
 			WorldMapFrame:HookScript("OnUpdate", function(self, elapsed)
-				--For some reason these buttons aren't functioning correctly, and we can't afford for it to fuckup because toggling to a big map in combat will cause a taint.
-				if InCombatLockdown() then
-					WorldMapFrameSizeDownButton:Disable()
-					WorldMapFrameSizeUpButton:Disable()
-				else
-					WorldMapFrameSizeDownButton:Enable()
-					WorldMapFrameSizeUpButton:Enable()			
-				end
-				
 				if WORLDMAP_SETTINGS.size == WORLDMAP_FULLMAP_SIZE then
 					WorldMapFrameSizeUpButton:Hide()
 					WorldMapFrameSizeDownButton:Show()
@@ -3678,9 +3728,13 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 					end
 					
 					int = 0
-				end				
-			end)		
+				end
+			end)
 		end
+		
+		-- dropdown on full map is scaled incorrectly
+		WorldMapContinentDropDownButton:HookScript("OnClick", function() DropDownList1:SetScale(C.general.uiscale) end)
+		WorldMapZoneDropDownButton:HookScript("OnClick", function() DropDownList1:SetScale(C.general.uiscale) end)
 		
 		--Item Text Frame
 		do
@@ -3808,29 +3862,13 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			}
 			
 			for _, object in pairs(checkButtons) do
-				_G[object]:GetChildren():SetFrameLevel(_G[object]:GetChildren():GetFrameLevel() + 2)
-				SkinCheckBox(_G[object]:GetChildren())
+				_G[object].checkButton:SetFrameLevel(_G[object].checkButton:GetFrameLevel() + 2)
+				SkinCheckBox(_G[object].checkButton)
 			end
 			
-			for _, object in pairs(StripAllTextures) do
-				_G[object]:StripTextures()
-			end
-
-			for _, texture in pairs(KillTextures) do
-				_G[texture]:Kill()
-			end
-
-			for i = 1, #buttons do
-				_G[buttons[i]]:StripTextures()
-				SkinButton(_G[buttons[i]])
-			end	
-
-			for i= 1,15 do
-				SkinCheckBox(_G["LFDQueueFrameSpecificListButton"..i.."EnableButton"])
-			end
-			
-			LFDQueueFrameCapBar:SetPoint("LEFT", 40, 0)
-			LFDQueueFrameRandom:HookScript("OnShow", function()
+			hooksecurefunc("LFDQueueFrameRandom_UpdateFrame", function()
+			local dungeonID = LFDQueueFrame.type
+			local _, _, _, _, _, numRewards = GetLFGDungeonRewards(dungeonID)
 				for i=1, LFD_MAX_REWARDS do
 					local button = _G["LFDQueueFrameRandomScrollFrameChildFrameItem"..i]
 					local icon = _G["LFDQueueFrameRandomScrollFrameChildFrameItem"..i.."IconTexture"]
@@ -3840,7 +3878,9 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 					local role3 = _G["LFDQueueFrameRandomScrollFrameChildFrameItem"..i.."RoleIcon3"]
 					
 					if button then
+						local __texture = _G[button:GetName().."IconTexture"]:GetTexture()
 						button:StripTextures()
+						icon:SetTexture(__texture)
 						icon:SetTexCoord(.08, .92, .08, .92)
 						icon:Point("TOPLEFT", 2, -2)
 						icon:SetDrawLayer("OVERLAY")
@@ -3869,6 +3909,38 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 				end
 			end)
 			
+			hooksecurefunc("LFDQueueFrameSpecificListButton_SetDungeon", function(button, dungeonID, mode, submode)
+				for _, object in pairs(checkButtons) do
+					local button = _G[object]
+					if not ( button.checkButton:GetChecked() ) then
+						button.checkButton:SetDisabledTexture(nil)
+					else
+						button.checkButton:SetDisabledTexture("Interface\\Buttons\\UI-CheckBox-Check-Disabled")
+					end
+				end
+			end)
+			
+			for _, object in pairs(StripAllTextures) do
+				_G[object]:StripTextures()
+			end
+			
+			for _, texture in pairs(KillTextures) do
+				_G[texture]:Kill()
+			end
+			
+			for i = 1, #buttons do
+				_G[buttons[i]]:StripTextures()
+				SkinButton(_G[buttons[i]])
+			end
+			
+			for i= 1,15 do
+				SkinCheckBox(_G["LFDQueueFrameSpecificListButton"..i.."EnableButton"])
+			end
+			
+			LFDQueueFrameCapBar:SetPoint("LEFT", 40, 0)
+			
+			LFDDungeonReadyDialog:SetTemplate("Default")
+			LFDDungeonReadyDialog:CreateShadow("Default")
 			LFDQueueFrameSpecificListScrollFrame:StripTextures()
 			LFDQueueFrameSpecificListScrollFrame:Height(LFDQueueFrameSpecificListScrollFrame:GetHeight() - 8)
 			LFDParentFrame:CreateBackdrop("Default")
@@ -4559,7 +4631,6 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 						icon:ClearAllPoints()
 						icon:SetAllPoints()
 						
-						button:SetFrameLevel(button:GetFrameLevel() + 2)
 						if not button.backdrop then
 							button:CreateBackdrop("Default", true)	
 						end
@@ -5209,12 +5280,11 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			_G["ReadyCheckFrame"]:HookScript("OnShow", function(self) if UnitIsUnit("player", self.initiator) then self:Hide() end end) -- bug fix, don't show it if initiator
 			_G["StackSplitFrame"]:GetRegions():Hide()
 
-			RolePollPopup:SetTemplate("Default")
-			RolePollPopup:CreateShadow("Default")
-			LFDDungeonReadyDialog:SetTemplate("Default")
-			LFDDungeonReadyDialog:CreateShadow("Default")
 			SkinButton(LFDDungeonReadyDialogEnterDungeonButton)
 			SkinButton(LFDDungeonReadyDialogLeaveQueueButton)
+			
+			RolePollPopup:SetTemplate("Default")
+			RolePollPopup:CreateShadow("Default")
 	end
 		
 		-- mac menu/option panel, made by affli.

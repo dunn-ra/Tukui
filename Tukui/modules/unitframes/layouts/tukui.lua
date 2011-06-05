@@ -971,7 +971,7 @@ local function Shared(self, unit)
 		healthBG:SetAllPoints()
 		healthBG:SetTexture(unpack(C["unitframes"].hpbg))
 	
-		health.value = T.SetFontString(health, font1, 10)
+		health.value = T.SetFontString(health, font1, 9)
 		health.value:Point("RIGHT", health, "RIGHT", -2, 0)
 		health.PostUpdate = T.PostUpdateHealth
 				
@@ -1566,7 +1566,7 @@ local function Shared(self, unit)
 	--	Main tanks and Main Assists layout (both mirror'd)
 	------------------------------------------------------------------------
 	
-	if unit == "maintank" or unit == "mainassist" or unit == "maintanktarget" or unit == "mainassisttarget" then
+	if(self:GetParent():GetName():match"TukuiMainTank" or self:GetParent():GetName():match"TukuiMainAssist") then
 		-- Right-click focus on maintank or mainassist units
 		self:SetAttribute("type2", "focus")
 		

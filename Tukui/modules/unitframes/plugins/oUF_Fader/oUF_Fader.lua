@@ -98,8 +98,11 @@ local function UpdateAlpha(obj)
 		obj.outsideRangeAlpha = alpha * obj.outsideRangeAlphaPerc
 	end
 	obj:SetAlpha(alpha)
-	TukuiPlayerCastBar:SetParent(UIParent) -- we don't want to fade our castbar
-	TukuiPlayerCastBar:SetAlpha(1)
+	
+	if not (IsAddOnLoaded("Quartz") or IsAddOnLoaded("AzCastBar") or IsAddOnLoaded("eCastingBar")) then
+		TukuiPlayerCastBar:SetParent(UIParent) -- we don't want to fade our castbar
+		TukuiPlayerCastBar:SetAlpha(1)
+	end
 end
 
 local t = 0

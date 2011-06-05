@@ -428,9 +428,7 @@ T.PostUpdateHealth = function(health, unit, min, max)
 				else
 					health.value:SetFormattedText("|cffAF5050%s|r |cffD7BEA5-|r |cff%02x%02x%02x%d%%|r", ShortValue(min), r * 255, g * 255, b * 255, floor(min / max * 100))
 				end
-			elseif unit == "focus" or unit == "focustarget" or unit == "pet" then
-				health.value:SetText("|cff559655"..ShortValue(min).."|r")
-			elseif (unit and unit:find("boss%d")) or (unit and unit:find("arena%d")) then
+			elseif unit == "focus" or unit == "focustarget" or unit == "pet" or (unit and unit:find("boss%d")) or (unit and unit:find("arena%d")) then
 				health.value:SetText("|cff559655"..floor(min / max * 100).."%|r")
 			end
 		else
