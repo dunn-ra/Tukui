@@ -127,10 +127,6 @@ C["bags"] = {
 	["moveable"] = true,								-- toggle moveable bags
 }
 
-C["map"] = {
-	["enable"] = true,                                  -- reskin the map to fit tukui
-}
-
 C["loot"] = {
 	["lootframe"] = true,                               -- reskin the loot frame to fit tukui
 	["rolllootframe"] = true,                           -- reskin the roll frame to fit tukui
