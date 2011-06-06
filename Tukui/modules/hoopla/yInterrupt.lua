@@ -9,11 +9,13 @@ local function OnEvent(self, event, ...)
 		if (eventType == "SPELL_INTERRUPT") and sourceName == T.myname then
 			SendChatMessage(GetSpellLink(extraskillID).." interrupted", channel)
 		elseif (eventType == "SPELL_STOLEN") and sourceName == T.myname then
-			SendChatMessage(GetSpellLink(extraskillID).." stolen", channel)
+			SendChatMessage(GetSpellLink(extraskillID).." stolen.", channel)
+		elseif (eventType == "SPELL_PURGE") and sourceName == T.myname then
+			SendChatMessage(GetSpellLink(extraskillID).." removed.", channel)
 		end
 	end
 end
 
-local yAnnounce = CreateFrame("Frame")
-yAnnounce:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
-yAnnounce:SetScript("OnEvent", OnEvent)
+local yInterrupt = CreateFrame("Frame")
+yInterrupt:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
+yInterrupt:SetScript("OnEvent", OnEvent)
