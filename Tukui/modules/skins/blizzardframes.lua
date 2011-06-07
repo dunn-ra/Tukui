@@ -26,7 +26,6 @@ local function SkinButton(f, strip)
 		local m = _G[f:GetName().."Middle"]
 		local r = _G[f:GetName().."Right"]
 		
-		
 		if l then l:SetAlpha(0) end
 		if m then m:SetAlpha(0) end
 		if r then r:SetAlpha(0) end
@@ -3497,6 +3496,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 		--WorldMap
 		do
 			WorldMapFrame:CreateBackdrop("Default")
+			WorldMapDetailFrame:SetFrameLevel(WorldMapDetailFrame:GetFrameLevel() + 1)
 			WorldMapDetailFrame.backdrop = CreateFrame("Frame", nil, WorldMapFrame)
 			WorldMapDetailFrame.backdrop:SetTemplate("Default")
 			WorldMapDetailFrame.backdrop:Point("TOPLEFT", WorldMapDetailFrame, "TOPLEFT", -2, 2)
@@ -3615,8 +3615,10 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			WorldMapFrame:RegisterEvent("PLAYER_REGEN_ENABLED") -- fix taint with small map & big map
 			WorldMapFrame:RegisterEvent("PLAYER_REGEN_DISABLED") -- fix taint with small map & big map
 			WorldMapFrame:HookScript("OnEvent", function(self, event)
+				local miniWorldMap = GetCVarBool("miniWorldMap")
+				
 				if event == "PLAYER_LOGIN" then
-					if not GetCVarBool("miniWorldMap") then
+					if not miniWorldMap then
 						ToggleFrame(WorldMapFrame)
 						ToggleFrame(WorldMapFrame)
 					end
@@ -3730,11 +3732,11 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 					int = 0
 				end
 			end)
+
+			-- dropdown on full map is scaled incorrectly
+			WorldMapContinentDropDownButton:HookScript("OnClick", function() DropDownList1:SetScale(C.general.uiscale) end)
+			WorldMapZoneDropDownButton:HookScript("OnClick", function() DropDownList1:SetScale(C.general.uiscale) end)
 		end
-		
-		-- dropdown on full map is scaled incorrectly
-		WorldMapContinentDropDownButton:HookScript("OnClick", function() DropDownList1:SetScale(C.general.uiscale) end)
-		WorldMapZoneDropDownButton:HookScript("OnClick", function() DropDownList1:SetScale(C.general.uiscale) end)
 		
 		--Item Text Frame
 		do
@@ -3918,6 +3920,13 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 						button.checkButton:SetDisabledTexture("Interface\\Buttons\\UI-CheckBox-Check-Disabled")
 					end
 				end
+				
+				local oldTex = button.enableButton:GetDisabledCheckedTexture():GetTexture()
+				if not button.enableButton:GetChecked() then
+					button.enableButton:SetDisabledTexture(nil)
+				else
+					button.enableButton:SetDisabledTexture(oldTex)
+				end
 			end)
 			
 			for _, object in pairs(StripAllTextures) do
@@ -3933,7 +3942,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 				SkinButton(_G[buttons[i]])
 			end
 			
-			for i= 1,15 do
+			for i= 1, NUM_LFD_CHOICE_BUTTONS do
 				SkinCheckBox(_G["LFDQueueFrameSpecificListButton"..i.."EnableButton"])
 			end
 			
