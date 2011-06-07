@@ -1,7 +1,7 @@
 --[[
 	Project.: oUF_Swing
 	File....: oUF_Swing.lua
-	Version.: 40000.2
+	Version.: 40100.3
 	Rev Date: 23/11/2010
 	Authors.: p3lim, Thalyra
 ]] 
@@ -34,10 +34,10 @@
 	 - hideOoc [boolean] (Autohide on leaving Combat)
 
 	Functions that can be overridden from within a layout:
-	 - :OverrideText(now)
+	 - .OverrideText(text, now)
 --]]
 
-local addon, ns = ...
+local _, ns = ...
 local oUF = oUF or ns.oUF
 
 local meleeing
@@ -47,6 +47,20 @@ local lasthit
 local MainhandID = GetInventoryItemID("player", 16)
 local OffhandID = GetInventoryItemID("player", 17)
 local RangedID = GetInventoryItemID("player", 18)
+
+local SwingStopped = function(element)
+	local bar = element.__owner
+	
+	local swing = bar.Twohand
+	local swingMH = bar.Mainhand
+	local swingOH = bar.Offhand
+	
+	if swing:IsShown() then return end
+	if swingMH:IsShown() then return end
+	if swingOH:IsShown() then return end
+	
+	bar:Hide()
+end
 
 local OnDurationUpdate
 do
@@ -65,6 +79,7 @@ do
 				if lasthit + self.speed + slamtime < now then
 					self:Hide()
 					self:SetScript("OnUpdate", nil)
+					SwingStopped(self)
 					meleeing = false
 					rangeing = false
 				end
@@ -108,8 +123,8 @@ do
 			else
 				self:SetValue(now)
 				if self.Text then
-					if self.OverrideText then
-						self:OverrideText(now)
+					if self.__owner.OverrideText then
+						self.__owner.OverrideText(self, now)
 					else
 						self.Text:SetFormattedText("%.1f", self.max - now)
 					end
@@ -119,7 +134,7 @@ do
 	end
 end
 
-local function MeleeChange(self, event, unit)
+local MeleeChange = function(self, event, unit)
 	if unit ~= "player" then return end
 	if not meleeing then return end
 	
@@ -137,6 +152,9 @@ local function MeleeChange(self, event, unit)
 	
 	if MainhandID ~= NewMainhandID or OffhandID ~= NewOffhandID then
 		if ohspeed then
+			swing:Hide()
+			swing:SetScript("OnUpdate", nil)
+			
 			swingMH.min = GetTime()
 			swingMH.max = swingMH.min + mhspeed
 			swingMH.speed = mhspeed
@@ -160,6 +178,13 @@ local function MeleeChange(self, event, unit)
 			swing:Show()
 			swing:SetMinMaxValues(swing.min, swing.max)
 			swing:SetScript("OnUpdate", OnDurationUpdate)
+			
+			swingMH:Hide()
+			swingMH:SetScript("OnUpdate", nil)
+				
+			swingOH:Hide()
+			swingOH:SetScript("OnUpdate", nil)
+			
 		end
 			
 		lasthit = now
@@ -194,7 +219,7 @@ local function MeleeChange(self, event, unit)
 	end
 end
 
-local function RangedChange(self, event, unit)
+local RangedChange = function(self, event, unit)
 	if unit ~= "player" then return end
 	if not rangeing then return end
 	
@@ -212,8 +237,8 @@ local function RangedChange(self, event, unit)
 		swing.max = swing.min + swing.speed
 			
 		swing:Show()
-		swing:SetMinMaxValues(Swing.min, Swing.max)
-		Swing:SetScript("OnUpdate", OnDurationupdate)
+		swing:SetMinMaxValues(swing.min, swing.max)
+		swing:SetScript("OnUpdate", OnDurationUpdate)
 	else
 		if swing.speed ~= speed then
 			local percentage = (swing.max - GetTime()) / (swing.speed)
@@ -224,7 +249,7 @@ local function RangedChange(self, event, unit)
 	end
 end
 
-local function Ranged(self, event, unit, spellName)
+local Ranged = function(self, event, unit, spellName)
 	if unit ~= "player" then return end
 	if spellName ~= GetSpellInfo(75) and spellName ~= GetSpellInfo(5019) then return end
 	
@@ -236,6 +261,8 @@ local function Ranged(self, event, unit, spellName)
 	
 	meleeing = false
 	rangeing = true
+	
+	bar:Show()
 	
 	swing.speed = UnitRangedDamage(unit)
 	swing.min = GetTime()
@@ -252,7 +279,7 @@ local function Ranged(self, event, unit, spellName)
 	swingOH:SetScript("OnUpdate", nil)
 end
 
-local function Melee(self, event, _, subevent, GUID)
+local Melee = function(self, event, _, subevent, _, GUID)
 	if UnitGUID("player") ~= GUID then return end
 	if not string.find(subevent, "SWING") then return end
 	
@@ -262,7 +289,11 @@ local function Melee(self, event, _, subevent, GUID)
 	local swingMH = bar.Mainhand
 	local swingOH = bar.Offhand
 	
+	-- calculation of new hits is in OnDurationUpdate
+	-- workaround, cant differ between mainhand and offhand hits
 	if not meleeing then
+		bar:Show()
+		
 		swing:Hide()
 		swingMH:Hide()
 		swingOH:Hide()
@@ -306,7 +337,7 @@ local function Melee(self, event, _, subevent, GUID)
 	lasthit = GetTime()
 end
 
-local function ParryHaste(self, event, _, subevent, _, _, _, _, tarGUID, _, missType)
+local ParryHaste = function(self, event, _, subevent, _, _, _, _, _, tarGUID, _, missType)
 	if UnitGUID("player") ~= tarGUID then return end
 	if not meleeing then return end
 	if not string.find(subevent, "MISSED") then return end
@@ -361,13 +392,22 @@ local function ParryHaste(self, event, _, subevent, _, _, _, _, tarGUID, _, miss
 	end
 end
 
-local function Ooc(self)
-	self.Swing.Twohand:Hide()
-	self.Swing.Mainhand:Hide()
-	self.Swing.Offhand:Hide()
+local Ooc = function(self)
+	local bar = self.Swing
+	
+	-- strange behaviour sometimes...
+	meleeing = false
+	rangeing = false
+	
+	if not bar.hideOoc then return end
+	
+	bar:Hide()
+	bar.Twohand:Hide()
+	bar.Mainhand:Hide()
+	bar.Offhand:Hide()
 end
 
-local function Enable(self, unit)
+local Enable = function(self, unit)
 	local bar = self.Swing
 	
 	if bar and unit == "player" then
@@ -389,59 +429,63 @@ local function Enable(self, unit)
 	
 		if not bar.Twohand then
 			bar.Twohand = CreateFrame("StatusBar", nil, bar)
-			bar.Twohand:SetPoint("TOPLEFT")
-			bar.Twohand:SetPoint("BOTTOMRIGHT")
+			bar.Twohand:SetPoint("TOPLEFT", bar, "TOPLEFT", 0, 0)
+			bar.Twohand:SetPoint("BOTTOMRIGHT", bar, "BOTTOMRIGHT", 0, 0)
 			bar.Twohand:SetStatusBarTexture(normTex)
 			bar.Twohand:SetStatusBarColor(r, g, b, a)
 			bar.Twohand:SetFrameLevel(20)
 			bar.Twohand:Hide()
 			
-			bar.Twohand.bg = bar.Twohand:CreateTexture(nil, "BACKGROUND") -- change?
+			bar.Twohand.bg = bar.Twohand:CreateTexture(nil, "BACKGROUND")
 			bar.Twohand.bg:SetAllPoints(bar.Twohand)
 			bar.Twohand.bg:SetTexture(bgTex)
 			bar.Twohand.bg:SetVertexColor(r2, g2, b2, a2)
 		end
+		bar.Twohand.__owner = bar
 		
 		if not bar.Mainhand then
 			bar.Mainhand = CreateFrame("StatusBar", nil, bar)
-			bar.Mainhand:SetPoint("TOPLEFT")
-			bar.Mainhand:SetPoint("RIGHT")
+			bar.Mainhand:SetPoint("TOPLEFT", bar, "TOPLEFT", 0, 0)
+			bar.Mainhand:SetPoint("BOTTOMRIGHT", bar, "RIGHT", 0, 0)
 			bar.Mainhand:SetStatusBarTexture(normTex)
 			bar.Mainhand:SetStatusBarColor(r, g, b, a)
 			bar.Mainhand:SetFrameLevel(20)
 			bar.Mainhand:Hide()
 			
-			bar.Mainhand.bg = bar.Mainhand:CreateTexture(nil, "BACKGROUND") -- change?
+			bar.Mainhand.bg = bar.Mainhand:CreateTexture(nil, "BACKGROUND")
 			bar.Mainhand.bg:SetAllPoints(bar.Mainhand)
 			bar.Mainhand.bg:SetTexture(bgTex)
 			bar.Mainhand.bg:SetVertexColor(r2, g2, b2, a2)
 		end
+		bar.Mainhand.__owner = bar
 		
 		if not bar.Offhand then
 			bar.Offhand = CreateFrame("StatusBar", nil, bar)
-			bar.Offhand:SetPoint("LEFT")
-			bar.Offhand:SetPoint("BOTTOMRIGHT")
+			bar.Offhand:SetPoint("TOPLEFT", bar, "LEFT", 0, 0)
+			bar.Offhand:SetPoint("BOTTOMRIGHT", bar, "BOTTOMRIGHT", 0, 0)
 			bar.Offhand:SetStatusBarTexture(normTex)
 			bar.Offhand:SetStatusBarColor(r, g, b, a)
 			bar.Offhand:SetFrameLevel(20)
 			bar.Offhand:Hide()
 			
-			bar.Offhand.bg = bar.Offhand:CreateTexture(nil, "BACKGROUND") -- change?
+			bar.Offhand.bg = bar.Offhand:CreateTexture(nil, "BACKGROUND")
 			bar.Offhand.bg:SetAllPoints(bar.Offhand)
 			bar.Offhand.bg:SetTexture(bgTex)
 			bar.Offhand.bg:SetVertexColor(r2, g2, b2, a2)
 		end
+		bar.Offhand.__owner = bar
 		
 		if bar.Text then
 			bar.Twohand.Text = bar.Text
+			bar.Twohand.Text:SetParent(bar.Twohand)
 		end
-		
 		if bar.TextMH then
 			bar.Mainhand.Text = bar.TextMH
+			bar.Mainhand.Text:SetParent(bar.Mainhand)
 		end
-		
 		if bar.TextOH then
 			bar.Offhand.Text = bar.TextOH
+			bar.Offhand.Text:SetParent(bar.Offhand)
 		end
 		
 		if bar.OverrideText then
@@ -461,15 +505,13 @@ local function Enable(self, unit)
 			self:RegisterEvent("UNIT_ATTACK_SPEED", MeleeChange)
 		end
 		
-		if not bar.hideOoc then
-			self:RegisterEvent("PLAYER_REGEN_ENABLED", Ooc)
-		end
+		self:RegisterEvent("PLAYER_REGEN_ENABLED", Ooc)
 		
 		return true
 	end
 end
 
-local function Disable(self)
+local Disable = function(self)
 	local bar = self.Swing
 	if bar then
 		if not bar.disableRanged then
@@ -483,9 +525,9 @@ local function Disable(self)
 			self:UnregisterEvent("UNIT_ATTACK_SPEED", MeleeChange)
 		end
 		
-		if not bar.hideOoc then
-			self:UnregisterEvent("PLAYER_REGEN_ENABLED", Ooc)
-		end
+		self:UnregisterEvent("PLAYER_REGEN_ENABLED", Ooc)
+		
+		bar:Hide()
 	end
 end
 
