@@ -131,6 +131,7 @@ local TRINKET_FILTER = {
 	-- Enchants
 	CreateSpellEntry( 74245 ), -- Landslide
 	CreateSpellEntry( 74221 ), -- Hurricane
+	CreateSpellEntry( 74224 ), -- Heartsong
 	
 	-- Professions
 	CreateSpellEntry( 74497 ), -- Lifeblood (Herbalism)
@@ -470,18 +471,18 @@ local CLASS_FILTERS = {
 			CreateSpellEntry( 77657 ), -- Searing Flames
 			CreateSpellEntry( 64701 ), -- Elemental Mastery
 		},
-			player = {
+		player = {
 			CreateSpellEntry( 324 ), -- Lightning Shield
 			CreateSpellEntry( 52127 ), -- Water Shield
 			CreateSpellEntry( 974 ), -- Earth Shield
 			CreateSpellEntry( 30823 ), -- Shamanistic Rage
 			CreateSpellEntry( 55198 ), -- Tidal Force
 			CreateSpellEntry( 61295 ), -- Riptide
-
 		},
 		procs = {
 			CreateSpellEntry( 53817 ), -- Maelstrom Weapon
-			CreateSpellEntry( 16246 ), -- Clearcasting				
+			CreateSpellEntry( 16246 ), -- Clearcasting
+			CreateSpellEntry( 53390 ), -- Tidal Waves
 		},
 	},
 	WARLOCK = { 
