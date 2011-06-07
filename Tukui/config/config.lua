@@ -56,7 +56,7 @@ C["unitframes"] = {
 	-- raid layout (if one of them is enabled)
 	["enableraidframes"] = true,						-- enable or disable raid frames
 	["showrange"] = true,								-- show range opacity on raidframes
-	["raidalphaoor"] = 0.5,								-- alpha of unitframes when unit is out of range
+	["raidalphaoor"] = 0.3,								-- alpha of unitframes when unit is out of range
 	["gridonly"] = true,								-- enable grid only mode for all healer mode raid layout.
 	["dpsdebuff"] = true,								-- enable tracking of debuffs on dps layout (alternate mode)
 	["debuffnumber"] = 5,								-- number of debuffs to show on dps/heal raid layout	
@@ -177,6 +177,7 @@ C["chat"] = {
 	["width"] = 380,									-- width of the chat frame (/resetui to apply)
 	["height"] = 130,									-- height of the chat frame (/resetui to apply)
 	["shadow"] = false,									-- add a drop shadow to the chat text
+	["embedright"] = false,								-- embed recount or omen in the right chat panel. only works with background
 }
 
 C["nameplate"] = {
@@ -201,8 +202,8 @@ C["tooltip"] = {
 }
 
 C["merchant"] = {
-	["sellgrays"] = true,								-- automaticly sell grays?
-	["autorepair"] = true,								-- automaticly repair?
+	["sellgrays"] = true,								-- automatically sell gray item
+	["autorepair"] = true,								-- automatically repair gear
 	["sellmisc"] = true,								-- sell defined items automatically
 	["restocker"] = true,								-- auto reagent buyer
 		["number"] = 60,								-- number of reagents to buy
@@ -226,5 +227,8 @@ C["buffreminder"] = {
 
 C["misc"] = {
 	["duelspam"] = true,								-- removes duel chat spam
-	["interrupt"] = true,								-- announces interrupts and spellsteals to /p or /r
+	["interrupt"] = true,								-- announces interrupts and spellsteals to party or raid chat
+	["announce"] = true,								-- announces crowd control abilities to party or raid chat
+		["ending"] = false,								-- NYI announces when abilities end
+		["conjured"] = true,							-- announce totems, conjured items, portals, soul well
 }
