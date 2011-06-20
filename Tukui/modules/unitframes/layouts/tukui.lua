@@ -1024,7 +1024,7 @@ local function Shared(self, unit)
 		Name:SetFont(font1, 10)
 		Name:SetJustifyH("LEFT")
 
-		self:Tag(Name, '[Tukui:getnamecolor][Tukui:nameshort] [Tukui:diffcolor][level]')
+		self:Tag(Name, '[Tukui:getnamecolor][Tukui:nameshort] [Tukui:diffcolor]')
 		self.Name = Name
 		
 		-- update pet name, this should fix "UNKNOWN" pet names on pet unit, health and bar color sometime being "grayish".

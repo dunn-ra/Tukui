@@ -103,7 +103,7 @@ if C["actionbar"].cubes == true then
 				SlashCmdList.ACECONSOLE_OMEN('toggle')
 			end
 		elseif btn == "MiddleButton" then
-			if not T.IsPTRVersion() then ToggleKeyRing() else ToggleAllBags() end
+			if T.toc < 40200 then ToggleKeyRing() else ToggleAllBags() end
 		end
 	end)
 end
