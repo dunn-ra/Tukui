@@ -1,6 +1,6 @@
 ﻿local T, C, L = unpack(select(2, ...)) -- Import Functions/Constants, Config, Locales
 
-if not IsAddOnLoaded("Recount") then return end
+if not IsAddOnLoaded("Recount") or C.skinning.recount ~= true then return end
 local Recount = _G.Recount
 
 local function SkinFrame(frame)

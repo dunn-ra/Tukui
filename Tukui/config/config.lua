@@ -75,6 +75,13 @@ C["unitframes"] = {
 	["classbar"] = true,								-- enable tukui classbar over player unit
 }
 
+C["skinning"] = {
+	["blizzardreskin"] = true,							-- reskin all Blizzard frames
+	["recount"] = true,
+	["omen"] = true,
+	["dbm"] = true,
+}
+	
 C["classtimer"] = {
 	["enable"] = true,									-- enable classtimer
 	["classcolor"] = false,								-- classcolored bars

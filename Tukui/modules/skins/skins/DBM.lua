@@ -5,7 +5,7 @@
 ]]--
 local T, C, L = unpack(Tukui) -- Import: T - functions, constants, variables; C - config; L - locales
 
-if not Mod_AddonSkins or not IsAddOnLoaded("DBM-Core") then return end
+if not Mod_AddonSkins or not IsAddOnLoaded("DBM-Core") or C.skinning.dbm ~= true then return end
 
 local classcolor = RAID_CLASS_COLORS[T.myclass]
 local buttonsize

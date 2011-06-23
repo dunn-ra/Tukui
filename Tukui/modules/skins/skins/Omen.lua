@@ -5,7 +5,7 @@
 ]]
 local T, C, L = unpack(select(2, ...)) -- Import Functions/Constants, Config, Locales
 
-if not Mod_AddonSkins or not IsAddOnLoaded("Omen") then return end
+if not Mod_AddonSkins or not IsAddOnLoaded("Omen") or C.skinning.omen ~= true then return end
 local Omen = LibStub("AceAddon-3.0"):GetAddon("Omen")
 local borderWidth = T.Scale(2, 2)
 
